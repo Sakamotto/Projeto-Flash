@@ -1,0 +1,6 @@
+language: java
+java:
+  - 1.8
+
+notifications:
+  slack: bsi-ifes:nECNqvrLZq1fjJz6C88BjfXk
