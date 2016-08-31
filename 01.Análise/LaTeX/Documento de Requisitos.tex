@@ -1,0 +1,102 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[width=21.00cm, height=31.00cm, left=3.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{pdflscape}
+\usepackage{indentfirst}
+\usepackage[normalem]{ulem}
+
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{anyfontsize}
+
+% Criação de comando para definir a fonte. Primeiro parâmetro: tamanho da fonte. Segundo parâmetro: baseline-skip. O baseline-skip tem que ser 1,2 vezes maior que a fonte.
+
+\newcommand{\setfont}[2]{\fontsize{#1}{#2} \selectfont}
+\newcommand{\centralizar}[1]{\begin{center} {#1} \end{center}}
+
+\pagenumbering{gobble}
+
+
+\begin{document}
+
+
+	\begin{center}
+		\textbf{\setfont{16}{19} Documento de Requisitos}
+	\end{center}
+
+	\vspace{24pt}
+
+	\noindent \textbf{Projeto}: Projeto Flash
+
+	\vspace{12pt}
+
+	\noindent \textbf{Registro de Alterações}:
+
+
+
+	\begin{table}[htp]
+		\begin{center}
+			\begin{tabular}{|p{1.3cm}|p{4cm}|p{2.3cm}|p{7.7cm}|}
+				\hline
+				\textbf{Versão} & \textbf{Responsável} & \textbf{Data} & \textbf{Alterações} \\
+				\hline
+				1.0 & Danilo de Oliveira & 20/08/2016 & Criação do documento \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+	
+	
+	\section{Introdução}
+	
+	Este documento apresenta os requisitos de usuário do sistema \uline{Organizador de Horários} e está organizado da seguinte forma: a seção 2 contém uma descrição do propósito do sistema; a seção 3 apresenta uma descrição do minimundo apresentando o problema; e a seção 4 apresenta a lista de requisitos de usuário levantados junto ao cliente.
+	
+	
+	\section{Descrição do Propósito do Sistema}
+	
+	O coordenador do Ifes Campus Serra necessita de um sistema de informação que auxilie no processo de elaboração do horário do semestre. Para que os horários sejam elaborados de forma correta, todas as restrições não devem ser quebradas.
+	
+	\section{Descrição do Minimundo}
+	
+	O coordenador de curso de Bacharelado em Sistemas de Informação do Ifes Campus Serra enfrenta problemas para elaborar o horário de cada semestre para os três cursos (técnico e graduação), pois é uma tarefa muito complexa, na qual tem de ser levado em conta diferentes regras e restrições. Além disso, envolve a disponibilidade de professores, salas, laboratórios, alunos (restrições e questões), e mais cessões de docentes para (e da) Automação e Cefor. Atualmente existe um software que o apoia. Porém, o atual software não ajuda muito, pois não atende algumas restrições. Sendo assim, será desenvolvido um sistema que produz horários com base nas restrições.
+
+	De um professor, deseja-se saber: nome, número de \uline{matrícula}, endereço residencial (inclindo o CEP), \uline{disciplinas que pode lecionar} e projetos dos quais participam, bem como seus respectivios horários.
+
+	Para alocar uma disciplina, o professor deve ter disponibilidade para atendê-la. A carga horária de cada professor não pode exceder um total de quarenta horas semanais. Cada professor precisa ter um intervalo mínimo de onze horas entre um determinado dia e o dia seguinte. Os professores também não devem ter um intervalo de mais de três horas em um dia. É desejável que os professores que moram mais perto do Campus, sejam alocados para os primeiros horários de aula do dia. É desejável que professores que moram longe, não estejam alocados a partir das 15 horas.
+	
+	É desejável que as disciplinas e suas respectivas disciplinas que são pré-requisitos, estejam definidas no mesmo horário. Por exemplo, Cálculo 1 e Cálculo 2.
+	
+	As aulas da graduação devem terminar no máximo às 13:20.
+	
+	Os setores administrativos precisam de horários para cuidar dos espaços, incluindo as salas e laboratórios. Tem que ser disponibilizado um laboratório para os alunos estudarem e um laboratório exclusivo para TCC e Projeto Integrador. \uline{É necessário que haja horários vagos em um laboratório para que um professor possa usar sempre que preciso (conforme dito em um recado no facebook)}.
+	
+	
+	\section{Requisitos de Usuário}
+	
+	\par Tomando por base o contexto do sistema, foram identificados os seguintes requisitos de usuário:
+	
+	
+		
+	\begin{landscape}
+		
+		\noindent \textbf{Requisitos Funcionais}
+		
+		\begin{table}[htp]
+			\begin{center}
+				\begin{tabular}{|p{3cm}|p{12.5cm}|p{2.5cm}|p{6cm}|}
+					\hline
+					\textbf{Identificador} & \textbf{Descrição} & \textbf{Prioridade} & \textbf{Depende de} \\
+					\hline
+					RF01 & Este requisito é apenas um teste. & Alta & - \\
+					\hline
+				\end{tabular}
+			\end{center}
+		\end{table}
+	\end{landscape}
+	
+	
+	
+	
+\end{document}
