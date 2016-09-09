@@ -89,11 +89,13 @@
 					\hline
 					\textbf{Identificador} & \textbf{Descrição} & \textbf{Prioridade} & \textbf{Depende de} \\
 					\hline
-					RF01 & O sistema deve permitir o gerenciamento de recursos, permitindo cadastrar professores, espaços e disciplinas. & Alta & - \\
+					RF01 & O sistema tem que permitir o registro e o controle de professores, disciplinas, turmas, área de conhecimento, curso, salas e projetos de extensão. & Alta & - \\
 					\hline
-					RF02 & O sistema deve buscar bons horários que quebrem menos restrições. & Alta & - \\
+					RF02 & O sistema deve construir um ou mais horários associando disciplina, professor e sala, respeitando as restrições impostas. & Alta & RF01, RN01, RN02, RN03, RN04, RN05, RN06, RN07, RN08, RN09 \\
 					\hline
-					RF03 & . & Alta & - \\
+					RF03 & O sistema deve permitir o registro de amarração de professores e salas para alocações fixas (Ex.: O professor fulano está alocado ao projeto tal de segunda à sexta de 15 às 17 horas) & Alta & RF01 \\
+					\hline
+					RF04 & O sistema deve permitir o controle e o registro das disciplinas que um professor pode lecionar. & Alta & RF01 \\
 					\hline
 				\end{tabular}
 			\end{center}
@@ -113,12 +115,25 @@
 					\hline
 					\textbf{Identificador} & \textbf{Descrição} & \textbf{Prioridade} & \textbf{Depende de} \\
 					\hline
-					RN01 & . & Alta & - \\
+					RN01 & O intervalo mínimo entre a última alocação de um professor em um dia e a primeira alocação do professor no dia seguinte é de 11 horas. (Ex.: Se um professor estava alocado no horário de 20h às 22h, só poderá estar alocado às 9h do dia seguinte. & Alta & - \\
 					\hline
-					RN02 & . & Alta & - \\
+					RN02 & Um professor só pode estar alocado às disciplinas que ele puder lecionar. & Alta & RF04 \\
 					\hline
-					RN03 & . & Alta & - \\
+					RN03 & O total de horas que um professor está alocado não pode ultrapassar de 40 horas semanais. & Alta & RF03 \\
 					\hline
+					RN04 & Não deve haver um intervalo de 3 horas entre duas alocações de um professor em um dia qualquer. & Alta & - \\
+					\hline
+					RN05 & As aulas da graduação devem terminar no máximo às 13:20 & Alta & - \\
+					\hline
+					RN06 & Tem que haver horários vagos em um laboratório para que um professor possa usar sempre que preciso. & Alta & - \\
+					\hline
+					RN07 & Na criação dos horários, o sistema deve, preferencialmente, alocar aos primeiros horários os professores que moram mais próximos ao campus. & Alta & - \\
+					\hline
+					RN08 & É desejável que o sistema aloque disciplinas que são pré requisitos em dias e horários iguais. & Alta & - \\
+					\hline
+					RN09 & Na criação dos horários, o sistema deve, preferencialmente, alocar os professores que moram mais longe do campus aos horários antes das 15 horas. & Alta & - \\
+					\hline
+					
 				\end{tabular}
 			\end{center}
 		\end{table}
