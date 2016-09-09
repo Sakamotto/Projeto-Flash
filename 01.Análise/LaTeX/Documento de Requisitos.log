@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.9)  9 SEP 2016 14:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.9)  9 SEP 2016 14:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -566,6 +566,14 @@ Overfull \hbox (28.08302pt too wide) in paragraph at lines 88--99
 
 [3
 
+]
+Overfull \hbox (28.08302pt too wide) in paragraph at lines 112--123
+ [] 
+ []
+
+[4
+
+
 ] (./Documento de Requisitos.aux) ) 
 Here is how much of TeX's memory you used:
  2774 strings out of 494929
@@ -578,10 +586,10 @@ Here is how much of TeX's memory you used:
 </usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr12.pfb>
-Output written on "Documento de Requisitos.pdf" (3 pages, 37489 bytes).
+Output written on "Documento de Requisitos.pdf" (4 pages, 38547 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
- 14 compressed objects within 1 object stream
+ 25 PDF objects out of 1000 (max. 8388607)
+ 16 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
