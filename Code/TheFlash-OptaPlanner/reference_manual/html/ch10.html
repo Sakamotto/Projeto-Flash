@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Chapter 10. Local Search</title><link rel="stylesheet" type="text/css" href="css/jbossorg.css"/><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"/><link rel="home" href="index.html" title="OptaPlanner User Guide"/><link rel="up" href="index.html" title="OptaPlanner User Guide"/><link rel="prev" href="ch09.html" title="Chapter 9. Construction Heuristics"/><link rel="next" href="ch11.html" title="Chapter 11. Evolutionary Algorithms"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head><body><p id="title"><a href="http://www.jboss.org" class="site_href"><strong>JBoss.org</strong></a><a href="http://docs.jboss.org/" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="ch09.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="ch11.html"><strong>Next</strong></a></li></ul><div class="chapter" title="Chapter 10. Local Search"><div class="titlepage"><div><div><h2 class="title"><a id="localSearch"/>Chapter 10. Local Search</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch10.html#localSearchOverview">10.1. Overview</a></span></dt><dt><span class="section"><a href="ch10.html#localSearchConcepts">10.2. Local Search Concepts</a></span></dt><dd><dl><dt><span class="section"><a href="ch10.html#localSearchStepByStep">10.2.1. Step by Step</a></span></dt><dt><span class="section"><a href="ch10.html#localSearchConceptsDecideTheNextStep">10.2.2. Decide the Next Step</a></span></dt><dt><span class="section"><a href="ch10.html#localSearchAcceptor">10.2.3. Acceptor</a></span></dt><dt><span class="section"><a href="ch10.html#localSearchForager">10.2.4. Forager</a></span></dt></dl></dd><dt><span class="section"><a href="ch10.html#hillClimbing">10.3. Hill Climbing (Simple Local Search)</a></span></dt><dd><dl><dt><span class="section"><a href="ch10.html#hillClimbingAlgorithm">10.3.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch10.html#hillClimbingStuckInLocalOptima">10.3.2. Stuck in Local Optima</a></span></dt><dt><span class="section"><a href="ch10.html#hillClimbingConfigure">10.3.3. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch10.html#tabuSearch">10.4. Tabu Search</a></span></dt><dd><dl><dt><span class="section"><a href="ch10.html#tabuSearchAlgorithm">10.4.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch10.html#tabuSearchConfiguration">10.4.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch10.html#simulatedAnnealing">10.5. Simulated Annealing</a></span></dt><dd><dl><dt><span class="section"><a href="ch10.html#simulatedAnnealingAlgorithm">10.5.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch10.html#simulatedAnnealingConfiguration">10.5.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch10.html#lateAcceptance">10.6. Late Acceptance</a></span></dt><dd><dl><dt><span class="section"><a href="ch10.html#lateAcceptanceAlgorithm">10.6.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch10.html#lateAcceptanceConfiguration">10.6.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch10.html#stepCountingHillClimbing">10.7. Step Counting Hill Climbing</a></span></dt><dd><dl><dt><span class="section"><a href="ch10.html#stepCountingHillClimbingAlgorithm">10.7.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch10.html#stepCountingHillClimbingConfiguration">10.7.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch10.html#strategicOscillation">10.8. Strategic Oscillation</a></span></dt><dd><dl><dt><span class="section"><a href="ch10.html#strategicOscillationAlgorithm">10.8.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch10.html#strategicOscillationConfiguration">10.8.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch10.html#customTerminationSelectorOrAcceptor">10.9. Using a Custom Termination, MoveSelector, EntitySelector, ValueSelector or Acceptor</a></span></dt></dl></div><div class="section" title="10.1. Overview"><div class="titlepage"><div><div><h2 class="title"><a id="localSearchOverview"/>10.1. Overview</h2></div></div></div><p>Local Search starts from an initial solution and evolves that single solution into a mostly better and better
+    solution. It uses a single search path of solutions, not a search tree. At each solution in this path it evaluates a
+    number of moves on the solution and applies the most suitable move to take the step to the next solution. It does
+    that for a high number of iterations until it's terminated (usually because its time has run out).</p><p>Local Search acts a lot like a human planner: it uses a single search path and moves facts around to find a
+    good feasible solution. Therefore it's pretty natural to implement.</p><p><span class="bold"><strong>Local Search usually needs to start from an initialized solution</strong></span>, therefore
+    it's usually required to configure a construction heuristic solver phase before it.</p></div><div class="section" title="10.2. Local Search Concepts"><div class="titlepage"><div><div><h2 class="title"><a id="localSearchConcepts"/>10.2. Local Search Concepts</h2></div></div></div><div class="section" title="10.2.1. Step by Step"><div class="titlepage"><div><div><h3 class="title"><a id="localSearchStepByStep"/>10.2.1. Step by Step</h3></div></div></div><p>A step is the winning <code class="literal">Move</code>. Local Search tries a number of moves on the current solution
+      and picks the best accepted move as the step:</p><div class="figure"><a id="d0e11028"/><p class="title"><strong>Figure 10.1. Decide the next step at step 0 (4 queens example)</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Local_search/decideNextStepNQueens04.png" alt="Decide the next step at step 0 (4 queens example)"/></div></div></div><br class="figure-break"/><p>Because the move <span class="emphasis"><em>B0 to B3</em></span> has the highest score (<code class="literal">-3</code>), it is picked
+      as the next step. If multiple moves have the same highest score, one is picked randomly, in this case <span class="emphasis"><em>B0
+      to B3</em></span>. Note that <span class="emphasis"><em>C0 to C3</em></span> (not shown) could also have been picked because it also
+      has the score <code class="literal">-3</code>.</p><p>The step is applied on the solution. From that new solution, Local Search tries every move again, to decide
+      the next step after that. It continually does this in a loop, and we get something like this:</p><div class="figure"><a id="d0e11053"/><p class="title"><strong>Figure 10.2. All steps (4 queens example)</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Local_search/allStepsNQueens04.png" alt="All steps (4 queens example)"/></div></div></div><br class="figure-break"/><p>Notice that Local Search doesn't use a search tree, but a search path. The search path is highlighted by the
+      green arrows. At each step it tries all selected moves, but unless it's the step, it doesn't investigate that
+      solution further. This is one of the reasons why Local Search is very scalable.</p><p>As shown above, Local Search solves the 4 queens problem by starting with the starting solution and make the
+      following steps sequentially:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><span class="emphasis"><em>B0 to B3</em></span></p></li><li class="listitem"><p><span class="emphasis"><em>D0 to B2</em></span></p></li><li class="listitem"><p><span class="emphasis"><em>A0 to B1</em></span></p></li></ol></div><p>Turn on <code class="literal">debug</code> logging for the category <code class="literal">org.optaplanner</code> to show those
+      steps in the log:</p><pre><code class="no-highlight">INFO  Solving started: time spent (0), best score (-6), random (JDK with seed 0).
+DEBUG     LS step (0), time spent (20), score (-3), new best score (-3), accepted/selected move count (12/12), picked move (Queen-1 {Row-0 -&gt; Row-3}).
+DEBUG     LS step (1), time spent (31), score (-1), new best score (-1), accepted/selected move count (12/12), picked move (Queen-3 {Row-0 -&gt; Row-2}).
+DEBUG     LS step (2), time spent (40), score (0), new best score (0), accepted/selected move count (12/12), picked move (Queen-0 {Row-0 -&gt; Row-1}).
+INFO  Local Search phase (0) ended: step total (3), time spent (41), best score (0).
+INFO  Solving ended: time spent (41), best score (0), average calculate count per second (1780).</code></pre><p>Notice that a log message includes the <code class="literal">toString()</code> method of the <code class="literal">Move</code>
+      implementation which returns for example "<code class="literal">Queen-1 {Row-0 -&gt; Row-3}</code>".</p><p>A naive Local Search configuration solves the 4 queens problem in 3 steps, by evaluating only 37 possible
+      solutions (3 steps with 12 moves each + 1 starting solution), which is only fraction of all 256 possible
+      solutions. It solves 16 queens in 31 steps, by evaluating only 7441 out of 18446744073709551616 possible
+      solutions. By using a <a class="link" href="ch09.html" title="Chapter 9. Construction Heuristics">Construction Heuristics</a> phase first, it's even
+      a lot more efficient.</p></div><div class="section" title="10.2.2. Decide the Next Step"><div class="titlepage"><div><div><h3 class="title"><a id="localSearchConceptsDecideTheNextStep"/>10.2.2. Decide the Next Step</h3></div></div></div><p>Local Search decides the next step with the aid of 3 configurable components:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>A <code class="literal">MoveSelector</code> which selects the possible moves of the current solution. See the
+          chapter <a class="link" href="ch07.html" title="Chapter 7. Move and Neighborhood Selection">move and neighborhood selection</a>.</p></li><li class="listitem"><p>An <code class="literal">Acceptor</code> which filters out unacceptable moves.</p></li><li class="listitem"><p>A <code class="literal">Forager</code> which gathers accepted moves and picks the next step from them.</p></li></ul></div><p>The solver phase configuration looks like this:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    &lt;unionMoveSelector&gt;
+      ...
+    &lt;/unionMoveSelector&gt;
+    &lt;acceptor&gt;
+      ...
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      ...
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre><p>In the example below, the <code class="literal">MoveSelector</code> generated the moves shown with the blue lines, the
+      <code class="literal">Acceptor</code> accepted all of them and the <code class="literal">Forager</code> picked the move <span class="emphasis"><em>B0
+      to B3</em></span>.</p><div class="mediaobject"><img src="images/Chapter-Local_search/decideNextStepNQueens04.png"/></div><p><a class="link" href="ch04.html#logging" title="4.4.4. Logging Level: What is the Solver Doing?">Turn on <code class="literal">trace</code> logging</a> to show the decision making in the
+      log:</p><pre><code class="no-highlight">INFO  Solver started: time spent (0), score (-6), new best score (-6), random (JDK with seed 0).
+TRACE         Move index (0) not doable, ignoring move (Queen-0 {Row-0 -&gt; Row-0}).
+TRACE         Move index (1), score (-4), accepted (true), move (Queen-0 {Row-0 -&gt; Row-1}).
+TRACE         Move index (2), score (-4), accepted (true), move (Queen-0 {Row-0 -&gt; Row-2}).
+TRACE         Move index (3), score (-4), accepted (true), move (Queen-0 {Row-0 -&gt; Row-3}).
+...
+TRACE         Move index (6), score (-3), accepted (true), move (Queen-1 {Row-0 -&gt; Row-3}).
+...
+TRACE         Move index (9), score (-3), accepted (true), move (Queen-2 {Row-0 -&gt; Row-3}).
+...
+TRACE         Move index (12), score (-4), accepted (true), move (Queen-3 {Row-0 -&gt; Row-3}).
+DEBUG     LS step (0), time spent (6), score (-3), new best score (-3), accepted/selected move count (12/12), picked move (Queen-1 {Row-0 -&gt; Row-3}).
+...</code></pre><p>Because the last solution can degrade (for example in Tabu Search), the <code class="literal">Solver</code> remembers
+      the best solution it has encountered through the entire search path. Each time the current solution is better than
+      the last best solution, the current solution is <a class="link" href="ch04.html#cloningASolution" title="4.3.7.6. Cloning a Solution">cloned</a> and referenced as
+      the new best solution.</p><div class="mediaobject"><img src="images/Chapter-Local_search/localSearchScoreOverTime.png"/></div></div><div class="section" title="10.2.3. Acceptor"><div class="titlepage"><div><div><h3 class="title"><a id="localSearchAcceptor"/>10.2.3. Acceptor</h3></div></div></div><p>An <code class="literal">Acceptor</code> is used (together with a <code class="literal">Forager</code>) to active Tabu Search,
+      Simulated Annealing, Late Acceptance, ... For each move it checks whether it is accepted or not.</p><p>By changing a few lines of configuration, you can easily switch from Tabu Search to Simulated Annealing or
+      Late Acceptance and back.</p><p>You can implement your own <code class="literal">Acceptor</code>, but the build-in acceptors should suffice for most
+      needs. You can also combine multiple acceptors.</p></div><div class="section" title="10.2.4. Forager"><div class="titlepage"><div><div><h3 class="title"><a id="localSearchForager"/>10.2.4. Forager</h3></div></div></div><p>A <code class="literal">Forager</code> gathers all accepted moves and picks the move which is the next step. Normally
+      it picks the accepted move with the highest score. If several accepted moves have the highest score, one is picked
+      randomly to break the tie. Breaking ties randomly leads to better results.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>It is possible to disable breaking ties randomly by explicitly setting <code class="literal">breakTieRandomly</code>
+        to <code class="literal">false</code>, but that's almost never a good idea:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>If an earlier move is better than a later move with the same score, the score calculator should add an
+            extra softer <a class="link" href="ch05.html#scoreLevel" title="5.1.4. Score Constraint Level (hard, soft, ...)">score level</a> to score the first move as slightly better. Don't
+            rely on move selection order to enforce that.</p></li><li class="listitem"><p>Random tie breaking does not affect <a class="link" href="ch04.html#environmentMode" title="4.4.3. Environment Mode: Are There Bugs in my Code?">reproducibility</a>.</p></li></ul></div></div><div class="section" title="10.2.4.1. Accepted Count Limit"><div class="titlepage"><div><div><h4 class="title"><a id="acceptedCountLimit"/>10.2.4.1. Accepted Count Limit</h4></div></div></div><p>When there are many possible moves, it becomes inefficient to evaluate all of them at every step. To
+        evaluate only a random subset of all the moves, use:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>An <code class="literal">acceptedCountLimit</code> integer, which specifies how many accepted moves should be
+            evaluated during each step. By default, all accepted moves are evaluated at every step.</p><pre><code class="language-xml">  &lt;forager&gt;
+    &lt;acceptedCountLimit&gt;1000&lt;/acceptedCountLimit&gt;
+  &lt;/forager&gt;</code></pre></li></ul></div><p>Unlike the n queens problem, real world problems require the use of <code class="literal">acceptedCountLimit</code>.
+        Start from an <code class="literal">acceptedCountLimit</code> that takes a step in less then 2 seconds. <a class="link" href="ch04.html#logging" title="4.4.4. Logging Level: What is the Solver Doing?">Turn on INFO logging</a> to see the step times. Use the <a class="link" href="ch14.html" title="Chapter 14. Benchmarking And Tweaking">Benchmarker</a> to tweak the value.</p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Important</h2><p>With a low <code class="literal">acceptedCountLimit</code> (so a fast stepping algorithm), it is recommended to
+          avoid using <code class="literal">selectionOrder</code> SHUFFLED because the shuffling generates a random number for
+          every element in the selector, taking up a lot of time, but only a few elements are actually selected.</p></div></div><div class="section" title="10.2.4.2. Pick Early Type"><div class="titlepage"><div><div><h4 class="title"><a id="localSearchPickEarlyType"/>10.2.4.2. Pick Early Type</h4></div></div></div><p>A forager can pick a move early during a step, ignoring subsequent selected moves. There are 3 pick early
+        types for Local Search:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">NEVER</code>: A move is never picked early: all accepted moves are evaluated that the
+            selection allows. This is the default.</p><pre><code class="language-xml">    &lt;forager&gt;
+      &lt;pickEarlyType&gt;NEVER&lt;/pickEarlyType&gt;
+    &lt;/forager&gt;</code></pre></li><li class="listitem"><p><code class="literal">FIRST_BEST_SCORE_IMPROVING</code>: Pick the first accepted move that improves the best
+            score. If none improve the best score, it behaves exactly like the pickEarlyType NEVER.</p><pre><code class="language-xml">    &lt;forager&gt;
+      &lt;pickEarlyType&gt;FIRST_BEST_SCORE_IMPROVING&lt;/pickEarlyType&gt;
+    &lt;/forager&gt;</code></pre></li><li class="listitem"><p><code class="literal">FIRST_LAST_STEP_SCORE_IMPROVING</code>: Pick the first accepted move that improves the
+            last step score. If none improve the last step score, it behaves exactly like the pickEarlyType
+            NEVER.</p><pre><code class="language-xml">    &lt;forager&gt;
+      &lt;pickEarlyType&gt;FIRST_LAST_STEP_SCORE_IMPROVING&lt;/pickEarlyType&gt;
+    &lt;/forager&gt;</code></pre></li></ul></div></div></div></div><div class="section" title="10.3. Hill Climbing (Simple Local Search)"><div class="titlepage"><div><div><h2 class="title"><a id="hillClimbing"/>10.3. Hill Climbing (Simple Local Search)</h2></div></div></div><div class="section" title="10.3.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="hillClimbingAlgorithm"/>10.3.1. Algorithm Description</h3></div></div></div><p>Hill Climbing tries all selected moves and then takes the best move, which is the move which leads to the
+      solution with the highest score. That best move is called the step move. From that new solution, it again tries
+      all selected moves and takes the best move and continues like that iteratively. If multiple selected moves tie for
+      the best move, one of them is randomly chosen as the best move.</p><div class="mediaobject"><img src="images/Chapter-Local_search/hillClimbingNQueens04.png"/></div><p>Notice that once a queen has moved, it can be moved again later. This is a good thing, because in an
+      NP-complete problem it's impossible to predict what will be the optimal final value for a planning
+      variable.</p></div><div class="section" title="10.3.2. Stuck in Local Optima"><div class="titlepage"><div><div><h3 class="title"><a id="hillClimbingStuckInLocalOptima"/>10.3.2. Stuck in Local Optima</h3></div></div></div><p>Hill Climbing always takes improving moves. This may seem like a good thing, but it's not: <span class="bold"><strong>Hill Climbing can easily get stuck in a local optimum.</strong></span> This happens when it reaches a
+      solution for which all the moves deteriorate the score. Even if it picks one of those moves, the next step might
+      go back to the original solution and which case chasing its own tail:</p><div class="mediaobject"><img src="images/Chapter-Local_search/hillClimbingGetsStuckInLocalOptimaNQueens04.png"/></div><p>Improvements upon Hill Climbing (such as Tabu Search, Simulated Annealing and Late Acceptance) address the
+      problem of being stuck in local optima. Therefore, it's recommend to never use Hill Climbing, unless you're
+      absolutely sure there are no local optima in your planning problem.</p></div><div class="section" title="10.3.3. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="hillClimbingConfigure"/>10.3.3. Configuration</h3></div></div></div><p>Simplest configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    &lt;localSearchType&gt;HILL_CLIMBING&lt;/localSearchType&gt;
+  &lt;/localSearch&gt;</code></pre><p>Advanced configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;acceptorType&gt;HILL_CLIMBING&lt;/acceptorType&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1&lt;/acceptedCountLimit&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre></div></div><div class="section" title="10.4. Tabu Search"><div class="titlepage"><div><div><h2 class="title"><a id="tabuSearch"/>10.4. Tabu Search</h2></div></div></div><div class="section" title="10.4.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="tabuSearchAlgorithm"/>10.4.1. Algorithm Description</h3></div></div></div><p>Tabu Search works like Hill Climbing, but it maintains a tabu list to avoid getting stuck in local optima.
+      The tabu list holds recently used objects that are <span class="emphasis"><em>taboo</em></span> to use for now. Moves that involve
+      an object in the tabu list, are not accepted. The tabu list objects can be anything related to the move, such as
+      the planning entity, planning value, move, solution, ... Here's an example with entity tabu for 4 queens, so the
+      queens are put in the tabu list:</p><div class="mediaobject"><img src="images/Chapter-Local_search/entityTabuSearch.png"/></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>It's called Tabu Search, not Taboo Search. There is no spelling error.</p></div><p>Scientific paper: <span class="emphasis"><em>Tabu Search - Part 1 and Part 2</em></span> by Fred Glover (1989 - 1990)</p></div><div class="section" title="10.4.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="tabuSearchConfiguration"/>10.4.2. Configuration</h3></div></div></div><p>Simplest configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    &lt;localSearchType&gt;TABU_SEARCH&lt;/localSearchType&gt;
+  &lt;/localSearch&gt;</code></pre><p>When Tabu Search takes steps it creates one or more tabu's. For a number of steps, it does not accept a move
+      if that move breaks tabu. That number of steps is the tabu size. Advanced configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;entityTabuSize&gt;7&lt;/entityTabuSize&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1000&lt;/acceptedCountLimit&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Important</h2><p>A Tabu Search acceptor should be combined with a high <code class="literal">acceptedCountLimit</code>, such as
+        <code class="literal">1000</code>.</p></div><p>Planner implements several tabu types:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><span class="emphasis"><em>Planning entity tabu</em></span> (recommended) makes the planning entities of recent steps
+          tabu. For example, for N queens it makes the recently moved queens tabu. It's recommended to start with this
+          tabu type.</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;entityTabuSize&gt;7&lt;/entityTabuSize&gt;
+    &lt;/acceptor&gt;</code></pre><p>To avoid hard coding the tabu size, configure a tabu ratio, relative to the number of entities, for
+          example 2%:</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;entityTabuRatio&gt;0.02&lt;/entityTabuRatio&gt;
+    &lt;/acceptor&gt;</code></pre></li><li class="listitem"><p><span class="emphasis"><em>Planning value tabu</em></span> makes the planning values of recent steps tabu. For example,
+          for N queens it makes the recently moved to rows tabu.</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;valueTabuSize&gt;7&lt;/valueTabuSize&gt;
+    &lt;/acceptor&gt;</code></pre><p>To avoid hard coding the tabu size, configure a tabu ratio, relative to the number of values, for
+          example 2%:</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;valueTabuRatio&gt;0.02&lt;/valueTabuRatio&gt;
+    &lt;/acceptor&gt;</code></pre></li><li class="listitem"><p><span class="emphasis"><em>Move tabu</em></span> makes recent steps tabu. It does not accept a move equal to one of those
+          steps.</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;moveTabuSize&gt;7&lt;/moveTabuSize&gt;
+    &lt;/acceptor&gt;</code></pre></li><li class="listitem"><p><span class="emphasis"><em>Undo move tabu </em></span>makes the undo move of recent steps tabu.</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;undoMoveTabuSize&gt;7&lt;/undoMoveTabuSize&gt;
+    &lt;/acceptor&gt;</code></pre></li><li class="listitem"><p><span class="emphasis"><em>Solution tabu</em></span> makes recently visited solutions tabu. It does not accept a move that
+          leads to one of those solutions. It requires that the <code class="literal">Solution</code> implements
+          <code class="literal">equals()</code> and <code class="literal">hashCode()</code> properly. If you can spare the memory, don't be
+          cheap on the tabu size.</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;solutionTabuSize&gt;1000&lt;/solutionTabuSize&gt;
+    &lt;/acceptor&gt;</code></pre><p>For non-trivial cases, solution tabu is usually useless because the <a class="link" href="ch06.html#searchSpaceSize" title="6.1. Search Space Size in the Real World">search space size</a> makes it statistically highly unlikely to reach the same
+          solution twice. Therefore its use is not recommended, except for small datasets.</p></li></ul></div><p>Sometimes it's useful to combine tabu types:</p><pre><code class="language-xml">    &lt;acceptor&gt;
+      &lt;entityTabuSize&gt;7&lt;/entityTabuSize&gt;
+      &lt;valueTabuSize&gt;3&lt;/valueTabuSize&gt;
+    &lt;/acceptor&gt;</code></pre><p>If the tabu size is too small, the solver can still get stuck in a local optimum. On the other hand, if the
+      tabu size is too large, the solver can be inefficient by bouncing of the walls. Use the <a class="link" href="ch14.html" title="Chapter 14. Benchmarking And Tweaking">Benchmarker</a> to fine tweak your configuration.</p></div></div><div class="section" title="10.5. Simulated Annealing"><div class="titlepage"><div><div><h2 class="title"><a id="simulatedAnnealing"/>10.5. Simulated Annealing</h2></div></div></div><div class="section" title="10.5.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="simulatedAnnealingAlgorithm"/>10.5.1. Algorithm Description</h3></div></div></div><p>Simulated Annealing evaluates only a few moves per step, so it steps quickly. In the classic implementation,
+      the first accepted move is the winning step. A move is accepted if it doesn't decrease the score or - in case it
+      does decrease the score - it passes a random check. The chance that a decreasing move passes the random check
+      decreases relative to the size of the score decrement and the time the phase has been running (which is
+      represented as the temperature).</p><div class="mediaobject"><img src="images/Chapter-Local_search/simulatedAnnealing.png"/></div><p>Simulated Annealing does not always pick the move with the highest score, neither does it evaluate many
+      moves per step. At least at first. Instead, it gives non improving moves also a chance to be picked, depending on
+      its score and the time gradient of the <code class="literal">Termination</code>. In the end, it gradually turns into Hill
+      Climbing, only accepting improving moves.</p></div><div class="section" title="10.5.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="simulatedAnnealingConfiguration"/>10.5.2. Configuration</h3></div></div></div><p>Start with a <code class="literal">simulatedAnnealingStartingTemperature</code> set to the maximum score delta a
+      single move can cause. Use the <a class="link" href="ch14.html" title="Chapter 14. Benchmarking And Tweaking">Benchmarker</a> to tweak the value. Advanced
+      configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;simulatedAnnealingStartingTemperature&gt;2hard/100soft&lt;/simulatedAnnealingStartingTemperature&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1&lt;/acceptedCountLimit&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre><p>Simulated Annealing should use a low <code class="literal">acceptedCountLimit</code>. The classic algorithm uses an
+      <code class="literal">acceptedCountLimit</code> of <code class="literal">1</code>, but often <code class="literal">4</code> performs
+      better.</p><p>Simulated Annealing can be combined with a tabu acceptor at the same time. That gives Simulated Annealing
+      salted with a bit of Tabu. Use a lower tabu size than in a pure Tabu Search configuration.</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;simulatedAnnealingStartingTemperature&gt;2hard/100soft&lt;/simulatedAnnealingStartingTemperature&gt;
+      &lt;entityTabuSize&gt;5&lt;/entityTabuSize&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1&lt;/acceptedCountLimit&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre></div></div><div class="section" title="10.6. Late Acceptance"><div class="titlepage"><div><div><h2 class="title"><a id="lateAcceptance"/>10.6. Late Acceptance</h2></div></div></div><div class="section" title="10.6.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="lateAcceptanceAlgorithm"/>10.6.1. Algorithm Description</h3></div></div></div><p>Late Acceptance (also known as Late Acceptance Hill Climbing) also evaluates only a few moves per step. A
+      move is accepted if it does not decrease the score, or if it leads to a score that is at least the late score
+      (which is the winning score of a fixed number of steps ago).</p><div class="mediaobject"><img src="images/Chapter-Local_search/lateAcceptance.png"/></div><p>Scientific paper: <a class="link" href="http://www.cs.stir.ac.uk/research/publications/techreps/pdf/TR192.pdf"><span class="emphasis"><em>The Late Acceptance
+      Hill-Climbing Heuristic</em></span> by Edmund K. Burke, Yuri Bykov (2012)</a></p></div><div class="section" title="10.6.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="lateAcceptanceConfiguration"/>10.6.2. Configuration</h3></div></div></div><p>Simplest configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    &lt;localSearchType&gt;LATE_ACCEPTANCE&lt;/localSearchType&gt;
+  &lt;/localSearch&gt;</code></pre><p>Late Acceptance accepts any move that has a score which is higher than the best score of a number of steps
+      ago. That number of steps is the <code class="literal">lateAcceptanceSize</code>. Advanced configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;lateAcceptanceSize&gt;400&lt;/lateAcceptanceSize&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1&lt;/acceptedCountLimit&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre><p>Late Acceptance should use a low <code class="literal">acceptedCountLimit</code>.</p><p>Late Acceptance can be combined with a tabu acceptor at the same time. That gives Late Acceptance salted
+      with a bit of Tabu. Use a lower tabu size than in a pure Tabu Search configuration.</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;lateAcceptanceSize&gt;400&lt;/lateAcceptanceSize&gt;
+      &lt;entityTabuSize&gt;5&lt;/entityTabuSize&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1&lt;/acceptedCountLimit&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre></div></div><div class="section" title="10.7. Step Counting Hill Climbing"><div class="titlepage"><div><div><h2 class="title"><a id="stepCountingHillClimbing"/>10.7. Step Counting Hill Climbing</h2></div></div></div><div class="section" title="10.7.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="stepCountingHillClimbingAlgorithm"/>10.7.1. Algorithm Description</h3></div></div></div><p>Step Counting Hill Climbing also evaluates only a few moves per step. For a number of steps, it keeps the
+      step score as a threshold. A move is accepted if it does not decrease the score, or if it leads to a score that is
+      at least the threshold score.</p><p>Scientific paper: <a class="link" href="https://www.cs.nott.ac.uk/~yxb/SCHC/SCHC_mista2013_79.pdf"><span class="emphasis"><em>An
+      initial study of a novel Step Counting Hill Climbing heuristic applied to timetabling problems</em></span> by Yuri
+      Bykov, Sanja Petrovic (2013)</a></p></div><div class="section" title="10.7.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="stepCountingHillClimbingConfiguration"/>10.7.2. Configuration</h3></div></div></div><p>Step Counting Hill Climbing accepts any move that has a score which is higher than a threshold score. Every
+      number of steps (specified by <code class="literal">stepCountingHillClimbingSize</code>), the threshold score is set to the
+      step score.</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;stepCountingHillClimbingSize&gt;400&lt;/stepCountingHillClimbingSize&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1&lt;/acceptedCountLimit&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre><p>Step Counting Hill Climbing should use a low <code class="literal">acceptedCountLimit</code>.</p><p>Step Counting Hill Climbing can be combined with a tabu acceptor at the same time, similar as shown in <a class="link" href="ch10.html#lateAcceptance" title="10.6. Late Acceptance">the Late Acceptance section</a>.</p></div></div><div class="section" title="10.8. Strategic Oscillation"><div class="titlepage"><div><div><h2 class="title"><a id="strategicOscillation"/>10.8. Strategic Oscillation</h2></div></div></div><div class="section" title="10.8.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="strategicOscillationAlgorithm"/>10.8.1. Algorithm Description</h3></div></div></div><p>Strategic Oscillation is an add-on, which works especially well with <a class="link" href="ch10.html#tabuSearch" title="10.4. Tabu Search">Tabu
+      Search</a>. Instead of picking the accepted move with the highest score, it employs a different mechanism: If
+      there's an improving move, it picks it. If there's no improving move however, it prefers moves which improve a
+      softer score level, over moves which break a harder score level less.</p></div><div class="section" title="10.8.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="strategicOscillationConfiguration"/>10.8.2. Configuration</h3></div></div></div><p>Configure a <code class="literal">finalistPodiumType</code>, for example in a Tabu Search configuration:</p><pre><code class="language-xml">  &lt;localSearch&gt;
+    ...
+    &lt;acceptor&gt;
+      &lt;entityTabuSize&gt;7&lt;/entityTabuSize&gt;
+    &lt;/acceptor&gt;
+    &lt;forager&gt;
+      &lt;acceptedCountLimit&gt;1000&lt;/acceptedCountLimit&gt;
+      &lt;finalistPodiumType&gt;STRATEGIC_OSCILLATION&lt;/finalistPodiumType&gt;
+    &lt;/forager&gt;
+  &lt;/localSearch&gt;</code></pre><p>The following <code class="literal">finalistPodiumType</code>s are supported:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">HIGHEST_SCORE</code> (default): Pick the accepted move with the highest score.</p></li><li class="listitem"><p><code class="literal">STRATEGIC_OSCILLATION</code>: Alias for the default strategic oscillation variant.</p></li><li class="listitem"><p><code class="literal">STRATEGIC_OSCILLATION_BY_LEVEL</code>: If there is an accepted improving move, pick it. If
+          no such move exists, prefer an accepted move which improves a softer score level over one that doesn't (even
+          if it has a better harder score level). A move is improving if it's better than the last completed step
+          score.</p></li><li class="listitem"><p><code class="literal">STRATEGIC_OSCILLATION_BY_LEVEL_ON_BEST_SCORE</code>: Like
+          <code class="literal">STRATEGIC_OSCILLATION_BY_LEVEL</code>, but define improving as better than the best score (instead
+          of the last completed step score).</p></li></ul></div></div></div><div class="section" title="10.9. Using a Custom Termination, MoveSelector, EntitySelector, ValueSelector or Acceptor"><div class="titlepage"><div><div><h2 class="title"><a id="customTerminationSelectorOrAcceptor"/>10.9. Using a Custom Termination, MoveSelector, EntitySelector, ValueSelector or Acceptor</h2></div></div></div><p>You can plug in a custom <code class="literal">Termination</code>, <code class="literal">MoveSelector</code>,
+    <code class="literal">EntitySelector</code>, <code class="literal">ValueSelector</code> or <code class="literal">Acceptor</code> by extending the
+    abstract class and also the related <code class="literal">*Config</code> class.</p><p>For example, to use a custom <code class="literal">MoveSelector</code>, extend the
+    <code class="literal">AbstractMoveSelector</code> class, extend the <code class="literal">MoveSelectorConfig</code> class and configure
+    it in the solver configuration.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>It's not possible to inject a <code class="literal">Termination</code>, ... instance directly (to avoid extending a
+      <code class="literal">Config</code> class too) because:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>A <code class="literal">SolverFactory</code> can build multiple <code class="literal">Solver</code> instances, which each
+          require a distinct <code class="literal">Termination</code>, ... instance.</p></li><li class="listitem"><p>A solver configuration needs to be serializable to and from XML. This makes benchmarking with
+          <code class="literal">PlannerBenchmark</code> particularly easy because you can configure different
+          <code class="literal">Solver</code> variants in XML.</p></li><li class="listitem"><p>A <code class="literal">Config</code> class is often easier and clearer to configure. For example:
+          <code class="literal">TerminationConfig</code> translates <code class="literal">minutesSpentLimit</code> and
+          <code class="literal">secondsSpentLimit</code> into <code class="literal">timeMillisSpentLimit</code>.</p></li></ul></div></div><p>If you build a better implementation that's not domain specific, consider contributing it back as a pull
+    request on github: we'll optimize it and take it along in future refactorings.</p></div></div><script type="text/javascript" src="highlight.js/highlight.pack.js"> </script><script type="text/javascript">hljs.initHighlightingOnLoad();</script><script type="text/javascript">
+dataLayer = [{'channel' : 'OptaPlanner', 'additional_tracking_code' : 'UA-39485370-1'}];
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJWS5L');</script><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NJWS5L" height="0" width="0" style="display:none;visibility:hidden"> </iframe></noscript><ul class="docnav"><li class="previous"><a accesskey="p" href="ch09.html"><strong>Prev</strong>Chapter 9. Construction Heuristics</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="ch11.html"><strong>Next</strong>Chapter 11. Evolutionary Algorithms</a></li></ul></body></html>

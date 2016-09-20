@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Chapter 9. Construction Heuristics</title><link rel="stylesheet" type="text/css" href="css/jbossorg.css"/><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"/><link rel="home" href="index.html" title="OptaPlanner User Guide"/><link rel="up" href="index.html" title="OptaPlanner User Guide"/><link rel="prev" href="ch08.html" title="Chapter 8. Exhaustive Search"/><link rel="next" href="ch10.html" title="Chapter 10. Local Search"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head><body><p id="title"><a href="http://www.jboss.org" class="site_href"><strong>JBoss.org</strong></a><a href="http://docs.jboss.org/" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="ch08.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="ch10.html"><strong>Next</strong></a></li></ul><div class="chapter" title="Chapter 9. Construction Heuristics"><div class="titlepage"><div><div><h2 class="title"><a id="constructionHeuristics"/>Chapter 9. Construction Heuristics</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch09.html#constructionHeuristicsOverview">9.1. Overview</a></span></dt><dt><span class="section"><a href="ch09.html#firstFit">9.2. First Fit</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#firstFitAlgorithm">9.2.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#firstFitConfiguration">9.2.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#firstFitDecreasing">9.3. First Fit Decreasing</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#firstFitDecreasingAlgorithm">9.3.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#firstFitDecreasingConfiguration">9.3.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#weakestFit">9.4. Weakest Fit</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#weakestFitAlgorithm">9.4.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#weakestFitConfiguration">9.4.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#weakestFitDecreasing">9.5. Weakest Fit Decreasing</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#weakestFitDecreasingAlgorithm">9.5.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#weakestFitDecreasingConfiguration">9.5.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#strongestFit">9.6. Strongest Fit</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#strongestFitAlgorithm">9.6.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#strongestFitConfiguration">9.6.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#strongestFitDecreasing">9.7. Strongest Fit Decreasing</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#strongestFitDecreasingAlgorithm">9.7.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#strongestFitDecreasingConfiguration">9.7.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#allocateEntityFromQueue">9.8. Allocate Entity From Queue</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#allocateEntityFromQueueAlgorithm">9.8.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#allocateEntityFromQueueConfiguration">9.8.2. Configuration</a></span></dt><dt><span class="section"><a href="ch09.html#allocateEntityFromQueueMultipleVariables">9.8.3. Multiple Variables</a></span></dt><dt><span class="section"><a href="ch09.html#allocateEntityFromQueueMultipleEntityClasses">9.8.4. Multiple Entity Classes</a></span></dt><dt><span class="section"><a href="ch09.html#constructionHeuristicsPickEarlyType">9.8.5. Pick Early Type</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#allocateToValueFromQueue">9.9. Allocate To Value From Queue</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#allocateToValueFromQueueAlgorithm">9.9.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#allocateToValueFromQueueConfiguration">9.9.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#cheapestInsertion">9.10. Cheapest Insertion</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#cheapestInsertionAlgorithm">9.10.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#cheapestInsertionConfiguration">9.10.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#regretInsertion">9.11. Regret Insertion</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#regretInsertionAlgorithm">9.11.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#regretInsertionConfiguration">9.11.2. Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.html#allocateFromPool">9.12. Allocate From Pool</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.html#allocateFromPoolAlgorithm">9.12.1. Algorithm Description</a></span></dt><dt><span class="section"><a href="ch09.html#allocateFromPoolConfiguration">9.12.2. Configuration</a></span></dt></dl></dd></dl></div><div class="section" title="9.1. Overview"><div class="titlepage"><div><div><h2 class="title"><a id="constructionHeuristicsOverview"/>9.1. Overview</h2></div></div></div><p>A construction heuristic builds a pretty good initial solution in a finite length of time. Its solution isn't
+    always feasible, but it finds it fast so metaheuristics can finish the job.</p><p>Construction heuristics terminate automatically, so there's usually no need to configure a
+    <code class="literal">Termination</code> on the construction heuristic phase specifically.</p></div><div class="section" title="9.2. First Fit"><div class="titlepage"><div><div><h2 class="title"><a id="firstFit"/>9.2. First Fit</h2></div></div></div><div class="section" title="9.2.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="firstFitAlgorithm"/>9.2.1. Algorithm Description</h3></div></div></div><p>The First Fit algorithm cycles through all the planning entities (in default order), initializing 1 planning
+      entity at a time. It assigns the planning entity to the best available planning value, taking the already
+      initialized planning entities into account. It terminates when all planning entities have been initialized. It
+      never changes a planning entity after it has been assigned.</p><div class="mediaobject"><img src="images/Chapter-Construction_heuristics/firstFitNQueens04.png"/></div><p>Notice that it starts with putting <code class="literal">Queen</code> A into row 0 (and never moving it later), which
+      makes it impossible to reach the optimal solution. Suffixing this construction heuristic with metaheuristics can
+      remedy that.</p></div><div class="section" title="9.2.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="firstFitConfiguration"/>9.2.2. Configuration</h3></div></div></div><p>Configure this solver phase:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;FIRST_FIT&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+        <code class="literal">ONLY_DOWN</code>, this algorithm is faster: for an entity, it picks the first move for which the
+        score does not deteriorate the last step score, ignoring all subsequent moves.</p></div><p>For advanced configuration, see <a class="link" href="ch09.html#allocateEntityFromQueue" title="9.8. Allocate Entity From Queue">Allocate Entity From
+      Queue</a>.</p></div></div><div class="section" title="9.3. First Fit Decreasing"><div class="titlepage"><div><div><h2 class="title"><a id="firstFitDecreasing"/>9.3. First Fit Decreasing</h2></div></div></div><div class="section" title="9.3.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="firstFitDecreasingAlgorithm"/>9.3.1. Algorithm Description</h3></div></div></div><p>Like First Fit, but assigns the more difficult planning entities first, because they are less likely to fit
+      in the leftovers. So it sorts the planning entities on decreasing difficulty.</p><p>Requires the model to support <a class="link" href="ch04.html#planningEntityDifficulty" title="4.3.3.2. Planning Entity Difficulty">planning entity difficulty
+      comparison</a>.</p><div class="mediaobject"><img src="images/Chapter-Construction_heuristics/firstFitDecreasingNQueens04.png"/></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>One would expect that this algorithm has better results than First Fit. That's usually the case, but not
+        always.</p></div></div><div class="section" title="9.3.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="firstFitDecreasingConfiguration"/>9.3.2. Configuration</h3></div></div></div><p>Configure this solver phase:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;FIRST_FIT_DECREASING&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+        <code class="literal">ONLY_DOWN</code>, this algorithm is faster: for an entity, it picks the first move for which the
+        score does not deteriorate the last step score, ignoring all subsequent moves.</p></div><p>For advanced configuration, see <a class="link" href="ch09.html#allocateEntityFromQueue" title="9.8. Allocate Entity From Queue">Allocate Entity From
+      Queue</a>.</p></div></div><div class="section" title="9.4. Weakest Fit"><div class="titlepage"><div><div><h2 class="title"><a id="weakestFit"/>9.4. Weakest Fit</h2></div></div></div><div class="section" title="9.4.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="weakestFitAlgorithm"/>9.4.1. Algorithm Description</h3></div></div></div><p>Like First Fit, but uses the weaker planning values first, because the strong planning values are more
+      likely to be able to accommodate later planning entities. So it sorts the planning values on increasing
+      strength.</p><p>Requires the model to support <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength
+      comparison</a>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Do not presume that this algorithm has better results than First Fit. That's often not the case.</p></div></div><div class="section" title="9.4.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="weakestFitConfiguration"/>9.4.2. Configuration</h3></div></div></div><p>Configure this solver phase:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;WEAKEST_FIT&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+        <code class="literal">ONLY_DOWN</code>, this algorithm is faster: for an entity, it picks the first move for which the
+        score does not deteriorate the last step score, ignoring all subsequent moves.</p></div><p>For advanced configuration, see <a class="link" href="ch09.html#allocateEntityFromQueue" title="9.8. Allocate Entity From Queue">Allocate Entity From
+      Queue</a>.</p></div></div><div class="section" title="9.5. Weakest Fit Decreasing"><div class="titlepage"><div><div><h2 class="title"><a id="weakestFitDecreasing"/>9.5. Weakest Fit Decreasing</h2></div></div></div><div class="section" title="9.5.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="weakestFitDecreasingAlgorithm"/>9.5.1. Algorithm Description</h3></div></div></div><p>Combines First Fit Decreasing and Weakest Fit. So it sorts the planning entities on decreasing difficulty
+      and the planning values on increasing strength.</p><p>Requires the model to support <a class="link" href="ch04.html#planningEntityDifficulty" title="4.3.3.2. Planning Entity Difficulty">planning entity difficulty
+      comparison</a> and <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength comparison</a>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Do not presume that this algorithm has better results than First Fit Decreasing. That's often not the
+        case. However, it is usually better than Weakest Fit.</p></div></div><div class="section" title="9.5.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="weakestFitDecreasingConfiguration"/>9.5.2. Configuration</h3></div></div></div><p>Configure this solver phase:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;WEAKEST_FIT_DECREASING&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+        <code class="literal">ONLY_DOWN</code>, this algorithm is faster: for an entity, it picks the first move for which the
+        score does not deteriorate the last step score, ignoring all subsequent moves.</p></div><p>For advanced configuration, see <a class="link" href="ch09.html#allocateEntityFromQueue" title="9.8. Allocate Entity From Queue">Allocate Entity From
+      Queue</a>.</p></div></div><div class="section" title="9.6. Strongest Fit"><div class="titlepage"><div><div><h2 class="title"><a id="strongestFit"/>9.6. Strongest Fit</h2></div></div></div><div class="section" title="9.6.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="strongestFitAlgorithm"/>9.6.1. Algorithm Description</h3></div></div></div><p>Like First Fit, but uses the strong planning values first, because the strong planning values are more
+      likely to have a lower soft cost to use. So it sorts the planning values on decreasing strength.</p><p>Requires the model to support <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength
+      comparison</a>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Do not presume that this algorithm has better results than First Fit or Weakest Fit. That's often not the
+        case.</p></div></div><div class="section" title="9.6.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="strongestFitConfiguration"/>9.6.2. Configuration</h3></div></div></div><p>Configure this solver phase:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;STRONGEST_FIT&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+        <code class="literal">ONLY_DOWN</code>, this algorithm is faster: for an entity, it picks the first move for which the
+        score does not deteriorate the last step score, ignoring all subsequent moves.</p></div><p>For advanced configuration, see <a class="link" href="ch09.html#allocateEntityFromQueue" title="9.8. Allocate Entity From Queue">Allocate Entity From
+      Queue</a>.</p></div></div><div class="section" title="9.7. Strongest Fit Decreasing"><div class="titlepage"><div><div><h2 class="title"><a id="strongestFitDecreasing"/>9.7. Strongest Fit Decreasing</h2></div></div></div><div class="section" title="9.7.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="strongestFitDecreasingAlgorithm"/>9.7.1. Algorithm Description</h3></div></div></div><p>Combines First Fit Decreasing and Strongest Fit. So it sorts the planning entities on decreasing difficulty
+      and the planning values on decreasing strength.</p><p>Requires the model to support <a class="link" href="ch04.html#planningEntityDifficulty" title="4.3.3.2. Planning Entity Difficulty">planning entity difficulty
+      comparison</a> and <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength comparison</a>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Do not presume that this algorithm has better results than First Fit Decreasing or Weakest Fit Decreasing.
+        That's often not the case. However, it is usually better than Strongest Fit.</p></div></div><div class="section" title="9.7.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="strongestFitDecreasingConfiguration"/>9.7.2. Configuration</h3></div></div></div><p>Configure this solver phase:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;STRONGEST_FIT_DECREASING&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+        <code class="literal">ONLY_DOWN</code>, this algorithm is faster: for an entity, it picks the first move for which the
+        score does not deteriorate the last step score, ignoring all subsequent moves.</p></div><p>For advanced configuration, see <a class="link" href="ch09.html#allocateEntityFromQueue" title="9.8. Allocate Entity From Queue">Allocate Entity From
+      Queue</a>.</p></div></div><div class="section" title="9.8. Allocate Entity From Queue"><div class="titlepage"><div><div><h2 class="title"><a id="allocateEntityFromQueue"/>9.8. Allocate Entity From Queue</h2></div></div></div><div class="section" title="9.8.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="allocateEntityFromQueueAlgorithm"/>9.8.1. Algorithm Description</h3></div></div></div><p>Allocate Entity From Queue is a versatile, generic form of <a class="link" href="ch09.html#firstFit" title="9.2. First Fit">First Fit</a>, <a class="link" href="ch09.html#firstFitDecreasing" title="9.3. First Fit Decreasing">First Fit Decreasing</a>, <a class="link" href="ch09.html#weakestFit" title="9.4. Weakest Fit">Weakest Fit</a> and <a class="link" href="ch09.html#weakestFitDecreasing" title="9.5. Weakest Fit Decreasing">Weakest Fit Decreasing</a>. It works like this:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Put all entities in a queue.</p></li><li class="listitem"><p>Assign the first entity (from that queue) to the best value.</p></li><li class="listitem"><p>Repeat until all entities are assigned.</p></li></ol></div></div><div class="section" title="9.8.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="allocateEntityFromQueueConfiguration"/>9.8.2. Configuration</h3></div></div></div><p>Simple configuration:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;ALLOCATE_ENTITY_FROM_QUEUE&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>Verbose simple configuration:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;ALLOCATE_ENTITY_FROM_QUEUE&lt;/constructionHeuristicType&gt;
+    &lt;entitySorterManner&gt;DECREASING_DIFFICULTY_IF_AVAILABLE&lt;/entitySorterManner&gt;
+    &lt;valueSorterManner&gt;INCREASING_STRENGTH_IF_AVAILABLE&lt;/valueSorterManner&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>The <code class="literal">entitySorterManner</code> options are:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">DECREASING_DIFFICULTY</code>: Initialize the more difficult planning entities first. This
+          usually increases pruning (and therefore improves scalability). Requires the model to support <a class="link" href="ch04.html#planningEntityDifficulty" title="4.3.3.2. Planning Entity Difficulty">planning entity difficulty comparison</a>.</p></li><li class="listitem"><p><code class="literal">DECREASING_DIFFICULTY_IF_AVAILABLE</code> (default): If the model supports <a class="link" href="ch04.html#planningEntityDifficulty" title="4.3.3.2. Planning Entity Difficulty">planning entity difficulty comparison</a>, behave like
+          <code class="literal">DECREASING_DIFFICULTY</code>, else like <code class="literal">NONE</code>.</p></li><li class="listitem"><p><code class="literal">NONE</code>: Initialize the planning entities in original order.</p></li></ul></div><p>The <code class="literal">valueSorterManner</code> options are:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">INCREASING_STRENGTH</code>: Evaluate the planning values in increasing strength. Requires
+          the model to support <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength comparison</a>.</p></li><li class="listitem"><p><code class="literal">INCREASING_STRENGTH_IF_AVAILABLE</code> (default): If the model supports <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength comparison</a>, behave like
+          <code class="literal">INCREASING_STRENGTH</code>, else like <code class="literal">NONE</code>.</p></li><li class="listitem"><p><code class="literal">DECREASING_STRENGTH</code>: Evaluate the planning values in decreasing strength. Requires
+          the model to support <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength comparison</a>.</p></li><li class="listitem"><p><code class="literal">DECREASING_STRENGTH_IF_AVAILABLE</code>: If the model supports <a class="link" href="ch04.html#planningValueStrength" title="4.3.5.3. Planning Value Strength">planning value strength comparison</a>, behave like
+          <code class="literal">DECREASING_STRENGTH</code>, else like <code class="literal">NONE</code>.</p></li><li class="listitem"><p><code class="literal">NONE</code>: Try the planning values in original order.</p></li></ul></div><p>Advanced detailed configuration. For example, a Weakest Fit Decreasing configuration for a single entity
+      class with a single variable:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;queuedEntityPlacer&gt;
+      &lt;entitySelector id="placerEntitySelector"&gt;
+        &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+        &lt;selectionOrder&gt;SORTED&lt;/selectionOrder&gt;
+        &lt;sorterManner&gt;DECREASING_DIFFICULTY&lt;/sorterManner&gt;
+      &lt;/entitySelector&gt;
+      &lt;changeMoveSelector&gt;
+        &lt;entitySelector mimicSelectorRef="placerEntitySelector"/&gt;
+        &lt;valueSelector&gt;
+          &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+          &lt;selectionOrder&gt;SORTED&lt;/selectionOrder&gt;
+          &lt;sorterManner&gt;INCREASING_STRENGTH&lt;/sorterManner&gt;
+        &lt;/valueSelector&gt;
+      &lt;/changeMoveSelector&gt;
+    &lt;/queuedEntityPlacer&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>Per step, the <code class="literal">QueuedEntityPlacer</code> selects 1 uninitialized entity from the
+      <code class="literal">EntitySelector</code> and applies the winning <code class="literal">Move</code> (out of all the moves for that
+      entity generated by the <code class="literal">MoveSelector</code>). The <a class="link" href="ch07.html#mimicSelection" title="7.6.8. Mimic Selection (Record/Replay)">mimic
+      selection</a> ensures that the winning <code class="literal">Move</code> changes (only) the selected entity.</p><p>To customize the entity or value sorting, see <a class="link" href="ch07.html#sortedSelection" title="7.6.5. Sorted Selection">sorted selection</a>. Other
+      <code class="literal">Selector</code> customization (such as <a class="link" href="ch07.html#filteredSelection" title="7.6.4. Filtered Selection">filtering</a> and <a class="link" href="ch07.html#limitedSelection" title="7.6.7. Limited Selection">limiting</a>) is supported too.</p></div><div class="section" title="9.8.3. Multiple Variables"><div class="titlepage"><div><div><h3 class="title"><a id="allocateEntityFromQueueMultipleVariables"/>9.8.3. Multiple Variables</h3></div></div></div><p>There are 2 ways to deal with multiple variables, depending on how their <code class="literal">ChangeMove</code>s are
+      combined:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Cartesian product of the <code class="literal">ChangeMove</code>s (default): All variables of the selected entity
+          are assigned together. Has far better results (especially for timetabling use cases).</p></li><li class="listitem"><p>Sequential <code class="literal">ChangeMove</code>s: One variable is assigned at a time. Scales much better,
+          especially for 3 or more variables.</p></li></ul></div><p>For example, presume a course scheduling example with 200 rooms and 40 periods.</p><p>This First Fit configuration for a single entity class with 2 variables, using a <a class="link" href="ch07.html#cartesianProductMoveSelector" title="7.3.2. cartesianProductMoveSelector">cartesian product</a> of their <code class="literal">ChangeMove</code>s, will
+      select 8000 moves per entity:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;queuedEntityPlacer&gt;
+      &lt;entitySelector id="placerEntitySelector"&gt;
+        &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+      &lt;/entitySelector&gt;
+      &lt;cartesianProductMoveSelector&gt;
+        &lt;changeMoveSelector&gt;
+          &lt;entitySelector mimicSelectorRef="placerEntitySelector"/&gt;
+          &lt;valueSelector&gt;
+            &lt;variableName&gt;room&lt;/variableName&gt;
+          &lt;/valueSelector&gt;
+        &lt;/changeMoveSelector&gt;
+        &lt;changeMoveSelector&gt;
+          &lt;entitySelector mimicSelectorRef="placerEntitySelector"/&gt;
+          &lt;valueSelector&gt;
+            &lt;variableName&gt;period&lt;/variableName&gt;
+          &lt;/valueSelector&gt;
+        &lt;/changeMoveSelector&gt;
+      &lt;/cartesianProductMoveSelector&gt;
+    &lt;/queuedEntityPlacer&gt;
+    ...
+  &lt;/constructionHeuristic&gt;</code></pre><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>With 3 variables of 1000 values each, a cartesian product selects 1000000000 values per entity, which will
+        take far too long.</p></div><p>This First Fit configuration for a single entity class with 2 variables, using sequential
+      <code class="literal">ChangeMove</code>s, will select 240 moves per entity:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;queuedEntityPlacer&gt;
+      &lt;entitySelector id="placerEntitySelector"&gt;
+        &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+      &lt;/entitySelector&gt;
+      &lt;changeMoveSelector&gt;
+        &lt;entitySelector mimicSelectorRef="placerEntitySelector"/&gt;
+        &lt;valueSelector&gt;
+          &lt;variableName&gt;period&lt;/variableName&gt;
+        &lt;/valueSelector&gt;
+      &lt;/changeMoveSelector&gt;
+      &lt;changeMoveSelector&gt;
+        &lt;entitySelector mimicSelectorRef="placerEntitySelector"/&gt;
+        &lt;valueSelector&gt;
+          &lt;variableName&gt;room&lt;/variableName&gt;
+        &lt;/valueSelector&gt;
+      &lt;/changeMoveSelector&gt;
+    &lt;/queuedEntityPlacer&gt;
+    ...
+  &lt;/constructionHeuristic&gt;</code></pre><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Important</h2><p>Especially for sequential <code class="literal">ChangeMove</code>s, the order of the variables is important. In the
+        example above, it's better to select the period first (instead of the other way around), because there are more
+        hard constraints that do not involve the room (for example: no teacher should teach 2 lectures at the same
+        time). Let the <a class="link" href="ch14.html" title="Chapter 14. Benchmarking And Tweaking">Benchmarker</a> guide you.</p></div><p>With 3 or more variables, it's possible to combine the cartesian product and sequential techniques:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;queuedEntityPlacer&gt;
+      ...
+      &lt;cartesianProductMoveSelector&gt;
+        &lt;changeMoveSelector&gt;...&lt;/changeMoveSelector&gt;
+        &lt;changeMoveSelector&gt;...&lt;/changeMoveSelector&gt;
+      &lt;/cartesianProductMoveSelector&gt;
+      &lt;changeMoveSelector&gt;...&lt;/changeMoveSelector&gt;
+    &lt;/queuedEntityPlacer&gt;
+    ...
+  &lt;/constructionHeuristic&gt;</code></pre></div><div class="section" title="9.8.4. Multiple Entity Classes"><div class="titlepage"><div><div><h3 class="title"><a id="allocateEntityFromQueueMultipleEntityClasses"/>9.8.4. Multiple Entity Classes</h3></div></div></div><p>The easiest way to deal with multiple entity classes is to run a separate construction heuristic for each
+      entity class:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;queuedEntityPlacer&gt;
+      &lt;entitySelector id="placerEntitySelector"&gt;
+        &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+        &lt;entityClass&gt;...DogEntity&lt;/entityClass&gt;
+      &lt;/entitySelector&gt;
+      &lt;changeMoveSelector&gt;
+        &lt;entitySelector mimicSelectorRef="placerEntitySelector"/&gt;
+      &lt;/changeMoveSelector&gt;
+    &lt;/queuedEntityPlacer&gt;
+    ...
+  &lt;/constructionHeuristic&gt;
+  &lt;constructionHeuristic&gt;
+    &lt;queuedEntityPlacer&gt;
+      &lt;entitySelector id="placerEntitySelector"&gt;
+        &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+        &lt;entityClass&gt;...CatEntity&lt;/entityClass&gt;
+      &lt;/entitySelector&gt;
+      &lt;changeMoveSelector&gt;
+        &lt;entitySelector mimicSelectorRef="placerEntitySelector"/&gt;
+      &lt;/changeMoveSelector&gt;
+    &lt;/queuedEntityPlacer&gt;
+    ...
+  &lt;/constructionHeuristic&gt;</code></pre></div><div class="section" title="9.8.5. Pick Early Type"><div class="titlepage"><div><div><h3 class="title"><a id="constructionHeuristicsPickEarlyType"/>9.8.5. Pick Early Type</h3></div></div></div><p>There are several pick early types for Construction Heuristics:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">NEVER</code>: Evaluate all the selected moves to initialize the variable(s). This is the
+          default if the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is not
+          <code class="literal">ONLY_DOWN</code>.</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    ...
+    &lt;forager&gt;
+      &lt;pickEarlyType&gt;NEVER&lt;/pickEarlyType&gt;
+    &lt;/forager&gt;
+  &lt;/constructionHeuristic&gt;</code></pre></li><li class="listitem"><p><code class="literal">FIRST_NON_DETERIORATING_SCORE</code>: Initialize the variable(s) with the first move that
+          doesn't deteriorate the score, ignore the remaining selected moves. This is the default if the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is <code class="literal">ONLY_DOWN</code>.</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    ...
+    &lt;forager&gt;
+      &lt;pickEarlyType&gt;FIRST_NON_DETERIORATING_SCORE&lt;/pickEarlyType&gt;
+    &lt;/forager&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If there are only negative constraints, but the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is strictly not <code class="literal">ONLY_DOWN</code>,
+            it can sometimes make sense to apply FIRST_NON_DETERIORATING_SCORE. Use the <a class="link" href="ch14.html" title="Chapter 14. Benchmarking And Tweaking">Benchmarker</a> to decide if the score quality loss is worth the time gain.</p></div></li><li class="listitem"><p><code class="literal">FIRST_FEASIBLE_SCORE</code>: Initialize the variable(s) with the first move that has a
+          feasible score.</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    ...
+    &lt;forager&gt;
+      &lt;pickEarlyType&gt;FIRST_FEASIBLE_SCORE&lt;/pickEarlyType&gt;
+    &lt;/forager&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+          <code class="literal">ONLY_DOWN</code>, use <code class="literal">FIRST_FEASIBLE_SCORE_OR_NON_DETERIORATING_HARD</code> instead,
+          because that's faster without any disadvantages.</p></li><li class="listitem"><p><code class="literal">FIRST_FEASIBLE_SCORE_OR_NON_DETERIORATING_HARD</code>: Initialize the variable(s) with the
+          first move that doesn't deteriorate the feasibility of the score any further.</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    ...
+    &lt;forager&gt;
+      &lt;pickEarlyType&gt;FIRST_FEASIBLE_SCORE_OR_NON_DETERIORATING_HARD&lt;/pickEarlyType&gt;
+    &lt;/forager&gt;
+  &lt;/constructionHeuristic&gt;</code></pre></li></ul></div></div></div><div class="section" title="9.9. Allocate To Value From Queue"><div class="titlepage"><div><div><h2 class="title"><a id="allocateToValueFromQueue"/>9.9. Allocate To Value From Queue</h2></div></div></div><div class="section" title="9.9.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="allocateToValueFromQueueAlgorithm"/>9.9.1. Algorithm Description</h3></div></div></div><p>Allocate To Value From Queue works like this:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Put all values in a round-robin queue.</p></li><li class="listitem"><p>Assign the best entity to the first value (from that queue).</p></li><li class="listitem"><p>Repeat until all entities are assigned.</p></li></ol></div></div><div class="section" title="9.9.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="allocateToValueFromQueueConfiguration"/>9.9.2. Configuration</h3></div></div></div><p>Simple configuration:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;ALLOCATE_TO_VALUE_FROM_QUEUE&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>Verbose simple configuration:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;ALLOCATE_TO_VALUE_FROM_QUEUE&lt;/constructionHeuristicType&gt;
+    &lt;entitySorterManner&gt;DECREASING_DIFFICULTY_IF_AVAILABLE&lt;/entitySorterManner&gt;
+    &lt;valueSorterManner&gt;INCREASING_STRENGTH_IF_AVAILABLE&lt;/valueSorterManner&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>Advanced detailed configuration. For example, a configuration for a single entity class with a single
+      variable:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;queuedValuePlacer&gt;
+      &lt;valueSelector id="placerValueSelector"&gt;
+        &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+        &lt;selectionOrder&gt;SORTED&lt;/selectionOrder&gt;
+        &lt;sorterManner&gt;INCREASING_STRENGTH&lt;/sorterManner&gt;
+      &lt;/valueSelector&gt;
+      &lt;changeMoveSelector&gt;
+        &lt;entitySelector&gt;
+          &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+          &lt;selectionOrder&gt;SORTED&lt;/selectionOrder&gt;
+          &lt;sorterManner&gt;DECREASING_DIFFICULTY&lt;/sorterManner&gt;
+        &lt;/entitySelector&gt;
+        &lt;valueSelector mimicSelectorRef="placerValueSelector"/&gt;
+      &lt;/changeMoveSelector&gt;
+    &lt;/queuedValuePlacer&gt;
+  &lt;/constructionHeuristic&gt;</code></pre></div></div><div class="section" title="9.10. Cheapest Insertion"><div class="titlepage"><div><div><h2 class="title"><a id="cheapestInsertion"/>9.10. Cheapest Insertion</h2></div></div></div><div class="section" title="9.10.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="cheapestInsertionAlgorithm"/>9.10.1. Algorithm Description</h3></div></div></div><p>The Cheapest Insertion algorithm cycles through all the planning values for all the planning entities,
+      initializing 1 planning entity at a time. It assigns a planning entity to the best available planning value (out
+      of all the planning entities and values), taking the already initialized planning entities into account. It
+      terminates when all planning entities have been initialized. It never changes a planning entity after it has been
+      assigned.</p><div class="mediaobject"><img src="images/Chapter-Construction_heuristics/cheapestInsertionNQueens04.png"/></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Cheapest Insertion scales considerably worse than First Fit, etc.</p></div></div><div class="section" title="9.10.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="cheapestInsertionConfiguration"/>9.10.2. Configuration</h3></div></div></div><p>Simplest configuration of Cheapest Insertion:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;CHEAPEST_INSERTION&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If the <a class="link" href="ch05.html#initializingScoreTrend" title="5.3.5. InitializingScoreTrend">InitializingScoreTrend</a> is
+        <code class="literal">ONLY_DOWN</code>, this algorithm is faster: for an entity, it picks the first move for which the
+        score does not deteriorate the last step score, ignoring all subsequent moves.</p></div><p>For advanced configuration, see <a class="link" href="ch09.html#allocateFromPool" title="9.12. Allocate From Pool">Allocate from pool</a>.</p></div></div><div class="section" title="9.11. Regret Insertion"><div class="titlepage"><div><div><h2 class="title"><a id="regretInsertion"/>9.11. Regret Insertion</h2></div></div></div><div class="section" title="9.11.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="regretInsertionAlgorithm"/>9.11.1. Algorithm Description</h3></div></div></div><p>The Regret Insertion algorithm behaves like the Cheapest Insertion algorithm. It also cycles through all the
+      planning values for all the planning entities, initializing 1 planning entity at a time. But instead of picking
+      the entity-value combination with the best score, it picks the entity which has the largest score loss between its
+      best and second best value assignment. It then assigns that entity to its best value, to avoid regretting not
+      having done that.</p></div><div class="section" title="9.11.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="regretInsertionConfiguration"/>9.11.2. Configuration</h3></div></div></div><p>This algorithm has not been implemented yet.</p></div></div><div class="section" title="9.12. Allocate From Pool"><div class="titlepage"><div><div><h2 class="title"><a id="allocateFromPool"/>9.12. Allocate From Pool</h2></div></div></div><div class="section" title="9.12.1. Algorithm Description"><div class="titlepage"><div><div><h3 class="title"><a id="allocateFromPoolAlgorithm"/>9.12.1. Algorithm Description</h3></div></div></div><p>Allocate From Pool is a versatile, generic form of <a class="link" href="ch09.html#cheapestInsertion" title="9.10. Cheapest Insertion">Cheapest
+      Insertion</a> and <a class="link" href="ch09.html#regretInsertion" title="9.11. Regret Insertion">Regret Insertion</a>. It works like this:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Put all entity-value combinations in a pool.</p></li><li class="listitem"><p>Assign the best entity to best value.</p></li><li class="listitem"><p>Repeat until all entities are assigned.</p></li></ol></div></div><div class="section" title="9.12.2. Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="allocateFromPoolConfiguration"/>9.12.2. Configuration</h3></div></div></div><p>Simple configuration:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;ALLOCATE_FROM_POOL&lt;/constructionHeuristicType&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>Verbose simple configuration:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;constructionHeuristicType&gt;ALLOCATE_FROM_POOL&lt;/constructionHeuristicType&gt;
+    &lt;entitySorterManner&gt;DECREASING_DIFFICULTY_IF_AVAILABLE&lt;/entitySorterManner&gt;
+    &lt;valueSorterManner&gt;INCREASING_STRENGTH_IF_AVAILABLE&lt;/valueSorterManner&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>The <code class="literal">entitySorterManner</code> and <code class="literal">valueSorterManner</code> options are described in
+      <a class="link" href="ch09.html#allocateEntityFromQueue" title="9.8. Allocate Entity From Queue">Allocate Entity From Queue</a>.</p><p>Advanced detailed configuration. For example, a Cheapest Insertion configuration for a single entity class
+      with a single variable:</p><pre><code class="language-xml">  &lt;constructionHeuristic&gt;
+    &lt;pooledEntityPlacer&gt;
+      &lt;changeMoveSelector&gt;
+        &lt;entitySelector id="placerEntitySelector"&gt;
+          &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+          &lt;selectionOrder&gt;SORTED&lt;/selectionOrder&gt;
+          &lt;sorterManner&gt;DECREASING_DIFFICULTY&lt;/sorterManner&gt;
+        &lt;/entitySelector&gt;
+        &lt;valueSelector&gt;
+          &lt;cacheType&gt;PHASE&lt;/cacheType&gt;
+          &lt;selectionOrder&gt;SORTED&lt;/selectionOrder&gt;
+          &lt;sorterManner&gt;INCREASING_STRENGTH&lt;/sorterManner&gt;
+        &lt;/valueSelector&gt;
+      &lt;/changeMoveSelector&gt;
+    &lt;/pooledEntityPlacer&gt;
+  &lt;/constructionHeuristic&gt;</code></pre><p>Per step, the <code class="literal">PooledEntityPlacer</code> applies the winning <code class="literal">Move</code> (out of all
+      the moves for that entity generated by the <code class="literal">MoveSelector</code>).</p><p>To customize the entity or value sorting, see <a class="link" href="ch07.html#sortedSelection" title="7.6.5. Sorted Selection">sorted selection</a>. Other
+      <code class="literal">Selector</code> customization (such as <a class="link" href="ch07.html#filteredSelection" title="7.6.4. Filtered Selection">filtering</a> and <a class="link" href="ch07.html#limitedSelection" title="7.6.7. Limited Selection">limiting</a>) is supported too.</p></div></div></div><script type="text/javascript" src="highlight.js/highlight.pack.js"> </script><script type="text/javascript">hljs.initHighlightingOnLoad();</script><script type="text/javascript">
+dataLayer = [{'channel' : 'OptaPlanner', 'additional_tracking_code' : 'UA-39485370-1'}];
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJWS5L');</script><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NJWS5L" height="0" width="0" style="display:none;visibility:hidden"> </iframe></noscript><ul class="docnav"><li class="previous"><a accesskey="p" href="ch08.html"><strong>Prev</strong>Chapter 8. Exhaustive Search</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="ch10.html"><strong>Next</strong>Chapter 10. Local Search</a></li></ul></body></html>

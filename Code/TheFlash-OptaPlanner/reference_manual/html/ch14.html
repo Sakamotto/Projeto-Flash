@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Chapter 14. Benchmarking And Tweaking</title><link rel="stylesheet" type="text/css" href="css/jbossorg.css"/><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"/><link rel="home" href="index.html" title="OptaPlanner User Guide"/><link rel="up" href="index.html" title="OptaPlanner User Guide"/><link rel="prev" href="ch13.html" title="Chapter 13. Partitioned Search"/><link rel="next" href="ch15.html" title="Chapter 15. Repeated Planning"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head><body><p id="title"><a href="http://www.jboss.org" class="site_href"><strong>JBoss.org</strong></a><a href="http://docs.jboss.org/" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="ch13.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="ch15.html"><strong>Next</strong></a></li></ul><div class="chapter" title="Chapter 14. Benchmarking And Tweaking"><div class="titlepage"><div><div><h2 class="title"><a id="benchmarker"/>Chapter 14. Benchmarking And Tweaking</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch14.html#findTheBestSolverConfiguration">14.1. Find The Best <code class="literal">Solver</code> Configuration</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkConfiguration">14.2. Benchmark Configuration</a></span></dt><dd><dl><dt><span class="section"><a href="ch14.html#benchmarker.addDependency">14.2.1. Add Dependency On <code class="literal">optaplanner-benchmark</code></a></span></dt><dt><span class="section"><a href="ch14.html#buildAndRunAPlannerBenchmark">14.2.2. Build And Run A <code class="literal">PlannerBenchmark</code></a></span></dt><dt><span class="section"><a href="ch14.html#solutionFileIO">14.2.3. SolutionFileIO: Input And Output Of Solution Files</a></span></dt><dt><span class="section"><a href="ch14.html#warmingUpTheHotSpotCompiler">14.2.4. Warming Up The HotSpot Compiler</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkBlueprint">14.2.5. Benchmark Blueprint: A Predefined Configuration</a></span></dt><dt><span class="section"><a href="ch14.html#writeTheOutputSolutionOfBenchmarkRuns">14.2.6. Write The Output Solution Of Benchmark Runs</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkLogging">14.2.7. Benchmark Logging</a></span></dt></dl></dd><dt><span class="section"><a href="ch14.html#benchmarkReport">14.3. Benchmark Report</a></span></dt><dd><dl><dt><span class="section"><a href="ch14.html#benchmarkHtmlReport">14.3.1. HTML Report</a></span></dt><dt><span class="section"><a href="ch14.html#rankingTheSolvers">14.3.2. Ranking The <code class="literal">Solver</code>s</a></span></dt></dl></dd><dt><span class="section"><a href="ch14.html#benchmarkReportSummaryStatistics">14.4. Summary Statistics</a></span></dt><dd><dl><dt><span class="section"><a href="ch14.html#benchmarkReportBestScoreSummary">14.4.1. Best Score Summary (Graph And Table)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportBestScoreScalabilitySummary">14.4.2. Best Score Scalability Summary (Graph)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportBestScoreDistributionSummary">14.4.3. Best Score Distribution Summary (Graph)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportWinningScoreDifferenceSummary">14.4.4. Winning Score Difference Summary (Graph And Table)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportWorstScoreDifferencePercentageSummary">14.4.5. Worst Score Difference Percentage (ROI) Summary (Graph and Table)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportAverageCalculationCountSummary">14.4.6. Average Calculation Count Summary (Graph and Table)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportTimeSpentSummary">14.4.7. Time Spent Summary (Graph And Table)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportTimeSpentScalabilitySummary">14.4.8. Time Spent Scalability Summary (Graph)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportBestScorePerTimeSpentSummary">14.4.9. Best Score Per Time Spent Summary (Graph)</a></span></dt></dl></dd><dt><span class="section"><a href="ch14.html#benchmarkReportStatisticPerDataset">14.5. Statistic Per Dataset (Graph And CSV)</a></span></dt><dd><dl><dt><span class="section"><a href="ch14.html#enableAProblemStatistic">14.5.1. Enable A Problem Statistic</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportBestScoreOverTimeStatistic">14.5.2. Best Score Over Time Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportStepScoreOverTimeStatistic">14.5.3. Step Score Over Time Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportCalculateCountPerSecondStatistic">14.5.4. Calculate Count Per Second Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportBestSolutionMutationOverTimeStatistic">14.5.5. Best Solution Mutation Over Time Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportMoveCountPerStepStatistic">14.5.6. Move Count Per Step Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportMemoryUseStatistic">14.5.7. Memory Use Statistic (Graph And CSV)</a></span></dt></dl></dd><dt><span class="section"><a href="ch14.html#benchmarkReportStatisticPerSingleBenchmark">14.6. Statistic Per Single Benchmark (Graph And CSV)</a></span></dt><dd><dl><dt><span class="section"><a href="ch14.html#enableASingleStatistic">14.6.1. Enable A Single Statistic</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportConstraintMatchTotalBestScoreOverTimeStatistic">14.6.2. Constraint Match Total Best Score Over Time Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportConstraintMatchTotalStepScoreOverTimeStatistic">14.6.3. Constraint Match Total Step Score Over Time Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportPickedMoveTypeBestScoreDiffOverTimeStatistic">14.6.4. Picked Move Type Best Score Diff Over Time Statistic (Graph And CSV)</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportPickedMoveTypeStepScoreDiffOverTimeStatistic">14.6.5. Picked Move Type Step Score Diff Over Time Statistic (Graph And CSV)</a></span></dt></dl></dd><dt><span class="section"><a href="ch14.html#advancedBenchmarking">14.7. Advanced Benchmarking</a></span></dt><dd><dl><dt><span class="section"><a href="ch14.html#benchmarkingPerformanceTricks">14.7.1. Benchmarking Performance Tricks</a></span></dt><dt><span class="section"><a href="ch14.html#statisticalBenchmarking">14.7.2. Statistical Benchmarking</a></span></dt><dt><span class="section"><a href="ch14.html#templateBasedBenchmarking">14.7.3. Template Based Benchmarking And Matrix Benchmarking</a></span></dt><dt><span class="section"><a href="ch14.html#benchmarkReportAggregation">14.7.4. Benchmark Report Aggregation</a></span></dt></dl></dd></dl></div><div class="section" title="14.1. Find The Best Solver Configuration"><div class="titlepage"><div><div><h2 class="title"><a id="findTheBestSolverConfiguration"/>14.1. Find The Best <code class="literal">Solver</code> Configuration</h2></div></div></div><p>Planner supports several optimization algorithms, so you're probably wondering which is the best one? Although
+    some optimization algorithms generally perform better than others, it really depends on your problem domain. Most
+    solver phases have parameters which can be tweaked. Those parameters can influence the results a lot, even though
+    most solver phases work pretty well out-of-the-box.</p><p>Luckily, Planner includes a benchmarker, which allows you to play out different solver phases with different
+    settings against each other in development, so you can use the best configuration for your planning problem in
+    production.</p><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/benchmarkOverview.png"/></div></div><div class="section" title="14.2. Benchmark Configuration"><div class="titlepage"><div><div><h2 class="title"><a id="benchmarkConfiguration"/>14.2. Benchmark Configuration</h2></div></div></div><div class="section" title="14.2.1. Add Dependency On optaplanner-benchmark"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarker.addDependency"/>14.2.1. Add Dependency On <code class="literal">optaplanner-benchmark</code></h3></div></div></div><p>The benchmarker is in a separate artifact called <code class="literal">optaplanner-benchmark</code>.</p><p>If you use Maven, add a dependency in your <code class="filename">pom.xml</code> file:</p><pre><code class="language-xml">    &lt;dependency&gt;
+      &lt;groupId&gt;org.optaplanner&lt;/groupId&gt;
+      &lt;artifactId&gt;optaplanner-benchmark&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre><p>This is similar for Gradle, Ivy and Buildr. The version must be exactly the same as the
+      <code class="literal">optaplanner-core</code> version used (which is automatically the case if you import
+      <code class="literal">optaplanner-bom</code>).</p><p>If you use ANT, you've probably already copied the required jars from the download zip's
+      <code class="filename">binaries</code> directory.</p></div><div class="section" title="14.2.2. Build And Run A PlannerBenchmark"><div class="titlepage"><div><div><h3 class="title"><a id="buildAndRunAPlannerBenchmark"/>14.2.2. Build And Run A <code class="literal">PlannerBenchmark</code></h3></div></div></div><p>Build a <code class="literal">PlannerBenchmark</code> instance with a <code class="literal">PlannerBenchmarkFactory</code>.
+      Configure it with a benchmark configuration XML file, provided as a classpath resource:</p><pre><code class="language-java">        PlannerBenchmarkFactory plannerBenchmarkFactory = PlannerBenchmarkFactory.createFromXmlResource(
+                "org/optaplanner/examples/nqueens/benchmark/nqueensBenchmarkConfig.xml");
+        PlannerBenchmark plannerBenchmark = plannerBenchmarkFactory.buildPlannerBenchmark();
+        plannerBenchmark.benchmark();</code></pre><p>A benchmark configuration file looks like this:</p><pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plannerBenchmark&gt;
+  &lt;benchmarkDirectory&gt;local/data/nqueens&lt;/benchmarkDirectory&gt;
+
+  &lt;inheritedSolverBenchmark&gt;
+    &lt;problemBenchmarks&gt;
+      ...
+      &lt;inputSolutionFile&gt;data/nqueens/unsolved/32queens.xml&lt;/inputSolutionFile&gt;
+      &lt;inputSolutionFile&gt;data/nqueens/unsolved/64queens.xml&lt;/inputSolutionFile&gt;
+    &lt;/problemBenchmarks&gt;
+    &lt;solver&gt;
+      ...&lt;!-- Common solver configuration --&gt;
+    &lt;/solver&gt;
+  &lt;/inheritedSolverBenchmark&gt;
+
+  &lt;solverBenchmark&gt;
+    &lt;name&gt;Tabu Search&lt;/name&gt;
+    &lt;solver&gt;
+      ...&lt;!-- Tabu Search specific solver configuration --&gt;
+    &lt;/solver&gt;
+  &lt;/solverBenchmark&gt;
+  &lt;solverBenchmark&gt;
+    &lt;name&gt;Simulated Annealing&lt;/name&gt;
+    &lt;solver&gt;
+      ...&lt;!-- Simulated Annealing specific solver configuration --&gt;
+    &lt;/solver&gt;
+  &lt;/solverBenchmark&gt;
+  &lt;solverBenchmark&gt;
+    &lt;name&gt;Late Acceptance&lt;/name&gt;
+    &lt;solver&gt;
+      ...&lt;!-- Late Acceptance specific solver configuration --&gt;
+    &lt;/solver&gt;
+  &lt;/solverBenchmark&gt;
+&lt;/plannerBenchmark&gt;</code></pre><p>This <code class="literal">PlannerBenchmark</code> will try 3 configurations (Tabu Search, Simulated Annealing and
+      Late Acceptance) on 2 data sets (32queens and 64queens), so it will run 6 solvers.</p><p>Every <code class="literal">&lt;solverBenchmark&gt;</code> element contains a solver configuration and one or more
+      <code class="literal">&lt;inputSolutionFile&gt;</code> elements. It will run the solver configuration on each of those
+      unsolved solution files. The element <code class="literal">name</code> is optional, because it is generated if absent. The
+      <code class="literal">inputSolutionFile</code> is read by a <a class="link" href="ch14.html#solutionFileIO" title="14.2.3. SolutionFileIO: Input And Output Of Solution Files">SolutionFileIO</a> (relative
+      to the working directory).</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Use a forward slash (<code class="literal">/</code>) as the file separator (for example in the element
+        <code class="literal">&lt;inputSolutionFile&gt;</code>). That will work on any platform (including Windows).</p><p>Do not use backslash (<code class="literal">\</code>) as the file separator: that breaks portability because it does
+        not work on Linux and Mac.</p></div><p>The benchmark report will be written in the directory specified the
+      <code class="literal">&lt;benchmarkDirectory&gt;</code> element (relative to the working directory).</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>It's recommended that the <code class="literal">benchmarkDirectory</code> is a directory ignored for source control
+        and not cleaned by your build system. This way the generated files are not bloating your source control and they
+        aren't lost when doing a build. Usually that directory is called <code class="literal">local</code>.</p></div><p>If an <code class="literal">Exception</code> or <code class="literal">Error</code> occurs in a single benchmark, the entire
+      Benchmarker will not fail-fast (unlike everything else in Planner). Instead, the Benchmarker will continue to run
+      all other benchmarks, write the benchmark report and then fail (if there is at least 1 failing single benchmark).
+      The failing benchmarks will be clearly marked as such in the benchmark report.</p><div class="section" title="14.2.2.1. Inherited solver benchmark"><div class="titlepage"><div><div><h4 class="title"><a id="inheritedSolverBenchmark"/>14.2.2.1. Inherited solver benchmark</h4></div></div></div><p>To lower verbosity, the common parts of multiple <code class="literal">&lt;solverBenchmark&gt;</code> elements are
+        extracted to the <code class="literal">&lt;inheritedSolverBenchmark&gt;</code> element. Every property can still be
+        overwritten per <code class="literal">&lt;solverBenchmark&gt;</code> element. Note that inherited solver phases such as
+        <code class="literal">&lt;constructionHeuristic&gt;</code> or <code class="literal">&lt;localSearch&gt;</code> are not overwritten
+        but instead are added to the tail of the solver phases list.</p></div></div><div class="section" title="14.2.3. SolutionFileIO: Input And Output Of Solution Files"><div class="titlepage"><div><div><h3 class="title"><a id="solutionFileIO"/>14.2.3. SolutionFileIO: Input And Output Of Solution Files</h3></div></div></div><div class="section" title="14.2.3.1. SolutionFileIO Interface"><div class="titlepage"><div><div><h4 class="title"><a id="solutionFileIOInterface"/>14.2.3.1. <code class="literal">SolutionFileIO</code> Interface</h4></div></div></div><p>The benchmarker needs to be able to read the input files to load a <code class="literal">Solution</code>. Also, it
+        might need to write the best <code class="literal">Solution</code> of each benchmark to an output file. For that it uses a
+        class that implements the <code class="literal">SolutionFileIO</code> interface:</p><pre><code class="language-java">public interface SolutionFileIO {
+
+    String getInputFileExtension();
+
+    String getOutputFileExtension();
+
+    Solution read(File inputSolutionFile);
+
+    void write(Solution solution, File outputSolutionFile);
+
+}</code></pre><p>The <code class="literal">SolutionFileIO</code> interface is in the
+        <code class="literal">optaplanner-persistence-common</code> jar (which is a dependency of the
+        <code class="literal">optaplanner-benchmark</code> jar).</p></div><div class="section" title="14.2.3.2. XStreamSolutionFileIO: The Default SolutionFileIO"><div class="titlepage"><div><div><h4 class="title"><a id="xStreamSolutionFileIO"/>14.2.3.2. <code class="literal">XStreamSolutionFileIO</code>: The Default <code class="literal">SolutionFileIO</code></h4></div></div></div><p>By default, a benchmarker uses a <code class="literal">XStreamSolutionFileIO</code> instance to read and write
+        solutions.</p><p>It's required to tell the benchmarker about your <code class="literal">Solution</code> class which is annotated with
+        XStream annotations:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      &lt;xStreamAnnotatedClass&gt;org.optaplanner.examples.nqueens.domain.NQueens&lt;/xStreamAnnotatedClass&gt;
+      &lt;inputSolutionFile&gt;data/nqueens/unsolved/32queens.xml&lt;/inputSolutionFile&gt;
+      ...
+    &lt;/problemBenchmarks&gt;</code></pre><p>Those input files need to have been written with a <code class="literal">XStreamSolutionFileIO</code> instance, not
+        just any <code class="literal">XStream</code> instance, because the <code class="literal">XStreamSolutionFileIO</code> uses a
+        customized <code class="literal">XStream</code> instance.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>XStream (and XML in general) is a very verbose format. Reading or writing very large datasets in this
+          format can cause an <code class="literal">OutOfMemoryError</code> and performance degradation.</p></div></div><div class="section" title="14.2.3.3. Custom SolutionFileIO"><div class="titlepage"><div><div><h4 class="title"><a id="customSolutionFileIO"/>14.2.3.3. Custom <code class="literal">SolutionFileIO</code></h4></div></div></div><p>Alternatively, implement your own <code class="literal">SolutionFileIO</code> implementation and configure it with
+        the <code class="literal">solutionFileIOClass</code> element:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      &lt;solutionFileIOClass&gt;org.optaplanner.examples.machinereassignment.persistence.MachineReassignmentFileIO&lt;/solutionFileIOClass&gt;
+      &lt;inputSolutionFile&gt;data/machinereassignment/import/model_a1_1.txt&lt;/inputSolutionFile&gt;
+      ...
+    &lt;/problemBenchmarks&gt;</code></pre><p>It's recommended that output files can be read as input files, which also implies that
+        <code class="literal">getInputFileExtension()</code> and <code class="literal">getOutputFileExtension()</code> return the same
+        value.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>A <code class="literal">SolutionFileIO</code> implementation must be thread-safe.</p></div></div><div class="section" title="14.2.3.4. Reading An Input Solution From A Database (Or Other Repository)"><div class="titlepage"><div><div><h4 class="title"><a id="readingAnInputSolutionFromADatabase"/>14.2.3.4. Reading An Input Solution From A Database (Or Other Repository)</h4></div></div></div><p>The benchmark configuration currently expects an <code class="literal">&lt;inputSolutionFile&gt;</code> element for
+        each dataset. There are 2 ways to deal with this if your dataset is in a database or another type of
+        repository:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Extract the datasets from the database and serialize them to a local file (for example as XML with
+            <code class="literal">XStreamSolutionFileIO</code>). Then use those files an
+            <code class="literal">&lt;inputSolutionFile&gt;</code> elements.</p></li><li class="listitem"><p>For each dataset, create a txt file that holds the unique id of the dataset. Write <a class="link" href="ch14.html#customSolutionFileIO" title="14.2.3.3. Custom SolutionFileIO">a custom <code class="literal">SolutionFileIO</code></a> that reads that identifier,
+            connects to the database and extract the problem identified by that id. Configure those txt files as
+            <code class="literal">&lt;inputSolutionFile&gt;</code> elements.</p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Local files are always faster and don't require a network connection.</p></div></div></div><div class="section" title="14.2.4. Warming Up The HotSpot Compiler"><div class="titlepage"><div><div><h3 class="title"><a id="warmingUpTheHotSpotCompiler"/>14.2.4. Warming Up The HotSpot Compiler</h3></div></div></div><p><span class="bold"><strong>Without a warm up, the results of the first (or first few) benchmarks are not
+      reliable</strong></span>, because they will have lost CPU time on HotSpot JIT compilation (and possibly DRL compilation
+      too).</p><p>To avoid that distortion, the benchmarker can run some of the benchmarks for a specified amount of time,
+      before running the real benchmarks. Generally, a warm up of 30 seconds suffices:</p><pre><code class="language-xml">&lt;plannerBenchmark&gt;
+  ...
+  &lt;warmUpSecondsSpentLimit&gt;30&lt;/warmUpSecondsSpentLimit&gt;
+  ...
+&lt;/plannerBenchmark&gt;</code></pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>The warm up time budget does not include the time it takes to load the datasets. With large datasets, this
+        can cause the warm up to run considerably longer than specified in the configuration.</p></div></div><div class="section" title="14.2.5. Benchmark Blueprint: A Predefined Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkBlueprint"/>14.2.5. Benchmark Blueprint: A Predefined Configuration</h3></div></div></div><p>To quickly configure and run a benchmark for typical solver configs, use a
+      <code class="literal">solverBenchmarkBluePrint</code> instead of <code class="literal">solverBenchmark</code>s:</p><pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plannerBenchmark&gt;
+  &lt;benchmarkDirectory&gt;local/data/nqueens&lt;/benchmarkDirectory&gt;
+  &lt;warmUpSecondsSpentLimit&gt;30&lt;/warmUpSecondsSpentLimit&gt;
+
+  &lt;inheritedSolverBenchmark&gt;
+    &lt;problemBenchmarks&gt;
+      &lt;xStreamAnnotatedClass&gt;org.optaplanner.examples.nqueens.domain.NQueens&lt;/xStreamAnnotatedClass&gt;
+      &lt;inputSolutionFile&gt;data/nqueens/unsolved/32queens.xml&lt;/inputSolutionFile&gt;
+      &lt;inputSolutionFile&gt;data/nqueens/unsolved/64queens.xml&lt;/inputSolutionFile&gt;
+      &lt;problemStatisticType&gt;BEST_SCORE&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;
+    &lt;solver&gt;
+      &lt;scanAnnotatedClasses/&gt;
+      &lt;scoreDirectorFactory&gt;
+        &lt;scoreDefinitionType&gt;SIMPLE&lt;/scoreDefinitionType&gt;
+        &lt;scoreDrl&gt;org/optaplanner/examples/nqueens/solver/nQueensScoreRules.drl&lt;/scoreDrl&gt;
+        &lt;initializingScoreTrend&gt;ONLY_DOWN&lt;/initializingScoreTrend&gt;
+      &lt;/scoreDirectorFactory&gt;
+      &lt;termination&gt;
+        &lt;minutesSpentLimit&gt;1&lt;/minutesSpentLimit&gt;
+      &lt;/termination&gt;
+    &lt;/solver&gt;
+  &lt;/inheritedSolverBenchmark&gt;
+
+  &lt;solverBenchmarkBluePrint&gt;
+    &lt;solverBenchmarkBluePrintType&gt;EVERY_CONSTRUCTION_HEURISTIC_TYPE_WITH_EVERY_LOCAL_SEARCH_TYPE&lt;/solverBenchmarkBluePrintType&gt;
+  &lt;/solverBenchmarkBluePrint&gt;
+&lt;/plannerBenchmark&gt;</code></pre><p>The following <code class="literal">SolverBenchmarkBluePrintType</code>s are supported:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">EVERY_CONSTRUCTION_HEURISTIC_TYPE</code>: Run every Construction Heuristic type (First Fit,
+          First Fit Decreasing, Cheapest Insertion, ...).</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">EVERY_LOCAL_SEARCH_TYPE</code>: Run every Local Search type (Tabu Search, Late Acceptance,
+          ...) with the default Construction Heuristic.</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">EVERY_CONSTRUCTION_HEURISTIC_TYPE_WITH_EVERY_LOCAL_SEARCH_TYPE</code>: Run every
+          Construction Heuristic type with every Local Search type.</p></li></ul></div></div><div class="section" title="14.2.6. Write The Output Solution Of Benchmark Runs"><div class="titlepage"><div><div><h3 class="title"><a id="writeTheOutputSolutionOfBenchmarkRuns"/>14.2.6. Write The Output Solution Of Benchmark Runs</h3></div></div></div><p>The best solution of each benchmark run can be written in the <code class="literal">benchmarkDirectory</code>. By
+      default, this is disabled, because the files are rarely used and considered bloat. Also, on large datasets,
+      writing the best solution of each single benchmark can take quite some time and memory (causing an
+      <code class="literal">OutOfMemoryError</code>), especially in a verbose format like XStream XML.</p><p>To write those solutions in the <code class="literal">benchmarkDirectory</code>, enable
+      <code class="literal">writeOutputSolutionEnabled</code>:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;writeOutputSolutionEnabled&gt;true&lt;/writeOutputSolutionEnabled&gt;
+      ...
+    &lt;/problemBenchmarks&gt;</code></pre></div><div class="section" title="14.2.7. Benchmark Logging"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkLogging"/>14.2.7. Benchmark Logging</h3></div></div></div><p>Benchmark logging is configured like <a class="link" href="ch04.html#logging" title="4.4.4. Logging Level: What is the Solver Doing?">the <code class="literal">Solver</code>
+      logging</a>.</p><p>To separate the log messages of each single benchmark run into a separate file, use the <a class="link" href="http://logback.qos.ch/manual/mdc.html">MDC</a> with key <code class="literal">singleBenchmark.name</code> in
+      a sifting appender. For example with Logback in <code class="literal">logback.xml</code>:</p><pre><code class="language-xml">  &lt;appender name="fileAppender" class="ch.qos.logback.classic.sift.SiftingAppender"&gt;
+    &lt;discriminator&gt;
+      &lt;key&gt;singleBenchmark.name&lt;/key&gt;
+      &lt;defaultValue&gt;app&lt;/defaultValue&gt;
+    &lt;/discriminator&gt;
+    &lt;sift&gt;
+      &lt;appender name="fileAppender.${singleBenchmark.name}" class="...FileAppender"&gt;
+        &lt;file&gt;local/log/optaplannerBenchmark-${singleBenchmark.name}.log&lt;/file&gt;
+        ...
+      &lt;/appender&gt;
+    &lt;/sift&gt;
+  &lt;/appender&gt;</code></pre></div></div><div class="section" title="14.3. Benchmark Report"><div class="titlepage"><div><div><h2 class="title"><a id="benchmarkReport"/>14.3. Benchmark Report</h2></div></div></div><div class="section" title="14.3.1. HTML Report"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkHtmlReport"/>14.3.1. HTML Report</h3></div></div></div><p>After running a benchmark, an HTML report will be written in the <code class="literal">benchmarkDirectory</code> with
+      the <code class="filename">index.html</code> filename. Open it in your browser. It has a nice overview of your benchmark
+      including:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Summary statistics: graphs and tables</p></li><li class="listitem"><p>Problem statistics per <code class="literal">inputSolutionFile</code>: graphs and CSV</p></li><li class="listitem"><p>Each solver configuration (ranked): Handy to copy and paste</p></li><li class="listitem"><p>Benchmark information: settings, hardware, ...</p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>Graphs are generated by the excellent <a class="link" href="http://www.jfree.org/jfreechart/">JFreeChart</a> library.</p></div><p>The HTML report will use your default locale to format numbers. If you share the benchmark report with
+      people from another country, consider overwriting the <code class="literal">locale</code> accordingly:</p><pre><code class="language-xml">&lt;plannerBenchmark&gt;
+  ...
+  &lt;benchmarkReport&gt;
+    &lt;locale&gt;en_US&lt;/locale&gt;
+  &lt;/benchmarkReport&gt;
+  ...
+&lt;/plannerBenchmark&gt;</code></pre></div><div class="section" title="14.3.2. Ranking The Solvers"><div class="titlepage"><div><div><h3 class="title"><a id="rankingTheSolvers"/>14.3.2. Ranking The <code class="literal">Solver</code>s</h3></div></div></div><p>The benchmark report automatically ranks the solvers. The <code class="literal">Solver</code> with rank
+      <code class="literal">0</code> is called the favorite <code class="literal">Solver</code>: it performs best overall, but it might not
+      be the best on every problem. It's recommended to use that favorite <code class="literal">Solver</code> in
+      production.</p><p>However, there are different ways of ranking the solvers. Configure it like this:</p><pre><code class="language-xml">&lt;plannerBenchmark&gt;
+  ...
+  &lt;benchmarkReport&gt;
+    &lt;solverRankingType&gt;TOTAL_SCORE&lt;/solverRankingType&gt;
+  &lt;/benchmarkReport&gt;
+  ...
+&lt;/plannerBenchmark&gt;</code></pre><p>The following <code class="literal">solverRankingType</code>s are supported:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">TOTAL_SCORE</code> (default): Maximize the overall score, so minimize the overall cost if
+          all solutions would be executed.</p></li><li class="listitem"><p><code class="literal">WORST_SCORE</code>: Minimize the worst case scenario.</p></li><li class="listitem"><p><code class="literal">TOTAL_RANKING</code>: Maximize the overall ranking. Use this if your datasets differ greatly
+          in size or difficulty, producing a difference in <code class="literal">Score</code> magnitude.</p></li></ul></div><p><code class="literal">Solver</code>s with at least one failed single benchmark do not get a ranking.
+      <code class="literal">Solver</code>s with not fully initialized solutions are ranked worse.</p><p>You can also use a custom ranking, by implementing a <code class="literal">Comparator</code>:</p><pre><code class="language-xml">  &lt;benchmarkReport&gt;
+    &lt;solverRankingComparatorClass&gt;...TotalScoreSolverRankingComparator&lt;/solverRankingComparatorClass&gt;
+  &lt;/benchmarkReport&gt;</code></pre><p>Or by implementing a weight factory:</p><pre><code class="language-xml">  &lt;benchmarkReport&gt;
+    &lt;solverRankingWeightFactoryClass&gt;...TotalRankSolverRankingWeightFactory&lt;/solverRankingWeightFactoryClass&gt;
+  &lt;/benchmarkReport&gt;</code></pre></div></div><div class="section" title="14.4. Summary Statistics"><div class="titlepage"><div><div><h2 class="title"><a id="benchmarkReportSummaryStatistics"/>14.4. Summary Statistics</h2></div></div></div><div class="section" title="14.4.1. Best Score Summary (Graph And Table)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportBestScoreSummary"/>14.4.1. Best Score Summary (Graph And Table)</h3></div></div></div><p>Shows the best score per <code class="literal">inputSolutionFile</code> for each solver configuration.</p><p>Useful for visualizing the best solver configuration.</p><div class="figure"><a id="d0e12242"/><p class="title"><strong>Figure 14.1. Best Score Summary Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/bestScoreSummary.png" alt="Best Score Summary Statistic"/></div></div></div><br class="figure-break"/></div><div class="section" title="14.4.2. Best Score Scalability Summary (Graph)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportBestScoreScalabilitySummary"/>14.4.2. Best Score Scalability Summary (Graph)</h3></div></div></div><p>Shows the best score per problem scale for each solver configuration.</p><p>Useful for visualizing the scalability of each solver configuration.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>The problem scale will report <code class="literal">0</code> if any <code class="literal">@ValueRangeProvider</code> method
+        signature returns ValueRange (instead of <code class="literal">CountableValueRange</code> or
+        <code class="literal">Collection</code>).</p></div></div><div class="section" title="14.4.3. Best Score Distribution Summary (Graph)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportBestScoreDistributionSummary"/>14.4.3. Best Score Distribution Summary (Graph)</h3></div></div></div><p>Shows the best score distribution per <code class="literal">inputSolutionFile</code> for each solver
+      configuration.</p><p>Useful for visualizing the reliability of each solver configuration.</p><div class="figure"><a id="d0e12280"/><p class="title"><strong>Figure 14.2. Best Score Distribution Summary Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/bestScoreDistributionSummary.png" alt="Best Score Distribution Summary Statistic"/></div></div></div><br class="figure-break"/><p>Enable <a class="link" href="ch14.html#statisticalBenchmarking" title="14.7.2. Statistical Benchmarking">statistical benchmarking</a> to use this summary.</p></div><div class="section" title="14.4.4. Winning Score Difference Summary (Graph And Table)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportWinningScoreDifferenceSummary"/>14.4.4. Winning Score Difference Summary (Graph And Table)</h3></div></div></div><p>Shows the winning score difference per <code class="literal">inputSolutionFile</code> for each solver configuration.
+      The winning score difference is the score difference with the score of the winning solver configuration for that
+      particular <code class="literal">inputSolutionFile</code>.</p><p>Useful for zooming in on the results of the best score summary.</p></div><div class="section" title="14.4.5. Worst Score Difference Percentage (ROI) Summary (Graph and Table)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportWorstScoreDifferencePercentageSummary"/>14.4.5. Worst Score Difference Percentage (ROI) Summary (Graph and Table)</h3></div></div></div><p>Shows the return on investment (ROI) per <code class="literal">inputSolutionFile</code> for each solver configuration
+      if you'd upgrade from the worst solver configuration for that particular
+      <code class="literal">inputSolutionFile</code>.</p><p>Useful for visualizing the return on investment (ROI) to decision makers.</p></div><div class="section" title="14.4.6. Average Calculation Count Summary (Graph and Table)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportAverageCalculationCountSummary"/>14.4.6. Average Calculation Count Summary (Graph and Table)</h3></div></div></div><p>Shows the score calculation speed: the average calculation count per second per problem scale for each
+      solver configuration.</p><p>Useful for comparing different score calculators and/or score rule implementations (presuming that the
+      solver configurations do not differ otherwise). Also useful to measure the scalability cost of an extra
+      constraint.</p></div><div class="section" title="14.4.7. Time Spent Summary (Graph And Table)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportTimeSpentSummary"/>14.4.7. Time Spent Summary (Graph And Table)</h3></div></div></div><p>Shows the time spent per <code class="literal">inputSolutionFile</code> for each solver configuration. This is
+      pointless if it's benchmarking against a fixed time limit.</p><p>Useful for visualizing the performance of construction heuristics (presuming that no other solver phases are
+      configured).</p></div><div class="section" title="14.4.8. Time Spent Scalability Summary (Graph)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportTimeSpentScalabilitySummary"/>14.4.8. Time Spent Scalability Summary (Graph)</h3></div></div></div><p>Shows the time spent per problem scale for each solver configuration. This is pointless if it's benchmarking
+      against a fixed time limit.</p><p>Useful for extrapolating the scalability of construction heuristics (presuming that no other solver phases
+      are configured).</p></div><div class="section" title="14.4.9. Best Score Per Time Spent Summary (Graph)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportBestScorePerTimeSpentSummary"/>14.4.9. Best Score Per Time Spent Summary (Graph)</h3></div></div></div><p>Shows the best score per time spent for each solver configuration. This is pointless if it's benchmarking
+      against a fixed time limit.</p><p>Useful for visualizing trade-off between the best score versus the time spent for construction heuristics
+      (presuming that no other solver phases are configured).</p></div></div><div class="section" title="14.5. Statistic Per Dataset (Graph And CSV)"><div class="titlepage"><div><div><h2 class="title"><a id="benchmarkReportStatisticPerDataset"/>14.5. Statistic Per Dataset (Graph And CSV)</h2></div></div></div><div class="section" title="14.5.1. Enable A Problem Statistic"><div class="titlepage"><div><div><h3 class="title"><a id="enableAProblemStatistic"/>14.5.1. Enable A Problem Statistic</h3></div></div></div><p>The benchmarker supports outputting problem statistics as graphs and CSV (comma separated values) files to
+      the <code class="literal">benchmarkDirectory</code>. To configure one, add a <code class="literal">problemStatisticType</code>
+      line:</p><pre><code class="language-xml">&lt;plannerBenchmark&gt;
+  &lt;benchmarkDirectory&gt;local/data/nqueens/solved&lt;/benchmarkDirectory&gt;
+  &lt;inheritedSolverBenchmark&gt;
+    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;BEST_SCORE&lt;/problemStatisticType&gt;
+      &lt;problemStatisticType&gt;CALCULATE_COUNT_PER_SECOND&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;
+    ...
+  &lt;/inheritedSolverBenchmark&gt;
+  ...
+&lt;/plannerBenchmark&gt;</code></pre><p>Multiple <code class="literal">problemStatisticType</code> elements are allowed.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>These statistic per dataset can slow down the solver noticeably, which affects the benchmark results.
+        That's why they are optional and not enabled by default.</p><p>The non-optional summary statistics cannot slow down the solver noticeably.</p></div><p>The following types are supported:</p></div><div class="section" title="14.5.2. Best Score Over Time Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportBestScoreOverTimeStatistic"/>14.5.2. Best Score Over Time Statistic (Graph And CSV)</h3></div></div></div><p>To see how the best score evolves over time, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;BEST_SCORE&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12383"/><p class="title"><strong>Figure 14.3. Best Score Over Time Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/bestScoreStatistic.png" alt="Best Score Over Time Statistic"/></div></div></div><br class="figure-break"/><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>A time gradient based algorithm (such as Simulated Annealing) will have a different statistic if it's run
+        with a different time limit configuration. That's because this Simulated Annealing implementation automatically
+        determines its velocity based on the amount of time that can be spent. On the other hand, for the Tabu Search
+        and Late Annealing, what you see is what you'd get.</p></div><p><span class="bold"><strong>The best score over time statistic is very useful to detect abnormalities, such as a
+      potential <a class="link" href="ch05.html#scoreTrap" title="5.4.8. Score Trap">score trap</a> which gets the solver temporarily stuck in a local
+      optima.</strong></span></p><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/letTheBestScoreStatisticGuideYou.png"/></div></div><div class="section" title="14.5.3. Step Score Over Time Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportStepScoreOverTimeStatistic"/>14.5.3. Step Score Over Time Statistic (Graph And CSV)</h3></div></div></div><p>To see how the step score evolves over time, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;STEP_SCORE&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12408"/><p class="title"><strong>Figure 14.4. Step Score Over Time Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/stepScoreStatistic.png" alt="Step Score Over Time Statistic"/></div></div></div><br class="figure-break"/><p>Compare the step score statistic with the best score statistic (especially on parts for which the best score
+      flatlines). If it hits a local optima, the solver should take deteriorating steps to escape it. But it shouldn't
+      deteriorate too much either.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>The step score statistic has been seen to slow down the solver noticeably due to GC stress, especially for
+        fast stepping algorithms (such as Simulated Annealing and Late Acceptance).</p></div></div><div class="section" title="14.5.4. Calculate Count Per Second Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportCalculateCountPerSecondStatistic"/>14.5.4. Calculate Count Per Second Statistic (Graph And CSV)</h3></div></div></div><p>To see how fast the scores are calculated, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;CALCULATE_COUNT_PER_SECOND&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12426"/><p class="title"><strong>Figure 14.5. Calculate Count Per Second Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/calculateCountPerSecondStatistic.png" alt="Calculate Count Per Second Statistic"/></div></div></div><br class="figure-break"/><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>The initial high calculate count is typical during solution initialization: it's far easier to calculate
+        the score of a solution if only a handful planning entities have been initialized, than when all the planning
+        entities are initialized.</p><p>After those few seconds of initialization, the calculate count is relatively stable, apart from an
+        occasional stop-the-world garbage collector disruption.</p></div></div><div class="section" title="14.5.5. Best Solution Mutation Over Time Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportBestSolutionMutationOverTimeStatistic"/>14.5.5. Best Solution Mutation Over Time Statistic (Graph And CSV)</h3></div></div></div><p>To see how much each new best solution differs from the <span class="emphasis"><em>previous best solution</em></span>, by
+      counting the number of planning variables which have a different value (not including the variables that have
+      changed multiple times but still end up with the same value), add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;BEST_SOLUTION_MUTATION&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12447"/><p class="title"><strong>Figure 14.6. Best Solution Mutation Over Time Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/bestSolutionMutationStatistic.png" alt="Best Solution Mutation Over Time Statistic"/></div></div></div><br class="figure-break"/><p>Use Tabu Search - an algorithm that behaves like a human - to get an estimation on how difficult it would be
+      for a human to improve the previous best solution to that new best solution.</p></div><div class="section" title="14.5.6. Move Count Per Step Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportMoveCountPerStepStatistic"/>14.5.6. Move Count Per Step Statistic (Graph And CSV)</h3></div></div></div><p>To see how the selected and accepted move count per step evolves over time, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;MOVE_COUNT_PER_STEP&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12462"/><p class="title"><strong>Figure 14.7. Move Count Per Step Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/moveCountPerStepStatistic.png" alt="Move Count Per Step Statistic"/></div></div></div><br class="figure-break"/><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>This statistic has been seen to slow down the solver noticeably due to GC stress, especially for fast
+        stepping algorithms (such as Simulated Annealing and Late Acceptance).</p></div></div><div class="section" title="14.5.7. Memory Use Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportMemoryUseStatistic"/>14.5.7. Memory Use Statistic (Graph And CSV)</h3></div></div></div><p>To see how much memory is used, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;MEMORY_USE&lt;/problemStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12478"/><p class="title"><strong>Figure 14.8. Memory Use Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/memoryUseStatistic.png" alt="Memory Use Statistic"/></div></div></div><br class="figure-break"/><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>The memory use statistic has been seen to affect the solver noticeably.</p></div></div></div><div class="section" title="14.6. Statistic Per Single Benchmark (Graph And CSV)"><div class="titlepage"><div><div><h2 class="title"><a id="benchmarkReportStatisticPerSingleBenchmark"/>14.6. Statistic Per Single Benchmark (Graph And CSV)</h2></div></div></div><div class="section" title="14.6.1. Enable A Single Statistic"><div class="titlepage"><div><div><h3 class="title"><a id="enableASingleStatistic"/>14.6.1. Enable A Single Statistic</h3></div></div></div><p>A single statistic is a statics for 1 dataset for 1 solver configuration. Unlike a problem statistic, it
+      does not aggregate over solver configurations.</p><p>The benchmarker supports outputting single statistics as graphs and CSV (comma separated values) files to
+      the <code class="literal">benchmarkDirectory</code>. To configure one, add a <code class="literal">singleStatisticType</code>
+      line:</p><pre><code class="language-xml">&lt;plannerBenchmark&gt;
+  &lt;benchmarkDirectory&gt;local/data/nqueens/solved&lt;/benchmarkDirectory&gt;
+  &lt;inheritedSolverBenchmark&gt;
+    &lt;problemBenchmarks&gt;
+      ...
+      &lt;problemStatisticType&gt;...&lt;/problemStatisticType&gt;
+      &lt;singleStatisticType&gt;PICKED_MOVE_TYPE_BEST_SCORE_DIFF&lt;/singleStatisticType&gt;
+    &lt;/problemBenchmarks&gt;
+    ...
+  &lt;/inheritedSolverBenchmark&gt;
+  ...
+&lt;/plannerBenchmark&gt;</code></pre><p>Multiple <code class="literal">singleStatisticType</code> elements are allowed.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>These statistic per single benchmark can slow down the solver noticeably, which affects the benchmark
+        results. That's why they are optional and not enabled by default.</p></div><p>The following types are supported:</p></div><div class="section" title="14.6.2. Constraint Match Total Best Score Over Time Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportConstraintMatchTotalBestScoreOverTimeStatistic"/>14.6.2. Constraint Match Total Best Score Over Time Statistic (Graph And CSV)</h3></div></div></div><p>To see which constraints are matched in the best score (and how much) over time, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;singleStatisticType&gt;CONSTRAINT_MATCH_TOTAL_BEST_SCORE&lt;/singleStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12522"/><p class="title"><strong>Figure 14.9. Constraint Match Total Best Score Diff Over Time Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/constraintMatchTotalBestScoreStatistic.png" alt="Constraint Match Total Best Score Diff Over Time Statistic"/></div></div></div><br class="figure-break"/><p>Requires the score calculation to support <a class="link" href="ch05.html#explainingTheScore" title="5.5. Explaining the Score: Using Score Calculation Outside the Solver">constraint matches</a>.
+      <a class="link" href="ch05.html#droolsScoreCalculation" title="5.3.4. Drools Score Calculation">Drools score calculation</a> supports constraint matches automatically,
+      but <a class="link" href="ch05.html#incrementalJavaScoreCalculation" title="5.3.3. Incremental Java Score Calculation">incremental Java score calculation</a> requires more
+      work.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>The constraint match total statistics has been seen to affect the solver noticeably.</p></div></div><div class="section" title="14.6.3. Constraint Match Total Step Score Over Time Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportConstraintMatchTotalStepScoreOverTimeStatistic"/>14.6.3. Constraint Match Total Step Score Over Time Statistic (Graph And CSV)</h3></div></div></div><p>To see which constraints are matched in the step score (and how much) over time, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;singleStatisticType&gt;CONSTRAINT_MATCH_TOTAL_STEP_SCORE&lt;/singleStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12549"/><p class="title"><strong>Figure 14.10. Constraint Match Total Step Score Diff Over Time Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/constraintMatchTotalStepScoreStatistic.png" alt="Constraint Match Total Step Score Diff Over Time Statistic"/></div></div></div><br class="figure-break"/><p>Requires the score calculation to support <a class="link" href="ch05.html#explainingTheScore" title="5.5. Explaining the Score: Using Score Calculation Outside the Solver">constraint matches</a>.
+      <a class="link" href="ch05.html#droolsScoreCalculation" title="5.3.4. Drools Score Calculation">Drools score calculation</a> supports constraint matches automatically,
+      but <a class="link" href="ch05.html#incrementalJavaScoreCalculation" title="5.3.3. Incremental Java Score Calculation">incremental Java score calculation</a> requires more
+      work.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>The constraint match total statistics has been seen to affect the solver noticeably.</p></div></div><div class="section" title="14.6.4. Picked Move Type Best Score Diff Over Time Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportPickedMoveTypeBestScoreDiffOverTimeStatistic"/>14.6.4. Picked Move Type Best Score Diff Over Time Statistic (Graph And CSV)</h3></div></div></div><p>To see which move types improve the best score (and how much) over time, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;singleStatisticType&gt;PICKED_MOVE_TYPE_BEST_SCORE_DIFF&lt;/singleStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12576"/><p class="title"><strong>Figure 14.11. Picked Move Type Best Score Diff Over Time Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/pickedMoveTypeBestScoreDiffStatistic.png" alt="Picked Move Type Best Score Diff Over Time Statistic"/></div></div></div><br class="figure-break"/></div><div class="section" title="14.6.5. Picked Move Type Step Score Diff Over Time Statistic (Graph And CSV)"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportPickedMoveTypeStepScoreDiffOverTimeStatistic"/>14.6.5. Picked Move Type Step Score Diff Over Time Statistic (Graph And CSV)</h3></div></div></div><p>To see how much each winning step affects the step score over time, add:</p><pre><code class="language-xml">    &lt;problemBenchmarks&gt;
+      ...
+      &lt;singleStatisticType&gt;PICKED_MOVE_TYPE_STEP_SCORE_DIFF&lt;/singleStatisticType&gt;
+    &lt;/problemBenchmarks&gt;</code></pre><div class="figure"><a id="d0e12589"/><p class="title"><strong>Figure 14.12. Picked Move Type Step Score Diff Over Time Statistic</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/pickedMoveTypeStepScoreDiffStatistic.png" alt="Picked Move Type Step Score Diff Over Time Statistic"/></div></div></div><br class="figure-break"/></div></div><div class="section" title="14.7. Advanced Benchmarking"><div class="titlepage"><div><div><h2 class="title"><a id="advancedBenchmarking"/>14.7. Advanced Benchmarking</h2></div></div></div><div class="section" title="14.7.1. Benchmarking Performance Tricks"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkingPerformanceTricks"/>14.7.1. Benchmarking Performance Tricks</h3></div></div></div><div class="section" title="14.7.1.1. Parallel Benchmarking On Multiple Threads"><div class="titlepage"><div><div><h4 class="title"><a id="parallelBenchmarkingOnMultipleThreads"/>14.7.1.1. Parallel Benchmarking On Multiple Threads</h4></div></div></div><p>If you have multiple processors available on your computer, you can run multiple benchmarks in parallel on
+        multiple threads to get your benchmarks results faster:</p><pre><code class="language-xml">&lt;plannerBenchmark&gt;
+  ...
+  &lt;parallelBenchmarkCount&gt;AUTO&lt;/parallelBenchmarkCount&gt;
+  ...
+&lt;/plannerBenchmark&gt;</code></pre><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>Running too many benchmarks in parallel will affect the results of benchmarks negatively. Leave some
+          processors unused for garbage collection and other processes.</p><p>We tweak <code class="literal">parallelBenchmarkCount</code> <code class="literal">AUTO</code> to maximize the reliability
+          and efficiency of the benchmark results.</p></div><p>The following <code class="literal">parallelBenchmarkCount</code>s are supported:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="literal">1</code> (default): Run all benchmarks sequentially.</p></li><li class="listitem"><p><code class="literal">AUTO</code>: Let Planner decide how many benchmarks to run in parallel. This formula is
+            based on experience. It's recommended to prefer this over the other parallel enabling options.</p></li><li class="listitem"><p>Static number: The number of benchmarks to run in parallel.</p><pre><code class="language-xml">&lt;parallelBenchmarkCount&gt;2&lt;/parallelBenchmarkCount&gt;</code></pre></li><li class="listitem"><p>JavaScript formula: Formula for the number of benchmarks to run in parallel. It can use the variable
+            <code class="literal">availableProcessorCount</code>. For example:</p><pre><code class="language-xml">&lt;parallelBenchmarkCount&gt;(availableProcessorCount / 2) + 1&lt;/parallelBenchmarkCount&gt;</code></pre></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>The <code class="literal">parallelBenchmarkCount</code> is always limited to the number of available processors.
+          If it's higher, it will be automatically decreased.</p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If you have a computer with slow or unreliable cooling, increasing the
+          <code class="literal">parallelBenchmarkCount</code> above 1 (even on <code class="literal">AUTO</code>) may overheat your
+          CPU.</p><p>The <code class="literal">sensors</code> command can help you detect if this is the case. It is available in the
+          package <code class="literal">lm_sensors</code> or <code class="literal">lm-sensors</code> in most Linux distributions. There are
+          several freeware tools available for Windows too.</p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>In the future, we will also support multi-JVM benchmarking. This feature is independent of <a class="link" href="https://issues.jboss.org/browse/PLANNER-76">multi-threaded solving</a> or multi-JVM
+          solving.</p></div></div></div><div class="section" title="14.7.2. Statistical Benchmarking"><div class="titlepage"><div><div><h3 class="title"><a id="statisticalBenchmarking"/>14.7.2. Statistical Benchmarking</h3></div></div></div><p>To minimize the influence of your environment and the Random Number Generator on the benchmark results,
+      configure the number of times each single benchmark run is repeated. The results of those runs are statistically
+      aggregated. Each individual result is also visible in the report, as well as plotted in <a class="link" href="ch14.html#benchmarkReportBestScoreDistributionSummary" title="14.4.3. Best Score Distribution Summary (Graph)">the best score distribution summary</a>.</p><p>Just add a <code class="literal">&lt;subSingleCount&gt;</code> element to an <a class="link" href="ch14.html#inheritedSolverBenchmark" title="14.2.2.1. Inherited solver benchmark"><code class="literal">&lt;inheritedSolverBenchmark&gt;</code></a> element or in a
+      <code class="literal">&lt;solverBenchmark&gt;</code> element:</p><pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plannerBenchmark&gt;
+  ...
+  &lt;inheritedSolverBenchmark&gt;
+    ...
+    &lt;solver&gt;
+      ...
+    &lt;/solver&gt;
+    &lt;subSingleCount&gt;10&lt;subSingleCount&gt;
+  &lt;/inheritedSolverBenchmark&gt;
+  ...
+&lt;/plannerBenchmark&gt;</code></pre><p>The <code class="literal">subSingleCount</code> defaults to <code class="literal">1</code> (so no statistical
+      benchmarking).</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>If <code class="literal">subSingleCount</code> is higher than <code class="literal">1</code>, the benchmarker will
+        automatically use a <span class="emphasis"><em>different</em></span> <a class="link" href="ch04.html#randomNumberGenerator" title="4.4.5. Random Number Generator"><code class="literal">Random</code> seed</a> for every sub single run, without losing
+        reproducibility (for each sub single index) in <a class="link" href="ch04.html#environmentMode" title="4.4.3. Environment Mode: Are There Bugs in my Code?">EnvironmentMode</a>
+        <code class="literal">REPRODUCIBLE</code> and lower.</p></div></div><div class="section" title="14.7.3. Template Based Benchmarking And Matrix Benchmarking"><div class="titlepage"><div><div><h3 class="title"><a id="templateBasedBenchmarking"/>14.7.3. Template Based Benchmarking And Matrix Benchmarking</h3></div></div></div><p>Matrix benchmarking is benchmarking a combination of value sets. For example: benchmark 4
+      <code class="literal">entityTabuSize</code> values (<code class="literal">5</code>, <code class="literal">7</code>, <code class="literal">11</code> and
+      <code class="literal">13</code>) combined with 3 <code class="literal">acceptedCountLimit</code> values (<code class="literal">500</code>,
+      <code class="literal">1000</code> and <code class="literal">2000</code>), resulting in 12 solver configurations.</p><p>To reduce the verbosity of such a benchmark configuration, you can use a <a class="link" href="http://freemarker.org//">Freemarker</a> template for the benchmark configuration instead:</p><pre><code class="language-xml">&lt;plannerBenchmark&gt;
+  ...
+
+  &lt;inheritedSolverBenchmark&gt;
+    ...
+  &lt;/inheritedSolverBenchmark&gt;
+
+&lt;#list [5, 7, 11, 13] as entityTabuSize&gt;
+&lt;#list [500, 1000, 2000] as acceptedCountLimit&gt;
+  &lt;solverBenchmark&gt;
+    &lt;name&gt;entityTabuSize ${entityTabuSize} acceptedCountLimit ${acceptedCountLimit}&lt;/name&gt;
+    &lt;solver&gt;
+      &lt;localSearch&gt;
+        &lt;unionMoveSelector&gt;
+          &lt;changeMoveSelector/&gt;
+          &lt;swapMoveSelector/&gt;
+        &lt;/unionMoveSelector&gt;
+        &lt;acceptor&gt;
+          &lt;entityTabuSize&gt;${entityTabuSize}&lt;/entityTabuSize&gt;
+        &lt;/acceptor&gt;
+        &lt;forager&gt;
+          &lt;acceptedCountLimit&gt;${acceptedCountLimit}&lt;/acceptedCountLimit&gt;
+        &lt;/forager&gt;
+      &lt;/localSearch&gt;
+    &lt;/solver&gt;
+  &lt;/solverBenchmark&gt;
+&lt;/#list&gt;
+&lt;/#list&gt;
+&lt;/plannerBenchmark&gt;</code></pre><p>And build it with the class <code class="literal">PlannerBenchmarkFactory</code>:</p><pre><code class="language-java">        PlannerBenchmarkFactory plannerBenchmarkFactory = PlannerBenchmarkFactory.createFromFreemarkerXmlResource(
+                "org/optaplanner/examples/cloudbalancing/benchmark/cloudBalancingBenchmarkConfigTemplate.xml.ftl");
+        PlannerBenchmark plannerBenchmark = plannerBenchmarkFactory.buildPlannerBenchmark();</code></pre></div><div class="section" title="14.7.4. Benchmark Report Aggregation"><div class="titlepage"><div><div><h3 class="title"><a id="benchmarkReportAggregation"/>14.7.4. Benchmark Report Aggregation</h3></div></div></div><p>The <code class="literal">BenchmarkAggregator</code> takes 1 or more existing benchmarks and merges them into new
+      benchmark report, without actually running the benchmarks again.</p><div class="mediaobject"><img src="images/Chapter-Benchmarking_and_tweaking/benchmarkAggregator.png"/></div><p>This is useful to:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><span class="bold"><strong>Report on the impact of code changes</strong></span>: Run the same benchmark
+          configuration before and after the code changes, then aggregate a report.</p></li><li class="listitem"><p><span class="bold"><strong>Report on the impact of dependency upgrades</strong></span>: Run the same benchmark
+          configuration before and after upgrading the dependency, then aggregate a report.</p></li><li class="listitem"><p><span class="bold"><strong>Condense a too verbose report</strong></span>: Select only the interesting solver
+          benchmarks from the existing report. This especially useful on template reports to make the graphs
+          readable.</p></li><li class="listitem"><p><span class="bold"><strong>Partially rerun a benchmark</strong></span>: Rerun part of an existing report (for
+          example only the failed or invalid solvers), then recreate the original intended report with the new
+          values.</p></li></ul></div><p>To use it, provide a <code class="literal">PlannerBenchmarkFactory</code> to the
+      <code class="literal">BenchmarkAggregatorFrame</code> to display the GUI:</p><pre><code class="language-java">    public static void main(String[] args) {
+        PlannerBenchmarkFactory plannerBenchmarkFactory = PlannerBenchmarkFactory.createFromXmlResource(
+                "org/optaplanner/examples/nqueens/benchmark/nqueensBenchmarkConfig.xml");
+        BenchmarkAggregatorFrame.createAndDisplay(plannerBenchmarkFactory);
+    }</code></pre><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Warning</h2><p>Despite that it uses a benchmark configuration as input, it ignores all elements of that configuration,
+        except for the elements <code class="literal">&lt;benchmarkDirectory&gt;</code> and
+        <code class="literal">&lt;benchmarkReport&gt;</code>.</p></div><p>In the GUI, select the interesting benchmarks and click the button to generate the report.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h2>Note</h2><p>All the input reports which are being merged should have been generated with the same Planner version
+        (excluding hotfix differences) as the <code class="literal">BenchmarkAggregator</code>. Using reports from different
+        Planner major or minor versions are not guaranteed to succeed and deliver correct information, because the
+        benchmark report data structure often changes.</p></div></div></div></div><script type="text/javascript" src="highlight.js/highlight.pack.js"> </script><script type="text/javascript">hljs.initHighlightingOnLoad();</script><script type="text/javascript">
+dataLayer = [{'channel' : 'OptaPlanner', 'additional_tracking_code' : 'UA-39485370-1'}];
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJWS5L');</script><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NJWS5L" height="0" width="0" style="display:none;visibility:hidden"> </iframe></noscript><ul class="docnav"><li class="previous"><a accesskey="p" href="ch13.html"><strong>Prev</strong>Chapter 13. Partitioned Search</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="ch15.html"><strong>Next</strong>Chapter 15. Repeated Planning</a></li></ul></body></html>
