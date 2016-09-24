@@ -1,4 +1,4 @@
-
+﻿
 CREATE SEQUENCE flash.dia_semana_dia_semana_id_seq_1;
 
 CREATE TABLE flash.dia_semana (
@@ -142,3 +142,36 @@ REFERENCES flash.disciplina (disciplina_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+
+
+
+
+-- Inserção
+
+INSERT INTO flash.area_conhecimento (descricao)
+VALUES
+('Matemática'),
+('Ciência da Computação'),
+('Física'),
+('Química'),
+('GeoCiências'),
+('Oceanografia'),
+('Engenharia de Materiais e Metalúrgica'),
+('Engenharia Elétrica'),
+('Engenharia Mecânica'),
+('Engenharia Mecânica');
+
+INSERT INTO flash.curso (nome, regime, duracao, sigla)
+VALUES
+('Bacharelado em Sistemas de Informação', 'Créditos', 2520, 'BSI'),
+('Engenharia de Controle e Automação', 'Créditos', 3645, 'ECA');
+
+INSERT INTO flash.dia_semana (nome_dia)
+VALUES
+('Domingo'),
+('Segunda-feira'),
+('Terça-feira'),
+('Quarta-feira'),
+('Quinta-feira'),
+('Sexta-feira'),
+('Sábado');
