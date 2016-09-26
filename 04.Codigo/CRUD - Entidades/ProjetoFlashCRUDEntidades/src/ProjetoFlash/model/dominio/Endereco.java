@@ -1,9 +1,11 @@
 package ProjetoFlash.model.dominio;
 
+import java.util.Objects;
+
 /**
  * Created by danilo on 24/09/16.
  */
-public class Endereco {
+public class Endereco implements Cloneable {
     String municipio, bairro, endereco, numero, cep;
 
     public String getMunicipio() {
@@ -44,5 +46,18 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    @Override
+    public Object clone() {
+        Object obj = null;
+
+        try {
+            obj = super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
     }
 }
