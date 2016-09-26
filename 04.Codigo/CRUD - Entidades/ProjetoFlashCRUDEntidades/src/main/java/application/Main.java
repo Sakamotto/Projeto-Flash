@@ -1,4 +1,4 @@
-package ProjetoFlash;
+package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +27,7 @@ public class Main extends Application {
 
     public void initIndexPage() throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("view/index_page.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("index_page.fxml"));
         Scene scene = new Scene(root);
 
 
@@ -39,18 +39,11 @@ public class Main extends Application {
 
     }
 
-    public void initCadastroProfessorPage() throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("view/cadastro_professor.fxml"));
-        Scene scene = new Scene(root);
-
-        this.primaryStage.setTitle("Cadastro Professor");
-        this.primaryStage.setScene(scene);
-        this.primaryStage.show();
-    }
 
 
     public static void main(String[] args) {
+
         launch(args);
     }
 }

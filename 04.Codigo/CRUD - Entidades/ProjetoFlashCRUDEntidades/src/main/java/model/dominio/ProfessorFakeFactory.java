@@ -1,4 +1,4 @@
-package ProjetoFlash.model.dominio;
+package model.dominio;
 
 /**
  * Created by danilo on 24/09/16.

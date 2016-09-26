@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="403.0" prefWidth="614.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ProjetoFlash.controller.ControllerProfessorDialogInsercao">
+<AnchorPane prefHeight="403.0" prefWidth="614.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.ControllerProfessorDialogInsercao">
   <children>
     <GridPane layoutX="36.0" layoutY="92.0" prefWidth="521.0">
       <children>

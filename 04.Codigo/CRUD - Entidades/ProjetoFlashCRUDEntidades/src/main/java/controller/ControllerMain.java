@@ -1,4 +1,4 @@
-package ProjetoFlash.controller;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,14 +46,14 @@ public class ControllerMain implements Initializable {
 
     */
 
-    @Override
+
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
     @FXML
     public void handleMenuItemCadastrosProfessor() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("../view/cadastro_professor.fxml"));
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("cadastro_professor.fxml"));
         this.anchorPane.getChildren().setAll(anchorPane);
     }
 

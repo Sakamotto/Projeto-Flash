@@ -1,7 +1,7 @@
-package ProjetoFlash.model.database;
+package model.database;
 
-import ProjetoFlash.model.dominio.Endereco;
-import ProjetoFlash.model.dominio.Professor;
+import model.dominio.Endereco;
+import model.dominio.Professor;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -48,7 +48,7 @@ public class PersistenciaProfessor {
     }
 
     public static ArrayList<Professor> getProfessores() throws SQLException, ClassNotFoundException {
-        ArrayList<Professor> professores = new ArrayList<>();
+        ArrayList<Professor> professores = new ArrayList<Professor>();
         Connection con = Conexao.getConexao();
         Statement stm = con.createStatement();
         ResultSet rs;

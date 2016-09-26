@@ -1,8 +1,8 @@
-package ProjetoFlash.controller;
+package controller;
 
-import ProjetoFlash.model.database.PersistenciaProfessor;
-import ProjetoFlash.model.dominio.Professor;
-import ProjetoFlash.model.dominio.ProfessorFakeFactory;
+import model.database.PersistenciaProfessor;
+import model.dominio.Professor;
+import model.dominio.ProfessorFakeFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -41,7 +40,7 @@ public class ControllerProfessor implements Initializable {
 
 
 
-    @Override
+
     public void initialize(URL location, ResourceBundle resources) {
         //Professor prof = ProfessorFakeFactory.getProfessorFake(ProfessorFakeFactory.Tipo.FAKE);
         try {
@@ -172,7 +171,7 @@ public class ControllerProfessor implements Initializable {
 
     public boolean showOpenCadastroProfessorDialog(Professor professor) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getResource("../view/insercao_professor.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getResource("insercao_professor.fxml"));
 
         AnchorPane paginaDialogoCadastro = fxmlLoader.load();
 

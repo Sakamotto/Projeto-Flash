@@ -1,7 +1,7 @@
-package ProjetoFlash.controller;
+package controller;
 
-import ProjetoFlash.model.dominio.Endereco;
-import ProjetoFlash.model.dominio.Professor;
+import model.dominio.Endereco;
+import model.dominio.Professor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -62,7 +62,7 @@ public class ControllerProfessorDialogInsercao implements Initializable {
 
     }
 
-    @Override
+
     public void initialize(URL location, ResourceBundle resources) {
 
 

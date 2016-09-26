@@ -1,6 +1,4 @@
-package ProjetoFlash.model.dominio;
-
-import java.util.Objects;
+package model.dominio;
 
 /**
  * Created by danilo on 24/09/16.

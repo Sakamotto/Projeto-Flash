@@ -1,7 +1,5 @@
-package ProjetoFlash.model.dominio;
+package model.dominio;
 
-
-import java.util.Objects;
 
 public class Professor implements Cloneable {
 
