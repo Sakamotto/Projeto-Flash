@@ -1,5 +1,6 @@
 package ProjetoFlash.controller;
 
+import ProjetoFlash.model.database.PersistenciaProfessor;
 import ProjetoFlash.model.dominio.Professor;
 import ProjetoFlash.model.dominio.ProfessorFakeFactory;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import java.beans.EventHandler;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -41,8 +43,12 @@ public class ControllerProfessor implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Professor prof = ProfessorFakeFactory.getProfessorFake(ProfessorFakeFactory.Tipo.FAKE);
-        listProfessor = new ArrayList<>(Collections.singletonList(prof));
+        //Professor prof = ProfessorFakeFactory.getProfessorFake(ProfessorFakeFactory.Tipo.FAKE);
+        try {
+            listProfessor = PersistenciaProfessor.getProfessores();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         carregaTableViewProfessor();
 
@@ -90,7 +96,7 @@ public class ControllerProfessor implements Initializable {
     }
 
     @FXML
-    public void handleButtonCadastrar () throws IOException {
+    public void handleButtonCadastrar () throws IOException, SQLException, ClassNotFoundException {
         Professor professor = ProfessorFakeFactory.getProfessorFake(ProfessorFakeFactory.Tipo.VAZIO);
         boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor);
 
@@ -98,6 +104,7 @@ public class ControllerProfessor implements Initializable {
             // System.out.println("Salvando professor no banco de dados.");
 
             listProfessor.add(professor);
+            PersistenciaProfessor.salvarProfessor(professor);
 
             // Recarrega a página de cadastro de professor.
             carregaTableViewProfessor();
@@ -106,16 +113,21 @@ public class ControllerProfessor implements Initializable {
     }
 
     @FXML
-    public void handleButtonEditar () throws IOException {
+    public void handleButtonEditar () throws IOException, SQLException, ClassNotFoundException {
         Professor professor = tableViewProfessor.getSelectionModel().getSelectedItem();
 
+
         if (professor != null) {
+            Professor professorAntigo = (Professor) professor.clone();
+
             boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor);
 
             if (btnSalvarClicado) {
                 System.out.println("Alterando professor no banco de dados.");
 
                 // Recarrega a página de cadastro de professor.
+
+                PersistenciaProfessor.alterProfessor(professorAntigo, professor);
 
                 observableListProfessor.clear();
                 carregaTableViewProfessor();
@@ -132,7 +144,7 @@ public class ControllerProfessor implements Initializable {
     }
 
     @FXML
-    public void handleButtonExcluir () {
+    public void handleButtonExcluir () throws SQLException, ClassNotFoundException {
         Professor professor = tableViewProfessor.getSelectionModel().getSelectedItem();
 
         if (professor != null) {
@@ -144,6 +156,7 @@ public class ControllerProfessor implements Initializable {
                 System.out.println("Deletando professor no banco de dados.");
 
                 listProfessor.remove(professor);
+                PersistenciaProfessor.deleteProfessor(professor);
 
 
                 // Recarrega a página de cadastro de professor.

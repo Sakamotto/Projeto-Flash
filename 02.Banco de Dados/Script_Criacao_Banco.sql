@@ -39,7 +39,8 @@ CREATE SEQUENCE flash.endereco_endereco_id_seq_1;
 
 CREATE TABLE flash.endereco (
                 endereco_id INTEGER NOT NULL DEFAULT nextval('flash.endereco_endereco_id_seq_1'),
-                rua VARCHAR NOT NULL,
+                numero INTEGER NOT NULL,
+                endereco VARCHAR NOT NULL,
                 bairro VARCHAR NOT NULL,
                 municipio VARCHAR NOT NULL,
                 cep VARCHAR NOT NULL,
@@ -118,15 +119,15 @@ NOT DEFERRABLE;
 ALTER TABLE flash.professor ADD CONSTRAINT endereco_professor_fk
 FOREIGN KEY (endereco_id)
 REFERENCES flash.endereco (endereco_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE flash.disciplina ADD CONSTRAINT professor_disciplina_fk
 FOREIGN KEY (professor_id)
 REFERENCES flash.professor (professor_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE SET NULL
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE flash.disciplina ADD CONSTRAINT disciplina_disciplina_fk

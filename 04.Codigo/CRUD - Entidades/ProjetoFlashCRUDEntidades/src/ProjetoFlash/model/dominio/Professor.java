@@ -1,8 +1,9 @@
 package ProjetoFlash.model.dominio;
 
 
+import java.util.Objects;
 
-public class Professor {
+public class Professor implements Cloneable {
 
     private String nome, matricula, cpf;
     private Endereco endereco;
@@ -37,5 +38,21 @@ public class Professor {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public Object clone() {
+        Object obj = null;
+
+        try {
+            obj = super.clone();
+
+            ( (Professor) obj).setEndereco( (Endereco) this.getEndereco().clone() );
+
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
     }
 }
