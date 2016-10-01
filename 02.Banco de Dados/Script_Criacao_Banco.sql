@@ -1,9 +1,20 @@
 
+CREATE SEQUENCE flash.tipo_espaco_tipo_id_seq;
+
+CREATE TABLE flash.tipo_espaco (
+                tipo_id INTEGER NOT NULL DEFAULT nextval('flash.tipo_espaco_tipo_id_seq'),
+                descricao VARCHAR NOT NULL,
+                CONSTRAINT tipo_espaco_pk PRIMARY KEY (tipo_id)
+);
+
+
+ALTER SEQUENCE flash.tipo_espaco_tipo_id_seq OWNED BY flash.tipo_espaco.tipo_id;
+
 CREATE TABLE flash.espaco (
                 espaco_id INTEGER NOT NULL,
-                tipo VARCHAR NOT NULL,
                 bloco VARCHAR NOT NULL,
                 numero INTEGER NOT NULL,
+                tipo_id INTEGER NOT NULL,
                 CONSTRAINT espaco_pk PRIMARY KEY (espaco_id)
 );
 
@@ -29,6 +40,13 @@ CREATE TABLE flash.area_conhecimento (
 
 
 ALTER SEQUENCE flash.area_conhecimento_area_conhecimento_id_seq_1 OWNED BY flash.area_conhecimento.area_conhecimento_id;
+
+CREATE TABLE flash.sub_area (
+                area_conhecimento_id INTEGER NOT NULL,
+                sub_area_conhecimento_id INTEGER NOT NULL,
+                CONSTRAINT sub_area_pk PRIMARY KEY (area_conhecimento_id, sub_area_conhecimento_id)
+);
+
 
 CREATE SEQUENCE flash.curso_curso_id_seq_1;
 
@@ -61,10 +79,10 @@ CREATE SEQUENCE flash.endereco_endereco_id_seq_1;
 
 CREATE TABLE flash.endereco (
                 endereco_id INTEGER NOT NULL DEFAULT nextval('flash.endereco_endereco_id_seq_1'),
-                numero INTEGER NOT NULL,
-                endereco VARCHAR NOT NULL,
-                bairro VARCHAR NOT NULL,
                 municipio VARCHAR NOT NULL,
+                bairro VARCHAR NOT NULL,
+                endereco VARCHAR NOT NULL,
+                numero INTEGER NOT NULL,
                 cep VARCHAR NOT NULL,
                 CONSTRAINT endereco_pk PRIMARY KEY (endereco_id)
 );
@@ -77,8 +95,11 @@ CREATE SEQUENCE flash.professor_professor_id_seq;
 CREATE TABLE flash.professor (
                 professor_id INTEGER NOT NULL DEFAULT nextval('flash.professor_professor_id_seq'),
                 nome VARCHAR NOT NULL,
-                matricula VARCHAR NOT NULL,
+                email VARCHAR,
+                data_nascimento DATE,
+                rg VARCHAR,
                 cpf VARCHAR,
+                matricula VARCHAR NOT NULL,
                 endereco_id INTEGER NOT NULL,
                 CONSTRAINT professor_pk PRIMARY KEY (professor_id)
 );
@@ -94,7 +115,6 @@ CREATE TABLE flash.disciplina (
                 carga_horaria INTEGER NOT NULL,
                 periodo INTEGER NOT NULL,
                 curso_id INTEGER NOT NULL,
-                requisito_equivalencia_disciplina_id INTEGER,
                 area_conhecimento_id INTEGER NOT NULL,
                 professor_id INTEGER,
                 CONSTRAINT disciplina_pk PRIMARY KEY (disciplina_id)
@@ -102,6 +122,20 @@ CREATE TABLE flash.disciplina (
 
 
 ALTER SEQUENCE flash.disciplina_disciplina_id_seq OWNED BY flash.disciplina.disciplina_id;
+
+CREATE TABLE flash.requisito_curso (
+                disciplina_id INTEGER NOT NULL,
+                periodo INTEGER NOT NULL,
+                CONSTRAINT requisito_curso_pk PRIMARY KEY (disciplina_id, periodo)
+);
+
+
+CREATE TABLE flash.requisito_disciplina (
+                disciplina_id INTEGER NOT NULL,
+                disciplina_pre_requisito_id INTEGER NOT NULL,
+                CONSTRAINT requisito_disciplina_pk PRIMARY KEY (disciplina_id, disciplina_pre_requisito_id)
+);
+
 
 CREATE TABLE flash.alocacao (
                 alocacao_id INTEGER NOT NULL,
@@ -112,6 +146,13 @@ CREATE TABLE flash.alocacao (
                 CONSTRAINT alocacao_pk PRIMARY KEY (alocacao_id)
 );
 
+
+ALTER TABLE flash.espaco ADD CONSTRAINT tipo_espaco_fk
+FOREIGN KEY (tipo_id)
+REFERENCES flash.tipo_espaco (tipo_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
 
 ALTER TABLE flash.alocacao ADD CONSTRAINT espaco_alocacao_fk
 FOREIGN KEY (espaco_id)
@@ -132,6 +173,20 @@ FOREIGN KEY (area_conhecimento_id)
 REFERENCES flash.area_conhecimento (area_conhecimento_id)
 ON DELETE NO ACTION
 ON UPDATE CASCADE
+NOT DEFERRABLE;
+
+ALTER TABLE flash.sub_area ADD CONSTRAINT area_conhecimento_sub_area_fk
+FOREIGN KEY (area_conhecimento_id)
+REFERENCES flash.area_conhecimento (area_conhecimento_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE flash.sub_area ADD CONSTRAINT area_conhecimento_sub_area_fk1
+FOREIGN KEY (sub_area_conhecimento_id)
+REFERENCES flash.area_conhecimento (area_conhecimento_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE flash.disciplina ADD CONSTRAINT curso_disciplina_fk
@@ -169,16 +224,30 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 NOT DEFERRABLE;
 
-ALTER TABLE flash.disciplina ADD CONSTRAINT disciplina_disciplina_fk
-FOREIGN KEY (requisito_equivalencia_disciplina_id)
-REFERENCES flash.disciplina (disciplina_id)
-ON DELETE SET NULL
-ON UPDATE CASCADE
-NOT DEFERRABLE;
-
 ALTER TABLE flash.alocacao ADD CONSTRAINT disciplina_alocacao_fk
 FOREIGN KEY (disciplina_id)
 REFERENCES flash.disciplina (disciplina_id)
 ON DELETE CASCADE
 ON UPDATE CASCADE
+NOT DEFERRABLE;
+
+ALTER TABLE flash.requisito_disciplina ADD CONSTRAINT disciplina_requisito_fk
+FOREIGN KEY (disciplina_id)
+REFERENCES flash.disciplina (disciplina_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE flash.requisito_disciplina ADD CONSTRAINT disciplina_requisito_fk1
+FOREIGN KEY (disciplina_pre_requisito_id)
+REFERENCES flash.disciplina (disciplina_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE flash.requisito_curso ADD CONSTRAINT disciplina_requisito_curso_fk
+FOREIGN KEY (disciplina_id)
+REFERENCES flash.disciplina (disciplina_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
 NOT DEFERRABLE;

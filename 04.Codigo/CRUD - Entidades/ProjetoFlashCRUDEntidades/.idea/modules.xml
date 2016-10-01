@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProjetoFlashCRUDEntidades.iml" filepath="$PROJECT_DIR$/ProjetoFlashCRUDEntidades.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Flash.iml" filepath="$PROJECT_DIR$/Flash.iml" />
     </modules>
   </component>
 </project>
