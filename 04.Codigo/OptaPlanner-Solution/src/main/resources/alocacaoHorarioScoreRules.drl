@@ -15,9 +15,12 @@ global HardMediumSoftScoreHolder scoreHolder;
 rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
 
     when
-        a: Alocacao()
+        $h: Horario()
+        $total: Number( intValue > 1 )
+                from accumulate( Alocacao(horario == $h, $incrementar: 1) , sum($incrementar))
+
     then
-        scoreHolder.addHardConstraintMatch(kcontext, 5);
-        System.out.println("Ok!");
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+        System.out.println("Buscando solução...");
 
 end
