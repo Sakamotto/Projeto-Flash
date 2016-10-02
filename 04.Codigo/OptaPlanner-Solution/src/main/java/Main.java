@@ -12,11 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 
-/**
- * Created by danilo on 01/10/16.
- */
 public class Main {
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(Main.class);
@@ -66,7 +62,7 @@ public class Main {
 
 
 
-        problema = new AlocacaoHorario(listAlocacao(alocacao1, alocacao2, alocacao3), listHorarios(h01, h02, h03));
+        problema = new AlocacaoHorario(listAlocacao(alocacao1, alocacao2, alocacao3), listHorarios(h02, h01, h03, h04, h05));
 
 
 
