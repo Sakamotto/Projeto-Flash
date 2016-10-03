@@ -171,7 +171,7 @@ public class ControllerProfessor implements Initializable {
 
     public boolean showOpenCadastroProfessorDialog(Professor professor) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getResource("insercao_professor.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getClassLoader().getResource("insercao_professor.fxml"));
 
         AnchorPane paginaDialogoCadastro = fxmlLoader.load();
 
