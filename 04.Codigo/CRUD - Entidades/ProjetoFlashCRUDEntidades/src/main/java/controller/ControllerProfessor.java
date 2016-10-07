@@ -33,7 +33,8 @@ public class ControllerProfessor implements Initializable {
 
     @FXML
     private Label labelProfessorNome, labelProfessorMatricula, labelProfessorCpf, labelProfessorMunicipio,
-                  labelProfessorBairro, labelProfessorEndereco, labelProfessorNumero, labelProfessorCep;
+                  labelProfessorBairro, labelProfessorEndereco, labelProfessorNumero, labelProfessorCep,
+                  labelProfessorEmail, labelProfessorDataNascimento, labelProfessorRg;
 
     private List<Professor> listProfessor;
     private ObservableList<Professor> observableListProfessor;
@@ -69,12 +70,15 @@ public class ControllerProfessor implements Initializable {
 
     // Recebe um professor, pois o tableView é do tipo Professor.
     public void selecionaItemViewClientes (Professor professor) {
-        String pNome = "", pMatricula = "", pCpf = "", pMunicipio = "", pBairro = "", pEndereco = "", pNumero = "", pCep = "";
+        String pNome = "", pMatricula = "", pCpf = "", pMunicipio = "", pBairro = "", pEndereco = "", pNumero = "", pCep = "", pEmail = "", pDataNascimento = "", pRg = "";
 
         if (professor != null) {
             pNome = professor.getNome();
-            pMatricula = professor.getMatricula();
+            pEmail = professor.getEmail();
+            pDataNascimento = professor.getDataNascimento();
+            pRg = professor.getRg();
             pCpf = professor.getCpf();
+            pMatricula = professor.getMatricula();
             pMunicipio = professor.getEndereco().getMunicipio();
             pBairro = professor.getEndereco().getBairro();
             pEndereco = professor.getEndereco().getEndereco();
@@ -84,8 +88,11 @@ public class ControllerProfessor implements Initializable {
         }
 
         labelProfessorNome.setText(pNome);
-        labelProfessorMatricula.setText(pMatricula);
+        labelProfessorEmail.setText(pEmail);
+        labelProfessorDataNascimento.setText(pDataNascimento);
+        labelProfessorRg.setText(pRg);
         labelProfessorCpf.setText(pCpf);
+        labelProfessorMatricula.setText(pMatricula);
         labelProfessorMunicipio.setText(pMunicipio);
         labelProfessorBairro.setText(pBairro);
         labelProfessorEndereco.setText(pEndereco);
@@ -171,7 +178,7 @@ public class ControllerProfessor implements Initializable {
 
     public boolean showOpenCadastroProfessorDialog(Professor professor) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getResource("insercao_professor.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getClassLoader().getResource("insercao_professor.fxml"));
 
         AnchorPane paginaDialogoCadastro = fxmlLoader.load();
 

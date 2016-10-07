@@ -3,8 +3,32 @@ package model.dominio;
 
 public class Professor implements Cloneable {
 
-    private String nome, matricula, cpf;
+    private String nome, matricula, cpf, email, dataNascimento, rg;
     private Endereco endereco;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
 
     public String getNome() {
         return nome;

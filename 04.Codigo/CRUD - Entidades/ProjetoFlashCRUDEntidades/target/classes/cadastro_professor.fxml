@@ -30,27 +30,36 @@
             <GridPane layoutX="103.0" layoutY="62.0" prefHeight="402.0" prefWidth="362.0">
               <children>
                 <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Matrícula:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label text="CPF:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Label text="Município:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Label text="Bairro:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <Label text="Endereço:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                <Label text="Número:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                <Label text="CEP:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <Label text="Município:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <Label text="Bairro:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <Label text="Endereço:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <Label text="Número:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                <Label text="CEP:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
                 <Label id="labelClienteNome" fx:id="labelProfessorNome" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label fx:id="labelProfessorMatricula" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label fx:id="labelProfessorCpf" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label fx:id="labelProfessorMunicipio" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label fx:id="labelProfessorBairro" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label fx:id="labelProfessorEndereco" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label fx:id="labelProfessorNumero" text="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <Label fx:id="labelProfessorCep" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label fx:id="labelProfessorMatricula" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label fx:id="labelProfessorCpf" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label fx:id="labelProfessorMunicipio" text="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label fx:id="labelProfessorBairro" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label fx:id="labelProfessorEndereco" text="" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <Label fx:id="labelProfessorNumero" text="" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label fx:id="labelProfessorCep" text="" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Data de Nascimento:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="RG:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label text="Matrícula:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label text="CPF:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="labelProfessorEmail" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="labelProfessorDataNascimento" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="labelProfessorRg" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="105.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="257.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="145.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="217.0" />
               </columnConstraints>
               <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

@@ -14,9 +14,21 @@ import java.util.ArrayList;
  */
 public class PersistenciaProfessor {
 
-    public static void salvarProfessor(Professor professor) throws SQLException, ClassNotFoundException {
-        Connection con = Conexao.getConexao();
-        Statement stm = con.createStatement();
+    public static void salvarProfessor(Professor professor) {
+        Connection con = null;
+        try {
+            con = Conexao.getConexao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Statement stm = null;
+        try {
+            stm = con.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         String valueEndereco = "('";
         String valueProfessor = "('";
         String enderecoID;
@@ -28,23 +40,33 @@ public class PersistenciaProfessor {
         valueEndereco += professor.getEndereco().getMunicipio() + "','";
         valueEndereco += professor.getEndereco().getCep() + "')";
 
-        stm.execute("INSERT INTO flash.endereco (numero, endereco, bairro, municipio, cep) VALUES " + valueEndereco + ";");
 
 
-        rs = stm.executeQuery("SELECT MAX(endereco_id) FROM flash.endereco;");
+        try {
+            stm.execute("INSERT INTO flash.endereco (numero, endereco, bairro, municipio, cep) VALUES " + valueEndereco + ";");
 
-        rs.next();
+            rs = stm.executeQuery("SELECT MAX(endereco_id) FROM flash.endereco;");
 
-        enderecoID = rs.getString("max");
-        System.out.println(enderecoID);
+            rs.next();
 
-        valueProfessor += professor.getNome() + "','";
-        valueProfessor += professor.getMatricula() + "','";
-        valueProfessor += professor.getCpf() + "','";
-        valueProfessor += enderecoID + "')";
+            enderecoID = rs.getString("max");
+            System.out.println(enderecoID);
+
+            valueProfessor += professor.getNome() + "','";
+            valueProfessor += professor.getEmail() + "','";
+            valueProfessor += professor.getDataNascimento() + "','";
+            valueProfessor += professor.getRg() + "','";
+            valueProfessor += professor.getCpf() + "','";
+            valueProfessor += professor.getMatricula() + "','";
+            valueProfessor += enderecoID + "')";
 
 
-        stm.execute("INSERT INTO flash.professor (nome, matricula, cpf, endereco_id) VALUES " + valueProfessor + ";");
+            stm.execute("INSERT INTO flash.professor (nome, email, data_nascimento, rg, cpf, matricula,  endereco_id) VALUES " + valueProfessor + ";");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public static ArrayList<Professor> getProfessores() throws SQLException, ClassNotFoundException {
@@ -56,8 +78,11 @@ public class PersistenciaProfessor {
         rs = stm.executeQuery("" +
                 "SELECT " +
                 "professor.nome AS NOME, " +
-                "professor.matricula AS MATRICULA, " +
+                "professor.email AS EMAIL, " +
+                "professor.data_nascimento AS DATA_NASCIMENTO, " +
+                "professor.rg AS RG, " +
                 "professor.cpf AS CPF, " +
+                "professor.matricula AS MATRICULA, " +
                 "endereco.numero AS NUMERO, " +
                 "endereco.endereco AS ENDERECO, " +
                 "endereco.bairro AS BAIRRO, " +
@@ -72,8 +97,11 @@ public class PersistenciaProfessor {
             Endereco endereco = new Endereco();
 
             professor.setNome(rs.getString("NOME"));
-            professor.setMatricula(rs.getString("MATRICULA"));
+            professor.setEmail(rs.getString("EMAIL"));
+            professor.setDataNascimento(rs.getString("DATA_NASCIMENTO"));
+            professor.setRg(rs.getString("RG"));
             professor.setCpf(rs.getString("CPF"));
+            professor.setMatricula(rs.getString("MATRICULA"));
 
             endereco.setNumero(rs.getString("NUMERO"));
             endereco.setEndereco(rs.getString("ENDERECO"));
@@ -118,8 +146,11 @@ public class PersistenciaProfessor {
 
         stm.executeUpdate("UPDATE flash.professor SET " +
                           "nome='" + professorNovo.getNome() + "', " +
-                          "matricula='" + professorNovo.getMatricula() + "', " +
+                          "email='" + professorNovo.getEmail() + "', " +
+                          "data_nascimento='" + professorNovo.getDataNascimento() + "', " +
+                          "rg='" + professorNovo.getRg() + "', " +
                           "cpf='" + professorNovo.getCpf() + "' " +
+                          "matricula='" + professorNovo.getMatricula() + "', " +
                           "WHERE professor.cpf='" + professorAntigo.getCpf() + "';");
 
 
