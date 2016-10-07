@@ -46,9 +46,19 @@ public class Main {
         h05.setHorarioInicio(7, 30);
         h05.setHorarioFim(9, 30);
 
+
+        Horario h06 = new Horario();
+        h06.setDiaSemana(Horario.DiaSemana.QUINTA);
+        h06.setHorarioInicio(11, 30);
+        h06.setHorarioFim(13, 30);
+
+
         Disciplina d1 = new Disciplina("Cálculo 1", 1, 60);
         Disciplina d2 = new Disciplina("Sociologia 1", 1, 30);
         Disciplina d3 = new Disciplina("Metodologia da Pesquisa", 1, 30);
+        Disciplina d4 = new Disciplina("FSI", 1, 30);
+        Disciplina d5 = new Disciplina("Lógica", 1, 30);
+        Disciplina d6 = new Disciplina("Programação 1", 1, 60);
 
         Alocacao alocacao1 = new Alocacao();
         alocacao1.setDisciplina(d1);
@@ -59,10 +69,19 @@ public class Main {
         Alocacao alocacao3 = new Alocacao();
         alocacao3.setDisciplina(d3);
 
+        Alocacao alocacao4 = new Alocacao();
+        alocacao4.setDisciplina(d4);
+
+        Alocacao alocacao5 = new Alocacao();
+        alocacao5.setDisciplina(d5);
+
+        Alocacao alocacao6 = new Alocacao();
+        alocacao6.setDisciplina(d6);
 
 
 
-        problema = new AlocacaoHorario(listAlocacao(alocacao1, alocacao2, alocacao3), listHorarios(h02, h01, h03, h04, h05));
+
+        problema = new AlocacaoHorario(listAlocacao(alocacao1, alocacao2, alocacao3, alocacao4, alocacao5, alocacao6), listHorarios(h02, h01, h03, h04, h05, h06));
 
 
 
@@ -75,6 +94,8 @@ public class Main {
                                " | " + alocacao.getHorario().getStrDiaSemana() +
                                " | " + alocacao.getHorario().getHorarioInicio());
         }
+
+        logarSolucao(solucao);
 
 
     }
