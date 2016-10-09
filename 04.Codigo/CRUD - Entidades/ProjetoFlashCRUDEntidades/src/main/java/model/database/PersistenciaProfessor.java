@@ -149,8 +149,8 @@ public class PersistenciaProfessor {
                           "email='" + professorNovo.getEmail() + "', " +
                           "data_nascimento='" + professorNovo.getDataNascimento() + "', " +
                           "rg='" + professorNovo.getRg() + "', " +
-                          "cpf='" + professorNovo.getCpf() + "' " +
-                          "matricula='" + professorNovo.getMatricula() + "', " +
+                          "cpf='" + professorNovo.getCpf() + "', " +
+                          "matricula='" + professorNovo.getMatricula() + "' " +
                           "WHERE professor.cpf='" + professorAntigo.getCpf() + "';");
 
 
