@@ -87,7 +87,7 @@ public class ControllerProfessorDialogInsercao implements Initializable {
         this.professor.setEmail(textFieldProfessorEmail.getText());
         this.professor.setDataNascimento(textFieldProfessorDataNascimento.getText());
         this.professor.setRg(textFieldProfessorRg.getText());
-        this.professor.setCpf(textFieldProfessorCpf.getText());
+        this.professor.setCpf(textFieldProfessorCpf.getText(), false);
         this.professor.setMatricula(textFieldProfessorMatricula.getText());
         this.professor.setEndereco(endereco);
 

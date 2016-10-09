@@ -36,8 +36,8 @@
                 <Label text="Número:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
                 <Label text="CEP:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
                 <Label id="labelClienteNome" fx:id="labelProfessorNome" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label fx:id="labelProfessorMatricula" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label fx:id="labelProfessorCpf" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label id="labelProfessorCpf" fx:id="labelProfessorMatricula" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label id="labelProfessorMatricula" fx:id="labelProfessorCpf" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <Label fx:id="labelProfessorMunicipio" text="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <Label fx:id="labelProfessorBairro" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <Label fx:id="labelProfessorEndereco" text="" GridPane.columnIndex="1" GridPane.rowIndex="8" />

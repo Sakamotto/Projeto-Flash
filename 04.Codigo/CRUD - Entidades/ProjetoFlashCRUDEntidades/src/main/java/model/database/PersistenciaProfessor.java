@@ -100,7 +100,7 @@ public class PersistenciaProfessor {
             professor.setEmail(rs.getString("EMAIL"));
             professor.setDataNascimento(rs.getString("DATA_NASCIMENTO"));
             professor.setRg(rs.getString("RG"));
-            professor.setCpf(rs.getString("CPF"));
+            professor.setCpf(rs.getString("CPF"), false);
             professor.setMatricula(rs.getString("MATRICULA"));
 
             endereco.setNumero(rs.getString("NUMERO"));
@@ -149,8 +149,8 @@ public class PersistenciaProfessor {
                           "email='" + professorNovo.getEmail() + "', " +
                           "data_nascimento='" + professorNovo.getDataNascimento() + "', " +
                           "rg='" + professorNovo.getRg() + "', " +
-                          "cpf='" + professorNovo.getCpf() + "' " +
-                          "matricula='" + professorNovo.getMatricula() + "', " +
+                          "cpf='" + professorNovo.getCpf() + "', " +
+                          "matricula='" + professorNovo.getMatricula() + "' " +
                           "WHERE professor.cpf='" + professorAntigo.getCpf() + "';");
 
 
