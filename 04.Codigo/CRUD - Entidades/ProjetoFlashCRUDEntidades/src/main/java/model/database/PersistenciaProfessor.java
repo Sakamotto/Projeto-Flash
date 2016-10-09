@@ -100,7 +100,7 @@ public class PersistenciaProfessor {
             professor.setEmail(rs.getString("EMAIL"));
             professor.setDataNascimento(rs.getString("DATA_NASCIMENTO"));
             professor.setRg(rs.getString("RG"));
-            professor.setCpf(rs.getString("CPF"));
+            professor.setCpf(rs.getString("CPF"), false);
             professor.setMatricula(rs.getString("MATRICULA"));
 
             endereco.setNumero(rs.getString("NUMERO"));

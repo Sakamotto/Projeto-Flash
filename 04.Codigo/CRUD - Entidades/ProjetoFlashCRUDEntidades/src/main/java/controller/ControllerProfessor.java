@@ -2,7 +2,6 @@ package controller;
 
 import model.database.PersistenciaProfessor;
 import model.dominio.Professor;
-import model.dominio.ProfessorFakeFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -70,40 +69,28 @@ public class ControllerProfessor implements Initializable {
 
     // Recebe um professor, pois o tableView é do tipo Professor.
     public void selecionaItemViewClientes (Professor professor) {
-        String pNome = "", pMatricula = "", pCpf = "", pMunicipio = "", pBairro = "", pEndereco = "", pNumero = "", pCep = "", pEmail = "", pDataNascimento = "", pRg = "";
 
-        if (professor != null) {
-            pNome = professor.getNome();
-            pEmail = professor.getEmail();
-            pDataNascimento = professor.getDataNascimento();
-            pRg = professor.getRg();
-            pCpf = professor.getCpf();
-            pMatricula = professor.getMatricula();
-            pMunicipio = professor.getEndereco().getMunicipio();
-            pBairro = professor.getEndereco().getBairro();
-            pEndereco = professor.getEndereco().getEndereco();
-            pNumero = professor.getEndereco().getNumero();
-            pCep = professor.getEndereco().getCep();
-
+        if (professor == null) {
+            professor = new Professor();
         }
 
-        labelProfessorNome.setText(pNome);
-        labelProfessorEmail.setText(pEmail);
-        labelProfessorDataNascimento.setText(pDataNascimento);
-        labelProfessorRg.setText(pRg);
-        labelProfessorCpf.setText(pCpf);
-        labelProfessorMatricula.setText(pMatricula);
-        labelProfessorMunicipio.setText(pMunicipio);
-        labelProfessorBairro.setText(pBairro);
-        labelProfessorEndereco.setText(pEndereco);
-        labelProfessorNumero.setText(pNumero);
-        labelProfessorCep.setText(pCep);
+        labelProfessorNome.setText(professor.getNome());
+        labelProfessorEmail.setText(professor.getEmail());
+        labelProfessorDataNascimento.setText(professor.getDataNascimento());
+        labelProfessorRg.setText(professor.getRg());
+        labelProfessorCpf.setText(professor.getDecoratedCpf());
+        labelProfessorMatricula.setText(professor.getMatricula());
+        labelProfessorMunicipio.setText(professor.getEndereco().getMunicipio());
+        labelProfessorBairro.setText(professor.getEndereco().getBairro());
+        labelProfessorEndereco.setText(professor.getEndereco().getEndereco());
+        labelProfessorNumero.setText(professor.getEndereco().getNumero());
+        labelProfessorCep.setText(professor.getEndereco().getCep());
 
     }
 
     @FXML
     public void handleButtonCadastrar () throws IOException, SQLException, ClassNotFoundException {
-        Professor professor = ProfessorFakeFactory.getProfessorFake(ProfessorFakeFactory.Tipo.VAZIO);
+        Professor professor = new Professor();
         boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor);
 
         if (btnSalvarClicado) {

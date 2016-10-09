@@ -6,6 +6,14 @@ package model.dominio;
 public class Endereco implements Cloneable {
     String municipio, bairro, endereco, numero, cep;
 
+    public Endereco() {
+        this.municipio = "";
+        this.bairro = "";
+        this.endereco = "";
+        this.numero = "";
+        this.cep = "";
+    }
+
     public String getMunicipio() {
         return municipio;
     }

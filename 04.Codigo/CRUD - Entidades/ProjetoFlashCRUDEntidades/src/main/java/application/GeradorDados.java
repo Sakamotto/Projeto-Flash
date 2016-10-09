@@ -3,12 +3,10 @@ package application;
 import com.github.javafaker.Faker;
 import com.mifmif.common.regex.Generex;
 import io.codearte.jfairy.Fairy;
-import model.database.Conexao;
 import model.database.PersistenciaProfessor;
 import model.dominio.Endereco;
 import model.dominio.Professor;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Random;
 
@@ -37,7 +35,7 @@ public class GeradorDados {
             p.setEmail(faker.person().email());
             p.setDataNascimento(faker.person().dateOfBirth().toString());
             p.setRg(faker.person().nationalIdentityCardNumber());
-            p.setCpf(gerarCpf());
+            p.setCpf(gerarCpf(), true);
             p.setMatricula(gerarMatricula());
 
             e.setBairro(faker.person().getAddress().getCity());
@@ -55,8 +53,44 @@ public class GeradorDados {
     }
 
     private static String gerarCpf() {
-        Generex generex = new Generex("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}");
-        return generex.random();
+        int sumVerificadorUm = 0,
+            sumVerificadorDois = 0;
+        int m = 11, n = 10;
+        String cpf = "";
+        Random random = new Random();
+
+        for(int i = 0 ; i < 10 ; i++) {
+
+            if (n > 1 && m > 2) {
+                int valorSortido = random.nextInt(10);
+                cpf += valorSortido;
+
+                sumVerificadorUm += valorSortido * n;
+                sumVerificadorDois += valorSortido * m;
+
+                m--;
+                n--;
+            }
+            else {
+                sumVerificadorUm = (sumVerificadorUm * 10) % 11;
+
+                if (sumVerificadorUm >= 10)
+                    sumVerificadorUm = 0;
+
+                sumVerificadorDois += sumVerificadorUm * 2;
+                sumVerificadorDois = (sumVerificadorDois * 10) % 11;
+
+                if (sumVerificadorDois >= 10)
+                    sumVerificadorDois = 0;
+
+                cpf += sumVerificadorUm;
+                cpf += sumVerificadorDois;
+            }
+        }
+
+        System.out.println(cpf);
+
+        return cpf;
     }
 
     private static String gerarMatricula() {
