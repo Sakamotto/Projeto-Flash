@@ -2,5 +2,7 @@ language: java
 java:
   - 1.8
 
+script: junit Teste.java
+
 notifications:
   slack: bsi-ifes:nECNqvrLZq1fjJz6C88BjfXk
