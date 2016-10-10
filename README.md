@@ -12,3 +12,5 @@ Utilizaremos o framework **OptaPlanner** desenvolvido em **Java** pela empresa *
 ### Relatório
 
 De acordo com as especificações, o trabalho deve conter um relatório. Para elaborar e armazenar o relatório, utilizamos a Wiki do Github. Para acessar o relatório, basta clicar na aba Wiki desse repositório ou clicar nesse [link](https://github.com/sakamotto/projeto-flash/wiki).
+
+
