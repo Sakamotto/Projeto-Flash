@@ -1,3 +1,4 @@
+import application.AlocacaoHorario;
 import domain.Alocacao;
 import domain.Disciplina;
 import domain.Horario;
