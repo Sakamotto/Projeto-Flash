@@ -92,7 +92,7 @@ public class Horarios {
 
     @Then("^Aloque o horario$")
     public void aloque_o_horario() {
-        System.out.println("NÃO DEU CONFLITO!!");
+        System.out.println("NÃO DEU CONFLITO!!!");
     }
 
     private static AlocacaoHorario resolver(AlocacaoHorario problem, String solverConfig) {
