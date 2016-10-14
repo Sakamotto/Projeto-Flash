@@ -50,8 +50,8 @@ public class Main {
 
         Horario h06 = new Horario();
         h06.setDiaSemana(Horario.DiaSemana.QUINTA);
-        h06.setHorarioInicio(11, 30);
-        h06.setHorarioFim(13, 30);
+        h06.setHorarioInicio(7, 30);
+        h06.setHorarioFim(9, 30);
 
 
         Disciplina d1 = new Disciplina("Cálculo 1", 1, 60);
