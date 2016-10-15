@@ -144,8 +144,8 @@ public class Main {
 
     private static void logarSolucao(AlocacaoHorario solucao) {
         HardMediumSoftScore score = solucao.getScore();
-        logger.info("Melhor score: {}", score);
-        logger.info("Solução é viável? {}", score.isFeasible());
-        solucao.getAlocacoes().forEach(g -> logger.info("Grupo=[{}] -> Veículo=[{}]", g, g.getHorario()));
+        logger.info("Melhor score: ", score);
+        logger.info("Solução é viável? ", score.isFeasible());
+        solucao.getAlocacoes().forEach(a -> logger.info("Grupo=[{}] -> Veículo=[{}]", a.getDisciplina(), a.getHorario()));
     }
 }
