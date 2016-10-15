@@ -1,5 +1,7 @@
 package domain;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * Created by danilo on 01/10/16.
  */
@@ -9,12 +11,17 @@ public class Horario {
 
     public enum DiaSemana {DOMINGO, SEGUNDA, TERCA, QUARTA, QUINTA, SEXTA, SABADO}
 
-    private int horaInicio, minutoInicio;
-    private int horaFim, minutoFim;
+    private int id;
+    private int horaInicio;
+    private int minutoInicio;
+    private int horaFim;
+    private int minutoFim;
 
     private DiaSemana diaSemana;
 
-    public Horario() {}
+    public Horario(int idParam) {
+        id = idParam;
+    }
 
 
     public void setHorarioInicio(int horaInicio, int minutoInicio) {
@@ -70,6 +77,10 @@ public class Horario {
         return hora + ":" + minuto;
     }
 
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(98587969, 810426655).append(id).append(getHorarioInicio()).append(getHorarioFim()).toHashCode();
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -77,14 +88,11 @@ public class Horario {
             return false;
         else {
             Horario horario = (Horario) object;
+            boolean comparacaoHorarioInicio = getHorarioInicio().equalsIgnoreCase( horario.getHorarioInicio() );
+            boolean comparacaoHorarioFim = getHorarioFim().equalsIgnoreCase( horario.getHorarioFim() );
+            boolean comparacaoDiaSemana = getDiaSemana() == horario.getDiaSemana();;
 
-            if ( !this.getHorarioInicio().equalsIgnoreCase( horario.getHorarioInicio() ) )
-                return false;
-
-            else if ( !this.getHorarioFim().equalsIgnoreCase( horario.getHorarioFim() ) )
-                return false;
-
-            else return this.getDiaSemana() == horario.getDiaSemana();
+            return comparacaoDiaSemana && comparacaoHorarioFim && comparacaoHorarioInicio;
         }
     }
 

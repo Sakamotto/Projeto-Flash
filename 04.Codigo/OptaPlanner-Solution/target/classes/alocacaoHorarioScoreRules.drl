@@ -2,6 +2,7 @@
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScoreHolder;
 
 import java.util.Set;
+import java.util.ArrayList;
 
 import domain.Alocacao
 import domain.Disciplina
@@ -10,17 +11,26 @@ import domain.Horario
 import domain.PreRequisito
 import domain.Professor
 
+
 global HardMediumSoftScoreHolder scoreHolder;
 
 rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
 
     when
-        $h: Horario()
-        $total: Number( intValue > 1 )
-                from accumulate( Alocacao(horario == $h, $incrementar: 1) , sum($incrementar))
+        $alocacao: Alocacao()
+        exists Alocacao(disciplina != $alocacao.disciplina && horario == $alocacao.horario)
+
+        /*
+        $horario: Horario()
+        // Aqui deseja-se contabilizar todas as alocacoes que possuem o mesmo horario.
+        // Dado um determinado horario, conta-se quantas alocacoes possuem aquele horario.
+
+        Number( intValue > 1 ) from accumulate(
+            $alocacao: Alocacao(horario == $horario),
+            count($alocacao)
+        )
+        */
 
     then
-        scoreHolder.addHardConstraintMatch(kcontext, -1);
-        System.out.println("Buscando solução...");
-
+        scoreHolder.addHardConstraintMatch( kcontext, -1 );
 end

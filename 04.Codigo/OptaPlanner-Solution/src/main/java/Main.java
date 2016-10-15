@@ -22,36 +22,42 @@ public class Main {
         AlocacaoHorario problema;
 
 
-        Horario h01 = new Horario();
+        Horario h01 = new Horario(1);
         h01.setDiaSemana(Horario.DiaSemana.SEGUNDA);
         h01.setHorarioInicio(7, 30);
         h01.setHorarioFim(9, 30);
 
-        Horario h02 = new Horario();
+        Horario h02 = new Horario(2);
         h02.setDiaSemana(Horario.DiaSemana.TERCA);
         h02.setHorarioInicio(7, 30);
         h02.setHorarioFim(9, 30);
 
-        Horario h03 = new Horario();
+        Horario h03 = new Horario(3);
         h03.setDiaSemana(Horario.DiaSemana.QUARTA);
         h03.setHorarioInicio(7, 30);
         h03.setHorarioFim(9, 30);
 
-        Horario h04 = new Horario();
+        Horario h04 = new Horario(4);
         h04.setDiaSemana(Horario.DiaSemana.QUINTA);
         h04.setHorarioInicio(7, 30);
         h04.setHorarioFim(9, 30);
 
-        Horario h05 = new Horario();
+        Horario h05 = new Horario(5);
         h05.setDiaSemana(Horario.DiaSemana.SEXTA);
         h05.setHorarioInicio(7, 30);
         h05.setHorarioFim(9, 30);
 
 
-        Horario h06 = new Horario();
+        Horario h06 = new Horario(6);
         h06.setDiaSemana(Horario.DiaSemana.QUINTA);
         h06.setHorarioInicio(7, 30);
         h06.setHorarioFim(9, 30);
+
+
+        Horario h07 = new Horario(7);
+        h07.setDiaSemana(Horario.DiaSemana.QUINTA);
+        h07.setHorarioInicio(9, 40);
+        h07.setHorarioFim(11, 30);
 
 
         Disciplina d1 = new Disciplina("Cálculo 1", 1, 60);
@@ -82,7 +88,10 @@ public class Main {
 
 
 
-        problema = new AlocacaoHorario(listAlocacao(alocacao1, alocacao2, alocacao3, alocacao4, alocacao5, alocacao6), listHorarios(h02, h01, h03, h04, h05, h06));
+        problema = new AlocacaoHorario(
+                listAlocacao(alocacao1, alocacao2, alocacao3, alocacao4, alocacao5, alocacao6),
+                listHorarios(h02, h01, h03, h04, h05, h06, h07)
+        );
 
 
 

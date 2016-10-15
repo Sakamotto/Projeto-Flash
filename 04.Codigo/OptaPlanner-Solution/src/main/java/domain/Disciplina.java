@@ -59,7 +59,9 @@ public class Disciplina {
     public boolean equals(Object object) {
         if (object == null)
             return false;
-        else
-            return this.getNome().equals( ( (Disciplina) object).getNome() );
+        else{
+            Disciplina paramDisciplina = (Disciplina) object;
+            return getNome().equalsIgnoreCase( paramDisciplina.getNome() );
+        }
     }
 }
