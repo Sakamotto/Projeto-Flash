@@ -2,6 +2,7 @@ import application.AlocacaoHorario;
 import domain.Alocacao;
 import domain.Disciplina;
 import domain.Horario;
+import domain.HorarioBuilder;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
@@ -22,87 +23,89 @@ public class Main {
         AlocacaoHorario problema;
 
 
-        Horario h01 = new Horario(1);
-        h01.setDiaSemana(Horario.DiaSemana.SEGUNDA);
-        h01.setHorarioInicio(7, 30);
-        h01.setHorarioFim(9, 30);
-
-        Horario h02 = new Horario(2);
-        h02.setDiaSemana(Horario.DiaSemana.TERCA);
-        h02.setHorarioInicio(7, 30);
-        h02.setHorarioFim(9, 30);
-
-        Horario h03 = new Horario(3);
-        h03.setDiaSemana(Horario.DiaSemana.QUARTA);
-        h03.setHorarioInicio(7, 30);
-        h03.setHorarioFim(9, 30);
-
-        Horario h04 = new Horario(4);
-        h04.setDiaSemana(Horario.DiaSemana.QUINTA);
-        h04.setHorarioInicio(7, 30);
-        h04.setHorarioFim(9, 30);
-
-        Horario h05 = new Horario(5);
-        h05.setDiaSemana(Horario.DiaSemana.SEXTA);
-        h05.setHorarioInicio(7, 30);
-        h05.setHorarioFim(9, 30);
+        Horario horario01 = new HorarioBuilder(1)
+                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
+                .addHorarioInicio(7, 30)
+                .addHorarioFim(9, 30)
+                .getHorario();
 
 
-        Horario h06 = new Horario(6);
-        h06.setDiaSemana(Horario.DiaSemana.QUINTA);
-        h06.setHorarioInicio(7, 30);
-        h06.setHorarioFim(9, 30);
+        Horario horario02 = new HorarioBuilder(2)
+                .addDiaSemana(Horario.DiaSemana.TERCA)
+                .addHorarioInicio(7, 30)
+                .addHorarioFim(9, 30)
+                .getHorario();
+
+        Horario horario03 = new HorarioBuilder(3)
+                .addDiaSemana(Horario.DiaSemana.QUARTA)
+                .addHorarioInicio(7, 30)
+                .addHorarioFim(9, 30)
+                .getHorario();
+
+        Horario horario04 = new HorarioBuilder(4)
+                .addDiaSemana(Horario.DiaSemana.QUINTA)
+                .addHorarioInicio(7, 30)
+                .addHorarioFim(9, 30)
+                .getHorario();
+
+        Horario horario05 = new HorarioBuilder(5)
+                .addDiaSemana(Horario.DiaSemana.SEXTA)
+                .addHorarioInicio(7, 30)
+                .addHorarioFim(9, 30)
+                .getHorario();
 
 
-        Horario h07 = new Horario(7);
-        h07.setDiaSemana(Horario.DiaSemana.QUINTA);
-        h07.setHorarioInicio(9, 40);
-        h07.setHorarioFim(11, 30);
+        Horario horario06 = new HorarioBuilder(6)
+                .addDiaSemana(Horario.DiaSemana.QUINTA)
+                .addHorarioInicio(7, 30)
+                .addHorarioFim(9, 30)
+                .getHorario();
 
 
-        Disciplina d1 = new Disciplina("Cálculo 1", 1, 60);
-        Disciplina d2 = new Disciplina("Sociologia 1", 1, 30);
-        Disciplina d3 = new Disciplina("Metodologia da Pesquisa", 1, 30);
-        Disciplina d4 = new Disciplina("FSI", 1, 30);
-        Disciplina d5 = new Disciplina("Lógica", 1, 30);
-        Disciplina d6 = new Disciplina("Programação 1", 1, 60);
+        Horario horario07 = new HorarioBuilder(7)
+                .addDiaSemana(Horario.DiaSemana.QUINTA)
+                .addHorarioInicio(9, 40)
+                .addHorarioFim(11, 30)
+                .getHorario();
 
-        Alocacao alocacao1 = new Alocacao();
-        alocacao1.setDisciplina(d1);
 
-        Alocacao alocacao2 = new Alocacao();
-        alocacao2.setDisciplina(d2);
+        Disciplina disciplina01 = new Disciplina("Calculo 1", 1, 60);
+        Disciplina disciplina02 = new Disciplina("Sociologia 1", 1, 30);
+        Disciplina disciplina03 = new Disciplina("Metodologia da Pesquisa", 1, 30);
+        Disciplina disciplina04 = new Disciplina("FSI", 1, 30);
+        Disciplina disciplina05 = new Disciplina("Logica", 1, 30);
+        Disciplina disciplina06 = new Disciplina("Programacao 1", 1, 60);
 
-        Alocacao alocacao3 = new Alocacao();
-        alocacao3.setDisciplina(d3);
+        Alocacao alocacao1 = new Alocacao( disciplina01 );
 
-        Alocacao alocacao4 = new Alocacao();
-        alocacao4.setDisciplina(d4);
+        Alocacao alocacao2 = new Alocacao( disciplina02 );
 
-        Alocacao alocacao5 = new Alocacao();
-        alocacao5.setDisciplina(d5);
+        Alocacao alocacao3 = new Alocacao( disciplina03 );
 
-        Alocacao alocacao6 = new Alocacao();
-        alocacao6.setDisciplina(d6);
+        Alocacao alocacao4 = new Alocacao( disciplina04 );
+
+        Alocacao alocacao5 = new Alocacao( disciplina05 );
+
+        Alocacao alocacao6 = new Alocacao( disciplina06 );
 
 
 
 
         problema = new AlocacaoHorario(
                 listAlocacao(alocacao1, alocacao2, alocacao3, alocacao4, alocacao5, alocacao6),
-                listHorarios(h02, h01, h03, h04, h05, h06, h07)
+                listHorarios(horario01, horario02, horario03, horario04, horario05, horario06, horario07)
         );
 
 
 
         AlocacaoHorario solucao = resolver(problema, "bruteForce_solverConfig.xml");
 
-        List<Alocacao> resultado = solucao.getAlocacoes();
+        List<Alocacao> resultadoAlocacoes = solucao.getAlocacoes();
 
-        for( Alocacao alocacao : resultado) {
-            System.out.println("Turma: " + alocacao.getDisciplina().getNome() +
-                               " | " + alocacao.getHorario().getStrDiaSemana() +
-                               " | " + alocacao.getHorario().getHorarioInicio());
+        for( Alocacao resultadoAlocacao : resultadoAlocacoes) {
+            System.out.println("Turma: " + resultadoAlocacao.getDisciplina().getNome() +
+                               " | " + resultadoAlocacao.getHorario().getStrDiaSemana() +
+                               " | " + resultadoAlocacao.getHorario().getHorarioInicio());
         }
 
         logarSolucao(solucao);

@@ -15,6 +15,10 @@ public class Alocacao {
 
     public Alocacao() {}
 
+    public Alocacao(Disciplina disciplinaParam) {
+        disciplina = disciplinaParam;
+    }
+
 
     @PlanningVariable(valueRangeProviderRefs = {"horarios"})
     public Horario getHorario() {
