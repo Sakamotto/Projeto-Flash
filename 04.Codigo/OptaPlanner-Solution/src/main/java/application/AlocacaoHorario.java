@@ -26,7 +26,7 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore>{
     @XStreamImplicit(itemFieldName = "alocacao")
     private List<Alocacao> alocacoes;
 
-    @XStreamImplicit(itemFieldName = "horario")
+    @XStreamImplicit(itemFieldName = "horarios")
     private List<Horario> horarios;
 
     public AlocacaoHorario(){}
@@ -50,7 +50,7 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore>{
     public Collection<?> getProblemFacts() {
         List<Object> facts = new ArrayList<>();
 
-        facts.addAll(this.horarios);
+        facts.addAll(horarios);
 
         return facts;
     }

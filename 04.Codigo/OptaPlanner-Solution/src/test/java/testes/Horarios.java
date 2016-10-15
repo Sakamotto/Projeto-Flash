@@ -45,8 +45,8 @@ public class Horarios {
     public void eu_alocar_o_horario() {
         alocacao1 = new Alocacao();
         alocacao2 = new Alocacao();
-        h1 = new Horario();
-        h2 = new Horario();
+        h1 = new Horario(1);
+        h2 = new Horario(2);
 
         alocacao1.setDisciplina(disciplina1);
         alocacao2.setDisciplina(disciplina2);
