@@ -32,7 +32,7 @@ public class Main {
 
 
         Horario horario02 = new HorarioBuilder(2)
-                .addDiaSemana(Horario.DiaSemana.TERCA)
+                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
                 .addHorarioInicio(7, 30)
                 .addHorarioFim(9, 30)
                 .getHorario();
@@ -58,8 +58,8 @@ public class Main {
 
         Horario horario06 = new HorarioBuilder(6)
                 .addDiaSemana(Horario.DiaSemana.QUINTA)
-                .addHorarioInicio(7, 30)
-                .addHorarioFim(9, 30)
+                .addHorarioInicio(15, 30)
+                .addHorarioFim(17, 30)
                 .getHorario();
 
 
@@ -101,7 +101,7 @@ public class Main {
 
         AlocacaoHorario solucao = resolver(problema, "solver/bruteForce_solverConfig.xml");
 
-        printResultSolution(solucao);
+        // printResultSolution(solucao);
 
     }
 
@@ -136,8 +136,12 @@ public class Main {
 
     private static void logarSolucao(AlocacaoHorario solucao) {
         HardMediumSoftScore score = solucao.getScore();
-        logger.info("Melhor score: ", score);
-        logger.info("Solução é viável? ", score.isFeasible());
+        String viabilidade = (score.isFeasible()) ? "Sim": "Nao";
+
+        System.out.println("Melhor score: " + score);
+
+        System.out.println("Solução é viável ? R = " + viabilidade);
+
         solucao.getAlocacoes().forEach(a -> logger.info("Disciplina = [{}] -> Horario = [{}]", a.getDisciplina().getNome(), a.getHorario().getStrDiaSemana() + ", " + a.getHorario().getHorarioInicio() + " - " + a.getHorario().getHorarioFim()));
     }
 
