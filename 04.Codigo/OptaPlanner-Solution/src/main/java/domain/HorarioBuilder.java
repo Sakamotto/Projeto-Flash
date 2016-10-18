@@ -1,5 +1,7 @@
 package domain;
 
+import java.io.Serializable;
+
 /**
  * Created by danilo on 15/10/16.
  */
