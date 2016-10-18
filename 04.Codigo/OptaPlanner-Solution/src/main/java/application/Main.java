@@ -1,4 +1,5 @@
-import application.AlocacaoHorario;
+package application;
+
 import domain.Alocacao;
 import domain.Disciplina;
 import domain.Horario;
@@ -93,23 +94,14 @@ public class Main {
 
         problema = new AlocacaoHorario(
                 listAlocacao(alocacao1, alocacao2, alocacao3, alocacao4, alocacao5, alocacao6),
-                listHorarios(horario01, horario02, horario03, horario04, horario05, horario06, horario07)
+                listHorarios(horario01, horario02, horario03, horario04, horario06, horario05, horario07)
         );
 
 
 
-        AlocacaoHorario solucao = resolver(problema, "bruteForce_solverConfig.xml");
+        AlocacaoHorario solucao = resolver(problema, "solver/bruteForce_solverConfig.xml");
 
-        List<Alocacao> resultadoAlocacoes = solucao.getAlocacoes();
-
-        for( Alocacao resultadoAlocacao : resultadoAlocacoes) {
-            System.out.println("Turma: " + resultadoAlocacao.getDisciplina().getNome() +
-                               " | " + resultadoAlocacao.getHorario().getStrDiaSemana() +
-                               " | " + resultadoAlocacao.getHorario().getHorarioInicio());
-        }
-
-        logarSolucao(solucao);
-
+        printResultSolution(solucao);
 
     }
 
@@ -146,6 +138,17 @@ public class Main {
         HardMediumSoftScore score = solucao.getScore();
         logger.info("Melhor score: ", score);
         logger.info("Solução é viável? ", score.isFeasible());
-        solucao.getAlocacoes().forEach(a -> logger.info("Grupo=[{}] -> Veículo=[{}]", a.getDisciplina(), a.getHorario()));
+        solucao.getAlocacoes().forEach(a -> logger.info("Disciplina = [{}] -> Horario = [{}]", a.getDisciplina().getNome(), a.getHorario().getStrDiaSemana() + ", " + a.getHorario().getHorarioInicio() + " - " + a.getHorario().getHorarioFim()));
+    }
+
+
+    private static void printResultSolution(AlocacaoHorario solucao) {
+        List<Alocacao> resultadoAlocacoes = solucao.getAlocacoes();
+
+        for( Alocacao resultadoAlocacao : resultadoAlocacoes) {
+            System.out.println("Turma: " + resultadoAlocacao.getDisciplina().getNome() +
+                    " | " + resultadoAlocacao.getHorario().getStrDiaSemana() +
+                    " | " + resultadoAlocacao.getHorario().getHorarioInicio());
+        }
     }
 }

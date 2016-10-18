@@ -1,5 +1,9 @@
 package domain;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -52,7 +56,8 @@ public class Disciplina {
 
     @Override
     public int hashCode() {
-        return nome.hashCode();
+        return new HashCodeBuilder(1450207409, -1692382659)
+                .append(getNome()).toHashCode();
     }
 
     @Override
@@ -61,7 +66,10 @@ public class Disciplina {
             return false;
         else{
             Disciplina paramDisciplina = (Disciplina) object;
-            return getNome().equalsIgnoreCase( paramDisciplina.getNome() );
+
+            return new EqualsBuilder()
+                    .append(nome, paramDisciplina.getNome())
+                    .isEquals();
         }
     }
 }

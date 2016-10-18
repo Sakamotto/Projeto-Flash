@@ -1,6 +1,9 @@
 package domain;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import java.io.Serializable;
 
 /**
  * Created by danilo on 01/10/16.
@@ -39,15 +42,15 @@ public class Horario {
     }
 
     public String getHorarioInicio() {
-        return getStrHorario(this.horaInicio, this.minutoInicio);
+        return getStrHorario(horaInicio, minutoInicio);
     }
 
     public String getHorarioFim() {
-        return getStrHorario(this.horaFim, this.minutoFim);
+        return getStrHorario(horaFim, minutoFim);
     }
 
     public DiaSemana getDiaSemana() {
-        return this.diaSemana;
+        return diaSemana;
     }
 
 
@@ -79,21 +82,29 @@ public class Horario {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(98587969, 810426655).append(id).append(getHorarioInicio()).append(getHorarioFim()).toHashCode();
+        return new HashCodeBuilder(1450207409, -1692382659)
+                .append(id)
+                .toHashCode();
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object == null)
-            return false;
+    public boolean equals(final Object object) {
+        boolean isEqual;
+
+        if (object == null || !(object instanceof Horario) )
+            isEqual = false;
+
         else {
             Horario horario = (Horario) object;
-            boolean comparacaoHorarioInicio = getHorarioInicio().equalsIgnoreCase( horario.getHorarioInicio() );
-            boolean comparacaoHorarioFim = getHorarioFim().equalsIgnoreCase( horario.getHorarioFim() );
-            boolean comparacaoDiaSemana = getDiaSemana() == horario.getDiaSemana();;
 
-            return comparacaoDiaSemana && comparacaoHorarioFim && comparacaoHorarioInicio;
+            isEqual = new EqualsBuilder()
+                    .append( getHorarioInicio(), horario.getHorarioInicio() )
+                    .append( getHorarioFim(), horario.getHorarioFim() )
+                    .append( getStrDiaSemana(), horario.getStrDiaSemana() )
+                    .isEquals();
         }
+
+        return isEqual;
     }
 
 

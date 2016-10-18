@@ -3,7 +3,6 @@ package application;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import domain.Alocacao;
-import domain.Disciplina;
 import domain.Horario;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -18,7 +17,7 @@ import java.util.List;
 
 @PlanningSolution
 @XStreamAlias("alocacaoHorarios")
-public class AlocacaoHorario implements Solution<HardMediumSoftScore>{
+public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
 
 
     private HardMediumSoftScore score;
@@ -26,10 +25,10 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore>{
     @XStreamImplicit(itemFieldName = "alocacao")
     private List<Alocacao> alocacoes;
 
-    @XStreamImplicit(itemFieldName = "horarios")
+    @XStreamImplicit(itemFieldName = "horario")
     private List<Horario> horarios;
 
-    public AlocacaoHorario(){}
+    AlocacaoHorario(){}
 
     public AlocacaoHorario(List<Alocacao> alocacoes, List<Horario> horarios) {
         this.alocacoes = alocacoes;
@@ -38,16 +37,16 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore>{
 
     @Override
     public HardMediumSoftScore getScore() {
-        return this.score;
+        return score;
     }
 
     @Override
-    public void setScore(HardMediumSoftScore hardMediumSoftScore) {
-        this.score = hardMediumSoftScore;
+    public void setScore(HardMediumSoftScore score) {
+        this.score = score;
     }
 
     @Override
-    public Collection<?> getProblemFacts() {
+    public Collection<? extends Object> getProblemFacts() {
         List<Object> facts = new ArrayList<>();
 
         facts.addAll(horarios);
@@ -61,7 +60,7 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore>{
         return alocacoes;
     }
 
-    @ValueRangeProvider(id = "horarios")
+    @ValueRangeProvider(id = "horario")
     public List<Horario> getHorarios() {
         return horarios;
     }

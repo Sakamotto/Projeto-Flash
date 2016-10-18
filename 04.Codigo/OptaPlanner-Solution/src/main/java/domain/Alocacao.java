@@ -20,14 +20,15 @@ public class Alocacao {
     }
 
 
-    @PlanningVariable(valueRangeProviderRefs = {"horarios"})
+    @PlanningVariable(valueRangeProviderRefs = {"horario"})
     public Horario getHorario() {
         return horario;
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(98587969, 810426655).append(disciplina.getNome()).append(disciplina.getPeriodo()).toHashCode();
+        return new HashCodeBuilder(1450207409, -1692382659)
+                .append(disciplina.getNome()).toHashCode();
     }
 
     public void setHorario(Horario horario) {
