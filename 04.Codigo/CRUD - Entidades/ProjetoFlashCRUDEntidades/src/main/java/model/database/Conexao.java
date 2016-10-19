@@ -12,14 +12,20 @@ public class Conexao {
     private static Connection connection = null;
     private static Conexao conexao = null;
 
-    private Conexao() throws SQLException, ClassNotFoundException {
+    private Conexao() throws ClassNotFoundException {
         String url = "jdbc:postgresql://localhost:5432/projetoflash";
         String user = "postgres";
         String password = "admin123";
 
         Class.forName("org.postgresql.Driver");
 
-        connection = DriverManager.getConnection(url, user, password);
+        try {
+            connection = DriverManager.getConnection(url, user, password);
+        }
+        catch (SQLException exception) {
+            exception.printStackTrace();
+            System.out.println("Erro ao abrir conexao.");
+        }
     }
 
     public static Connection getConexao() throws SQLException, ClassNotFoundException {

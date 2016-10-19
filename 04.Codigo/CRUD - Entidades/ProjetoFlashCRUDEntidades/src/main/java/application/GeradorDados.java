@@ -30,6 +30,7 @@ public class GeradorDados {
             Endereco e = new Endereco();
             Fairy faker = Fairy.create();
             Faker faker2 = new Faker();
+            boolean professorSalvoComSucesso;
 
             p.setNome(faker.person().fullName());
             p.setEmail(faker.person().email());
@@ -46,7 +47,10 @@ public class GeradorDados {
 
             p.setEndereco(e);
 
-            PersistenciaProfessor.salvarProfessor(p);
+            professorSalvoComSucesso = PersistenciaProfessor.salvarProfessor(p);
+
+            if( !professorSalvoComSucesso )
+                i--;
 
         }
 
