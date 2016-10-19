@@ -14,21 +14,18 @@ import java.util.ArrayList;
  */
 public class PersistenciaProfessor {
 
-    public static void salvarProfessor(Professor professor) {
-        Connection con = null;
+    public static boolean salvarProfessor(Professor professor) {
+        Connection con;
+        Statement stm = null;
+        boolean professorSalvoSucesso;
+
         try {
             con = Conexao.getConexao();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        Statement stm = null;
-        try {
             stm = con.createStatement();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         String valueEndereco = "('";
         String valueProfessor = "('";
         String enderecoID;
@@ -60,13 +57,14 @@ public class PersistenciaProfessor {
             valueProfessor += professor.getMatricula() + "','";
             valueProfessor += enderecoID + "')";
 
-
             stm.execute("INSERT INTO flash.professor (nome, email, data_nascimento, rg, cpf, matricula,  endereco_id) VALUES " + valueProfessor + ";");
+
+            professorSalvoSucesso = true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            professorSalvoSucesso = false;
         }
 
-
+        return professorSalvoSucesso;
     }
 
     public static ArrayList<Professor> getProfessores() throws SQLException, ClassNotFoundException {
