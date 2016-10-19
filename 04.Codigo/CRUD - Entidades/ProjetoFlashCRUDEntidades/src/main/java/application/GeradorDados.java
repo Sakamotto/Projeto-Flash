@@ -28,8 +28,8 @@ public class GeradorDados {
         for(int i = 0 ; i < quantidade ; i++) {
             Professor p = new Professor();
             Endereco e = new Endereco();
-            Fairy faker = Fairy.create();
             Faker faker2 = new Faker();
+            Fairy faker = Fairy.create();
             boolean professorSalvoComSucesso;
 
             p.setNome(faker.person().fullName());
