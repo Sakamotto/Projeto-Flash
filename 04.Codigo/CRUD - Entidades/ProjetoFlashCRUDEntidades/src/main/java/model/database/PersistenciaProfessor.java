@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class PersistenciaProfessor {
 
-    public static boolean salvarProfessor(Professor professor) {
+    public static boolean save(Professor professor) {
         Connection con;
         Statement stm = null;
         boolean professorSalvoSucesso;
@@ -67,7 +67,7 @@ public class PersistenciaProfessor {
         return professorSalvoSucesso;
     }
 
-    public static ArrayList<Professor> getProfessores() throws SQLException, ClassNotFoundException {
+    public static ArrayList<Professor> get() throws SQLException, ClassNotFoundException {
         ArrayList<Professor> professores = new ArrayList<Professor>();
         Connection con = Conexao.getConexao();
         Statement stm = con.createStatement();
@@ -117,7 +117,7 @@ public class PersistenciaProfessor {
 
     }
 
-    public static void deleteProfessor(Professor professor) throws SQLException, ClassNotFoundException {
+    public static void delete(Professor professor) throws SQLException, ClassNotFoundException {
         Connection con = Conexao.getConexao();
         Statement stm = con.createStatement();
 
@@ -129,7 +129,7 @@ public class PersistenciaProfessor {
         stm.executeUpdate("DELETE FROM flash.professor WHERE professor.cpf='" + professor.getCpf() + "';");
     }
 
-    public static void alterProfessor(Professor professorAntigo, Professor professorNovo) throws SQLException, ClassNotFoundException {
+    public static void update(Professor professorAntigo, Professor professorNovo) throws SQLException, ClassNotFoundException {
         Connection con = Conexao.getConexao();
         Statement stm = con.createStatement();
 
@@ -153,6 +153,5 @@ public class PersistenciaProfessor {
 
 
     }
-
 
 }

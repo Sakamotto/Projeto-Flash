@@ -3,7 +3,7 @@ package model.dominio;
 /**
  * Created by danilo on 24/10/16.
  */
-public class Curso {
+public class Curso implements Cloneable {
     private String nome;
     private String regime;
     private int duracao;
@@ -46,5 +46,18 @@ public class Curso {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+
+    @Override
+    public Object clone() {
+        Object obj = null;
+
+        try {
+            obj = super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
     }
 }

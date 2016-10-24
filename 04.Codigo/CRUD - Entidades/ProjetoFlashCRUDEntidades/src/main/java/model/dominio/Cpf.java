@@ -34,10 +34,9 @@ public class Cpf {
     }
 
     public boolean validaCpf(String cpf) {
-        int sumVerificadorUm = 0,
-                sumVerificadorDois = 0;
+        int sumVerificadorUm = 0;
+        int sumVerificadorDois = 0;
         int m = 11, n = 10;
-
         boolean cpfValido;
 
         cpfValido = cpf.length() == 11;

@@ -1,9 +1,12 @@
 package model.dominio;
 
-
 public class Professor implements Cloneable {
 
-    private String nome, matricula, email, dataNascimento, rg;
+    private String nome;
+    private String matricula;
+    private String email;
+    private String dataNascimento;
+    private String rg;
     private Endereco endereco;
     private Cpf cpf;
 
