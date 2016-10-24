@@ -28,9 +28,6 @@ public class ControllerProfessor implements Initializable {
     private TableColumn<Professor, String> tabelaColunaProfessorNome, tabelaColunaProfessorCpf;
 
     @FXML
-    private Button btnCadastrarProfessor, btnEditarProfessor, btnExcluirProfessor;
-
-    @FXML
     private Label labelProfessorNome, labelProfessorMatricula, labelProfessorCpf, labelProfessorMunicipio,
                   labelProfessorBairro, labelProfessorEndereco, labelProfessorNumero, labelProfessorCep,
                   labelProfessorEmail, labelProfessorDataNascimento, labelProfessorRg;
@@ -38,11 +35,7 @@ public class ControllerProfessor implements Initializable {
     private List<Professor> listProfessor;
     private ObservableList<Professor> observableListProfessor;
 
-
-
-
     public void initialize(URL location, ResourceBundle resources) {
-        //Professor prof = ProfessorFakeFactory.getProfessorFake(ProfessorFakeFactory.Tipo.FAKE);
         try {
             listProfessor = PersistenciaProfessor.getProfessores();
         } catch (SQLException | ClassNotFoundException e) {
@@ -58,7 +51,7 @@ public class ControllerProfessor implements Initializable {
 
     }
 
-    public void carregaTableViewProfessor () {
+    private void carregaTableViewProfessor() {
         tabelaColunaProfessorNome.setCellValueFactory(new PropertyValueFactory<>("Nome"));
         tabelaColunaProfessorCpf.setCellValueFactory(new PropertyValueFactory<>("Cpf"));
 
@@ -68,7 +61,7 @@ public class ControllerProfessor implements Initializable {
     }
 
     // Recebe um professor, pois o tableView é do tipo Professor.
-    public void selecionaItemViewClientes (Professor professor) {
+    private void selecionaItemViewClientes(Professor professor) {
 
         if (professor == null) {
             professor = new Professor();
@@ -109,7 +102,6 @@ public class ControllerProfessor implements Initializable {
     public void handleButtonEditar () throws IOException, SQLException, ClassNotFoundException {
         Professor professor = tableViewProfessor.getSelectionModel().getSelectedItem();
 
-
         if (professor != null) {
             Professor professorAntigo = (Professor) professor.clone();
 
@@ -124,7 +116,6 @@ public class ControllerProfessor implements Initializable {
 
                 observableListProfessor.clear();
                 carregaTableViewProfessor();
-
 
             }
         }
@@ -163,8 +154,7 @@ public class ControllerProfessor implements Initializable {
         }
     }
 
-    public boolean showOpenCadastroProfessorDialog(Professor professor) throws IOException {
-
+    private boolean showOpenCadastroProfessorDialog(Professor professor) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getClassLoader().getResource("insercao_professor.fxml"));
 
         AnchorPane paginaDialogoCadastro = fxmlLoader.load();

@@ -24,7 +24,7 @@ public class TesteCPF {
 
     @Then("^O cpf eh invalido$")
     public void resultadoValidacaoInvalido() {
-        assertEquals(professor.getCpf(), null);
+        assertEquals(professor.getCpf(), "");
     }
 
     @Then("^O cpf eh valido$")

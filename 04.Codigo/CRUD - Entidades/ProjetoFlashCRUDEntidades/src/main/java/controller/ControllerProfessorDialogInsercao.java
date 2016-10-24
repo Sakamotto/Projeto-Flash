@@ -21,23 +21,15 @@ public class ControllerProfessorDialogInsercao implements Initializable {
                       textFieldProfessorBairro, textFieldProfessorEndereco, textFieldProfessorNumero, textFieldProfessorCep,
                       textFieldProfessorEmail, textFieldProfessorDataNascimento, textFieldProfessorRg;
 
-    @FXML
-    private Button btnSalvarProfessor, btnCancelarProfessor;
-
     private Stage dialogStage;
     private boolean btnSalvarClicado = false;
     private Professor professor;
 
-
-    public Stage getDialogStage() {
-        return dialogStage;
-    }
-
-    public void setDialogStage(Stage dialogStage) {
+    void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
-    public boolean isBtnSalvarClicado() {
+    boolean isBtnSalvarClicado() {
         return btnSalvarClicado;
     }
 
@@ -49,33 +41,28 @@ public class ControllerProfessorDialogInsercao implements Initializable {
         return professor;
     }
 
-    public void setProfessor(Professor professor) {
+    void setProfessor(Professor professor) {
         this.professor = professor;
 
-        this.textFieldProfessorNome.setText(this.professor.getNome());
-        this.textFieldProfessorEmail.setText(this.professor.getEmail());
-        this.textFieldProfessorDataNascimento.setText(this.professor.getDataNascimento());
-        this.textFieldProfessorRg.setText(this.professor.getRg());
-        this.textFieldProfessorCpf.setText(this.professor.getCpf());
-        this.textFieldProfessorMatricula.setText(this.professor.getMatricula());
-        this.textFieldProfessorMunicipio.setText(this.professor.getEndereco().getMunicipio());
-        this.textFieldProfessorBairro.setText(this.professor.getEndereco().getBairro());
-        this.textFieldProfessorEndereco.setText(this.professor.getEndereco().getEndereco());
-        this.textFieldProfessorNumero.setText(this.professor.getEndereco().getNumero());
-        this.textFieldProfessorCep.setText(this.professor.getEndereco().getCep());
+        textFieldProfessorNome.setText(professor.getNome());
+        textFieldProfessorEmail.setText(professor.getEmail());
+        textFieldProfessorDataNascimento.setText(professor.getDataNascimento());
+        textFieldProfessorRg.setText(professor.getRg());
+        textFieldProfessorCpf.setText(professor.getCpf());
+        textFieldProfessorMatricula.setText(professor.getMatricula());
+        textFieldProfessorMunicipio.setText(professor.getEndereco().getMunicipio());
+        textFieldProfessorBairro.setText(professor.getEndereco().getBairro());
+        textFieldProfessorEndereco.setText(professor.getEndereco().getEndereco());
+        textFieldProfessorNumero.setText(professor.getEndereco().getNumero());
+        textFieldProfessorCep.setText(professor.getEndereco().getCep());
 
     }
 
 
-    public void initialize(URL location, ResourceBundle resources) {
-
-
-
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
     @FXML
     public void handleButtonSalvar() {
-
         Endereco endereco = new Endereco();
         endereco.setMunicipio(textFieldProfessorMunicipio.getText());
         endereco.setBairro(textFieldProfessorBairro.getText());
@@ -83,13 +70,13 @@ public class ControllerProfessorDialogInsercao implements Initializable {
         endereco.setNumero(textFieldProfessorNumero.getText());
         endereco.setCep(textFieldProfessorCep.getText());
 
-        this.professor.setNome(textFieldProfessorNome.getText());
-        this.professor.setEmail(textFieldProfessorEmail.getText());
-        this.professor.setDataNascimento(textFieldProfessorDataNascimento.getText());
-        this.professor.setRg(textFieldProfessorRg.getText());
-        this.professor.setCpf(textFieldProfessorCpf.getText(), false);
-        this.professor.setMatricula(textFieldProfessorMatricula.getText());
-        this.professor.setEndereco(endereco);
+        professor.setNome(textFieldProfessorNome.getText());
+        professor.setEmail(textFieldProfessorEmail.getText());
+        professor.setDataNascimento(textFieldProfessorDataNascimento.getText());
+        professor.setRg(textFieldProfessorRg.getText());
+        professor.setCpf(textFieldProfessorCpf.getText(), false);
+        professor.setMatricula(textFieldProfessorMatricula.getText());
+        professor.setEndereco(endereco);
 
         btnSalvarClicado = true;
 
