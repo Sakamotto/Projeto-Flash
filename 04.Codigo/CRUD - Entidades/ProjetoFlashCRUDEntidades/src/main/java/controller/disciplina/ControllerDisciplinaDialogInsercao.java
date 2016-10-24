@@ -65,8 +65,10 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         textFieldDisciplinaPeriodo.setText(disciplina.getPeriodo());
 
         // Coloca a Área de conhecimento da disciplina com oescolhido.
-        Collections.swap(listAreaConhecimentos, 0, listAreaConhecimentos.indexOf(disciplina.getAreaConhecimento()));
-        Collections.swap(listCursos, 0, listCursos.indexOf(disciplina.getCurso().getNome()));
+        if (!disciplina.getNome().equals("") && !disciplina.getAreaConhecimento().equals("")) {
+            Collections.swap(listAreaConhecimentos, 0, listAreaConhecimentos.indexOf(disciplina.getAreaConhecimento()));
+            Collections.swap(listCursos, 0, listCursos.indexOf(disciplina.getCurso().getNome()));
+        }
 
         observableListCurso = FXCollections.observableArrayList(listCursos);
         choiceBoxCurso.setItems(observableListCurso);
