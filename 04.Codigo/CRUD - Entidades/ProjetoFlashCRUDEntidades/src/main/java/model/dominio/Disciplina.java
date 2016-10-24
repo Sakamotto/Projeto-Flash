@@ -1,19 +1,21 @@
 package model.dominio;
 
+import java.util.zip.CRC32;
+
 /**
  * Created by danilo on 24/10/16.
  */
-public class Disciplina {
+public class Disciplina implements Cloneable {
     private String nome;
-    private int cargaHoraria;
-    private int periodo;
+    private String cargaHoraria;
+    private String periodo;
     private Curso curso;
     private String areaConhecimento;
 
     public Disciplina() {
         nome = "";
-        cargaHoraria = 0;
-        periodo = 0;
+        cargaHoraria = "";
+        periodo = "";
         curso = new Curso();
         areaConhecimento = "";
     }
@@ -26,24 +28,28 @@ public class Disciplina {
         this.nome = nome;
     }
 
-    public int getCargaHoraria() {
+    public String getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(int cargaHoraria) {
+    public void setCargaHoraria(String cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public int getPeriodo() {
+    public String getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(int periodo) {
+    public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
 
     public Curso getCurso() {
         return curso;
+    }
+
+    public String getCursoSigla() {
+        return curso.getSigla();
     }
 
     public void setCurso(Curso curso) {
@@ -56,5 +62,21 @@ public class Disciplina {
 
     public void setAreaConhecimento(String areaConhecimento) {
         this.areaConhecimento = areaConhecimento;
+    }
+
+    @Override
+    public Object clone() {
+        Object obj = null;
+
+        try {
+            obj = super.clone();
+
+            ( (Disciplina) obj).setCurso( (Curso) this.getCurso().clone() );
+
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
     }
 }

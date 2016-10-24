@@ -1,15 +1,21 @@
 package application;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Main extends Application {
-
+public class Main extends Application implements Initializable {
+    @FXML
+    private AnchorPane anchorPane;
     private Stage primaryStage;
 
     @Override
@@ -24,11 +30,26 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("index_page.fxml"));
         Scene scene = new Scene(root);
 
-        this.primaryStage.setTitle("Escalonador de Horários");
-        this.primaryStage.setScene(scene);
-        this.primaryStage.setResizable(false);
-        this.primaryStage.show();
+        primaryStage.setTitle("Escalonador de Horários");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {}
+
+    @FXML
+    public void handleMenuItemCadastrosProfessor() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("professor/cadastro_professor.fxml"));
+        this.anchorPane.getChildren().setAll(anchorPane);
+    }
+
+    @FXML
+    public void handleMenuItemCadastrosDisicplina() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("disciplina/cadastro_disciplina.fxml"));
+        this.anchorPane.getChildren().setAll(anchorPane);
     }
 
     public static void main(String[] args) {

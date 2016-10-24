@@ -1,5 +1,6 @@
-package controller;
+package controller.professor;
 
+import controller.exception.AllertExceptionController;
 import model.database.PersistenciaProfessor;
 import model.dominio.Professor;
 import javafx.collections.FXCollections;
@@ -20,24 +21,29 @@ import java.util.*;
 
 
 public class ControllerProfessor implements Initializable {
+    @FXML private TableView<Professor> tableViewProfessor;
 
-    @FXML
-    private TableView<Professor> tableViewProfessor;
+    @FXML private TableColumn<Professor, String> tabelaColunaProfessorNome;
+    @FXML private TableColumn<Professor, String> tabelaColunaProfessorCpf;
 
-    @FXML
-    private TableColumn<Professor, String> tabelaColunaProfessorNome, tabelaColunaProfessorCpf;
-
-    @FXML
-    private Label labelProfessorNome, labelProfessorMatricula, labelProfessorCpf, labelProfessorMunicipio,
-                  labelProfessorBairro, labelProfessorEndereco, labelProfessorNumero, labelProfessorCep,
-                  labelProfessorEmail, labelProfessorDataNascimento, labelProfessorRg;
+    @FXML private Label labelProfessorNome;
+    @FXML private Label labelProfessorMatricula;
+    @FXML private Label labelProfessorCpf;
+    @FXML private Label labelProfessorMunicipio;
+    @FXML private Label labelProfessorBairro;
+    @FXML private Label labelProfessorEndereco;
+    @FXML private Label labelProfessorNumero;
+    @FXML private Label labelProfessorCep;
+    @FXML private Label labelProfessorEmail;
+    @FXML private Label labelProfessorDataNascimento;
+    @FXML private Label labelProfessorRg;
 
     private List<Professor> listProfessor;
     private ObservableList<Professor> observableListProfessor;
 
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            listProfessor = PersistenciaProfessor.getProfessores();
+            listProfessor = PersistenciaProfessor.get();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -46,7 +52,7 @@ public class ControllerProfessor implements Initializable {
 
         // Abaixo temos uma função lambda em java. Do lado esquerdo é os parâmetros e do lado direito é a função.
         tableViewProfessor.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selecionaItemViewClientes(newValue)
+                (observable, oldValue, newValue) -> selecionaItemViewProfessor(newValue)
         );
 
     }
@@ -57,11 +63,10 @@ public class ControllerProfessor implements Initializable {
 
         observableListProfessor = FXCollections.observableArrayList(listProfessor);
         tableViewProfessor.setItems(observableListProfessor);
-
     }
 
     // Recebe um professor, pois o tableView é do tipo Professor.
-    private void selecionaItemViewClientes(Professor professor) {
+    private void selecionaItemViewProfessor(Professor professor) {
 
         if (professor == null) {
             professor = new Professor();
@@ -84,13 +89,13 @@ public class ControllerProfessor implements Initializable {
     @FXML
     public void handleButtonCadastrar () throws IOException, SQLException, ClassNotFoundException {
         Professor professor = new Professor();
-        boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor);
+        boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor, "Cadastro");
 
         if (btnSalvarClicado) {
             // System.out.println("Salvando professor no banco de dados.");
 
             listProfessor.add(professor);
-            PersistenciaProfessor.salvarProfessor(professor);
+            PersistenciaProfessor.save(professor);
 
             // Recarrega a página de cadastro de professor.
             carregaTableViewProfessor();
@@ -105,14 +110,14 @@ public class ControllerProfessor implements Initializable {
         if (professor != null) {
             Professor professorAntigo = (Professor) professor.clone();
 
-            boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor);
+            boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor, "Edição");
 
             if (btnSalvarClicado) {
                 System.out.println("Alterando professor no banco de dados.");
 
                 // Recarrega a página de cadastro de professor.
 
-                PersistenciaProfessor.alterProfessor(professorAntigo, professor);
+                PersistenciaProfessor.update(professorAntigo, professor);
 
                 observableListProfessor.clear();
                 carregaTableViewProfessor();
@@ -120,27 +125,24 @@ public class ControllerProfessor implements Initializable {
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, selecione um professor.");
-            alert.show();
+            AllertExceptionController.noItemSelected("Por favor, selecione um professor.");
         }
 
     }
 
     @FXML
-    public void handleButtonExcluir () throws SQLException, ClassNotFoundException {
+    public void handleButtonExcluir() throws SQLException, ClassNotFoundException {
         Professor professor = tableViewProfessor.getSelectionModel().getSelectedItem();
 
         if (professor != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("Atenção. Esse professor será deletado. Deseja mesmo fazer isso?");
-            alert.showAndWait();
+            boolean deletar;
+            deletar = AllertExceptionController.confirmation("Atenção. Esse professor será deletado. Deseja mesmo fazer isso?");
 
-            if (alert.getResult() == ButtonType.OK) {
+            if (deletar) {
                 System.out.println("Deletando professor no banco de dados.");
 
                 listProfessor.remove(professor);
-                PersistenciaProfessor.deleteProfessor(professor);
+                PersistenciaProfessor.delete(professor);
 
 
                 // Recarrega a página de cadastro de professor.
@@ -148,20 +150,18 @@ public class ControllerProfessor implements Initializable {
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, selecione um professor.");
-            alert.show();
+            AllertExceptionController.noItemSelected("Por favor, selecione um professor.");
         }
     }
 
-    private boolean showOpenCadastroProfessorDialog(Professor professor) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getClassLoader().getResource("insercao_professor.fxml"));
+    private boolean showOpenCadastroProfessorDialog(Professor professor, String action) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerProfessorDialogInsercao.class.getClassLoader().getResource("professor/insercao_professor.fxml"));
 
         AnchorPane paginaDialogoCadastro = fxmlLoader.load();
 
         // Cria um Estágio de Diálogo.
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Cadastro de Cliente");
+        dialogStage.setTitle(action + " de Professor");
         Scene scene = new Scene(paginaDialogoCadastro);
         dialogStage.setScene(scene);
 

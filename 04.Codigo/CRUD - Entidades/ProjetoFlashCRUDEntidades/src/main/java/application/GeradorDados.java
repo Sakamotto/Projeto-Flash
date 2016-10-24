@@ -47,7 +47,7 @@ public class GeradorDados {
 
             p.setEndereco(e);
 
-            professorSalvoComSucesso = PersistenciaProfessor.salvarProfessor(p);
+            professorSalvoComSucesso = PersistenciaProfessor.save(p);
 
             if( !professorSalvoComSucesso )
                 i--;

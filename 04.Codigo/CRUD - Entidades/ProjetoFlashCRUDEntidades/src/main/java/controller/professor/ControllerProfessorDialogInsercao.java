@@ -1,4 +1,4 @@
-package controller;
+package controller.professor;
 
 import model.dominio.Endereco;
 import model.dominio.Professor;
@@ -16,10 +16,17 @@ import java.util.ResourceBundle;
  */
 public class ControllerProfessorDialogInsercao implements Initializable {
 
-    @FXML
-    private TextField textFieldProfessorNome, textFieldProfessorMatricula, textFieldProfessorCpf, textFieldProfessorMunicipio,
-                      textFieldProfessorBairro, textFieldProfessorEndereco, textFieldProfessorNumero, textFieldProfessorCep,
-                      textFieldProfessorEmail, textFieldProfessorDataNascimento, textFieldProfessorRg;
+    @FXML private TextField textFieldProfessorNome;
+    @FXML private TextField textFieldProfessorMatricula;
+    @FXML private TextField textFieldProfessorCpf;
+    @FXML private TextField textFieldProfessorMunicipio;
+    @FXML private TextField textFieldProfessorBairro;
+    @FXML private TextField textFieldProfessorEndereco;
+    @FXML private TextField textFieldProfessorNumero;
+    @FXML private TextField textFieldProfessorCep;
+    @FXML private TextField textFieldProfessorEmail;
+    @FXML private TextField textFieldProfessorDataNascimento;
+    @FXML private TextField textFieldProfessorRg;
 
     private Stage dialogStage;
     private boolean btnSalvarClicado = false;
