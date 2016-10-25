@@ -6,6 +6,9 @@ script: junit Teste.java
 
 notifications:
   slack: bsi-ifes:nECNqvrLZq1fjJz6C88BjfXk
-  
+
+before_script:
+  - mvn clean install sonar:sonar -Dsonar.host.url=https:/sonarqube.com -Dsonar.login=${c85312f9026df6e3a31e017fa5c14b0c43258993}
+
 script:
   - sonar-scanner -Dsonar.login=$c85312f9026df6e3a31e017fa5c14b0c43258993 
