@@ -4,8 +4,6 @@ java:
 jdk:
   - oraclejdk8
 
-script: junit Teste.java
-
 addons:
   sonarqube: true
 env:
@@ -17,7 +15,8 @@ before_script:
 
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.login=$c85312f9026df6e3a31e017fa5c14b0c43258993
+  - cd 04.Codigo/OptaPlanner-Solution
+  - mvn clean install sonar:sonar -Dsonar.login=c85312f9026df6e3a31e017fa5c14b0c43258993
 
 notifications:
   slack: bsi-ifes:nECNqvrLZq1fjJz6C88BjfXk
