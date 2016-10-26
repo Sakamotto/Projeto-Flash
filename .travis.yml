@@ -1,8 +1,19 @@
 language: java
 java:
   - 1.8
+jdk:
+  - oraclejdk8
 
 script: junit Teste.java
+
+addons:
+  sonarqube: true
+env:
+  global:
+    - secure: SONAR_TOKEN=c85312f9026df6e3a31e017fa5c14b0c43258993
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
+  - mvn clean install sonar:sonar -Dsonar.login=$c85312f9026df6e3a31e017fa5c14b0c43258993
 
 notifications:
   slack: bsi-ifes:nECNqvrLZq1fjJz6C88BjfXk
