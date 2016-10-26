@@ -9,6 +9,8 @@
     <version>1.0</version>
          
     <properties>
+	<maven.test.skip>false</maven.test.skip>
+	    
         <!--- Configuracao do Sonar-->
 
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
