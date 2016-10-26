@@ -7,6 +7,17 @@
     <groupId>br.edu.ifes</groupId>
     <artifactId>treinoOptaPlanner</artifactId>
     <version>1.0</version>
+         
+    <properties>
+        <!--- Configuracao do Sonar-->
+
+        <sonar.host.url>https://sonarqube.com</sonar.host.url>
+	<sonar.login>c85312f9026df6e3a31e017fa5c14b0c43258993</sonar.login>    
+
+        <!-- Codificacao -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>    
+    </properties>
 
     <dependencies>
         <dependency>
