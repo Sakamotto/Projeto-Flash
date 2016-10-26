@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.ControllerProfessorDialogInsercao">
+  <children>
+    <GridPane layoutX="36.0" layoutY="92.0" prefWidth="592.0">
+      <children>
+        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Matrícula:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="CPF:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label text="Município:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="Bairro:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <Label text="Endereço:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <Label text="Número:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+        <Label text="CEP:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+        <TextField fx:id="textFieldProfessorNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="textFieldProfessorMatricula" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField fx:id="textFieldProfessorCpf" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="textFieldProfessorMunicipio" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField fx:id="textFieldProfessorBairro" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField fx:id="textFieldProfessorEndereco" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <TextField fx:id="textFieldProfessorNumero" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <TextField fx:id="textFieldProfessorCep" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+          <GridPane.margin>
+            <Insets />
+          </GridPane.margin>
+        </TextField>
+        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="textFieldProfessorEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="textFieldProfessorDataNascimento" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="textFieldProfessorRg" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="Data de Nascimento:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="RG:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="148.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="444.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label layoutX="129.0" layoutY="16.0" text="Cadastrar Professor">
+      <font>
+        <Font size="36.0" />
+      </font>
+    </Label>
+    <Group id="Group" layoutX="468.0" layoutY="441.0">
+      <children>
+        <Button fx:id="btnSalvarProfessor" defaultButton="true" layoutX="0.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonSalvar" text="Salvar" textAlignment="CENTER" />
+        <Button fx:id="btnCancelarProfessor" cancelButton="true" layoutX="80.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
+      </children>
+    </Group>
+  </children>
+</AnchorPane>
