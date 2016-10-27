@@ -110,7 +110,7 @@ public class ControllerProfessor implements Initializable {
         if (professor != null) {
             Professor professorAntigo = (Professor) professor.clone();
 
-            boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor, "Edição");
+            boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor, "Edicao");
 
             if (btnSalvarClicado) {
                 System.out.println("Alterando professor no banco de dados.");
@@ -136,7 +136,7 @@ public class ControllerProfessor implements Initializable {
 
         if (professor != null) {
             boolean deletar;
-            deletar = AllertExceptionController.confirmation("Atenção. Esse professor será deletado. Deseja mesmo fazer isso?");
+            deletar = AllertExceptionController.confirmation("Atencao. Esse professor sera deletado. Deseja mesmo fazer isso?");
 
             if (deletar) {
                 System.out.println("Deletando professor no banco de dados.");

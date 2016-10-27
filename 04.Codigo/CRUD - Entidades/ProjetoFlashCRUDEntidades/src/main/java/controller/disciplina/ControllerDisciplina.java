@@ -8,18 +8,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.database.PersistenciaDisciplina;
-import model.dominio.Curso;
 import model.dominio.Disciplina;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -115,7 +115,7 @@ public class ControllerDisciplina implements Initializable {
         if (disciplina != null) {
             Disciplina disciplinaAntiga = (Disciplina) disciplina.clone();
 
-            boolean btnSalvarClicado = showOpenCadastroDisciplinaDialog(disciplina, "Edição");
+            boolean btnSalvarClicado = showOpenCadastroDisciplinaDialog(disciplina, "Edicao");
 
             if (btnSalvarClicado) {
                 System.out.println("Alterando professor no banco de dados.");
@@ -141,7 +141,7 @@ public class ControllerDisciplina implements Initializable {
 
         if (disciplina != null) {
             boolean deletar;
-            deletar = AllertExceptionController.confirmation("Atenção. Essa disciplina será deletada. Deseja mesmo fazer isso?");
+            deletar = AllertExceptionController.confirmation("Atencao. Deseja mesmo excluir essa disciplina?");
 
             if (deletar) {
                 System.out.println("Deletando disciplina no banco de dados.");

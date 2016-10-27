@@ -30,7 +30,7 @@ public class Main extends Application implements Initializable {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("index_page.fxml"));
         Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Escalonador de Horários");
+        primaryStage.setTitle("Escalonador de Horarios");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
