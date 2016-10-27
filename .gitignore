@@ -13,7 +13,7 @@
 *.html
 *.*~
 
-#.idea/
+.idea/
 #target/
 
 .settings/
