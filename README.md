@@ -23,7 +23,7 @@ Os setores administrativos precisam de horários para cuidar dos espaços, inclu
 * Cristian da Silva Anterio
 * Danilo de Oliveira
 
-### Relatório
+## Relatório
 
 De acordo com as especificações, o trabalho deve conter um relatório. Para elaborar e armazenar o relatório, utilizamos a Wiki do Github. Para acessar o relatório, basta clicar na aba Wiki desse repositório ou clicar nesse [link](https://github.com/sakamotto/projeto-flash/wiki).
 
