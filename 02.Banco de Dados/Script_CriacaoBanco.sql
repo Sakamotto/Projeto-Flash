@@ -1,4 +1,16 @@
 
+CREATE SEQUENCE flash.semestre_semestre_id_seq_1;
+
+CREATE TABLE flash.semestre (
+                semestre_id INTEGER NOT NULL DEFAULT nextval('flash.semestre_semestre_id_seq_1'),
+                ano INTEGER NOT NULL,
+                semestre INTEGER NOT NULL,
+                CONSTRAINT semestre_id_pk PRIMARY KEY (semestre_id)
+);
+
+
+ALTER SEQUENCE flash.semestre_semestre_id_seq_1 OWNED BY flash.semestre.semestre_id;
+
 CREATE SEQUENCE flash.tipo_espaco_tipo_id_seq;
 
 CREATE TABLE flash.tipo_espaco (
@@ -112,10 +124,10 @@ CREATE TABLE flash.disciplina (
 
 ALTER SEQUENCE flash.disciplina_disciplina_id_seq OWNED BY flash.disciplina.disciplina_id;
 
-CREATE TABLE flash.requisito_curso (
+CREATE TABLE flash.requisito_periodo (
                 disciplina_id INTEGER NOT NULL,
                 periodo INTEGER NOT NULL,
-                CONSTRAINT requisito_curso_pk PRIMARY KEY (disciplina_id, periodo)
+                CONSTRAINT requisito_periodo_pk PRIMARY KEY (disciplina_id, periodo)
 );
 
 
@@ -163,11 +175,19 @@ CREATE TABLE flash.alocacao (
                 dia_semana_id INTEGER NOT NULL,
                 espaco_id INTEGER NOT NULL,
                 professor_disciplina_id INTEGER NOT NULL,
+                semestre_id INTEGER NOT NULL,
                 CONSTRAINT alocacao_pk PRIMARY KEY (alocacao_id)
 );
 
 
 ALTER SEQUENCE flash.alocacao_alocacao_id_seq OWNED BY flash.alocacao.alocacao_id;
+
+ALTER TABLE flash.alocacao ADD CONSTRAINT semestre_alocacao_fk
+FOREIGN KEY (semestre_id)
+REFERENCES flash.semestre (semestre_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
 
 ALTER TABLE flash.espaco ADD CONSTRAINT tipo_espaco_fk
 FOREIGN KEY (tipo_id)
@@ -246,7 +266,7 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE flash.requisito_curso ADD CONSTRAINT disciplina_requisito_curso_fk
+ALTER TABLE flash.requisito_periodo ADD CONSTRAINT disciplina_requisito_curso_fk
 FOREIGN KEY (disciplina_id)
 REFERENCES flash.disciplina (disciplina_id)
 ON DELETE NO ACTION
