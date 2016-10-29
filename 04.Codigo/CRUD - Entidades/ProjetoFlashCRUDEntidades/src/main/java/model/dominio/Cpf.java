@@ -4,7 +4,7 @@ package model.dominio;
  * Created by danilo on 23/10/16.
  */
 public class Cpf {
-    String cpf;
+    private String cpf;
 
     public Cpf(){
         cpf = "";
