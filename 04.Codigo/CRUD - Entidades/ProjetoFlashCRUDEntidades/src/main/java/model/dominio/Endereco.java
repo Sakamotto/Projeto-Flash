@@ -4,7 +4,11 @@ package model.dominio;
  * Created by danilo on 24/09/16.
  */
 public class Endereco implements Cloneable {
-    String municipio, bairro, endereco, numero, cep;
+    private String municipio;
+    private String bairro;
+    private String endereco;
+    private String numero;
+    private String cep;
 
     public Endereco() {
         this.municipio = "";
