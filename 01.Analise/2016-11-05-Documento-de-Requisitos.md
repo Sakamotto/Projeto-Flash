@@ -40,7 +40,7 @@ Cristian da Silva Anterio</td>
 
 O propósito do processo Gerência de Requisitos é gerenciar os requisitos do produto e dos componentes do produto do projeto e identificar inconsistências entre os requisitos, os planos do projeto e os produtos de trabalho do projeto (MPS.BR, 2012).
 
-Esse documento está dividido em duas partes, sendo que a primeira é mais alto nível e possui a seção 2 que contém uma motivação a respeito do que deu origem ao projeto, a seção 3 possui o Minimundo descrevendo o contexto e as informações colhidas em entrevistas com o usuário e a seção 4 possui os requisitos levantados, bem como as histórias de usuário, que é um artefato utilizado na metodologia ágil SCRUM. A segunda parte é a especificação de requisitos e possui a seção 1 que contém diagramas estruturais e a seção 2 que contém um dicionário de dados.
+Esse documento está dividido da seguinte forma: a parte "*Descrição do Propósito do Sistema*" contém uma motivação a respeito do que deu origem ao projeto e o propósito do sistema, a parte do “*Minimundo*” descreve o contexto e as informações colhidas em entrevistas com o usuário e a parte dos “*requisitos*” possui tabelas dos requisitos levantados.
 
 ### **Descrição do Propósito do Sistema**
 
