@@ -76,3 +76,93 @@ Com relação ao espaço de alocação:
 
 4. É necessário que existam horários vagos para que um professor possa usar sempre que preciso.
 
+### **Requisitos Funcionais**
+
+<table>
+  <tr>
+    <td>Identificador</td>
+    <td>Descrição</td>
+    <td>Prioridade</td>
+    <td>Depende de</td>
+  </tr>
+  <tr>
+    <td>RF01</td>
+    <td>O sistema deve permitir o registro e o controle de professores, disciplinas, turmas, área de conhecimento e curso.</td>
+    <td>Alta</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>RF02</td>
+    <td>O sistema deve construir um ou mais horários respeitando as restrições impostas</td>
+    <td>Alta</td>
+    <td>RF01, RF03, RN01, RN02, RN03, RN04, RN05, RN06, RN07</td>
+  </tr>
+  <tr>
+    <td>RF03</td>
+    <td>O sistema deve permitir o cadastro de professores em disciplinas.</td>
+    <td>Alta</td>
+    <td>RF01</td>
+  </tr>
+  <tr>
+    <td>RF04</td>
+    <td>O sistema deve permitir o registro de relações entre disciplinas.</td>
+    <td>Alta</td>
+    <td>RF01</td>
+  </tr>
+</table>
+
+
+### **Regras de Negócio**
+
+<table>
+  <tr>
+    <td>Identificador</td>
+    <td>Descrição</td>
+    <td>Prioridade</td>
+    <td>Depende de</td>
+  </tr>
+  <tr>
+    <td>RN01</td>
+    <td>Um professor não pode lecionar no último horário de um dia e no primeiro horário do dia seguinte.</td>
+    <td>Alta</td>
+    <td>RF01</td>
+  </tr>
+  <tr>
+    <td>RN02</td>
+    <td>Um professor não pode ter um intervalo maior que 3 horas entre uma aula e outra.</td>
+    <td>Alta</td>
+    <td>RF01</td>
+  </tr>
+  <tr>
+    <td>RN03</td>
+    <td>As aulas da graduação devem terminar no máximo às 13:20.</td>
+    <td>Média</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>RN04</td>
+    <td>Os primeiros horários do dia são preferenciais para professores que moram mais próximo do campus.</td>
+    <td>Média</td>
+    <td>RF01</td>
+  </tr>
+  <tr>
+    <td>RN05</td>
+    <td>Disciplinas que tem relação de pré-requisito ou são equivalentes (Ex.: duas turmas de PROG1. Logo são equivalentes e são do mesmo período) devem estar alocadas no mesmo horário.</td>
+    <td>Média</td>
+    <td>RF04</td>
+  </tr>
+  <tr>
+    <td>RN06</td>
+    <td>Não pode haver duas disciplinas do mesmo período no mesmo horário</td>
+    <td>Alta</td>
+    <td>RF01</td>
+  </tr>
+  <tr>
+    <td>RN07</td>
+    <td>É desejável que professores que moram mais longe do campus não estejam alocados após às 15 horas.</td>
+    <td>Baixa</td>
+    <td>RF01</td>
+  </tr>
+</table>
+
+
