@@ -44,13 +44,13 @@ Esse documento está dividido em duas partes, sendo que a primeira é mais alto 
 
 ### **Descrição do Propósito do Sistema**
 
-	Como já mencionado, o coordenador do curso BSI tem um grande problema na hora de distribuir a carga horária dos professores de uma determinada disciplina em um determinado espaço (laboratório/sala de aula), e precisa analisar diversos fatores internos e externos que impactam nesse processo.
+Como já mencionado, o coordenador do curso BSI tem um grande problema na hora de distribuir a carga horária dos professores de uma determinada disciplina em um determinado espaço (laboratório/sala de aula), e precisa analisar diversos fatores internos e externos que impactam nesse processo.
 
 O processo utilizado atualmente não é 100% eficaz e possui falhas. Quando essas falhas ocorrem, ele precisa alterar manualmente as alocações de horários, o que torna o processo ainda mais difícil. Sendo assim, o propósito do sistema é possibilitar o escalonamento de horários à disciplinas que obedeçam a maior parte possível das restrições de forma que minimize ao máximo ou não necessite de intervenção manual.
 
 ### **Descrição do Minimundo**
 
-	O coordenador de curso de Bacharelado em Sistemas de Informação do Ifes Campus Serra enfrenta problemas para elaborar o horário de cada semestre para os três cursos (técnico e graduação), visto que esta é uma tarefa muito complexa na qual deve-se levar em conta diferentes regras e restrições. Além disso tais questões, envolvem a disponibilidade de professores, salas, laboratórios, requisições dos alunos e cessões ou solicitações de docentes para (ou provenientes da) Automação e Cefor. Atualmente existe um software que o apoia. Porém, o atual software não ajuda muito, pois não atende algumas restrições.
+O coordenador de curso de Bacharelado em Sistemas de Informação do Ifes Campus Serra enfrenta problemas para elaborar o horário de cada semestre para os três cursos (técnico e graduação), visto que esta é uma tarefa muito complexa na qual deve-se levar em conta diferentes regras e restrições. Além disso tais questões, envolvem a disponibilidade de professores, salas, laboratórios, requisições dos alunos e cessões ou solicitações de docentes para (ou provenientes da) Automação e Cefor. Atualmente existe um software que o apoia. Porém, o atual software não ajuda muito, pois não atende algumas restrições.
 
 Para alocar uma disciplina, o professor deve ter disponibilidade para atendê-la observadas as seguintes restrições:
 
