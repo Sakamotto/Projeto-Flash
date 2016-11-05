@@ -6,7 +6,7 @@ permalink: /documento-de-requisitos/
 source-id: 1LXSAEiQU7f79dGxXmbvIrhqMUyEqQr0UCphLhxwZlpY
 published: true
 ---
-**Documento de Requisitos**
+Documento de Requisitos
 
 **Projeto**: Flash
 
