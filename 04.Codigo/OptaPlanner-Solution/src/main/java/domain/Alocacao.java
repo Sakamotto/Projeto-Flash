@@ -1,12 +1,15 @@
 package domain;
 
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 @PlanningEntity
+@XStreamAlias("Alocacao")
 public class Alocacao {
+
     private Horario horario;
     private Disciplina disciplina;
     private Professor professor;

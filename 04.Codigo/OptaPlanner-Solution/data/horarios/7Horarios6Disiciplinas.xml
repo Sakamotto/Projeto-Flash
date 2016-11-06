@@ -1,0 +1,38 @@
+<AlocacaoHorario id="1">
+    <alocacoes id="2">
+        <Alocacao id="3">
+            <disciplina id="4">
+                <nome>Calculo 1</nome>
+                <periodo>1</periodo>
+                <cargaHorariaSemanal>60</cargaHorariaSemanal>
+            </disciplina>
+        </Alocacao>
+
+        <Alocacao id="5">
+            <disciplina id="6">
+                <nome>Sociologia 1</nome>
+                <periodo>1</periodo>
+                <cargaHorariaSemanal>30</cargaHorariaSemanal>
+            </disciplina>
+        </Alocacao>
+    </alocacoes>
+
+
+    <horarios id="7">
+        <Horario id="8">
+            <horaInicio>7</horaInicio>
+            <minutoInicio>30</minutoInicio>
+            <horaFim>9</horaFim>
+            <minutoFim>20</minutoFim>
+            <diaSemana>SEGUNDA</diaSemana>
+        </Horario>
+
+        <Horario id="9">
+            <horaInicio>9</horaInicio>
+            <minutoInicio>40</minutoInicio>
+            <horaFim>11</horaFim>
+            <minutoFim>30</minutoFim>
+            <diaSemana>SEGUNDA</diaSemana>
+        </Horario>
+    </horarios>
+</AlocacaoHorario>
