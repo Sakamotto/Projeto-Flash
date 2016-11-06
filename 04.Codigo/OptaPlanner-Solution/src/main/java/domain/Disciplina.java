@@ -1,5 +1,6 @@
 package domain;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -7,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
+@XStreamAlias("Disciplina")
 public class Disciplina {
 
     private String nome;

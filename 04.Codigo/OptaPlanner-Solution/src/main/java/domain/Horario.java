@@ -1,5 +1,6 @@
 package domain;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
  */
 
 
+@XStreamAlias("Horario")
 public class Horario {
 
     public enum DiaSemana {DOMINGO, SEGUNDA, TERCA, QUARTA, QUINTA, SEXTA, SABADO}
