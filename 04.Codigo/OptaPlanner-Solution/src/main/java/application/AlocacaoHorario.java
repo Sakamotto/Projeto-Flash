@@ -1,6 +1,7 @@
 package application;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import domain.Alocacao;
 import domain.Horario;
@@ -9,6 +10,8 @@ import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
+import org.optaplanner.core.impl.score.buildin.hardmediumsoft.HardMediumSoftScoreDefinition;
+import org.optaplanner.persistence.xstream.impl.score.XStreamScoreConverter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,16 +19,14 @@ import java.util.List;
 
 
 @PlanningSolution
-@XStreamAlias("alocacaoHorarios")
+@XStreamAlias("AlocacaoHorario")
 public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
 
 
+    @XStreamConverter(value = XStreamScoreConverter.class, types = {HardMediumSoftScoreDefinition.class})
     private HardMediumSoftScore score;
 
-    @XStreamImplicit(itemFieldName = "alocacao")
     private List<Alocacao> alocacoes;
-
-    @XStreamImplicit(itemFieldName = "horario")
     private List<Horario> horarios;
 
     AlocacaoHorario(){}
