@@ -34,5 +34,3 @@ CREATE OR REPLACE FUNCTION percent_prof_horario(horarios_id VARIADIC INT[]) RETU
     END;
 
 $$ LANGUAGE PLPGSQL;
-
-SELECT percent_prof(0, 1, 2, 3)
