@@ -1,5 +1,5 @@
 ﻿set schema 'flash';
-
+--- Assertion #1
 CREATE OR REPLACE FUNCTION horarios_unicos() RETURNS TRIGGER AS $$
 	BEGIN
 		IF EXISTS (
@@ -16,6 +16,21 @@ CREATE OR REPLACE FUNCTION horarios_unicos() RETURNS TRIGGER AS $$
 	END;
 $$ LANGUAGE PLPGSQL;
 
+--- Assertion #2
+
 CREATE TRIGGER horarios_unicos BEFORE INSERT OR UPDATE ON horario
 	FOR EACH ROW EXECUTE PROCEDURE horarios_unicos();
+
+CREATE OR REPLACE FUNCTION not_matriculas_iguais() RETURNS TRIGGER AS $$
+	BEGIN
+		IF EXISTS (SELECT matricula FROM professor WHERE matricula = NEW.matricula) THEN
+			RAISE EXCEPTION 'A matrícula % já existe!', NEW.matricula;
+		END IF;
+		RETURN NULL;
+	END
+$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER not_matriculas_iguais
+AFTER INSERT OR UPDATE ON flash.professor
+FOR EACH ROW EXECUTE PROCEDURE not_matriculas_iguais();
 
