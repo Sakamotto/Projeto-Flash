@@ -18,7 +18,6 @@ public class Resolvedor {
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(Resolvedor.class);
 
-
     public static void benchMark() {
         PlannerBenchmarkFactory plannerBenchmarkFactory = PlannerBenchmarkFactory.createFromXmlResource(
                 "solver/benchmark/horariosBenchmarkConfig.xml");
