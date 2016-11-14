@@ -15,7 +15,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     protected static Session session;
     protected static Transaction transaction;
 
-    protected void initializeDAO() {
+    protected void initializeTransaction() {
 
         if (session == null)
             session = HibernateUtil.getSession();
@@ -24,7 +24,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         transaction.begin();
     }
 
-    protected void finalizeDAO() {
+    protected void finalizeTransaction() {
         session.flush();
         transaction.commit();
         // session.close();
@@ -32,52 +32,52 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @Override
     public List<T> listar(Class clazz) {
-        initializeDAO();
+        initializeTransaction();
 
         Criteria getAll = session.createCriteria(clazz);
         Hibernate.initialize(clazz);
         List<T> listProfessores = getAll.list();
 
-        finalizeDAO();
+        finalizeTransaction();
         return listProfessores;
     }
 
 
     @Override
     public T recuperar(Class clazz, Long id) {
-        initializeDAO();
+        initializeTransaction();
 
         T object = (T) session.load(clazz, id);
         Hibernate.initialize(clazz);
 
-        finalizeDAO();
+        finalizeTransaction();
         return object;
     }
 
     @Override
     public void deletar(T object) {
-        initializeDAO();
+        initializeTransaction();
 
         session.delete(object);
 
-        finalizeDAO();
+        finalizeTransaction();
     }
 
     @Override
     public void alterar(T object) {
-        initializeDAO();
+        initializeTransaction();
 
         session.update(object);
 
-        finalizeDAO();
+        finalizeTransaction();
     }
 
     @Override
     public void inserir(T object) {
-        initializeDAO();
+        initializeTransaction();
 
         session.save(object);
 
-        finalizeDAO();
+        finalizeTransaction();
     }
 }
