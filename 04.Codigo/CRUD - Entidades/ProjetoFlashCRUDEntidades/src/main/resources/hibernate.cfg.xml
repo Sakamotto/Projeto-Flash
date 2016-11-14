@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/projetoflash</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">admin123</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <mapping resource="hbm/Professor.hbm.xml"/>
+        <mapping resource="hbm/Endereco.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

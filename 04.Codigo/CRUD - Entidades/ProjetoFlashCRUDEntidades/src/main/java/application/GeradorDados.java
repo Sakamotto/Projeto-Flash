@@ -3,6 +3,8 @@ package application;
 import com.github.javafaker.Faker;
 import com.mifmif.common.regex.Generex;
 import io.codearte.jfairy.Fairy;
+import model.DAO.ProfessorDAO;
+import model.DAO.ProfessorDAOImpl;
 import model.database.PersistenciaProfessor;
 import model.dominio.Endereco;
 import model.dominio.Professor;
@@ -17,7 +19,7 @@ public class GeradorDados {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        gerarProfessores(3000);
+        gerarProfessores(5);
 
 
     }
@@ -32,25 +34,29 @@ public class GeradorDados {
             Fairy faker = Fairy.create();
             boolean professorSalvoComSucesso;
 
-            p.setNome(faker.person().fullName());
-            p.setEmail(faker.person().email());
-            p.setDataNascimento(faker.person().dateOfBirth().toString());
-            p.setRg(faker.person().nationalIdentityCardNumber());
+            p.setNome(faker.person().fullName().replace("'", ""));
+            p.setEmail(faker.person().email().replace("'", ""));
+            p.setDataNascimento(faker.person().dateOfBirth().toString().replace("'", ""));
+            p.setRg(faker.person().nationalIdentityCardNumber().replace("'", ""));
             p.setCpf(gerarCpf(), true);
             p.setMatricula(gerarMatricula());
 
-            e.setBairro(faker.person().getAddress().getCity());
-            e.setCep(faker.person().getAddress().getPostalCode());
-            e.setMunicipio(faker2.address().state());
-            e.setEndereco(faker2.address().streetAddress());
-            e.setNumero(faker2.address().streetAddressNumber());
+            e.setBairro(faker.person().getAddress().getCity().replace("'", ""));
+            e.setCep(faker.person().getAddress().getPostalCode().replace("'", ""));
+            e.setMunicipio(faker2.address().state().replace("'", ""));
+            e.setEndereco(faker2.address().streetAddress().replace("'", ""));
+            e.setNumero(Integer.parseInt(faker2.address().streetAddressNumber().replace("'", "")));
 
             p.setEndereco(e);
 
-            professorSalvoComSucesso = PersistenciaProfessor.save(p);
+            // professorSalvoComSucesso = PersistenciaProfessor.save(p);
 
-            if( !professorSalvoComSucesso )
-                i--;
+            ProfessorDAO professorDAO = new ProfessorDAOImpl();
+
+            p.setDataNascimento("2014-10-11");
+
+            professorDAO.inserir(p);
+
 
         }
 

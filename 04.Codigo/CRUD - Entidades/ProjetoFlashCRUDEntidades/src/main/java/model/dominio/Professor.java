@@ -1,14 +1,17 @@
 package model.dominio;
 
+
 public class Professor implements Cloneable {
 
+    private Long id;
+
     private String nome;
-    private String matricula;
     private String email;
     private String dataNascimento;
     private String rg;
-    private Endereco endereco;
     private Cpf cpf;
+    private String matricula;
+    private Endereco endereco;
 
     public Professor() {
         nome = "";
@@ -20,6 +23,7 @@ public class Professor implements Cloneable {
 
         endereco = new Endereco();
     }
+
 
     public String getEmail() {
         return email;
@@ -66,7 +70,7 @@ public class Professor implements Cloneable {
     }
 
     public String getDecoratedCpf() {
-       return cpf.getCpfFormated();
+       return cpf.cpfFormated();
     }
 
     public void setCpf(String cpf, boolean validar) {
@@ -97,4 +101,11 @@ public class Professor implements Cloneable {
         return obj;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

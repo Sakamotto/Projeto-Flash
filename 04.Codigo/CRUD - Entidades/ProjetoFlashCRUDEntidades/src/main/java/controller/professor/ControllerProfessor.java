@@ -1,6 +1,8 @@
 package controller.professor;
 
 import controller.exception.AllertExceptionController;
+import model.DAO.ProfessorDAO;
+import model.DAO.ProfessorDAOImpl;
 import model.database.PersistenciaProfessor;
 import model.dominio.Professor;
 import javafx.collections.FXCollections;
@@ -42,11 +44,7 @@ public class ControllerProfessor implements Initializable {
     private ObservableList<Professor> observableListProfessor;
 
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            listProfessor = PersistenciaProfessor.get();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        listProfessor = new ProfessorDAOImpl().listar(Professor.class);
 
         carregaTableViewProfessor();
 
@@ -81,7 +79,7 @@ public class ControllerProfessor implements Initializable {
         labelProfessorMunicipio.setText(professor.getEndereco().getMunicipio());
         labelProfessorBairro.setText(professor.getEndereco().getBairro());
         labelProfessorEndereco.setText(professor.getEndereco().getEndereco());
-        labelProfessorNumero.setText(professor.getEndereco().getNumero());
+        labelProfessorNumero.setText(Integer.toString(professor.getEndereco().getNumero()));
         labelProfessorCep.setText(professor.getEndereco().getCep());
 
     }

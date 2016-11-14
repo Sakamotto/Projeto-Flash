@@ -1,20 +1,24 @@
 package model.dominio;
 
+
 /**
  * Created by danilo on 24/09/16.
  */
 public class Endereco implements Cloneable {
+
+    private int id;
+
     private String municipio;
     private String bairro;
     private String endereco;
-    private String numero;
+    private int numero;
     private String cep;
 
     public Endereco() {
         this.municipio = "";
         this.bairro = "";
         this.endereco = "";
-        this.numero = "";
+        this.numero = 0;
         this.cep = "";
     }
 
@@ -42,11 +46,11 @@ public class Endereco implements Cloneable {
         this.endereco = endereco;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -69,5 +73,14 @@ public class Endereco implements Cloneable {
         }
 
         return obj;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
