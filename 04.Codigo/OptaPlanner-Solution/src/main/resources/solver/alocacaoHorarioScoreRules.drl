@@ -19,8 +19,8 @@ rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
     when
         // Opção 1 funcionando.
         $alocacoes: Alocacao()
-        Alocacao($d: disciplina, $h : horario)
-        exists ( Alocacao(disciplina != $d, horario == $h) from $alocacoes )
+        Alocacao($d: disciplina, $p: disciplina.periodo, $h : horario)
+        exists ( Alocacao(disciplina != $d, disciplina.periodo == $p, horario == $h) from $alocacoes )
 
         //Opção 2 funcionando.
         /*$horario: Horario()
