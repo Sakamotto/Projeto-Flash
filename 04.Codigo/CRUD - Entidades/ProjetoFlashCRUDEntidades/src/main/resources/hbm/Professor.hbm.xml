@@ -33,5 +33,20 @@
             VALUES
                 (?, ?, cast(? as date) , ?, ?, ?, ?, ?)
         </sql-insert>
+
+        <sql-update>
+            UPDATE
+                flash.professor
+            SET
+                nome = ?,
+                email = ?,
+                data_nascimento = cast(? as date),
+                rg = ?,
+                cpf = ?,
+                matricula = ?,
+                endereco_id = ?
+            WHERE
+                professor_id = ?
+        </sql-update>
     </class>
 </hibernate-mapping>

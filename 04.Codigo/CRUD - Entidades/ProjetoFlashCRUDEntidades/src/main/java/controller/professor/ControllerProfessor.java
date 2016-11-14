@@ -43,8 +43,12 @@ public class ControllerProfessor implements Initializable {
     private List<Professor> listProfessor;
     private ObservableList<Professor> observableListProfessor;
 
+    private ProfessorDAOImpl pDAO;
+
     public void initialize(URL location, ResourceBundle resources) {
-        listProfessor = new ProfessorDAOImpl().listar(Professor.class);
+        pDAO = new ProfessorDAOImpl();
+
+        listProfessor = pDAO.listar(Professor.class);
 
         carregaTableViewProfessor();
 
@@ -93,11 +97,10 @@ public class ControllerProfessor implements Initializable {
             // System.out.println("Salvando professor no banco de dados.");
 
             listProfessor.add(professor);
-            PersistenciaProfessor.save(professor);
+            pDAO.inserir(professor);
 
             // Recarrega a página de cadastro de professor.
             carregaTableViewProfessor();
-
         }
     }
 
@@ -106,8 +109,6 @@ public class ControllerProfessor implements Initializable {
         Professor professor = tableViewProfessor.getSelectionModel().getSelectedItem();
 
         if (professor != null) {
-            Professor professorAntigo = (Professor) professor.clone();
-
             boolean btnSalvarClicado = showOpenCadastroProfessorDialog(professor, "Edicao");
 
             if (btnSalvarClicado) {
@@ -115,7 +116,7 @@ public class ControllerProfessor implements Initializable {
 
                 // Recarrega a página de cadastro de professor.
 
-                PersistenciaProfessor.update(professorAntigo, professor);
+                pDAO.alterar(professor);
 
                 observableListProfessor.clear();
                 carregaTableViewProfessor();
@@ -140,7 +141,7 @@ public class ControllerProfessor implements Initializable {
                 System.out.println("Deletando professor no banco de dados.");
 
                 listProfessor.remove(professor);
-                PersistenciaProfessor.delete(professor);
+                pDAO.deletar(professor);
 
 
                 // Recarrega a página de cadastro de professor.
