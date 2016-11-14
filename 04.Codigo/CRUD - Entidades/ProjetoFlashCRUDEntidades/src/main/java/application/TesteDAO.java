@@ -14,8 +14,8 @@ public class TesteDAO {
 
         ProfessorDAO pDAO = new ProfessorDAOImpl();
 
-        Long idRecuperar = 9L;
-        Long idRemover = 10L;
+        Long idRecuperar = 25L;
+        Long idRemover = 26L;
 
         // Recuperar
         Professor professor = pDAO.recuperar(Professor.class, idRecuperar);
