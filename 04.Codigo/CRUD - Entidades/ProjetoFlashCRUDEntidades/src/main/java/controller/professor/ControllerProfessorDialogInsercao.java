@@ -60,7 +60,7 @@ public class ControllerProfessorDialogInsercao implements Initializable {
         textFieldProfessorMunicipio.setText(professor.getEndereco().getMunicipio());
         textFieldProfessorBairro.setText(professor.getEndereco().getBairro());
         textFieldProfessorEndereco.setText(professor.getEndereco().getEndereco());
-        textFieldProfessorNumero.setText(professor.getEndereco().getNumero());
+        textFieldProfessorNumero.setText(Integer.toString(professor.getEndereco().getNumero()));
         textFieldProfessorCep.setText(professor.getEndereco().getCep());
 
     }
@@ -74,7 +74,7 @@ public class ControllerProfessorDialogInsercao implements Initializable {
         endereco.setMunicipio(textFieldProfessorMunicipio.getText());
         endereco.setBairro(textFieldProfessorBairro.getText());
         endereco.setEndereco(textFieldProfessorEndereco.getText());
-        endereco.setNumero(textFieldProfessorNumero.getText());
+        endereco.setNumero(Integer.parseInt(textFieldProfessorNumero.getText()));
         endereco.setCep(textFieldProfessorCep.getText());
 
         professor.setNome(textFieldProfessorNome.getText());

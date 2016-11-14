@@ -1,8 +1,12 @@
 package model.dominio;
 
+import javax.persistence.Embeddable;
+
 /**
  * Created by danilo on 23/10/16.
  */
+
+
 public class Cpf {
     private String cpf;
 
@@ -14,7 +18,11 @@ public class Cpf {
         return cpf;
     }
 
-    public String getCpfFormated() {
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String cpfFormated() {
         String strCpf = cpf;
 
         if (!strCpf.equals(""))

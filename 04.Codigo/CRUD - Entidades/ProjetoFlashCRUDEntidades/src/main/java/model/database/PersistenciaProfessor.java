@@ -101,7 +101,7 @@ public class PersistenciaProfessor {
             professor.setCpf(rs.getString("CPF"), false);
             professor.setMatricula(rs.getString("MATRICULA"));
 
-            endereco.setNumero(rs.getString("NUMERO"));
+            endereco.setNumero(Integer.parseInt(rs.getString("NUMERO")));
             endereco.setEndereco(rs.getString("ENDERECO"));
             endereco.setBairro(rs.getString("BAIRRO"));
             endereco.setMunicipio(rs.getString("MUNICIPIO"));

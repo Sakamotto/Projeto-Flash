@@ -42,20 +42,6 @@ public class ControllerDisciplina implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*Curso curso = new Curso();
-        curso.setNome("Bacharelado em Sistemas de Informação");
-        curso.setSigla("BSI");
-        Disciplina disciplina = new Disciplina();
-        disciplina.setNome("Cálculo 1");
-        disciplina.setCargaHoraria(90);
-        disciplina.setPeriodo(1);
-        disciplina.setAreaConhecimento("Matemática");
-        disciplina.setCurso(curso);
-        disciplina.setEspaco("Sala 101");
-
-        disciplinas = new ArrayList<>();
-        disciplinas.add(disciplina);*/
-
         try {
             carregaTableViewDiscplina();
         } catch (SQLException | ClassNotFoundException e) {
