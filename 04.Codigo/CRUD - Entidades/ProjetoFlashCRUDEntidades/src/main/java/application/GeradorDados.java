@@ -3,13 +3,10 @@ package application;
 import com.github.javafaker.Faker;
 import com.mifmif.common.regex.Generex;
 import io.codearte.jfairy.Fairy;
-import model.DAO.ProfessorDAO;
-import model.DAO.ProfessorDAOImpl;
-import model.database.PersistenciaProfessor;
 import model.dominio.Endereco;
 import model.dominio.Professor;
-
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,22 +14,15 @@ import java.util.Random;
  */
 public class GeradorDados {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static List<Professor> gerarProfessores(int quantidade) throws ClassNotFoundException {
 
-        gerarProfessores(5);
-
-
-    }
-
-    public static void gerarProfessores(int quantidade) throws SQLException, ClassNotFoundException {
-
+        List<Professor> listProfessor = new ArrayList<>();
 
         for(int i = 0 ; i < quantidade ; i++) {
             Professor p = new Professor();
             Endereco e = new Endereco();
             Faker faker2 = new Faker();
             Fairy faker = Fairy.create();
-            boolean professorSalvoComSucesso;
 
             p.setNome(faker.person().fullName().replace("'", ""));
             p.setEmail(faker.person().email().replace("'", ""));
@@ -49,17 +39,10 @@ public class GeradorDados {
 
             p.setEndereco(e);
 
-            // professorSalvoComSucesso = PersistenciaProfessor.save(p);
-
-            ProfessorDAO professorDAO = new ProfessorDAOImpl();
-
-            p.setDataNascimento("2014-10-11");
-
-            professorDAO.inserir(p);
-
-
+            listProfessor.add(p);
         }
 
+        return listProfessor;
     }
 
     private static String gerarCpf() {

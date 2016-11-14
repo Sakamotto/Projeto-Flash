@@ -10,11 +10,26 @@ import model.dominio.Professor;
  */
 public class TesteDAO {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         ProfessorDAO pDAO = new ProfessorDAOImpl();
 
-        System.out.println(pDAO.recuperar(Professor.class, Long.parseLong("1")).getNome());
-        System.out.println(pDAO.recuperar(Professor.class, Long.parseLong("1")).getDataNascimento());
+        Long idRecuperar = 9L;
+        Long idRemover = 10L;
+
+        // Recuperar
+        Professor professor = pDAO.recuperar(Professor.class, idRecuperar);
+
+        // Alterar
+        professor.setNome("Nome Alterado");
+        pDAO.alterar(professor);
+
+        // Inserir
+        professor = GeradorDados.gerarProfessores(1).get(0);
+        pDAO.inserir(professor);
+
+        // Deletar
+        professor = pDAO.recuperar(Professor.class, idRemover);
+        pDAO.deletar(professor);
     }
 }

@@ -16,12 +16,18 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     protected static Transaction transaction;
 
     protected void initializeDAO() {
-        session = HibernateUtil.getSession();
-        transaction = session.beginTransaction();
+
+        if (session == null)
+            session = HibernateUtil.getSession();
+
+        transaction = session.getTransaction();
+        transaction.begin();
     }
 
-    protected void closeDAO() {
-        session.close();
+    protected void finalizeDAO() {
+        session.flush();
+        transaction.commit();
+        // session.close();
     }
 
     @Override
@@ -32,8 +38,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         Hibernate.initialize(clazz);
         List<T> listProfessores = getAll.list();
 
-        transaction.commit();
-
+        finalizeDAO();
         return listProfessores;
     }
 
@@ -45,12 +50,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         T object = (T) session.load(clazz, id);
         Hibernate.initialize(clazz);
 
-        if (transaction.wasCommitted()) {
-            transaction.commit();
-        }
-
-        session.flush();
-
+        finalizeDAO();
         return object;
     }
 
@@ -59,9 +59,8 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         initializeDAO();
 
         session.delete(object);
-        session.flush();
-        transaction.commit();
 
+        finalizeDAO();
     }
 
     @Override
@@ -69,9 +68,8 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         initializeDAO();
 
         session.update(object);
-        session.flush();
-        transaction.commit();
 
+        finalizeDAO();
     }
 
     @Override
@@ -80,8 +78,6 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
         session.save(object);
 
-        session.flush();
-        transaction.commit();
-
+        finalizeDAO();
     }
 }
