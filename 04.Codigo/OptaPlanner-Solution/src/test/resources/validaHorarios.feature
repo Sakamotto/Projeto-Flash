@@ -1,16 +1,17 @@
-Feature: Disciplinas conflitantes
+# language: pt
+Funcionalidade: Disciplinas conflitantes
 
   Não deve haver duas aulas do mesmo período no mesmo horário.
 
-  Scenario: Duas discplinas que conflitam
-    Given Eu tenha um conjunto de discplinas em um periodo
-    When Eu alocar o horario
-    And houver conflito
-    Then Enviar mensagem de erro de conflito de horario entre discplinas
+  Cenario: Duas discplinas que conflitam
+    Dado Eu tenha um conjunto de discplinas em um periodo
+    Quando Eu alocar o horario
+    E houver conflito
+    Entao Enviar mensagem de erro de conflito de horario entre discplinas
 
 
-  Scenario: Duas discplinas não conflitam
-    Given Eu tenha um conjunto de discplinas em um periodo
-    When Eu alocar o horario
-    And não houver conflito
-    Then Aloque o horario
+  Cenario: Duas discplinas não conflitam
+    Dado Eu tenha um conjunto de discplinas em um periodo
+    Quando Eu alocar o horario
+    E nao houver conflito
+    Entao Aloque o horario
