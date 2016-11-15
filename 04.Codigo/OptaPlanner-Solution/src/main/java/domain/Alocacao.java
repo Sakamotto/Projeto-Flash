@@ -2,6 +2,7 @@ package domain;
 
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
@@ -28,12 +29,6 @@ public class Alocacao {
         return horario;
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(1450207409, -1692382659)
-                .append(disciplina.getNome()).toHashCode();
-    }
-
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
@@ -52,5 +47,27 @@ public class Alocacao {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(disciplina)
+                .append(professor)
+                .toHashCode();
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Alocacao) {
+            Alocacao other = (Alocacao) o;
+            return new EqualsBuilder()
+                    .append(disciplina, other.getDisciplina())
+                    .append(professor, other.getProfessor())
+                    .isEquals();
+        } else {
+            return false;
+        }
     }
 }

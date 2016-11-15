@@ -56,22 +56,27 @@ public class Disciplina {
         this.preRequisitos = preRequisitos;
     }
 
-    @Override
     public int hashCode() {
-        return new HashCodeBuilder(1450207409, -1692382659)
-                .append(getNome()).toHashCode();
+        return new HashCodeBuilder()
+                .append(nome)
+                .append(periodo)
+                .append(cargaHorariaSemanal)
+                .toHashCode();
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        else{
-            Disciplina paramDisciplina = (Disciplina) object;
-
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Disciplina) {
+            Disciplina other = (Disciplina) o;
             return new EqualsBuilder()
-                    .append(nome, paramDisciplina.getNome())
+                    .append(nome, other.getNome())
+                    .append(periodo, other.getPeriodo())
+                    .append(cargaHorariaSemanal, other.getCargaHorariaSemanal())
                     .isEquals();
+        } else {
+            return false;
         }
     }
 }

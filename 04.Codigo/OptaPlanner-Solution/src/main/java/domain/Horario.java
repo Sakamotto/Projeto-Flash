@@ -77,6 +77,45 @@ public class Horario {
         }
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(int horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public int getMinutoInicio() {
+        return minutoInicio;
+    }
+
+    public void setMinutoInicio(int minutoInicio) {
+        this.minutoInicio = minutoInicio;
+    }
+
+    public int getHoraFim() {
+        return horaFim;
+    }
+
+    public void setHoraFim(int horaFim) {
+        this.horaFim = horaFim;
+    }
+
+    public int getMinutoFim() {
+        return minutoFim;
+    }
+
+    public void setMinutoFim(int minutoFim) {
+        this.minutoFim = minutoFim;
+    }
 
     private String getStrHorario(int hora, int minuto) {
         return hora + ":" + minuto;
@@ -84,32 +123,29 @@ public class Horario {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(1450207409, -1692382659)
+        return new HashCodeBuilder()
                 .append(id)
+                .append(diaSemana)
+                .append(getHorarioInicio())
+                .append(getHorarioFim())
                 .toHashCode();
     }
 
     @Override
-    public boolean equals(final Object object) {
-        boolean isEqual;
-
-        if (object == null || !(object instanceof Horario) )
-            isEqual = false;
-
-        else {
-            Horario horario = (Horario) object;
-
-            isEqual = new EqualsBuilder()
-                    .append( getHorarioInicio(), horario.getHorarioInicio() )
-                    .append( getHorarioFim(), horario.getHorarioFim() )
-                    .append( getStrDiaSemana(), horario.getStrDiaSemana() )
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Horario) {
+            Horario other = (Horario) o;
+            return new EqualsBuilder()
+                    .append(id, other.getId())
+                    .append(diaSemana, other.getDiaSemana())
+                    .append(getHorarioInicio(), other.getHorarioInicio())
+                    .append(getHorarioFim(), other.getHorarioFim())
                     .isEquals();
+        } else {
+            return false;
         }
-
-        return isEqual;
     }
-
-
-
 
 }
