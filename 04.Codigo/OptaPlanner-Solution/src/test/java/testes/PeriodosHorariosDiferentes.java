@@ -21,18 +21,25 @@ import static org.junit.Assert.assertEquals;
  */
 public class PeriodosHorariosDiferentes {
 
-    Professor professor1 = new Professor();
-    Alocacao alocacao1;
-    Alocacao alocacao2;
-    Alocacao alocacao3;
-    Alocacao alocacao4;
-    Disciplina disciplina1;
-    Disciplina disciplina2;
-    Disciplina disciplina3;
-    Disciplina disciplina4;
-    Horario h1;
-    Horario h2;
-    AlocacaoHorario solucao;
+    private Alocacao alocacao1;
+    private Alocacao alocacao2;
+    private Alocacao alocacao3;
+    private Alocacao alocacao4;
+
+    private Professor professor1 = new Professor("Fulano de Tal", "12312345678");
+    private Professor professor2 = new Professor("Filini di Til", "32165498787");
+    private Professor professor3 = new Professor("Foo Bar", "99999988888");
+    private Professor professor4 = new Professor("Professor Snape", "11122233344");
+
+    private Disciplina disciplina1;
+    private Disciplina disciplina2;
+    private Disciplina disciplina3;
+    private Disciplina disciplina4;
+
+    private Horario h1;
+    private Horario h2;
+
+    private AlocacaoHorario solucao;
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(PeriodosHorariosDiferentes.class);
 
@@ -56,9 +63,16 @@ public class PeriodosHorariosDiferentes {
         h2 = new Horario(2);
 
         alocacao1.setDisciplina(disciplina1);
+        alocacao1.setProfessor(professor1);
+
         alocacao2.setDisciplina(disciplina2);
+        alocacao2.setProfessor(professor2);
+
         alocacao3.setDisciplina(disciplina3);
+        alocacao3.setProfessor(professor3);
+
         alocacao4.setDisciplina(disciplina4);
+        alocacao4.setProfessor(professor4);
 
         h1.setDiaSemana(Horario.DiaSemana.SEGUNDA);
         h1.setHorarioInicio(7, 30);
