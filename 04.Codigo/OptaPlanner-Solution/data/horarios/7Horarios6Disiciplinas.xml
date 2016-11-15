@@ -6,52 +6,82 @@
                 <periodo>1</periodo>
                 <cargaHorariaSemanal>60</cargaHorariaSemanal>
             </disciplina>
+
+            <professor id = "5">
+                <nome>Bruno Ramos Gonzaga</nome>
+                <cpf>11111111111</cpf>
+            </professor>
         </Alocacao>
 
-        <Alocacao id="5">
-            <disciplina id="6">
-                <nome>Sociologia 1</nome>
+        <Alocacao id="6">
+            <disciplina id="7">
+                <nome>Comunicacao Empresarial</nome>
                 <periodo>1</periodo>
                 <cargaHorariaSemanal>30</cargaHorariaSemanal>
             </disciplina>
-        </Alocacao>
 
-		<Alocacao id="7">
-            <disciplina id="8">
-                <nome>Metodologia da Pesquisa</nome>
-                <periodo>1</periodo>
-                <cargaHorariaSemanal>30</cargaHorariaSemanal>
-            </disciplina>
+            <professor id="8">
+                <nome>Aurelia Hubner</nome>
+                <cpf>11111122222</cpf>
+            </professor>
         </Alocacao>
 
 		<Alocacao id="9">
             <disciplina id="10">
+                <nome>Metodologia da Pesquisa</nome>
+                <periodo>1</periodo>
+                <cargaHorariaSemanal>30</cargaHorariaSemanal>
+            </disciplina>
+
+            <professor id="11">
+                <nome>Rutinelli Nao Sei O Sobrenome</nome>
+                <cpf>22222111111</cpf>
+            </professor>
+        </Alocacao>
+
+		<Alocacao id="12">
+            <disciplina id="13">
                 <nome>FSI</nome>
                 <periodo>1</periodo>
                 <cargaHorariaSemanal>30</cargaHorariaSemanal>
             </disciplina>
+
+            <professor id="14">
+                <nome>Cleio Maioli</nome>
+                <cpf>22222222222</cpf>
+            </professor>
         </Alocacao>
 
-		<Alocacao id="11">
-            <disciplina id="12">
+		<Alocacao id="15">
+            <disciplina id="16">
                 <nome>Logica</nome>
                 <periodo>1</periodo>
                 <cargaHorariaSemanal>90</cargaHorariaSemanal>
             </disciplina>
+
+            <professor id="17">
+                <nome>Jeferson Oliveira Andrade</nome>
+                <cpf>22222333333</cpf>
+            </professor>
         </Alocacao>
 
-		<Alocacao id="13">
-            <disciplina id="14">
-                <nome>Programacao</nome>
+		<Alocacao id="18">
+            <disciplina id="19">
+                <nome>Programacao 1</nome>
                 <periodo>1</periodo>
                 <cargaHorariaSemanal>90</cargaHorariaSemanal>
             </disciplina>
+
+            <professor id="20">
+                <nome>Alessandra Aguiar</nome>
+                <cpf>33333222222</cpf>
+            </professor>
         </Alocacao>
     </alocacoes>
 
 
-    <horarios id="15">
-        <Horario id="16">
+    <horarios id="21">
+        <Horario id="22">
             <horaInicio>7</horaInicio>
             <minutoInicio>30</minutoInicio>
             <horaFim>9</horaFim>
@@ -59,7 +89,7 @@
             <diaSemana>SEGUNDA</diaSemana>
         </Horario>
 
-        <Horario id="17">
+        <Horario id="23">
             <horaInicio>7</horaInicio>
             <minutoInicio>30</minutoInicio>
             <horaFim>9</horaFim>
@@ -67,7 +97,7 @@
             <diaSemana>SEGUNDA</diaSemana>
         </Horario>
 
-        <Horario id="17">
+        <Horario id="24">
             <horaInicio>7</horaInicio>
             <minutoInicio>30</minutoInicio>
             <horaFim>9</horaFim>
@@ -75,7 +105,7 @@
             <diaSemana>QUARTA</diaSemana>
         </Horario>
 
-        <Horario id="17">
+        <Horario id="25">
             <horaInicio>7</horaInicio>
             <minutoInicio>30</minutoInicio>
             <horaFim>9</horaFim>
@@ -83,7 +113,7 @@
             <diaSemana>QUINTA</diaSemana>
         </Horario>
 
-        <Horario id="17">
+        <Horario id="26">
             <horaInicio>7</horaInicio>
             <minutoInicio>30</minutoInicio>
             <horaFim>9</horaFim>
@@ -91,7 +121,7 @@
             <diaSemana>SEXTA</diaSemana>
         </Horario>
 
-        <Horario id="17">
+        <Horario id="27">
             <horaInicio>15</horaInicio>
             <minutoInicio>30</minutoInicio>
             <horaFim>17</horaFim>
@@ -99,7 +129,7 @@
             <diaSemana>QUINTA</diaSemana>
         </Horario>
 
-        <Horario id="17">
+        <Horario id="28">
             <horaInicio>9</horaInicio>
             <minutoInicio>40</minutoInicio>
             <horaFim>11</horaFim>

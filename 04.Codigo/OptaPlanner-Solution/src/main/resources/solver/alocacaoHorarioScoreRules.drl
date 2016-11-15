@@ -32,4 +32,37 @@ rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
 
     then
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
-end
+
+    end
+
+
+rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre dois horarios de aula"
+
+    when
+
+        $alocacoes : Alocacao()
+
+        $a : Alocacao($p : professor, horario != null, $h : horario, $d : disciplina)
+
+        exists (
+            Alocacao(
+                professor == $p,
+                horario.diaSemana == $h.diaSemana,
+                disciplina != $d,
+                horario.horaInicio > $h.horaFim
+            ) from $alocacoes
+        )
+
+        not (
+            Alocacao(
+                professor == $p,
+                horario.diaSemana == $h.diaSemana,
+                disciplina != $d,
+                horario.horaInicio > $h.horaFim,
+                (horario.horaInicio - $h.horaFim) < 3
+            ) from $alocacoes
+        )
+
+    then
+        scoreHolder.addHardConstraintMatch( kcontext, -1 );
+    end

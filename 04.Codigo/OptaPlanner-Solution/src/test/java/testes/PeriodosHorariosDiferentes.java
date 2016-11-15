@@ -2,9 +2,6 @@ package testes;
 
 import application.AlocacaoHorario;
 import controller.Resolvedor;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
@@ -12,9 +9,6 @@ import domain.Alocacao;
 import domain.Disciplina;
 import domain.Horario;
 import domain.Professor;
-import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
-import org.optaplanner.core.api.solver.Solver;
-import org.optaplanner.core.api.solver.SolverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by cristian on 10/10/16.
  */
-public class Horarios {
+public class PeriodosHorariosDiferentes {
 
     Professor professor1 = new Professor();
     Alocacao alocacao1;
@@ -40,7 +34,7 @@ public class Horarios {
     Horario h2;
     AlocacaoHorario solucao;
 
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(Horarios.class);
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(PeriodosHorariosDiferentes.class);
 
 
     @Dado("^Eu tenha um conjunto de discplinas em um periodo$")
@@ -117,11 +111,6 @@ public class Horarios {
         solucao = Resolvedor.resolver(ah, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
-    }
-
-    @Entao("^Aloque o horario$")
-    public void aloque_o_horario() {
-        System.out.println("NÃO DEU CONFLITO!!!");
     }
 
 }

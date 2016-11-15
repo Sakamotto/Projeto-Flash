@@ -1,5 +1,8 @@
 package domain;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -7,13 +10,13 @@ import java.io.Serializable;
  */
 public class Professor {
     private String nome;
-    private int cpf;
+    private String cpf;
     private Endereco endereco;
 
     public Professor(){}
 
 
-    public Professor(String nome, int cpf) {
+    public Professor(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
     }
@@ -26,11 +29,11 @@ public class Professor {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -44,14 +47,24 @@ public class Professor {
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(this.cpf);
+        return new HashCodeBuilder()
+                .append(nome)
+                .append(cpf)
+                .toHashCode();
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object == null)
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Professor) {
+            Professor other = (Professor) o;
+            return new EqualsBuilder()
+                    .append(nome, other.getNome())
+                    .append(cpf, other.getCpf())
+                    .isEquals();
+        } else {
             return false;
-        else
-            return this.cpf == ( (Professor) object ).getCpf();
+        }
     }
 }
