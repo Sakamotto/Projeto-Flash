@@ -16,8 +16,12 @@ public class Alocacao {
     private Professor professor;
 
 
-
     public Alocacao() {}
+
+    public Alocacao(Disciplina disciplina, Professor professor) {
+        this.disciplina = disciplina;
+        this.professor = professor;
+    }
 
     public Alocacao(Disciplina disciplinaParam) {
         disciplina = disciplinaParam;
