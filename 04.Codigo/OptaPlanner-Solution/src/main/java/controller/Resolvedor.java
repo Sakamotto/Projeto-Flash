@@ -33,6 +33,7 @@ public class Resolvedor {
         AlocacaoHorario solucao = (AlocacaoHorario) solver.getBestSolution();
 
         logarSolucao(solucao);
+        printResultSolution(solucao);
 
         return solucao;
     }
@@ -52,9 +53,10 @@ public class Resolvedor {
         List<Alocacao> resultadoAlocacoes = solucao.getAlocacoes();
 
         for( Alocacao resultadoAlocacao : resultadoAlocacoes) {
-            System.out.println("Turma: " + resultadoAlocacao.getDisciplina().getNome() +
-                    " | " + resultadoAlocacao.getHorario().getStrDiaSemana() +
-                    " | " + resultadoAlocacao.getHorario().getHorarioInicio());
+            System.out.println("\n\nProfessor: " + resultadoAlocacao.getProfessor().getNome() +
+                    "\nDisciplina: " + resultadoAlocacao.getDisciplina().getNome() +
+                    "\nDia da Semana: " + resultadoAlocacao.getHorario().getStrDiaSemana() +
+                    "\nHorario Inicio " + resultadoAlocacao.getHorario().getHorarioInicio());
         }
     }
 }
