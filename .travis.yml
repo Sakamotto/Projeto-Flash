@@ -6,6 +6,7 @@ jdk:
 
 addons:
   sonarqube: true
+  srcclr: true
 env:
   global:
     - secure: SONAR_TOKEN=c85312f9026df6e3a31e017fa5c14b0c43258993
