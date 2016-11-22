@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.edu.ifes.leds</groupId>
-    <artifactId>Flash</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>flash-crud</artifactId>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
@@ -95,10 +95,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
-
-
 </project>
