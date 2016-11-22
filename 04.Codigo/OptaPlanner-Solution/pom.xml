@@ -5,16 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.edu.ifes</groupId>
-    <artifactId>treinoOptaPlanner</artifactId>
+    <artifactId>flash-optaplanner</artifactId>
     <version>1.0</version>
          
     <properties>
 	<maven.test.skip>true</maven.test.skip>
 	    
         <!--- Configuracao do Sonar-->
-
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
-	<sonar.login>c85312f9026df6e3a31e017fa5c14b0c43258993</sonar.login>    
+		<sonar.login>c85312f9026df6e3a31e017fa5c14b0c43258993</sonar.login>    
 
         <!-- Codificacao -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,7 +21,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.optaplanner</groupId>
             <artifactId>optaplanner-core</artifactId>
@@ -60,7 +58,6 @@
             <artifactId>optaplanner-benchmark</artifactId>
             <version>6.1.0.Final</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -75,6 +72,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
