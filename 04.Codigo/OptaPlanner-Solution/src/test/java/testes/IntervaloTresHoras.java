@@ -21,20 +21,20 @@ import static org.junit.Assert.assertEquals;
 public class IntervaloTresHoras {
 
     private List<Alocacao> alocacoes;
-    private List<Horario> horarios;
+    private List<Schedule> schedules;
 
     @Dado("^Eu tenha um conjunto de professores alocados a um conjunto de disciplinas$")
     public void eu_tenha_um_conjunto_de_professores_alocados_a_um_conjunto_de_disciplinas() throws Throwable {
-        Professor professor = new Professor("Bruno R. G.", "12345678910");
+        Teacher teacher = new Teacher("Bruno R. G.", "12345678910");
 
-        Disciplina disciplinaUm = new Disciplina("Calculo 1", 1, 90);
-        Disciplina disciplinaDois = new Disciplina("Lógica", 1, 90);
+        Subject subjectUm = new Subject("Calculo 1", 1, 90);
+        Subject subjectDois = new Subject("Lógica", 1, 90);
 
-        Alocacao alocacaoUm = new Alocacao(disciplinaUm);
-        Alocacao alocacaoDois = new Alocacao(disciplinaDois);
+        Alocacao alocacaoUm = new Alocacao(subjectUm);
+        Alocacao alocacaoDois = new Alocacao(subjectDois);
 
-        alocacaoUm.setProfessor(professor);
-        alocacaoDois.setProfessor(professor);
+        alocacaoUm.setTeacher(teacher);
+        alocacaoDois.setTeacher(teacher);
 
         alocacoes = new ArrayList<>();
 
@@ -45,22 +45,22 @@ public class IntervaloTresHoras {
 
     @Quando("^Eu alocar os horarios com intervalo maior que tres horas$")
     public void eu_alocar_os_horarios_com_intervalo_maior_que_tres_horas() throws Throwable {
-        Horario horarioUm = new Horario(1);
-        horarioUm.setDiaSemana(Horario.DiaSemana.SEGUNDA);
-        horarioUm.setHorarioInicio(7, 30);
-        horarioUm.setHorarioFim(9, 20);
+        Schedule scheduleUm = new Schedule(1);
+        scheduleUm.setDayWeek(Schedule.DayWeek.MONDAY);
+        scheduleUm.setInitSchedule(7, 30);
+        scheduleUm.setFinalSchedule(9, 20);
 
-        Horario horarioDois = new Horario(2);
-        horarioDois.setDiaSemana(Horario.DiaSemana.SEGUNDA);
-        horarioDois.setHorarioInicio(13, 20);
-        horarioDois.setHorarioFim(15, 30);
+        Schedule scheduleDois = new Schedule(2);
+        scheduleDois.setDayWeek(Schedule.DayWeek.MONDAY);
+        scheduleDois.setInitSchedule(13, 20);
+        scheduleDois.setFinalSchedule(15, 30);
 
-        horarios = new ArrayList<>();
+        schedules = new ArrayList<>();
 
-        horarios.add(horarioUm);
-        horarios.add(horarioDois);
+        schedules.add(scheduleUm);
+        schedules.add(scheduleDois);
 
-        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
 
         AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 
@@ -69,28 +69,28 @@ public class IntervaloTresHoras {
 
     @Entao("^Enviar mensagem de erro informando a quebra da regra$")
     public void enviar_mensagem_de_erro_informando_a_quebra_da_regra() throws Throwable {
-        System.out.println("Existe um professor com um intervalo de 3 horas vagas entre horarios de aula.");
+        System.out.println("Existe um professor com um intervalo de 3 horas vagas entre schedules de aula.");
     }
 
     @Quando("^Eu alocar os sem intervalo maior ou igual a tres horas para todos os professores$")
     public void eu_alocar_os_sem_intervalo_maior_ou_igual_a_tres_horas_para_todos_os_professores() throws Throwable {
-        Horario horarioUm = new HorarioBuilder(1)
-                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
-                .addHorarioInicio(7, 30)
-                .addHorarioFim(9, 20)
-                .getHorario();
-        Horario horarioDois = new HorarioBuilder(2)
-                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
-                .addHorarioInicio(9, 40)
-                .addHorarioFim(11, 30)
-                .getHorario();
+        Schedule scheduleUm = new ScheduleBuilder(1)
+                .addDayWeek(Schedule.DayWeek.MONDAY)
+                .addInitSchedule(7, 30)
+                .addFinalSchedule(9, 20)
+                .getSchedule();
+        Schedule scheduleDois = new ScheduleBuilder(2)
+                .addDayWeek(Schedule.DayWeek.MONDAY)
+                .addInitSchedule(9, 40)
+                .addFinalSchedule(11, 30)
+                .getSchedule();
 
-        horarios = new ArrayList<>();
+        schedules = new ArrayList<>();
 
-        horarios.add(horarioUm);
-        horarios.add(horarioDois);
+        schedules.add(scheduleUm);
+        schedules.add(scheduleDois);
 
-        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
 
         AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 

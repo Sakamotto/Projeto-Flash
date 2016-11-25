@@ -6,9 +6,9 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
 import domain.Alocacao;
-import domain.Disciplina;
-import domain.Horario;
-import domain.Professor;
+import domain.Schedule;
+import domain.Subject;
+import domain.Teacher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,18 +26,18 @@ public class PeriodosHorariosDiferentes {
     private Alocacao alocacao3;
     private Alocacao alocacao4;
 
-    private Professor professor1 = new Professor("Fulano de Tal", "12312345678");
-    private Professor professor2 = new Professor("Filini di Til", "32165498787");
-    private Professor professor3 = new Professor("Foo Bar", "99999988888");
-    private Professor professor4 = new Professor("Professor Snape", "11122233344");
+    private Teacher teacher1 = new Teacher("Fulano de Tal", "12312345678");
+    private Teacher teacher2 = new Teacher("Filini di Til", "32165498787");
+    private Teacher teacher3 = new Teacher("Foo Bar", "99999988888");
+    private Teacher teacher4 = new Teacher("Teacher Snape", "11122233344");
 
-    private Disciplina disciplina1;
-    private Disciplina disciplina2;
-    private Disciplina disciplina3;
-    private Disciplina disciplina4;
+    private Subject subject1;
+    private Subject subject2;
+    private Subject subject3;
+    private Subject subject4;
 
-    private Horario h1;
-    private Horario h2;
+    private Schedule h1;
+    private Schedule h2;
 
     private AlocacaoHorario solucao;
 
@@ -46,10 +46,10 @@ public class PeriodosHorariosDiferentes {
 
     @Dado("^Eu tenha um conjunto de discplinas em um periodo$")
     public void eu_tenha_um_conjunto_de_discplinas_em_um_periodo() {
-        disciplina1 = new Disciplina("Cálculo 1", 1, 60);
-        disciplina2 = new Disciplina("Lógica", 1, 60);
-        disciplina3 = new Disciplina("Cálculo 2", 2, 90);
-        disciplina4 = new Disciplina("AOC", 2, 90);
+        subject1 = new Subject("Cálculo 1", 1, 60);
+        subject2 = new Subject("Lógica", 1, 60);
+        subject3 = new Subject("Cálculo 2", 2, 90);
+        subject4 = new Subject("AOC", 2, 90);
 
     }
 
@@ -59,44 +59,44 @@ public class PeriodosHorariosDiferentes {
         alocacao2 = new Alocacao();
         alocacao3 = new Alocacao();
         alocacao4 = new Alocacao();
-        h1 = new Horario(1);
-        h2 = new Horario(2);
+        h1 = new Schedule(1);
+        h2 = new Schedule(2);
 
-        alocacao1.setDisciplina(disciplina1);
-        alocacao1.setProfessor(professor1);
+        alocacao1.setSubject(subject1);
+        alocacao1.setTeacher(teacher1);
 
-        alocacao2.setDisciplina(disciplina2);
-        alocacao2.setProfessor(professor2);
+        alocacao2.setSubject(subject2);
+        alocacao2.setTeacher(teacher2);
 
-        alocacao3.setDisciplina(disciplina3);
-        alocacao3.setProfessor(professor3);
+        alocacao3.setSubject(subject3);
+        alocacao3.setTeacher(teacher3);
 
-        alocacao4.setDisciplina(disciplina4);
-        alocacao4.setProfessor(professor4);
+        alocacao4.setSubject(subject4);
+        alocacao4.setTeacher(teacher4);
 
-        h1.setDiaSemana(Horario.DiaSemana.SEGUNDA);
-        h1.setHorarioInicio(7, 30);
-        h1.setHorarioFim(9, 30);
+        h1.setDayWeek(Schedule.DayWeek.MONDAY);
+        h1.setInitSchedule(7, 30);
+        h1.setFinalSchedule(9, 30);
 
-        h2.setDiaSemana(Horario.DiaSemana.SEGUNDA);
-        h2.setHorarioInicio(9, 31);
-        h2.setHorarioFim(11, 30);
+        h2.setDayWeek(Schedule.DayWeek.MONDAY);
+        h2.setInitSchedule(9, 31);
+        h2.setFinalSchedule(11, 30);
 
     }
 
     @Quando("^houver conflito$")
     public void houver_conflito() {
         ArrayList<Alocacao> alocacoes = new ArrayList<>();
-        ArrayList<Horario> horarios= new ArrayList<>();
+        ArrayList<Schedule> schedules = new ArrayList<>();
 
-        horarios.add(h1);
-        horarios.add(h1);
+        schedules.add(h1);
+        schedules.add(h1);
         alocacoes.add(alocacao1);
         alocacoes.add(alocacao2);
         alocacoes.add(alocacao3);
         alocacoes.add(alocacao4);
 
-        AlocacaoHorario ah = new AlocacaoHorario(alocacoes, horarios);
+        AlocacaoHorario ah = new AlocacaoHorario(alocacoes, schedules);
         solucao = Resolvedor.resolver(ah, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
@@ -111,17 +111,17 @@ public class PeriodosHorariosDiferentes {
     @Quando("^nao houver conflito$")
     public void nao_houver_conflito() {
         ArrayList<Alocacao> alocacoes = new ArrayList<>();
-        ArrayList<Horario> horarios= new ArrayList<>();
+        ArrayList<Schedule> schedules = new ArrayList<>();
 
-        horarios.add(h1);
-        horarios.add(h2);
+        schedules.add(h1);
+        schedules.add(h2);
         alocacoes.add(alocacao1);
         alocacoes.add(alocacao2);
         alocacoes.add(alocacao3);
         alocacoes.add(alocacao4);
 
 
-        AlocacaoHorario ah = new AlocacaoHorario(alocacoes, horarios);
+        AlocacaoHorario ah = new AlocacaoHorario(alocacoes, schedules);
         solucao = Resolvedor.resolver(ah, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
