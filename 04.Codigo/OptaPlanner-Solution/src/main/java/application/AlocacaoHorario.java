@@ -2,9 +2,8 @@ package application;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import domain.Alocacao;
-import domain.Horario;
+import domain.Schedule;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
@@ -27,13 +26,13 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
     private HardMediumSoftScore score;
 
     private List<Alocacao> alocacoes;
-    private List<Horario> horarios;
+    private List<Schedule> schedules;
 
     AlocacaoHorario(){}
 
-    public AlocacaoHorario(List<Alocacao> alocacoes, List<Horario> horarios) {
+    public AlocacaoHorario(List<Alocacao> alocacoes, List<Schedule> schedules) {
         this.alocacoes = alocacoes;
-        this.horarios = horarios;
+        this.schedules = schedules;
     }
 
     @Override
@@ -50,7 +49,7 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
     public Collection<? extends Object> getProblemFacts() {
         List<Object> facts = new ArrayList<>();
 
-        facts.addAll(horarios);
+        facts.addAll(schedules);
 
         return facts;
     }
@@ -61,8 +60,8 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
         return alocacoes;
     }
 
-    @ValueRangeProvider(id = "horario")
-    public List<Horario> getHorarios() {
-        return horarios;
+    @ValueRangeProvider(id = "schedule")
+    public List<Schedule> getSchedules() {
+        return schedules;
     }
 }

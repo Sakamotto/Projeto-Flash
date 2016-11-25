@@ -2,10 +2,7 @@ package application;
 
 import controller.Resolvedor;
 import domain.Alocacao;
-import domain.Disciplina;
-import domain.Horario;
-import domain.HorarioBuilder;
-
+import domain.Schedule;
 
 
 import java.util.ArrayList;
@@ -22,58 +19,58 @@ public class Main {
 //        AlocacaoHorario problema;
 //
 //
-//        Horario horario01 = new HorarioBuilder(1)
-//                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
-//                .addHorarioInicio(7, 30)
-//                .addHorarioFim(9, 30)
-//                .getHorario();
+//        Schedule horario01 = new ScheduleBuilder(1)
+//                .addDayWeek(Schedule.DayWeek.MONDAY)
+//                .addInitSchedule(7, 30)
+//                .addFinalSchedule(9, 30)
+//                .getSchedule();
 //
 //
-//        Horario horario02 = new HorarioBuilder(2)
-//                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
-//                .addHorarioInicio(7, 30)
-//                .addHorarioFim(9, 30)
-//                .getHorario();
+//        Schedule horario02 = new ScheduleBuilder(2)
+//                .addDayWeek(Schedule.DayWeek.MONDAY)
+//                .addInitSchedule(7, 30)
+//                .addFinalSchedule(9, 30)
+//                .getSchedule();
 //
-//        Horario horario03 = new HorarioBuilder(3)
-//                .addDiaSemana(Horario.DiaSemana.QUARTA)
-//                .addHorarioInicio(7, 30)
-//                .addHorarioFim(9, 30)
-//                .getHorario();
+//        Schedule horario03 = new ScheduleBuilder(3)
+//                .addDayWeek(Schedule.DayWeek.WEDNESDAY)
+//                .addInitSchedule(7, 30)
+//                .addFinalSchedule(9, 30)
+//                .getSchedule();
 //
-//        Horario horario04 = new HorarioBuilder(4)
-//                .addDiaSemana(Horario.DiaSemana.QUINTA)
-//                .addHorarioInicio(7, 30)
-//                .addHorarioFim(9, 30)
-//                .getHorario();
+//        Schedule horario04 = new ScheduleBuilder(4)
+//                .addDayWeek(Schedule.DayWeek.THURSDAY)
+//                .addInitSchedule(7, 30)
+//                .addFinalSchedule(9, 30)
+//                .getSchedule();
 //
-//        Horario horario05 = new HorarioBuilder(5)
-//                .addDiaSemana(Horario.DiaSemana.SEXTA)
-//                .addHorarioInicio(7, 30)
-//                .addHorarioFim(9, 30)
-//                .getHorario();
-//
-//
-//        Horario horario06 = new HorarioBuilder(6)
-//                .addDiaSemana(Horario.DiaSemana.QUINTA)
-//                .addHorarioInicio(15, 30)
-//                .addHorarioFim(17, 30)
-//                .getHorario();
+//        Schedule horario05 = new ScheduleBuilder(5)
+//                .addDayWeek(Schedule.DayWeek.FRIDAY)
+//                .addInitSchedule(7, 30)
+//                .addFinalSchedule(9, 30)
+//                .getSchedule();
 //
 //
-//        Horario horario07 = new HorarioBuilder(7)
-//                .addDiaSemana(Horario.DiaSemana.QUINTA)
-//                .addHorarioInicio(9, 40)
-//                .addHorarioFim(11, 30)
-//                .getHorario();
+//        Schedule horario06 = new ScheduleBuilder(6)
+//                .addDayWeek(Schedule.DayWeek.THURSDAY)
+//                .addInitSchedule(15, 30)
+//                .addFinalSchedule(17, 30)
+//                .getSchedule();
 //
 //
-//        Disciplina disciplina01 = new Disciplina("Calculo 1", 1, 60);
-//        Disciplina disciplina02 = new Disciplina("Sociologia 1", 1, 30);
-//        Disciplina disciplina03 = new Disciplina("Metodologia da Pesquisa", 1, 30);
-//        Disciplina disciplina04 = new Disciplina("FSI", 1, 30);
-//        Disciplina disciplina05 = new Disciplina("Logica", 1, 30);
-//        Disciplina disciplina06 = new Disciplina("Programacao 1", 1, 60);
+//        Schedule horario07 = new ScheduleBuilder(7)
+//                .addDayWeek(Schedule.DayWeek.THURSDAY)
+//                .addInitSchedule(9, 40)
+//                .addFinalSchedule(11, 30)
+//                .getSchedule();
+//
+//
+//        Subject disciplina01 = new Subject("Calculo 1", 1, 60);
+//        Subject disciplina02 = new Subject("Sociologia 1", 1, 30);
+//        Subject disciplina03 = new Subject("Metodologia da Pesquisa", 1, 30);
+//        Subject disciplina04 = new Subject("FSI", 1, 30);
+//        Subject disciplina05 = new Subject("Logica", 1, 30);
+//        Subject disciplina06 = new Subject("Programacao 1", 1, 60);
 //
 //        Alocacao alocacao1 = new Alocacao( disciplina01 );
 //
@@ -101,17 +98,14 @@ public class Main {
 //
 //        // printResultSolution(solucao);
 
-
-
     }
 
+    private static List<Schedule> listHorarios(Schedule... hs) {
+        ArrayList<Schedule> schedules = new ArrayList<>();
 
-    private static List<Horario> listHorarios(Horario... hs) {
-        ArrayList<Horario> horarios = new ArrayList<>();
+        Collections.addAll(schedules, hs);
 
-        Collections.addAll(horarios, hs);
-
-        return horarios;
+        return schedules;
     }
 
     private static List<Alocacao> listAlocacao(Alocacao... ds) {
@@ -121,6 +115,5 @@ public class Main {
 
         return alocacao;
     }
-
 
 }

@@ -5,11 +5,11 @@ import java.util.Set;
 import java.util.ArrayList;
 
 import domain.Alocacao
-import domain.Disciplina
-import domain.Endereco
-import domain.Horario
+import domain.Subject
+import domain.Address
+import domain.Schedule
 import domain.PreRequisito
-import domain.Professor
+import domain.Teacher
 
 
 global HardMediumSoftScoreHolder scoreHolder;
@@ -20,20 +20,20 @@ rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
         // Opção 1 funcionando.
         $alocacoes: Alocacao() // armazena todas as alocacoes existentes
 
-        Alocacao($d: disciplina, $p: disciplina.periodo, $h : horario) //
+        Alocacao($s: subject, $p: subject.period, $h : schedule) //
 
         exists (
             Alocacao(
-                disciplina != $d,
-                disciplina.periodo == $p,
-                horario == $h
+                subject != $s,
+                subject.period == $p,
+                schedule == $h
             ) from $alocacoes
         )
 
         //Opção 2 funcionando.
-        /*$horario: Horario()
+        /*$schedule: Schedule()
         $total: Number( intValue > 1 )
-                from accumulate( Alocacao($horario == horario),
+                from accumulate( Alocacao($schedule == schedule),
                                  init( int total = 0; ),
                                  action( total += 1; ),
                                  result( total ) )*/
@@ -44,34 +44,34 @@ rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
     end
 
 
-rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre dois horarios de aula"
+rule "Um teacher nao pode ter um intervalo maior ou igual a tres horas entre dois schedules de aula"
 
     when
 
         $alocacoes : Alocacao()
 
-        Alocacao($p : professor, horario != null, $h : horario, $d : disciplina)
+        Alocacao($p : teacher, schedule != null, $h : schedule, $s : subject)
 
-        // Verificando se existe alguma disciplina de um determinado professor alocada antes de outra disciplina
-        // desse mesmo professor em um determinado dia.
+        // Verificando se existe alguma subject de um determinado teacher alocada antes de outra subject
+        // desse mesmo teacher em um determinado dia.
         exists (
             Alocacao(
-                professor == $p,
-                horario.diaSemana == $h.diaSemana,
-                disciplina != $d,
-                horario.horaInicio > $h.horaFim
+                teacher == $p,
+                schedule.dayWeek == $h.dayWeek,
+                subject != $s,
+                schedule.initHour > $h.finalHour
             ) from $alocacoes
         )
 
-        // Verificando nao existe um intervalo de 3 horas entre duas disciplinas de um professor em um mesmo dia.
+        // Verificando nao existe um intervalo de 3 horas entre duas disciplinas de um teacher em um mesmo dia.
         // Se verdadeiro, entao a regra foi quebrada.
         not (
             Alocacao(
-                professor == $p,
-                horario.diaSemana == $h.diaSemana,
-                disciplina != $d,
-                horario.horaInicio > $h.horaFim,
-                (horario.horaInicio - $h.horaFim) < 3
+                teacher == $p,
+                schedule.dayWeek == $h.dayWeek,
+                subject != $s,
+                schedule.initHour > $h.finalHour,
+                (schedule.initHour - $h.finalHour) < 3
             ) from $alocacoes
         )
 
@@ -80,19 +80,19 @@ rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre d
     end
 
 
-rule "Um professor nao pode estar alocado em horarios conflitantes"
+rule "Um teacher nao pode estar alocado em schedules conflitantes"
 
     when
 
-        $alocacao : Alocacao($professor : professor, $horario : horario != null)
+        $alocacao : Alocacao($teacher : teacher, $schedule : schedule != null)
 
-        // Verificando se existe mais de uma alocacao de um professor em que os horarios sao iguais.
+        // Verificando se existe mais de uma alocacao de um teacher em que os schedules sao iguais.
         $total : Number( intValue > 1 )
                     from accumulate(
                         Alocacao(
-                            horario != null,
-                            professor == $professor,
-                            horario == $horario
+                            schedule != null,
+                            teacher == $teacher,
+                            schedule == $schedule
                         ),
                         init( int total = 0; ),
                         action( total += 1; ),
@@ -100,6 +100,6 @@ rule "Um professor nao pode estar alocado em horarios conflitantes"
                     )
 
     then
-        // System.out.println("Professor - > " + $professor.getNome() + " | Horario -> " + $horario.getStrDiaSemana() + " " + $horario.getHorarioInicio());
+        // System.out.println("Teacher - > " + $teacher.getName() + " | Schedule -> " + $schedule.getStrDiaSemana() + " " + $schedule.getInitSchedule());
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
     end

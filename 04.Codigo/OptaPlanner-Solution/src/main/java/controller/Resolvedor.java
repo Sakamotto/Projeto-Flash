@@ -46,17 +46,17 @@ public class Resolvedor {
 
         System.out.println("Solução é viável ? R = " + viabilidade);
 
-        solucao.getAlocacoes().forEach(a -> logger.info("Disciplina = [{}] -> Horario = [{}]", a.getDisciplina().getNome(), a.getHorario().getStrDiaSemana() + ", " + a.getHorario().getHorarioInicio() + " - " + a.getHorario().getHorarioFim()));
+        solucao.getAlocacoes().forEach(a -> logger.info("Subject = [{}] -> Schedule = [{}]", a.getSubject().getName(), a.getSchedule().getStrDiaSemana() + ", " + a.getSchedule().getInitSchedule() + " - " + a.getSchedule().getFinalSchedule()));
     }
 
     public static void printResultSolution(AlocacaoHorario solucao) {
         List<Alocacao> resultadoAlocacoes = solucao.getAlocacoes();
 
         for( Alocacao resultadoAlocacao : resultadoAlocacoes) {
-            System.out.println("\n\nProfessor: " + resultadoAlocacao.getProfessor().getNome() +
-                    "\nDisciplina: " + resultadoAlocacao.getDisciplina().getNome() +
-                    "\nDia da Semana: " + resultadoAlocacao.getHorario().getStrDiaSemana() +
-                    "\nHorario Inicio " + resultadoAlocacao.getHorario().getHorarioInicio());
+            System.out.println("\n\nTeacher: " + resultadoAlocacao.getTeacher().getName() +
+                    "\nSubject: " + resultadoAlocacao.getSubject().getName() +
+                    "\nDia da Semana: " + resultadoAlocacao.getSchedule().getStrDiaSemana() +
+                    "\nSchedule Inicio " + resultadoAlocacao.getSchedule().getInitSchedule());
         }
     }
 }

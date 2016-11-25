@@ -1,32 +1,33 @@
 package domain;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-
-import java.io.Serializable;
 
 /**
  * Created by danilo on 01/10/16.
  */
-public class Professor {
-    private String nome;
+
+@XStreamAlias("Teacher")
+public class Teacher {
+    private String name;
     private String cpf;
-    private Endereco endereco;
+    private Address address;
 
-    public Professor(){}
+    public Teacher(){}
 
 
-    public Professor(String nome, String cpf) {
-        this.nome = nome;
+    public Teacher(String name, String cpf) {
+        this.name = name;
         this.cpf = cpf;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCpf() {
@@ -37,18 +38,18 @@ public class Professor {
         this.cpf = cpf;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(nome)
+                .append(name)
                 .append(cpf)
                 .toHashCode();
     }
@@ -57,10 +58,10 @@ public class Professor {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else if (o instanceof Professor) {
-            Professor other = (Professor) o;
+        } else if (o instanceof Teacher) {
+            Teacher other = (Teacher) o;
             return new EqualsBuilder()
-                    .append(nome, other.getNome())
+                    .append(name, other.getName())
                     .append(cpf, other.getCpf())
                     .isEquals();
         } else {

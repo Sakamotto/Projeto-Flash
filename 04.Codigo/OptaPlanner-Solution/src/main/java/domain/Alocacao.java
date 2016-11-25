@@ -11,53 +11,53 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 @XStreamAlias("Alocacao")
 public class Alocacao {
 
-    private Horario horario;
-    private Disciplina disciplina;
-    private Professor professor;
+    private Schedule schedule;
+    private Subject subject;
+    private Teacher teacher;
 
 
     public Alocacao() {}
 
-    public Alocacao(Disciplina disciplina, Professor professor) {
-        this.disciplina = disciplina;
-        this.professor = professor;
+    public Alocacao(Subject subject, Teacher teacher) {
+        this.subject = subject;
+        this.teacher = teacher;
     }
 
-    public Alocacao(Disciplina disciplinaParam) {
-        disciplina = disciplinaParam;
+    public Alocacao(Subject subjectParam) {
+        subject = subjectParam;
     }
 
 
-    @PlanningVariable(valueRangeProviderRefs = {"horario"})
-    public Horario getHorario() {
-        return horario;
+    @PlanningVariable(valueRangeProviderRefs = {"schedule"})
+    public Schedule getSchedule() {
+        return schedule;
     }
 
-    public void setHorario(Horario horario) {
-        this.horario = horario;
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
-    public Disciplina getDisciplina() {
-        return disciplina;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(disciplina)
-                .append(professor)
+                .append(subject)
+                .append(teacher)
                 .toHashCode();
     }
 
@@ -67,8 +67,8 @@ public class Alocacao {
         } else if (o instanceof Alocacao) {
             Alocacao other = (Alocacao) o;
             return new EqualsBuilder()
-                    .append(disciplina, other.getDisciplina())
-                    .append(professor, other.getProfessor())
+                    .append(subject, other.getSubject())
+                    .append(teacher, other.getTeacher())
                     .isEquals();
         } else {
             return false;

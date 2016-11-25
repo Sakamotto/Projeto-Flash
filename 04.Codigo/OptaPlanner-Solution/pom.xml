@@ -6,7 +6,7 @@
 
     <groupId>br.edu.ifes</groupId>
     <artifactId>flashoptaplanner</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
          
     <properties>
 	<maven.test.skip>true</maven.test.skip>
@@ -21,6 +21,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>br.edu.ifes</groupId>
+            <artifactId>flashcrud</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.optaplanner</groupId>
             <artifactId>optaplanner-core</artifactId>
