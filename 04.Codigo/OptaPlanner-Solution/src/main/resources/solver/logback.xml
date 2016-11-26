@@ -1,15 +1,15 @@
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender nome="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
         </encoder>
     </appender>
 
-    <logger name="org.optaplanner" level="info">
+    <logger nome="org.optaplanner" level="info">
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="projetoflash" level="debug">
+    <logger nome="projetoflash" level="debug">
         <appender-ref ref="STDOUT" />
     </logger>
 </configuration>

@@ -5,7 +5,7 @@ package domain;
  */
 public class ScheduleBuilder {
 
-    Schedule schedule;
+    private Schedule schedule;
 
     public ScheduleBuilder(int id) {
         schedule = new Schedule(id);

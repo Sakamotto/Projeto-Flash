@@ -1,7 +1,7 @@
 package application;
 
 import controller.Resolvedor;
-import domain.Alocacao;
+import domain.Allocation;
 import domain.Schedule;
 
 
@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         Resolvedor.benchMark();
 
-//        AlocacaoHorario problema;
+//        AllocationSchedule problema;
 //
 //
 //        Schedule horario01 = new ScheduleBuilder(1)
@@ -72,29 +72,29 @@ public class Main {
 //        Subject disciplina05 = new Subject("Logica", 1, 30);
 //        Subject disciplina06 = new Subject("Programacao 1", 1, 60);
 //
-//        Alocacao alocacao1 = new Alocacao( disciplina01 );
+//        Allocation alocacao1 = new Allocation( disciplina01 );
 //
-//        Alocacao alocacao2 = new Alocacao( disciplina02 );
+//        Allocation alocacao2 = new Allocation( disciplina02 );
 //
-//        Alocacao alocacao3 = new Alocacao( disciplina03 );
+//        Allocation alocacao3 = new Allocation( disciplina03 );
 //
-//        Alocacao alocacao4 = new Alocacao( disciplina04 );
+//        Allocation alocacao4 = new Allocation( disciplina04 );
 //
-//        Alocacao alocacao5 = new Alocacao( disciplina05 );
+//        Allocation alocacao5 = new Allocation( disciplina05 );
 //
-//        Alocacao alocacao6 = new Alocacao( disciplina06 );
-//
-//
+//        Allocation alocacao6 = new Allocation( disciplina06 );
 //
 //
-//        problema = new AlocacaoHorario(
+//
+//
+//        problema = new AllocationSchedule(
 //                listAlocacao(alocacao1, alocacao2, alocacao3, alocacao4, alocacao5, alocacao6),
 //                listHorarios(horario01, horario02, horario03, horario04, horario06, horario05, horario07)
 //        );
 //
 //
 //
-//        AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+//        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 //
 //        // printResultSolution(solucao);
 
@@ -108,12 +108,12 @@ public class Main {
         return schedules;
     }
 
-    private static List<Alocacao> listAlocacao(Alocacao... ds) {
-        ArrayList<Alocacao> alocacao = new ArrayList<>();
+    private static List<Allocation> listAlocacao(Allocation... ds) {
+        ArrayList<Allocation> allocation = new ArrayList<>();
 
-        Collections.addAll(alocacao, ds);
+        Collections.addAll(allocation, ds);
 
-        return alocacao;
+        return allocation;
     }
 
 }

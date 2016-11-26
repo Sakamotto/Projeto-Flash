@@ -1,7 +1,7 @@
 package controller;
 
-import application.AlocacaoHorario;
-import domain.Alocacao;
+import application.AllocationSchedule;
+import domain.Allocation;
 import org.optaplanner.benchmark.api.PlannerBenchmark;
 import org.optaplanner.benchmark.api.PlannerBenchmarkFactory;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
@@ -25,12 +25,12 @@ public class Resolvedor {
         plannerBenchmark.benchmark();
     }
 
-    public static AlocacaoHorario resolver(AlocacaoHorario problem, String solverConfig) {
+    public static AllocationSchedule resolver(AllocationSchedule problem, String solverConfig) {
         SolverFactory sF = SolverFactory.createFromXmlResource(solverConfig);
         Solver solver = sF.buildSolver();
         solver.solve(problem);
 
-        AlocacaoHorario solucao = (AlocacaoHorario) solver.getBestSolution();
+        AllocationSchedule solucao = (AllocationSchedule) solver.getBestSolution();
 
         logarSolucao(solucao);
         printResultSolution(solucao);
@@ -38,7 +38,7 @@ public class Resolvedor {
         return solucao;
     }
 
-    public static void logarSolucao(AlocacaoHorario solucao) {
+    public static void logarSolucao(AllocationSchedule solucao) {
         HardMediumSoftScore score = solucao.getScore();
         String viabilidade = (score.isFeasible()) ? "Sim": "Nao";
 
@@ -46,17 +46,17 @@ public class Resolvedor {
 
         System.out.println("Solução é viável ? R = " + viabilidade);
 
-        solucao.getAlocacoes().forEach(a -> logger.info("Subject = [{}] -> Schedule = [{}]", a.getSubject().getName(), a.getSchedule().getStrDiaSemana() + ", " + a.getSchedule().getInitSchedule() + " - " + a.getSchedule().getFinalSchedule()));
+        solucao.getAllocations().forEach(a -> logger.info("Subject = [{}] -> Schedule = [{}]", a.getSubject().getNome(), a.getSchedule().getStrDiaSemana() + ", " + a.getSchedule().getInitSchedule() + " - " + a.getSchedule().getFinalSchedule()));
     }
 
-    public static void printResultSolution(AlocacaoHorario solucao) {
-        List<Alocacao> resultadoAlocacoes = solucao.getAlocacoes();
+    public static void printResultSolution(AllocationSchedule solucao) {
+        List<Allocation> resultadoAlocacoes = solucao.getAllocations();
 
-        for( Alocacao resultadoAlocacao : resultadoAlocacoes) {
-            System.out.println("\n\nTeacher: " + resultadoAlocacao.getTeacher().getName() +
-                    "\nSubject: " + resultadoAlocacao.getSubject().getName() +
-                    "\nDia da Semana: " + resultadoAlocacao.getSchedule().getStrDiaSemana() +
-                    "\nSchedule Inicio " + resultadoAlocacao.getSchedule().getInitSchedule());
+        for( Allocation resultadoAllocation : resultadoAlocacoes) {
+            System.out.println("\n\nTeacher: " + resultadoAllocation.getTeacher().getNome() +
+                    "\nDisciplina: " + resultadoAllocation.getSubject().getNome() +
+                    "\nDia da Semana: " + resultadoAllocation.getSchedule().getStrDiaSemana() +
+                    "\nHorario de Inicio " + resultadoAllocation.getSchedule().getInitSchedule());
         }
     }
 }

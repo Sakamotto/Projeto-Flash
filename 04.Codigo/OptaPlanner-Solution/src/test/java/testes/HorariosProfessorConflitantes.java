@@ -1,11 +1,11 @@
 package testes;
 
-import application.AlocacaoHorario;
+import application.AllocationSchedule;
 import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
-import domain.Alocacao;
+import domain.Allocation;
 import domain.Schedule;
 import domain.Subject;
 import domain.Teacher;
@@ -20,9 +20,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class HorariosProfessorConflitantes {
 
-    private Alocacao alocacaoUm;
-    private Alocacao alocacaoDois;
-    private Alocacao alocacaoTres;
+    private Allocation allocationUm;
+    private Allocation allocationDois;
+    private Allocation allocationTres;
 
     private Teacher teacherUm = new Teacher("Foo Bar", "99999988888");
     private Teacher teacherDois = new Teacher("Teacher Snape", "11122233344");
@@ -35,18 +35,18 @@ public class HorariosProfessorConflitantes {
     private Schedule scheduleDois = new Schedule(2);
     private Schedule scheduleTres = new Schedule(3);
 
-    private List<Alocacao> alocacoes = new ArrayList<>();
+    private List<Allocation> alocacoes = new ArrayList<>();
     private List<Schedule> schedules;
 
     @Dado("^Existe um conjunto de professores alocados a um conjunto de disciplinas$")
     public void existe_um_conjunto_de_professores_alocados_a_um_conjunto_de_disciplinas() throws Throwable {
-        alocacaoUm = new Alocacao(subjectUm, teacherUm);
-        alocacaoDois = new Alocacao(subjectDois, teacherDois);
-        alocacaoTres = new Alocacao(subjectTres, teacherDois);
+        allocationUm = new Allocation(subjectUm, teacherUm);
+        allocationDois = new Allocation(subjectDois, teacherDois);
+        allocationTres = new Allocation(subjectTres, teacherDois);
 
-        alocacoes.add(alocacaoUm);
-        alocacoes.add(alocacaoDois);
-        alocacoes.add(alocacaoTres);
+        alocacoes.add(allocationUm);
+        alocacoes.add(allocationDois);
+        alocacoes.add(allocationTres);
     }
 
     @Quando("^Eu alocar os horarios que geram conflito de horarios dos professores$")
@@ -69,9 +69,9 @@ public class HorariosProfessorConflitantes {
         schedules.add(scheduleDois);
         schedules.add(scheduleTres);
 
-        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
+        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
 
-        AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
     }
@@ -101,9 +101,9 @@ public class HorariosProfessorConflitantes {
         schedules.add(scheduleDois);
         schedules.add(scheduleTres);
 
-        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
+        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
 
-        AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
     }

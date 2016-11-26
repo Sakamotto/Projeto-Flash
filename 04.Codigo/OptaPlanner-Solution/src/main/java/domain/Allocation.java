@@ -8,27 +8,27 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 @PlanningEntity
-@XStreamAlias("Alocacao")
-public class Alocacao {
+@XStreamAlias("Allocation")
+public class Allocation {
 
     private Schedule schedule;
     private Subject subject;
     private Teacher teacher;
 
 
-    public Alocacao() {}
+    public Allocation() {}
 
-    public Alocacao(Subject subject, Teacher teacher) {
+    public Allocation(Subject subject, Teacher teacher) {
         this.subject = subject;
         this.teacher = teacher;
     }
 
-    public Alocacao(Subject subjectParam) {
+    public Allocation(Subject subjectParam) {
         subject = subjectParam;
     }
 
 
-    @PlanningVariable(valueRangeProviderRefs = {"schedule"})
+    @PlanningVariable(valueRangeProviderRefs = {"Schedule"})
     public Schedule getSchedule() {
         return schedule;
     }
@@ -64,8 +64,8 @@ public class Alocacao {
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else if (o instanceof Alocacao) {
-            Alocacao other = (Alocacao) o;
+        } else if (o instanceof Allocation) {
+            Allocation other = (Allocation) o;
             return new EqualsBuilder()
                     .append(subject, other.getSubject())
                     .append(teacher, other.getTeacher())
