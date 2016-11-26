@@ -1,6 +1,7 @@
 package domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import model.dominio.Disciplina;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -8,27 +9,21 @@ import java.util.List;
 
 
 @XStreamAlias("Subject")
-public class Subject {
+public class Subject extends Disciplina {
 
-    private String name;
     private int period;
     private int workLoad;
     private List<String> preRequisite;
 
     public Subject() {}
 
-    public Subject(String name, int period, int workLoad) {
-        this.name = name;
+    public Subject(String nome, int period, int workLoad) {
+        setNome(nome);
+        setPeriodo(Integer.toString(period));
+        setCargaHoraria(Integer.toString(workLoad));
+
         this.period = period;
         this.workLoad = workLoad;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getPeriod() {
@@ -57,7 +52,7 @@ public class Subject {
 
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(name)
+                .append(getNome())
                 .append(period)
                 .append(workLoad)
                 .toHashCode();
@@ -70,7 +65,7 @@ public class Subject {
         } else if (o instanceof Subject) {
             Subject other = (Subject) o;
             return new EqualsBuilder()
-                    .append(name, other.getName())
+                    .append(getNome(), other.getNome())
                     .append(period, other.getPeriod())
                     .append(workLoad, other.getWorkLoad())
                     .isEquals();

@@ -1,6 +1,7 @@
 package model.dominio;
 
-import javax.persistence.Embeddable;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Created by danilo on 23/10/16.
@@ -76,5 +77,26 @@ public class Cpf {
         cpfValido = cpfValido && Integer.parseInt(cpf.substring(10, 11)) == sumVerificadorDois;
 
         return cpfValido;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(cpf)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Cpf) {
+            Cpf other = (Cpf) o;
+            return new EqualsBuilder()
+                    .append(cpf, other.getCpf())
+                    .isEquals();
+        } else {
+            return false;
+        }
     }
 }

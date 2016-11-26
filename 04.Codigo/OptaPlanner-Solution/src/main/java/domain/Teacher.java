@@ -1,6 +1,7 @@
 package domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import model.dominio.Professor;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -9,48 +10,34 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 
 @XStreamAlias("Teacher")
-public class Teacher {
-    private String name;
+public class Teacher extends Professor {
+
     private String cpf;
-    private Address address;
 
     public Teacher(){}
 
+    public Teacher(String nome, String cpf) {
+        setNome(nome);
+        setCpf(cpf, false);
 
-    public Teacher(String name, String cpf) {
-        this.name = name;
         this.cpf = cpf;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Override
     public String getCpf() {
         return cpf;
     }
 
     public void setCpf(String cpf) {
+        setCpf(cpf, false);
         this.cpf = cpf;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(name)
-                .append(cpf)
+                .append(getNome())
+                .append(getCpf())
                 .toHashCode();
     }
 
@@ -61,8 +48,8 @@ public class Teacher {
         } else if (o instanceof Teacher) {
             Teacher other = (Teacher) o;
             return new EqualsBuilder()
-                    .append(name, other.getName())
-                    .append(cpf, other.getCpf())
+                    .append(getNome(), other.getNome())
+                    .append(getCpf(), other.getCpf())
                     .isEquals();
         } else {
             return false;

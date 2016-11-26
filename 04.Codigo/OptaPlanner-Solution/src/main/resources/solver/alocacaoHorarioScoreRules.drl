@@ -4,11 +4,10 @@ import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore
 import java.util.Set;
 import java.util.ArrayList;
 
-import domain.Alocacao
+import domain.Allocation
 import domain.Subject
-import domain.Address
 import domain.Schedule
-import domain.PreRequisito
+import domain.PreRequisite
 import domain.Teacher
 
 
@@ -18,22 +17,22 @@ rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
 
     when
         // Opção 1 funcionando.
-        $alocacoes: Alocacao() // armazena todas as alocacoes existentes
+        $a: Allocation() // armazena todas as alocacoes existentes
 
-        Alocacao($s: subject, $p: subject.period, $h : schedule) //
+        Allocation($subject: subject, $period: subject.period, $schedule : schedule) //
 
         exists (
-            Alocacao(
-                subject != $s,
-                subject.period == $p,
-                schedule == $h
-            ) from $alocacoes
+            Allocation(
+                subject != $subject,
+                subject.period == $period,
+                schedule == $schedule
+            ) from $a
         )
 
         //Opção 2 funcionando.
         /*$schedule: Schedule()
         $total: Number( intValue > 1 )
-                from accumulate( Alocacao($schedule == schedule),
+                from accumulate( Allocation($schedule == schedule),
                                  init( int total = 0; ),
                                  action( total += 1; ),
                                  result( total ) )*/
@@ -48,31 +47,31 @@ rule "Um teacher nao pode ter um intervalo maior ou igual a tres horas entre doi
 
     when
 
-        $alocacoes : Alocacao()
+        $a : Allocation()
 
-        Alocacao($p : teacher, schedule != null, $h : schedule, $s : subject)
+        Allocation($teacher : teacher, $schedule : schedule != null, $subject : subject)
 
         // Verificando se existe alguma subject de um determinado teacher alocada antes de outra subject
         // desse mesmo teacher em um determinado dia.
         exists (
-            Alocacao(
-                teacher == $p,
-                schedule.dayWeek == $h.dayWeek,
-                subject != $s,
-                schedule.initHour > $h.finalHour
-            ) from $alocacoes
+            Allocation(
+                teacher == $teacher,
+                schedule.dayWeek == $schedule.dayWeek,
+                subject != $subject,
+                schedule.initHour > $schedule.finalHour
+            ) from $a
         )
 
         // Verificando nao existe um intervalo de 3 horas entre duas disciplinas de um teacher em um mesmo dia.
         // Se verdadeiro, entao a regra foi quebrada.
         not (
-            Alocacao(
-                teacher == $p,
-                schedule.dayWeek == $h.dayWeek,
-                subject != $s,
-                schedule.initHour > $h.finalHour,
-                (schedule.initHour - $h.finalHour) < 3
-            ) from $alocacoes
+            Allocation(
+                teacher == $teacher,
+                schedule.dayWeek == $schedule.dayWeek,
+                subject != $subject,
+                schedule.initHour > $schedule.finalHour,
+                (schedule.initHour - $schedule.finalHour) < 3
+            ) from $a
         )
 
     then
@@ -84,12 +83,12 @@ rule "Um teacher nao pode estar alocado em schedules conflitantes"
 
     when
 
-        $alocacao : Alocacao($teacher : teacher, $schedule : schedule != null)
+        $a : Allocation($teacher : teacher, $schedule : schedule != null)
 
-        // Verificando se existe mais de uma alocacao de um teacher em que os schedules sao iguais.
+        // Verificando se existe mais de uma allocation de um teacher em que os schedules sao iguais.
         $total : Number( intValue > 1 )
                     from accumulate(
-                        Alocacao(
+                        Allocation(
                             schedule != null,
                             teacher == $teacher,
                             schedule == $schedule
@@ -100,6 +99,6 @@ rule "Um teacher nao pode estar alocado em schedules conflitantes"
                     )
 
     then
-        // System.out.println("Teacher - > " + $teacher.getName() + " | Schedule -> " + $schedule.getStrDiaSemana() + " " + $schedule.getInitSchedule());
+        // System.out.println("Teacher - > " + $teacher.getNome() + " | Schedule -> " + $schedule.getStrDiaSemana() + " " + $schedule.getInitSchedule());
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
     end

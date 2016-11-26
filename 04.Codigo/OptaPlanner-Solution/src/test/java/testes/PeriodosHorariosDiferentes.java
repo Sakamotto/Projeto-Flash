@@ -1,11 +1,11 @@
 package testes;
 
-import application.AlocacaoHorario;
+import application.AllocationSchedule;
 import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
-import domain.Alocacao;
+import domain.Allocation;
 import domain.Schedule;
 import domain.Subject;
 import domain.Teacher;
@@ -21,10 +21,10 @@ import static org.junit.Assert.assertEquals;
  */
 public class PeriodosHorariosDiferentes {
 
-    private Alocacao alocacao1;
-    private Alocacao alocacao2;
-    private Alocacao alocacao3;
-    private Alocacao alocacao4;
+    private Allocation allocation1;
+    private Allocation allocation2;
+    private Allocation allocation3;
+    private Allocation allocation4;
 
     private Teacher teacher1 = new Teacher("Fulano de Tal", "12312345678");
     private Teacher teacher2 = new Teacher("Filini di Til", "32165498787");
@@ -39,7 +39,7 @@ public class PeriodosHorariosDiferentes {
     private Schedule h1;
     private Schedule h2;
 
-    private AlocacaoHorario solucao;
+    private AllocationSchedule solucao;
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(PeriodosHorariosDiferentes.class);
 
@@ -55,24 +55,24 @@ public class PeriodosHorariosDiferentes {
 
     @Quando("^Eu alocar o horario$")
     public void eu_alocar_o_horario() {
-        alocacao1 = new Alocacao();
-        alocacao2 = new Alocacao();
-        alocacao3 = new Alocacao();
-        alocacao4 = new Alocacao();
+        allocation1 = new Allocation();
+        allocation2 = new Allocation();
+        allocation3 = new Allocation();
+        allocation4 = new Allocation();
         h1 = new Schedule(1);
         h2 = new Schedule(2);
 
-        alocacao1.setSubject(subject1);
-        alocacao1.setTeacher(teacher1);
+        allocation1.setSubject(subject1);
+        allocation1.setTeacher(teacher1);
 
-        alocacao2.setSubject(subject2);
-        alocacao2.setTeacher(teacher2);
+        allocation2.setSubject(subject2);
+        allocation2.setTeacher(teacher2);
 
-        alocacao3.setSubject(subject3);
-        alocacao3.setTeacher(teacher3);
+        allocation3.setSubject(subject3);
+        allocation3.setTeacher(teacher3);
 
-        alocacao4.setSubject(subject4);
-        alocacao4.setTeacher(teacher4);
+        allocation4.setSubject(subject4);
+        allocation4.setTeacher(teacher4);
 
         h1.setDayWeek(Schedule.DayWeek.MONDAY);
         h1.setInitSchedule(7, 30);
@@ -86,17 +86,17 @@ public class PeriodosHorariosDiferentes {
 
     @Quando("^houver conflito$")
     public void houver_conflito() {
-        ArrayList<Alocacao> alocacoes = new ArrayList<>();
+        ArrayList<Allocation> alocacoes = new ArrayList<>();
         ArrayList<Schedule> schedules = new ArrayList<>();
 
         schedules.add(h1);
         schedules.add(h1);
-        alocacoes.add(alocacao1);
-        alocacoes.add(alocacao2);
-        alocacoes.add(alocacao3);
-        alocacoes.add(alocacao4);
+        alocacoes.add(allocation1);
+        alocacoes.add(allocation2);
+        alocacoes.add(allocation3);
+        alocacoes.add(allocation4);
 
-        AlocacaoHorario ah = new AlocacaoHorario(alocacoes, schedules);
+        AllocationSchedule ah = new AllocationSchedule(alocacoes, schedules);
         solucao = Resolvedor.resolver(ah, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
@@ -110,18 +110,18 @@ public class PeriodosHorariosDiferentes {
 
     @Quando("^nao houver conflito$")
     public void nao_houver_conflito() {
-        ArrayList<Alocacao> alocacoes = new ArrayList<>();
+        ArrayList<Allocation> alocacoes = new ArrayList<>();
         ArrayList<Schedule> schedules = new ArrayList<>();
 
         schedules.add(h1);
         schedules.add(h2);
-        alocacoes.add(alocacao1);
-        alocacoes.add(alocacao2);
-        alocacoes.add(alocacao3);
-        alocacoes.add(alocacao4);
+        alocacoes.add(allocation1);
+        alocacoes.add(allocation2);
+        alocacoes.add(allocation3);
+        alocacoes.add(allocation4);
 
 
-        AlocacaoHorario ah = new AlocacaoHorario(alocacoes, schedules);
+        AllocationSchedule ah = new AllocationSchedule(alocacoes, schedules);
         solucao = Resolvedor.resolver(ah, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);

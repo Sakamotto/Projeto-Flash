@@ -1,83 +1,83 @@
-<AlocacaoHorario id="1">
-    <alocacoes id="2">
-        <Alocacao id="3">
+<AllocationSchedule id="1">
+    <allocations id="2">
+        <Allocation id="3">
             <subject id="4">
-                <name>Calculo 1</name>
+                <nome>Calculo 1</nome>
                 <period>1</period>
                 <workLoad>60</workLoad>
             </subject>
 
             <teacher id = "5">
-                <name>Bruno Ramos Gonzaga</name>
+                <nome>Bruno Ramos Gonzaga</nome>
                 <cpf>11111111111</cpf>
             </teacher>
-        </Alocacao>
+        </Allocation>
 
-        <Alocacao id="6">
+        <Allocation id="6">
             <subject id="7">
-                <name>Comunicacao Empresarial</name>
+                <nome>Comunicacao Empresarial</nome>
                 <period>1</period>
                 <workLoad>30</workLoad>
             </subject>
 
             <teacher id="8">
-                <name>Aurelia Hubner</name>
+                <nome>Aurelia Hubner</nome>
                 <cpf>11111122222</cpf>
             </teacher>
-        </Alocacao>
+        </Allocation>
 
-		<Alocacao id="9">
+		<Allocation id="9">
             <subject id="10">
-                <name>Metodologia da Pesquisa</name>
+                <nome>Metodologia da Pesquisa</nome>
                 <period>1</period>
                 <workLoad>30</workLoad>
             </subject>
 
             <teacher id="11">
-                <name>Rutinelli Nao Sei O Sobrenome</name>
+                <nome>Rutinelli Nao Sei O Sobrenome</nome>
                 <cpf>22222111111</cpf>
             </teacher>
-        </Alocacao>
+        </Allocation>
 
-		<Alocacao id="12">
+		<Allocation id="12">
             <subject id="13">
-                <name>FSI</name>
+                <nome>FSI</nome>
                 <period>1</period>
                 <workLoad>30</workLoad>
             </subject>
 
             <teacher id="14">
-                <name>Cleio Maioli</name>
+                <nome>Cleio Maioli</nome>
                 <cpf>22222222222</cpf>
             </teacher>
-        </Alocacao>
+        </Allocation>
 
-		<Alocacao id="15">
+		<Allocation id="15">
             <subject id="16">
-                <name>Logica</name>
+                <nome>Logica</nome>
                 <period>1</period>
                 <workLoad>90</workLoad>
             </subject>
 
             <teacher id="17">
-                <name>Jeferson Oliveira Andrade</name>
+                <nome>Jeferson Oliveira Andrade</nome>
                 <cpf>22222333333</cpf>
             </teacher>
-        </Alocacao>
+        </Allocation>
 
-		<Alocacao id="18">
+		<Allocation id="18">
             <subject id="19">
-                <name>Programacao 1</name>
+                <nome>Programacao 1</nome>
                 <period>1</period>
                 <workLoad>90</workLoad>
             </subject>
 
             <teacher id="20">
-                <name>Alessandra Aguiar</name>
+                <nome>Alessandra Aguiar</nome>
                 <cpf>33333222222</cpf>
             </teacher>
-        </Alocacao>
-    </alocacoes>
+        </Allocation>
+    </allocations>
 
 
     <schedules id="21">
@@ -137,4 +137,4 @@
             <dayWeek>THURSDAY</dayWeek>
         </Schedule>
     </schedules>
-</AlocacaoHorario>
+</AllocationSchedule>

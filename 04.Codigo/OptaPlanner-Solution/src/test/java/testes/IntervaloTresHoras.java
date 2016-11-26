@@ -1,7 +1,7 @@
 package testes;
 
 
-import application.AlocacaoHorario;
+import application.AllocationSchedule;
 import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntervaloTresHoras {
 
-    private List<Alocacao> alocacoes;
+    private List<Allocation> alocacoes;
     private List<Schedule> schedules;
 
     @Dado("^Eu tenha um conjunto de professores alocados a um conjunto de disciplinas$")
@@ -30,16 +30,16 @@ public class IntervaloTresHoras {
         Subject subjectUm = new Subject("Calculo 1", 1, 90);
         Subject subjectDois = new Subject("Lógica", 1, 90);
 
-        Alocacao alocacaoUm = new Alocacao(subjectUm);
-        Alocacao alocacaoDois = new Alocacao(subjectDois);
+        Allocation allocationUm = new Allocation(subjectUm);
+        Allocation allocationDois = new Allocation(subjectDois);
 
-        alocacaoUm.setTeacher(teacher);
-        alocacaoDois.setTeacher(teacher);
+        allocationUm.setTeacher(teacher);
+        allocationDois.setTeacher(teacher);
 
         alocacoes = new ArrayList<>();
 
-        alocacoes.add(alocacaoUm);
-        alocacoes.add(alocacaoDois);
+        alocacoes.add(allocationUm);
+        alocacoes.add(allocationDois);
 
     }
 
@@ -60,9 +60,9 @@ public class IntervaloTresHoras {
         schedules.add(scheduleUm);
         schedules.add(scheduleDois);
 
-        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
+        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
 
-        AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
     }
@@ -90,9 +90,9 @@ public class IntervaloTresHoras {
         schedules.add(scheduleUm);
         schedules.add(scheduleDois);
 
-        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
+        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
 
-        AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
 
