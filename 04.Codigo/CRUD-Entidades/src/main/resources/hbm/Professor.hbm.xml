@@ -22,6 +22,7 @@
         </component>
         <property name="matricula"/>
 
+
         <many-to-one name="endereco" column="endereco_id"
                      class="model.dominio.Endereco" not-null="true" cascade="all" fetch="select"/>
 

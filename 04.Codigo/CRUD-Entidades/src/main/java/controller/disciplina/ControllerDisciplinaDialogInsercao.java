@@ -1,7 +1,5 @@
 package controller.disciplina;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,13 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.database.PersistenciaAreaConhecimento;
-import model.database.PersistenciaCurso;
+import model.DAO.areaConhecimento.AreaConhecimentoDAO;
+import model.DAO.areaConhecimento.AreaConhecimentoDAOImpl;
+import model.DAO.curso.CursoDAO;
+import model.DAO.curso.CursoDAOImpl;
+import model.dominio.AreaConhecimento;
 import model.dominio.Curso;
 import model.dominio.Disciplina;
-
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,11 +31,18 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
     @FXML private ChoiceBox<String> choiceBoxAreaConhecimento;
     @FXML private ChoiceBox<String> choiceBoxCurso;
 
+    private CursoDAO cDAO = new CursoDAOImpl();
+    private AreaConhecimentoDAO acDAO = new AreaConhecimentoDAOImpl();
+
     private ObservableList<String> observableListCurso;
     private ObservableList<String> observableListAreaConhecimento;
 
-    ArrayList<String> listCursos = new ArrayList<>();
-    ArrayList<String> listAreaConhecimentos = new ArrayList<>();
+    private ArrayList<String> listCursos = new ArrayList<>();
+    private ArrayList<String> listAreaConhecimentos = new ArrayList<>();
+
+    private HashMap<String, Curso> cursos = new HashMap<>();
+    private HashMap<String, AreaConhecimento> areaConhecimentos = new HashMap<>();
+
     private Stage dialogStage;
     private boolean btnSalvarClicado = false;
     private Disciplina disciplina;
@@ -61,12 +67,12 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         this.disciplina = disciplina;
 
         textFieldDisciplinaNome.setText(disciplina.getNome());
-        textFieldDisciplinaCargaHoraria.setText(disciplina.getCargaHoraria());
-        textFieldDisciplinaPeriodo.setText(disciplina.getPeriodo());
+        textFieldDisciplinaCargaHoraria.setText(Integer.toString(disciplina.getCargaHoraria()));
+        textFieldDisciplinaPeriodo.setText(Integer.toString(disciplina.getPeriodo()));
 
         // Coloca a Área de conhecimento da disciplina com oescolhido.
         if (!disciplina.getNome().equals("") && !disciplina.getAreaConhecimento().equals("")) {
-            Collections.swap(listAreaConhecimentos, 0, listAreaConhecimentos.indexOf(disciplina.getAreaConhecimento()));
+            Collections.swap(listAreaConhecimentos, 0, listAreaConhecimentos.indexOf(disciplina.getAreaConhecimento().getDescricao()));
             Collections.swap(listCursos, 0, listCursos.indexOf(disciplina.getCurso().getNome()));
         }
 
@@ -96,15 +102,14 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
             }
         });
 
-        try {
+        for (Curso curso : cDAO.listar(Curso.class)) {
+            listCursos.add(curso.getNome());
+            cursos.put(curso.getNome(), curso);
+        }
 
-            for (Curso curso : PersistenciaCurso.get()) {
-                listCursos.add(curso.getNome());
-            }
-
-            listAreaConhecimentos = PersistenciaAreaConhecimento.get();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+        for (AreaConhecimento areaConhecimento : acDAO.listar(AreaConhecimento.class)) {
+            listAreaConhecimentos.add(areaConhecimento.getDescricao());
+            areaConhecimentos.put(areaConhecimento.getDescricao(), areaConhecimento);
         }
     }
 
@@ -112,10 +117,10 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
     public void handleButtonSalvar() {
 
         disciplina.setNome(textFieldDisciplinaNome.getText());
-        disciplina.setCargaHoraria(textFieldDisciplinaCargaHoraria.getText());
-        disciplina.getCurso().setNome(choiceBoxCurso.getSelectionModel().getSelectedItem());
-        disciplina.setPeriodo(textFieldDisciplinaPeriodo.getText());
-        disciplina.setAreaConhecimento(choiceBoxAreaConhecimento.getSelectionModel().getSelectedItem());
+        disciplina.setCargaHoraria(Integer.parseInt(textFieldDisciplinaCargaHoraria.getText()));
+        disciplina.setCurso(cursos.get(choiceBoxCurso.getSelectionModel().getSelectedItem()));
+        disciplina.setPeriodo(Integer.parseInt(textFieldDisciplinaPeriodo.getText()));
+        disciplina.setAreaConhecimento(areaConhecimentos.get(choiceBoxAreaConhecimento.getSelectionModel().getSelectedItem()));
 
         btnSalvarClicado = true;
 
