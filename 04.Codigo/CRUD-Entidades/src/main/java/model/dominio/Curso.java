@@ -4,6 +4,8 @@ package model.dominio;
  * Created by danilo on 24/10/16.
  */
 public class Curso implements Cloneable {
+
+    private int id;
     private String nome;
     private String regime;
     private int duracao;
@@ -14,6 +16,14 @@ public class Curso implements Cloneable {
         regime = "";
         duracao = 0;
         sigla = "";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

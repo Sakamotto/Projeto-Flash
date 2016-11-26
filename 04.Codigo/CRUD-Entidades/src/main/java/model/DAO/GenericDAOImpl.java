@@ -12,72 +12,56 @@ import java.util.List;
  */
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
-    protected static Session session;
-    protected static Transaction transaction;
-
-    protected void initializeTransaction() {
-
-        if (session == null)
-            session = HibernateUtil.getSession();
-
-        transaction = session.getTransaction();
-        transaction.begin();
-    }
-
-    protected void finalizeTransaction() {
-        session.flush();
-        transaction.commit();
-        // session.close();
-    }
+    protected static Session session = HibernateUtil.getSession();;
 
     @Override
     public List<T> listar(Class clazz) {
-        initializeTransaction();
+        session.beginTransaction();
 
         Criteria getAll = session.createCriteria(clazz);
         Hibernate.initialize(clazz);
         List<T> listProfessores = getAll.list();
 
-        finalizeTransaction();
+        session.getTransaction().commit();
         return listProfessores;
     }
 
 
     @Override
     public T recuperar(Class clazz, Long id) {
-        initializeTransaction();
+        session.beginTransaction();
 
         T object = (T) session.load(clazz, id);
         Hibernate.initialize(clazz);
 
-        finalizeTransaction();
+        session.getTransaction().commit();
         return object;
     }
 
     @Override
     public void deletar(T object) {
-        initializeTransaction();
+        session.beginTransaction();
 
         session.delete(object);
 
-        finalizeTransaction();
+        session.getTransaction().commit();
     }
 
     @Override
     public void alterar(T object) {
-        initializeTransaction();
+        session.beginTransaction();
 
         session.update(object);
 
-        finalizeTransaction();
+        session.getTransaction().commit();
     }
 
     @Override
     public void inserir(T object) {
-        initializeTransaction();
+        session.beginTransaction();
 
         session.save(object);
 
-        finalizeTransaction();
+        session.getTransaction().commit();
     }
 }

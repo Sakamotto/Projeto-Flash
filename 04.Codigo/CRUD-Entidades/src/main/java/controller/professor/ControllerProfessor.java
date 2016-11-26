@@ -1,9 +1,7 @@
 package controller.professor;
 
 import controller.exception.AllertExceptionController;
-import model.DAO.ProfessorDAO;
-import model.DAO.ProfessorDAOImpl;
-import model.database.PersistenciaProfessor;
+import model.DAO.professor.ProfessorDAOImpl;
 import model.dominio.Professor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

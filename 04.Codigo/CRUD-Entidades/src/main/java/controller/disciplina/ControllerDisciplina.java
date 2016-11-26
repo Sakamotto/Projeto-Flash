@@ -14,7 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.database.PersistenciaDisciplina;
+import model.DAO.disciplina.DisciplinaDAO;
+import model.DAO.disciplina.DisciplinaDAOImpl;
 import model.dominio.Disciplina;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class ControllerDisciplina implements Initializable {
     @FXML Label labelDisciplinaCurso;
     @FXML Label labelDisciplinaPeriodo;
     @FXML Label labelDisciplinaAreaConhecimento;
+
+    private DisciplinaDAO dDAO = new DisciplinaDAOImpl();
 
     private List<Disciplina> disciplinas;
     private ObservableList<Disciplina> observableListDisciplina;
@@ -58,7 +61,7 @@ public class ControllerDisciplina implements Initializable {
         tabelaColunaCursoNome.setCellValueFactory(new PropertyValueFactory<>("CursoSigla"));
         tabelaColunaDisciplinaNome.setCellValueFactory(new PropertyValueFactory<>("Nome"));
 
-        disciplinas = PersistenciaDisciplina.get();
+        disciplinas = dDAO.listar(Disciplina.class);
 
         observableListDisciplina = FXCollections.observableArrayList(disciplinas);
         tableViewDisciplina.setItems(observableListDisciplina);
@@ -71,10 +74,10 @@ public class ControllerDisciplina implements Initializable {
         }
 
         labelDisciplinaNome.setText(disciplina.getNome());
-        labelDisciplinaCargaHoraria.setText(disciplina.getCargaHoraria());
+        labelDisciplinaCargaHoraria.setText(Integer.toString(disciplina.getCargaHoraria()));
         labelDisciplinaCurso.setText(disciplina.getCurso().getNome());
-        labelDisciplinaPeriodo.setText(disciplina.getPeriodo());
-        labelDisciplinaAreaConhecimento.setText(disciplina.getAreaConhecimento());
+        labelDisciplinaPeriodo.setText(Integer.toString(disciplina.getPeriodo()));
+        labelDisciplinaAreaConhecimento.setText(disciplina.getAreaConhecimento().getDescricao());
     }
 
     @FXML
@@ -85,7 +88,7 @@ public class ControllerDisciplina implements Initializable {
         if (btnSalvarClicado) {
             // System.out.println("Salvando disciplina no banco de dados.");
 
-            PersistenciaDisciplina.save(disciplina);
+            dDAO.inserir(disciplina);
             disciplinas.add(disciplina);
 
             // Recarrega a página de cadastro de disciplina.
@@ -99,7 +102,6 @@ public class ControllerDisciplina implements Initializable {
         Disciplina disciplina = tableViewDisciplina.getSelectionModel().getSelectedItem();
 
         if (disciplina != null) {
-            Disciplina disciplinaAntiga = (Disciplina) disciplina.clone();
 
             boolean btnSalvarClicado = showOpenCadastroDisciplinaDialog(disciplina, "Edicao");
 
@@ -108,11 +110,10 @@ public class ControllerDisciplina implements Initializable {
 
                 // Recarrega a página de cadastro de professor.
 
-                PersistenciaDisciplina.update(disciplinaAntiga, disciplina);
+                dDAO.alterar(disciplina);
 
                 observableListDisciplina.clear();
                 carregaTableViewDiscplina();
-
             }
         }
         else {
@@ -132,7 +133,7 @@ public class ControllerDisciplina implements Initializable {
             if (deletar) {
                 System.out.println("Deletando disciplina no banco de dados.");
 
-                PersistenciaDisciplina.delete(disciplina);
+                dDAO.deletar(disciplina);
                 disciplinas.remove(disciplina);
 
                 // Recarrega a página de cadastro de disciplina.

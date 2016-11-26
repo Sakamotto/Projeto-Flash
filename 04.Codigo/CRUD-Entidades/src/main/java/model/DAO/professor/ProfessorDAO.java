@@ -1,5 +1,6 @@
-package model.DAO;
+package model.DAO.professor;
 
+import model.DAO.GenericDAO;
 import model.dominio.Professor;
 
 /**

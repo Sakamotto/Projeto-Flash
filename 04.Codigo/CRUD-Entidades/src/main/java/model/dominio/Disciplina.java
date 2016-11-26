@@ -6,18 +6,28 @@ import java.util.zip.CRC32;
  * Created by danilo on 24/10/16.
  */
 public class Disciplina implements Cloneable {
+
+    private int id;
     private String nome;
-    private String cargaHoraria;
-    private String periodo;
+    private int cargaHoraria;
+    private int periodo;
     private Curso curso;
-    private String areaConhecimento;
+    private AreaConhecimento areaConhecimento;
 
     public Disciplina() {
         nome = "";
-        cargaHoraria = "";
-        periodo = "";
+        cargaHoraria = 0;
+        periodo = 0;
         curso = new Curso();
-        areaConhecimento = "";
+        areaConhecimento = new AreaConhecimento();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -28,19 +38,19 @@ public class Disciplina implements Cloneable {
         this.nome = nome;
     }
 
-    public String getCargaHoraria() {
+    public int getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(String cargaHoraria) {
+    public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public String getPeriodo() {
+    public int getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(String periodo) {
+    public void setPeriodo(int periodo) {
         this.periodo = periodo;
     }
 
@@ -56,11 +66,11 @@ public class Disciplina implements Cloneable {
         this.curso = curso;
     }
 
-    public String getAreaConhecimento() {
+    public AreaConhecimento getAreaConhecimento() {
         return areaConhecimento;
     }
 
-    public void setAreaConhecimento(String areaConhecimento) {
+    public void setAreaConhecimento(AreaConhecimento areaConhecimento) {
         this.areaConhecimento = areaConhecimento;
     }
 

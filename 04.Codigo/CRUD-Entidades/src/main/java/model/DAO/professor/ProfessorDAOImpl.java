@@ -1,5 +1,6 @@
-package model.DAO;
+package model.DAO.professor;
 
+import model.DAO.GenericDAOImpl;
 import model.dominio.Professor;
 import org.hibernate.Hibernate;
 
