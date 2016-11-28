@@ -23,5 +23,17 @@
         <many-to-one name="areaConhecimento" column="area_conhecimento_id"
                      class="model.dominio.AreaConhecimento" not-null="true" cascade="all" fetch="select"/>
 
+        <list name="professores">
+            <key>
+                <column name="disciplina_id" not-null="true"/>
+            </key>
+
+            <list-index column="professor_disciplina_id" base="0"/>
+
+            <many-to-many entity-name="model.dominio.Professor">
+                <column name="professor_id" not-null="true"/>
+            </many-to-many>
+
+        </list>
     </class>
 </hibernate-mapping>

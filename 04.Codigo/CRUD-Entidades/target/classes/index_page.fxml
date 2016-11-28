@@ -20,7 +20,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Processos">
               <items>
-                <MenuItem mnemonicParsing="false" text="Alocar Professores" fx:id="menuProcessosAlocarProfessores" />
+                <MenuItem mnemonicParsing="false" text="Alocar Professores" fx:id="menuProcessosAlocarProfessores" onAction="#handleMenuItemProfessorDisciplina"/>
                 <MenuItem mnemonicParsing="false" text="Iniciar geração de horários" fx:id="menuProcessosIniciarGeracaoHorarios" />
               </items>
             </Menu>

@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class Main extends Application implements Initializable {
     @FXML
@@ -21,7 +23,6 @@ public class Main extends Application implements Initializable {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-
         initIndexPage();
 
     }
@@ -55,6 +56,12 @@ public class Main extends Application implements Initializable {
     @FXML
     public void handleMenuItemVisuzlizarRelatorio() throws IOException{
         AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("relatorio/relatorios.fxml"));
+        this.anchorPane.getChildren().setAll(anchorPane);
+    }
+
+    @FXML
+    public void handleMenuItemProfessorDisciplina() throws IOException{
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("professor_disciplina/professor_disciplina.fxml"));
         this.anchorPane.getChildren().setAll(anchorPane);
     }
 

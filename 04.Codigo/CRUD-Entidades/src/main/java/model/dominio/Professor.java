@@ -1,6 +1,10 @@
 package model.dominio;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 public class Professor implements Cloneable {
 
     private Long id;
@@ -12,6 +16,17 @@ public class Professor implements Cloneable {
     private Cpf cpf;
     private String matricula;
     private Endereco endereco;
+    private List<Disciplina> disciplinas = new ArrayList<>();
+
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
+
 
     public Professor() {
         nome = "";

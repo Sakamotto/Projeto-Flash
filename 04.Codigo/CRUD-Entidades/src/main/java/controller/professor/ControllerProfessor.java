@@ -2,6 +2,7 @@ package controller.professor;
 
 import controller.exception.AllertExceptionController;
 import model.DAO.professor.ProfessorDAOImpl;
+import model.dominio.Disciplina;
 import model.dominio.Professor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,6 +64,11 @@ public class ControllerProfessor implements Initializable {
 
         observableListProfessor = FXCollections.observableArrayList(listProfessor);
         tableViewProfessor.setItems(observableListProfessor);
+
+        for (Disciplina disciplina : listProfessor.get(0).getDisciplinas()) {
+            if (disciplina != null)
+                System.out.println("O professor " + listProfessor.get(0).getNome() + " Leciona: " + disciplina.getNome());
+        }
     }
 
     // Recebe um professor, pois o tableView é do tipo Professor.

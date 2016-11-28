@@ -1,5 +1,7 @@
 package model.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.CRC32;
 
 /**
@@ -13,6 +15,8 @@ public class Disciplina implements Cloneable {
     private int periodo;
     private Curso curso;
     private AreaConhecimento areaConhecimento;
+    private List<Professor> professores = new ArrayList<>();
+
 
     public Disciplina() {
         nome = "";
@@ -20,6 +24,14 @@ public class Disciplina implements Cloneable {
         periodo = 0;
         curso = new Curso();
         areaConhecimento = new AreaConhecimento();
+    }
+
+    public List<Professor> getProfessores() {
+        return professores;
+    }
+
+    public void setProfessores(List<Professor> professores) {
+        this.professores = professores;
     }
 
     public int getId() {
