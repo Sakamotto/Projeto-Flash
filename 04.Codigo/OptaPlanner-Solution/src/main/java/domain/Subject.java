@@ -19,8 +19,8 @@ public class Subject extends Disciplina {
 
     public Subject(String nome, int period, int workLoad) {
         setNome(nome);
-        setPeriodo(Integer.toString(period));
-        setCargaHoraria(Integer.toString(workLoad));
+        setPeriodo(period);
+        setCargaHoraria(workLoad);
 
         this.period = period;
         this.workLoad = workLoad;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+    <!-- Modelo de domínio -->
+    <solutionClass>application.AllocationSchedule</solutionClass>
+    <entityClass>domain.Allocation</entityClass>
+
+    <!-- Score -->
+    <scoreDirectorFactory>
+        <scoreDefinitionType>HARD_MEDIUM_SOFT</scoreDefinitionType>
+        <scoreDrl>solver/alocacaoHorarioScoreRules.drl</scoreDrl>
+        <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+    </scoreDirectorFactory>
+
+    <!-- Algoritmos de otimização -->
+    <exhaustiveSearch>
+        <exhaustiveSearchType>BRUTE_FORCE</exhaustiveSearchType>
+    </exhaustiveSearch>
+</solver>
