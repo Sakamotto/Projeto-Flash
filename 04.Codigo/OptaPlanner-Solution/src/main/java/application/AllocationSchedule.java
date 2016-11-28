@@ -23,7 +23,8 @@ public class AllocationSchedule implements Solution<HardMediumSoftScore> {
 
 
     @XStreamConverter(value = XStreamScoreConverter.class, types = {HardMediumSoftScoreDefinition.class})
-    private HardMediumSoftScore score;
+    private HardMediumSoftScore score = HardMediumSoftScore.valueOf(0, 0, 0);
+
 
     private List<Allocation> allocations;
     private List<Schedule> schedules;

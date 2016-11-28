@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.Main">
   <children>
     <VBox prefHeight="600.0" prefWidth="800.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
@@ -12,21 +12,21 @@
           <menus>
             <Menu mnemonicParsing="false" text="Cadastros">
               <items>
-                <MenuItem fx:id="menuCadastrosAreaConhecimento" mnemonicParsing="false" text="Área de Conhecimento" />
-                <MenuItem fx:id="menuCadastrosCurso" mnemonicParsing="false" text="Curso" />
-                <MenuItem fx:id="menuCadastrosDisciplina" mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" />
-                <MenuItem fx:id="menuCadastrosProfessor" mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" />
+                <MenuItem mnemonicParsing="false" text="Área de Conhecimento" fx:id="menuCadastrosAreaConhecimento" />
+                <MenuItem mnemonicParsing="false" text="Curso" fx:id="menuCadastrosCurso" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" fx:id="menuCadastrosDisciplina" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" fx:id="menuCadastrosProfessor" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Processos">
               <items>
-                <MenuItem fx:id="menuProcessosAlocarProfessores" mnemonicParsing="false" text="Alocar Professores" />
-                <MenuItem fx:id="menuProcessosIniciarGeracaoHorarios" mnemonicParsing="false" text="Iniciar geração de horários" />
+                <MenuItem mnemonicParsing="false" text="Alocar Professores" fx:id="menuProcessosAlocarProfessores" />
+                <MenuItem mnemonicParsing="false" text="Iniciar geração de horários" fx:id="menuProcessosIniciarGeracaoHorarios" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">
               <items>
-                <MenuItem fx:id="menuRelatoriosVisualizarRelatorios" mnemonicParsing="false" text="Visualizar Relatórios" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemVisuzlizarRelatorio" text="Visualizar Relatórios" fx:id="menuRelatoriosVisualizarRelatorios" />
               </items>
             </Menu>
           </menus>

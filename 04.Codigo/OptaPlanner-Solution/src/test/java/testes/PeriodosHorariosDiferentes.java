@@ -96,8 +96,11 @@ public class PeriodosHorariosDiferentes {
         alocacoes.add(allocation3);
         alocacoes.add(allocation4);
 
-        AllocationSchedule ah = new AllocationSchedule(alocacoes, schedules);
-        solucao = Resolvedor.resolver(ah, "solver/bruteForce_solverConfig.xml");
+        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+
+        Resolvedor.setAllocationSchedule(problema);
+
+        solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
     }
@@ -121,8 +124,11 @@ public class PeriodosHorariosDiferentes {
         alocacoes.add(allocation4);
 
 
-        AllocationSchedule ah = new AllocationSchedule(alocacoes, schedules);
-        solucao = Resolvedor.resolver(ah, "solver/bruteForce_solverConfig.xml");
+        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+
+        Resolvedor.setAllocationSchedule(problema);
+
+        solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
     }

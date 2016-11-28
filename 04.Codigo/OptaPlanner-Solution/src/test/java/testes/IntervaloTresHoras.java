@@ -62,7 +62,9 @@ public class IntervaloTresHoras {
 
         AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
 
-        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+        Resolvedor.setAllocationSchedule(problema);
+
+        AllocationSchedule solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
     }
@@ -92,7 +94,9 @@ public class IntervaloTresHoras {
 
         AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
 
-        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+        Resolvedor.setAllocationSchedule(problema);
+
+        AllocationSchedule solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
 

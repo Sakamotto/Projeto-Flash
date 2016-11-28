@@ -1,0 +1,140 @@
+<AllocationSchedule id="1">
+    <allocations id="2">
+        <Allocation id="3">
+            <subject id="4">
+                <nome>Calculo 1</nome>
+                <period>1</period>
+                <workLoad>60</workLoad>
+            </subject>
+
+            <teacher id = "5">
+                <nome>Bruno Ramos Gonzaga</nome>
+                <cpf>11111111111</cpf>
+            </teacher>
+        </Allocation>
+
+        <Allocation id="6">
+            <subject id="7">
+                <nome>Comunicacao Empresarial</nome>
+                <period>1</period>
+                <workLoad>30</workLoad>
+            </subject>
+
+            <teacher id="8">
+                <nome>Aurelia Hubner</nome>
+                <cpf>11111122222</cpf>
+            </teacher>
+        </Allocation>
+
+		<Allocation id="9">
+            <subject id="10">
+                <nome>Metodologia da Pesquisa</nome>
+                <period>1</period>
+                <workLoad>30</workLoad>
+            </subject>
+
+            <teacher id="11">
+                <nome>Rutinelli Nao Sei O Sobrenome</nome>
+                <cpf>22222111111</cpf>
+            </teacher>
+        </Allocation>
+
+		<Allocation id="12">
+            <subject id="13">
+                <nome>FSI</nome>
+                <period>1</period>
+                <workLoad>30</workLoad>
+            </subject>
+
+            <teacher id="14">
+                <nome>Cleio Maioli</nome>
+                <cpf>22222222222</cpf>
+            </teacher>
+        </Allocation>
+
+		<Allocation id="15">
+            <subject id="16">
+                <nome>Logica</nome>
+                <period>1</period>
+                <workLoad>90</workLoad>
+            </subject>
+
+            <teacher id="17">
+                <nome>Jeferson Oliveira Andrade</nome>
+                <cpf>22222333333</cpf>
+            </teacher>
+        </Allocation>
+
+		<Allocation id="18">
+            <subject id="19">
+                <nome>Programacao 1</nome>
+                <period>1</period>
+                <workLoad>90</workLoad>
+            </subject>
+
+            <teacher id="20">
+                <nome>Alessandra Aguiar</nome>
+                <cpf>33333222222</cpf>
+            </teacher>
+        </Allocation>
+    </allocations>
+
+
+    <schedules id="21">
+        <Schedule id="22">
+            <initHour>7</initHour>
+            <initMinute>30</initMinute>
+            <finalHour>9</finalHour>
+            <finalMinute>20</finalMinute>
+            <dayWeek>MONDAY</dayWeek>
+        </Schedule>
+
+        <Schedule id="23">
+            <initHour>7</initHour>
+            <initMinute>30</initMinute>
+            <finalHour>9</finalHour>
+            <finalMinute>20</finalMinute>
+            <dayWeek>MONDAY</dayWeek>
+        </Schedule>
+
+        <Schedule id="24">
+            <initHour>7</initHour>
+            <initMinute>30</initMinute>
+            <finalHour>9</finalHour>
+            <finalMinute>20</finalMinute>
+            <dayWeek>WEDNESDAY</dayWeek>
+        </Schedule>
+
+        <Schedule id="25">
+            <initHour>7</initHour>
+            <initMinute>30</initMinute>
+            <finalHour>9</finalHour>
+            <finalMinute>20</finalMinute>
+            <dayWeek>THURSDAY</dayWeek>
+        </Schedule>
+
+        <Schedule id="26">
+            <initHour>7</initHour>
+            <initMinute>30</initMinute>
+            <finalHour>9</finalHour>
+            <finalMinute>20</finalMinute>
+            <dayWeek>FRIDAY</dayWeek>
+        </Schedule>
+
+        <Schedule id="27">
+            <initHour>15</initHour>
+            <initMinute>30</initMinute>
+            <finalHour>17</finalHour>
+            <finalMinute>20</finalMinute>
+            <dayWeek>THURSDAY</dayWeek>
+        </Schedule>
+
+        <Schedule id="28">
+            <initHour>9</initHour>
+            <initMinute>40</initMinute>
+            <finalHour>11</finalHour>
+            <finalMinute>30</finalMinute>
+            <dayWeek>THURSDAY</dayWeek>
+        </Schedule>
+    </schedules>
+</AllocationSchedule>

@@ -14,21 +14,26 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 
-public class Resolvedor {
+public class Resolvedor implements Runnable{
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(Resolvedor.class);
+
+    private static AllocationSchedule allocationSchedule;
+
+    private static boolean terminado = false;
 
     public static void benchMark() {
         PlannerBenchmarkFactory plannerBenchmarkFactory = PlannerBenchmarkFactory.createFromXmlResource(
                 "solver/benchmark/horariosBenchmarkConfig.xml");
         PlannerBenchmark plannerBenchmark = plannerBenchmarkFactory.buildPlannerBenchmark();
+
         plannerBenchmark.benchmark();
     }
 
-    public static AllocationSchedule resolver(AllocationSchedule problem, String solverConfig) {
+    public static AllocationSchedule resolver(String solverConfig) {
         SolverFactory sF = SolverFactory.createFromXmlResource(solverConfig);
         Solver solver = sF.buildSolver();
-        solver.solve(problem);
+        solver.solve(allocationSchedule);
 
         AllocationSchedule solucao = (AllocationSchedule) solver.getBestSolution();
 
@@ -59,4 +64,30 @@ public class Resolvedor {
                     "\nHorario de Inicio " + resultadoAllocation.getSchedule().getInitSchedule());
         }
     }
+
+    public static int getScore() {
+        return 123456;
+    }
+
+    public AllocationSchedule getAllocationSchedule() {
+        return allocationSchedule;
+    }
+
+    public static void setAllocationSchedule(AllocationSchedule allocationSchedule) {
+        Resolvedor.allocationSchedule = allocationSchedule;
+    }
+
+
+
+    @Override
+    public void run() {
+        allocationSchedule = resolver("solver/bruteForce_solverConfig.xml");
+
+        terminado = true;
+    }
+
+    public static boolean isTerminado() {
+        return terminado;
+    }
+
 }
