@@ -12,9 +12,10 @@
 *.synctex.gz
 *.html
 *.*~
+*.iml
 
 .idea/
-#target/
+target/
 
 .settings/
 

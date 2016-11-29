@@ -2,6 +2,7 @@ package model.dominio;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,14 +17,14 @@ public class Professor implements Cloneable {
     private Cpf cpf;
     private String matricula;
     private Endereco endereco;
-    private List<Disciplina> disciplinas = new ArrayList<>();
+    private Set<Disciplina> disciplinas = new HashSet<>();
 
 
-    public List<Disciplina> getDisciplinas() {
+    public Set<Disciplina> getDisciplinas() {
         return disciplinas;
     }
 
-    public void setDisciplinas(List<Disciplina> disciplinas) {
+    public void setDisciplinas(Set<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
 

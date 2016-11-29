@@ -18,22 +18,31 @@
         <property name="periodo"/>
 
         <many-to-one name="curso" column="curso_id"
-                     class="model.dominio.Curso" not-null="true" cascade="all" fetch="select"/>
+                     class="model.dominio.Curso" not-null="false" cascade="none" fetch="select"/>
 
         <many-to-one name="areaConhecimento" column="area_conhecimento_id"
-                     class="model.dominio.AreaConhecimento" not-null="true" cascade="all" fetch="select"/>
+                     class="model.dominio.AreaConhecimento" not-null="true" cascade="none" fetch="select"/>
 
-        <list name="professores">
+        <set name="professores" table="professor_disciplina" inverse="true" lazy="true" fetch="select" cascade="none">
             <key>
                 <column name="disciplina_id" not-null="true"/>
             </key>
-
-            <list-index column="professor_disciplina_id" base="0"/>
-
             <many-to-many entity-name="model.dominio.Professor">
                 <column name="professor_id" not-null="true"/>
             </many-to-many>
+        </set>
 
-        </list>
+        <!--<list name="professores" table="professor_disciplina" inverse="false" lazy="true" fetch="select" cascade="all">-->
+            <!--<key>-->
+                <!--<column name="disciplina_id" not-null="true"/>-->
+            <!--</key>-->
+
+            <!--<list-index column="professor_disciplina_id"/>-->
+
+            <!--<many-to-many entity-name="model.dominio.Professor">-->
+                <!--<column name="professor_id" not-null="true"/>-->
+            <!--</many-to-many>-->
+
+        <!--</list>-->
     </class>
 </hibernate-mapping>

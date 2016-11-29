@@ -16,10 +16,7 @@ import model.dominio.Disciplina;
 import model.dominio.Professor;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by cristian on 28/11/16.
@@ -69,11 +66,14 @@ public class ControllerProfessorDisciplina implements Initializable{
     private void addDisciplinaLecionando(Disciplina disciplina) {
         disciplinasLecionando.add(disciplina.getNome());
         mapDisciplinasLecionando.put(disciplina.getNome(), disciplina);
+
+        Collections.sort(disciplinasLecionando);
     }
 
     private void addDisciplinaNaoLecionando(Disciplina disciplina) {
         disciplinasNaoLecionando.add(disciplina.getNome());
         mapDisciplinasNaoLecionando.put(disciplina.getNome(), disciplina);
+        Collections.sort(disciplinasNaoLecionando);
     }
 
     private void removeDisciplinaLecionando(Disciplina disciplina) {
@@ -128,22 +128,14 @@ public class ControllerProfessorDisciplina implements Initializable{
     }
 
     @FXML
-    public void handleButtonSalvarProfessorDisciplina(){
-
-    }
-
-    @FXML
-    public void handleButtonRemoverProfessorDisciplina(){
-
-    }
-
-    @FXML
     public void handleAddLecionaDisciplina(){
         String disciplinaSelecionadaNome = listViewNaoLecionando.getSelectionModel().getSelectedItems().get(0);
         Disciplina disciplinaSelecionada;
+        Set<Disciplina> setDisciplinas = professorSelecionado.getDisciplinas();
 
         if (disciplinaSelecionadaNome != null) {
             disciplinaSelecionada = mapDisciplinasNaoLecionando.get(disciplinaSelecionadaNome);
+            setDisciplinas.add(disciplinaSelecionada);
 
             addDisciplinaLecionando(disciplinaSelecionada);
             removeDisciplinaNaoLecionando(disciplinaSelecionada);
@@ -151,10 +143,32 @@ public class ControllerProfessorDisciplina implements Initializable{
 
         defineListViewLecionando();
         defineListViewNaoLecionando();
+
+        for (Disciplina d: professorSelecionado.getDisciplinas()){
+            System.out.println("Disciplina: " + d.getNome());
+        }
+
+        pDAO.inserir(professorSelecionado);
     }
 
     @FXML
     public void handleRemoveLecionaDisciplina(){
+        String disciplinaSelecionadaNome = listViewLecionando.getSelectionModel().getSelectedItems().get(0);
+        Disciplina disciplinaSelecionada;
+        Set<Disciplina> setDisciplinas = professorSelecionado.getDisciplinas();
+
+        if (disciplinaSelecionadaNome != null) {
+            disciplinaSelecionada = mapDisciplinasLecionando.get(disciplinaSelecionadaNome);
+            setDisciplinas.remove(disciplinaSelecionada);
+
+            removeDisciplinaLecionando(disciplinaSelecionada);
+            addDisciplinaNaoLecionando(disciplinaSelecionada);
+        }
+
+        defineListViewNaoLecionando();
+        defineListViewLecionando();
+
+        pDAO.alterar(professorSelecionado);
 
     }
 

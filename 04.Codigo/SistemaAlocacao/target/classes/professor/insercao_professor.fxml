@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.professor.ControllerProfessorDialogInsercao">
+<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.professor.ControllerProfessorDialogInsercao">
   <children>
     <GridPane layoutX="36.0" layoutY="92.0" prefWidth="592.0">
       <children>
@@ -20,8 +20,11 @@
         <Label text="Número:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
         <Label text="CEP:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
         <TextField fx:id="textFieldProfessorNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField fx:id="textFieldProfessorMatricula" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField fx:id="textFieldProfessorEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="textFieldProfessorDataNascimento" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="textFieldProfessorRg" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <TextField fx:id="textFieldProfessorCpf" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="textFieldProfessorMatricula" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <TextField fx:id="textFieldProfessorMunicipio" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         <TextField fx:id="textFieldProfessorBairro" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         <TextField fx:id="textFieldProfessorEndereco" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
@@ -32,9 +35,6 @@
           </GridPane.margin>
         </TextField>
         <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="textFieldProfessorEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextField fx:id="textFieldProfessorDataNascimento" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextField fx:id="textFieldProfessorRg" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <Label text="Data de Nascimento:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label text="RG:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
       </children>

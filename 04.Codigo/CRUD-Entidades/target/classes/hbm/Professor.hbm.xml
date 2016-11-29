@@ -25,15 +25,15 @@
         <many-to-one name="endereco" column="endereco_id"
                      class="model.dominio.Endereco" not-null="true" cascade="all" fetch="select"/>
 
-        <list name="disciplinas" table="professor_disciplina" inverse="false" lazy="true" fetch="select" cascade="all">
+
+        <set name="disciplinas" table="professor_disciplina" inverse="false" lazy="true" fetch="select" cascade="none">
             <key>
                 <column name="professor_id" not-null="true"/>
             </key>
-            <list-index column="professor_disciplina_id" base="0"/>
             <many-to-many entity-name="model.dominio.Disciplina">
                 <column name="disciplina_id" not-null="true"/>
             </many-to-many>
-        </list>
+        </set>
 
         <sql-insert>
             INSERT

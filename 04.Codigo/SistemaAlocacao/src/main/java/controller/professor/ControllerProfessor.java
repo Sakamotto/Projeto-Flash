@@ -65,10 +65,10 @@ public class ControllerProfessor implements Initializable {
         observableListProfessor = FXCollections.observableArrayList(listProfessor);
         tableViewProfessor.setItems(observableListProfessor);
 
-        for (Disciplina disciplina : listProfessor.get(0).getDisciplinas()) {
-            if (disciplina != null)
-                System.out.println("O professor " + listProfessor.get(0).getNome() + " Leciona: " + disciplina.getNome());
-        }
+//        for (Disciplina disciplina : listProfessor.get(0).getDisciplinas()) {
+//            if (disciplina != null)
+//                System.out.println("O professor " + listProfessor.get(0).getNome() + " Leciona: " + disciplina.getNome());
+//        }
     }
 
     // Recebe um professor, pois o tableView é do tipo Professor.
