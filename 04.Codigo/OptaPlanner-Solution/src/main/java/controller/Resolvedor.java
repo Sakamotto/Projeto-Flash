@@ -51,7 +51,7 @@ public class Resolvedor implements Runnable{
 
         System.out.println("Solução é viável ? R = " + viabilidade);
 
-        solucao.getAllocations().forEach(a -> logger.info("Subject = [{}] -> Schedule = [{}]", a.getSubject().getNome(), a.getSchedule().getStrDiaSemana() + ", " + a.getSchedule().getInitSchedule() + " - " + a.getSchedule().getFinalSchedule()));
+        solucao.getAllocations().forEach(a -> logger.info("Subject = [{}] -> Schedule = [{}]", a.getSubject().getNome(), a.getSchedule().getStrDiaSemana() + ", " + a.getSchedule().getHorarioInicio() + " - " + a.getSchedule().getHorarioInicio()));
     }
 
     public static void printResultSolution(AllocationSchedule solucao) {
@@ -61,7 +61,7 @@ public class Resolvedor implements Runnable{
             System.out.println("\n\nTeacher: " + resultadoAllocation.getTeacher().getNome() +
                     "\nDisciplina: " + resultadoAllocation.getSubject().getNome() +
                     "\nDia da Semana: " + resultadoAllocation.getSchedule().getStrDiaSemana() +
-                    "\nHorario de Inicio " + resultadoAllocation.getSchedule().getInitSchedule());
+                    "\nHorario de Inicio " + resultadoAllocation.getSchedule().getHorarioInicio());
         }
     }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.professor.ControllerProfessorDialogInsercao">
+  <children>
+    <GridPane layoutX="103.0" layoutY="138.0" prefWidth="330.0">
+      <children>
+        <TextField id="textFieldProfessorEmail" fx:id="textFieldHoraInicio" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField id="textFieldProfessorDataNascimento" fx:id="textFieldHoraFim" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Inicio:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Label text="Fim:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <TextField id="textFieldProfessorEmail" fx:id="textFieldMinutoInicio" prefWidth="125.00009999999747" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <TextField id="textFieldProfessorEmail" fx:id="textFieldMinutoFim" prefWidth="98.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <Label text="Hora" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Label text="Minuto" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Label text=":" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+          <font>
+            <Font name="System Bold" size="16.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label font="$x1" text=":" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="97.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="106.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="21.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="106.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label layoutX="251.0" layoutY="52.0" text="Horarios">
+      <font>
+        <Font size="36.0" />
+      </font>
+    </Label>
+    <Group id="Group" layoutX="468.0" layoutY="441.0" />
+    <Button fx:id="btnSalvarProfessor" defaultButton="true" layoutX="247.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleButtonSalvar" text="Salvar" textAlignment="CENTER" />
+    <Button fx:id="btnCancelarProfessor" cancelButton="true" layoutX="327.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
+  </children>
+</AnchorPane>

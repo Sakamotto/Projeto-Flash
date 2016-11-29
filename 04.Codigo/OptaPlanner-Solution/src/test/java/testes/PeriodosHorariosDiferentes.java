@@ -9,6 +9,7 @@ import domain.Allocation;
 import domain.Schedule;
 import domain.Subject;
 import domain.Teacher;
+import model.dominio.Horario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,13 +75,13 @@ public class PeriodosHorariosDiferentes {
         allocation4.setSubject(subject4);
         allocation4.setTeacher(teacher4);
 
-        h1.setDayWeek(Schedule.DayWeek.MONDAY);
-        h1.setInitSchedule(7, 30);
-        h1.setFinalSchedule(9, 30);
+        h1.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        h1.setHorarioInicio(7, 30);
+        h1.setHorarioFim(9, 30);
 
-        h2.setDayWeek(Schedule.DayWeek.MONDAY);
-        h2.setInitSchedule(9, 31);
-        h2.setFinalSchedule(11, 30);
+        h2.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        h2.setHorarioInicio(9, 31);
+        h2.setHorarioFim(11, 30);
 
     }
 

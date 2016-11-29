@@ -11,19 +11,19 @@ public class ScheduleBuilder {
         schedule = new Schedule(id);
     }
 
-    public ScheduleBuilder addDayWeek(Schedule.DayWeek dayWeek) {
-        schedule.setDayWeek(dayWeek);
+    public ScheduleBuilder addDayWeek(Schedule.DiaSemana dayWeek) {
+        schedule.setDiaSemana(dayWeek);
         return this;
     }
 
     public ScheduleBuilder addInitSchedule(int init, int finish) {
-        schedule.setInitSchedule(init, finish);
+        schedule.setHorarioInicio(init, finish);
 
         return this;
     }
 
     public ScheduleBuilder addFinalSchedule(int init, int finish) {
-        schedule.setFinalSchedule(init, finish);
+        schedule.setHorarioFim(init, finish);
 
         return this;
     }

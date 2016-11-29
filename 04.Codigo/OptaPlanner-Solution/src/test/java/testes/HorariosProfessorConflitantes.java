@@ -9,6 +9,7 @@ import domain.Allocation;
 import domain.Schedule;
 import domain.Subject;
 import domain.Teacher;
+import model.dominio.Horario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,17 +52,17 @@ public class HorariosProfessorConflitantes {
 
     @Quando("^Eu alocar os horarios que geram conflito de horarios dos professores$")
     public void eu_alocar_os_horarios_que_geram_conflito_de_horarios_dos_professores() throws Throwable {
-        scheduleUm.setDayWeek(Schedule.DayWeek.TUESDAY);
-        scheduleUm.setInitSchedule(7, 30);
-        scheduleUm.setFinalSchedule(9, 20);
+        scheduleUm.setDiaSemana(Schedule.DiaSemana.TERCA);
+        scheduleUm.setHorarioInicio(7, 30);
+        scheduleUm.setHorarioFim(9, 20);
 
-        scheduleDois.setDayWeek(Schedule.DayWeek.TUESDAY);
-        scheduleDois.setInitSchedule(7, 30);
-        scheduleDois.setFinalSchedule(9, 20);
+        scheduleDois.setDiaSemana(Schedule.DiaSemana.TERCA);
+        scheduleDois.setHorarioInicio(7, 30);
+        scheduleDois.setHorarioFim(9, 20);
 
-        scheduleTres.setDayWeek(Schedule.DayWeek.TUESDAY);
-        scheduleTres.setInitSchedule(7, 30);
-        scheduleTres.setFinalSchedule(9, 20);
+        scheduleTres.setDiaSemana(Schedule.DiaSemana.TERCA);
+        scheduleTres.setHorarioInicio(7, 30);
+        scheduleTres.setHorarioFim(9, 20);
 
         schedules = new ArrayList<>();
 
@@ -85,17 +86,17 @@ public class HorariosProfessorConflitantes {
 
     @Quando("^Alocar os horarios que nao geram conflito de horarios dos professores$")
     public void alocar_os_horarios_que_nao_geram_conflito_de_horarios_dos_professores() throws Throwable {
-        scheduleUm.setDayWeek(Schedule.DayWeek.MONDAY);
-        scheduleUm.setInitSchedule(7, 30);
-        scheduleUm.setFinalSchedule(9, 20);
+        scheduleUm.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        scheduleUm.setHorarioInicio(7, 30);
+        scheduleUm.setHorarioFim(9, 20);
 
-        scheduleDois.setDayWeek(Schedule.DayWeek.TUESDAY);
-        scheduleDois.setInitSchedule(7, 30);
-        scheduleDois.setFinalSchedule(9, 20);
+        scheduleDois.setDiaSemana(Schedule.DiaSemana.TERCA);
+        scheduleDois.setHorarioInicio(7, 30);
+        scheduleDois.setHorarioFim(9, 20);
 
-        scheduleTres.setDayWeek(Schedule.DayWeek.TUESDAY);
-        scheduleTres.setInitSchedule(7, 30);
-        scheduleTres.setFinalSchedule(9, 20);
+        scheduleTres.setDiaSemana(Schedule.DiaSemana.TERCA);
+        scheduleTres.setHorarioInicio(7, 30);
+        scheduleTres.setHorarioFim(9, 20);
 
         schedules = new ArrayList<>();
 

@@ -7,6 +7,7 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
 import domain.*;
+import model.dominio.Horario;
 
 
 import java.util.ArrayList;
@@ -46,14 +47,14 @@ public class IntervaloTresHoras {
     @Quando("^Eu alocar os horarios com intervalo maior que tres horas$")
     public void eu_alocar_os_horarios_com_intervalo_maior_que_tres_horas() throws Throwable {
         Schedule scheduleUm = new Schedule(1);
-        scheduleUm.setDayWeek(Schedule.DayWeek.MONDAY);
-        scheduleUm.setInitSchedule(7, 30);
-        scheduleUm.setFinalSchedule(9, 20);
+        scheduleUm.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        scheduleUm.setHorarioInicio(7, 30);
+        scheduleUm.setHorarioFim(9, 20);
 
         Schedule scheduleDois = new Schedule(2);
-        scheduleDois.setDayWeek(Schedule.DayWeek.MONDAY);
-        scheduleDois.setInitSchedule(13, 20);
-        scheduleDois.setFinalSchedule(15, 30);
+        scheduleDois.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        scheduleDois.setHorarioInicio(13, 20);
+        scheduleDois.setHorarioFim(15, 30);
 
         schedules = new ArrayList<>();
 
@@ -77,12 +78,12 @@ public class IntervaloTresHoras {
     @Quando("^Eu alocar os sem intervalo maior ou igual a tres horas para todos os professores$")
     public void eu_alocar_os_sem_intervalo_maior_ou_igual_a_tres_horas_para_todos_os_professores() throws Throwable {
         Schedule scheduleUm = new ScheduleBuilder(1)
-                .addDayWeek(Schedule.DayWeek.MONDAY)
+                .addDayWeek(Schedule.DiaSemana.SEGUNDA)
                 .addInitSchedule(7, 30)
                 .addFinalSchedule(9, 20)
                 .getSchedule();
         Schedule scheduleDois = new ScheduleBuilder(2)
-                .addDayWeek(Schedule.DayWeek.MONDAY)
+                .addDayWeek(Schedule.DiaSemana.SEGUNDA)
                 .addInitSchedule(9, 40)
                 .addFinalSchedule(11, 30)
                 .getSchedule();

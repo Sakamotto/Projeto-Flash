@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping schema="flash">
+    <class name="model.dominio.Horario" table="horario">
+        <meta attribute="class-description">
+            Essa classe contem informacoes a respeito de um horario.
+        </meta>
+        <id name="id" column="horario_id" type="java.lang.Integer">
+            <generator class="sequence">
+                <param name="sequence">horario_horario_id_seq</param>
+            </generator>
+        </id>
+        <property name="horarioInicio" column="hora_inicio"/>
+        <property name="horarioFim" column="hora_fim"/>
+
+        <sql-insert>
+            INSERT INTO flash.horario(horario_id, hora_inicio, hora_fim)
+            VALUES (?, cast (? as TIME), cast (? as TIME))
+        </sql-insert>
+
+        <sql-update>
+            UPDATE flash.horario
+            SET hora_inicio = cast (? as TIME),
+            hora_fim = cast (? as TIME)
+            WHERE horario_id = ?
+        </sql-update>
+    </class>
+</hibernate-mapping>

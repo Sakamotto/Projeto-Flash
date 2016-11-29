@@ -82,59 +82,59 @@
 
     <schedules id="21">
         <Schedule id="22">
-            <initHour>7</initHour>
-            <initMinute>30</initMinute>
-            <finalHour>9</finalHour>
-            <finalMinute>20</finalMinute>
-            <dayWeek>MONDAY</dayWeek>
+            <horaInicio>7</horaInicio>
+            <minutoInicio>30</minutoInicio>
+            <horaFim>9</horaFim>
+            <minutoFim>20</minutoFim>
+            <diaSemana>MONDAY</diaSemana>
         </Schedule>
 
         <Schedule id="23">
-            <initHour>7</initHour>
-            <initMinute>30</initMinute>
-            <finalHour>9</finalHour>
-            <finalMinute>20</finalMinute>
-            <dayWeek>MONDAY</dayWeek>
+            <horaInicio>7</horaInicio>
+            <minutoInicio>30</minutoInicio>
+            <horaFim>9</horaFim>
+            <minutoFim>20</minutoFim>
+            <diaSemana>MONDAY</diaSemana>
         </Schedule>
 
         <Schedule id="24">
-            <initHour>7</initHour>
-            <initMinute>30</initMinute>
-            <finalHour>9</finalHour>
-            <finalMinute>20</finalMinute>
-            <dayWeek>WEDNESDAY</dayWeek>
+            <horaInicio>7</horaInicio>
+            <minutoInicio>30</minutoInicio>
+            <horaFim>9</horaFim>
+            <minutoFim>20</minutoFim>
+            <diaSemana>WEDNESDAY</diaSemana>
         </Schedule>
 
         <Schedule id="25">
-            <initHour>7</initHour>
-            <initMinute>30</initMinute>
-            <finalHour>9</finalHour>
-            <finalMinute>20</finalMinute>
-            <dayWeek>THURSDAY</dayWeek>
+            <horaInicio>7</horaInicio>
+            <minutoInicio>30</minutoInicio>
+            <horaFim>9</horaFim>
+            <minutoFim>20</minutoFim>
+            <diaSemana>THURSDAY</diaSemana>
         </Schedule>
 
         <Schedule id="26">
-            <initHour>7</initHour>
-            <initMinute>30</initMinute>
-            <finalHour>9</finalHour>
-            <finalMinute>20</finalMinute>
-            <dayWeek>FRIDAY</dayWeek>
+            <horaInicio>7</horaInicio>
+            <minutoInicio>30</minutoInicio>
+            <horaFim>9</horaFim>
+            <minutoFim>20</minutoFim>
+            <diaSemana>FRIDAY</diaSemana>
         </Schedule>
 
         <Schedule id="27">
-            <initHour>15</initHour>
-            <initMinute>30</initMinute>
-            <finalHour>17</finalHour>
-            <finalMinute>20</finalMinute>
-            <dayWeek>THURSDAY</dayWeek>
+            <horaInicio>15</horaInicio>
+            <minutoInicio>30</minutoInicio>
+            <horaFim>17</horaFim>
+            <minutoFim>20</minutoFim>
+            <diaSemana>THURSDAY</diaSemana>
         </Schedule>
 
         <Schedule id="28">
-            <initHour>9</initHour>
-            <initMinute>40</initMinute>
-            <finalHour>11</finalHour>
-            <finalMinute>30</finalMinute>
-            <dayWeek>THURSDAY</dayWeek>
+            <horaInicio>9</horaInicio>
+            <minutoInicio>40</minutoInicio>
+            <horaFim>11</horaFim>
+            <minutoFim>30</minutoFim>
+            <diaSemana>THURSDAY</diaSemana>
         </Schedule>
     </schedules>
 </AllocationSchedule>

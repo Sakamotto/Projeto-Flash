@@ -16,11 +16,12 @@
                 <MenuItem mnemonicParsing="false" text="Curso" fx:id="menuCadastrosCurso" />
                 <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" fx:id="menuCadastrosDisciplina" />
                 <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" fx:id="menuCadastrosProfessor" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosHorarios" text="Horário" fx:id="menuCadastrosHorarios" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Processos">
               <items>
-                <MenuItem mnemonicParsing="false" text="Alocar Professores" fx:id="menuProcessosAlocarProfessores" onAction="#handleMenuItemProfessorDisciplina"/>
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemProfessorDisciplina" text="Alocar Professores" fx:id="menuProcessosAlocarProfessores" />
                 <MenuItem mnemonicParsing="false" text="Iniciar geração de horários" fx:id="menuProcessosIniciarGeracaoHorarios" />
               </items>
             </Menu>

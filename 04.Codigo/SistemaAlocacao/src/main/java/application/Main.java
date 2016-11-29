@@ -65,6 +65,12 @@ public class Main extends Application implements Initializable {
         this.anchorPane.getChildren().setAll(anchorPane);
     }
 
+    @FXML
+    public void handleMenuItemCadastrosHorarios()throws IOException{
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("horario/cadastro_horario.fxml"));
+        this.anchorPane.getChildren().setAll(anchorPane);
+    }
+
 
     public static void main(String[] args) {
         launch(args);

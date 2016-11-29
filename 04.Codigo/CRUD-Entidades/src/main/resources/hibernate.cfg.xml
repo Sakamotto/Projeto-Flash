@@ -15,6 +15,7 @@
         <mapping resource="hbm/Endereco.hbm.xml"/>
         <mapping resource="hbm/Disciplina.hbm.xml"/>
         <mapping resource="hbm/Curso.hbm.xml"/>
+        <mapping resource="hbm/Horario.hbm.xml"/>
         <mapping resource="hbm/AreaConhecimento.hbm.xml"/>
 
     </session-factory>

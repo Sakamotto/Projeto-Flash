@@ -56,9 +56,9 @@ rule "Um teacher nao pode ter um intervalo maior ou igual a tres horas entre doi
         exists (
             Allocation(
                 teacher == $teacher,
-                schedule.dayWeek == $schedule.dayWeek,
+                schedule.diaSemana == $schedule.diaSemana,
                 subject != $subject,
-                schedule.initHour > $schedule.finalHour
+                schedule.horaInicio > $schedule.horaFim
             ) from $a
         )
 
@@ -67,10 +67,10 @@ rule "Um teacher nao pode ter um intervalo maior ou igual a tres horas entre doi
         not (
             Allocation(
                 teacher == $teacher,
-                schedule.dayWeek == $schedule.dayWeek,
+                schedule.diaSemana == $schedule.diaSemana,
                 subject != $subject,
-                schedule.initHour > $schedule.finalHour,
-                (schedule.initHour - $schedule.finalHour) < 3
+                schedule.horaInicio > $schedule.horaFim,
+                (schedule.horaInicio - $schedule.horaFim) < 3
             ) from $a
         )
 
