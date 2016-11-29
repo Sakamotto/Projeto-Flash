@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping schema="flash">
+    <class name="model.dominio.Professor" table="professor">
+        <meta attribute="class-description">
+            Essa classe contem informacoes a respeito de um professor.
+        </meta>
+        <id name="id" column="professor_id" type="java.lang.Long">
+            <generator class="sequence">
+                <param name="sequence">professor_professor_id_seq</param>
+            </generator>
+        </id>
+        <property name="nome"/>
+        <property name="email"/>
+        <property name="dataNascimento" column="data_nascimento" type="string"/>
+        <property name="rg"/>
+        <component name="cpf" access="field" class="model.dominio.Cpf">
+            <property name="cpf" type="string"/>
+        </component>
+        <property name="matricula"/>
+
+        <many-to-one name="endereco" column="endereco_id"
+                     class="model.dominio.Endereco" not-null="true" cascade="all" fetch="select"/>
+
+        <list name="disciplinas" table="professor_disciplina" inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="professor_id" not-null="true"/>
+            </key>
+            <list-index column="professor_disciplina_id" base="0"/>
+            <many-to-many entity-name="model.dominio.Disciplina">
+                <column name="disciplina_id" not-null="true"/>
+            </many-to-many>
+        </list>
+
+        <sql-insert>
+            INSERT
+            INTO
+                flash.professor
+                (nome, email, data_nascimento, rg, cpf, matricula, endereco_id, professor_id)
+            VALUES
+                (?, ?, cast(? as date) , ?, ?, ?, ?, ?)
+        </sql-insert>
+
+        <sql-update>
+            UPDATE
+                flash.professor
+            SET
+                nome = ?,
+                email = ?,
+                data_nascimento = cast(? as date),
+                rg = ?,
+                cpf = ?,
+                matricula = ?,
+                endereco_id = ?
+            WHERE
+                professor_id = ?
+        </sql-update>
+    </class>
+</hibernate-mapping>

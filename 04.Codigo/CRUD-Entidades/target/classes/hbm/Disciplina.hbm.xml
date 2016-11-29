@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping schema="flash">
+    <class name="model.dominio.Disciplina" table="disciplina">
+        <meta attribute="class-description">
+            Essa classe contem informacoes relacionada a disciplina.
+        </meta>
+        <id name="id" column="disciplina_id" type="int">
+            <generator class="sequence">
+                <param name="sequence">disciplina_disciplina_id_seq</param>
+            </generator>
+        </id>
+        <property name="nome"/>
+        <property name="cargaHoraria" column="carga_horaria"/>
+        <property name="periodo"/>
+
+        <many-to-one name="curso" column="curso_id"
+                     class="model.dominio.Curso" not-null="true" cascade="all" fetch="select"/>
+
+        <many-to-one name="areaConhecimento" column="area_conhecimento_id"
+                     class="model.dominio.AreaConhecimento" not-null="true" cascade="all" fetch="select"/>
+
+        <list name="professores">
+            <key>
+                <column name="disciplina_id" not-null="true"/>
+            </key>
+
+            <list-index column="professor_disciplina_id" base="0"/>
+
+            <many-to-many entity-name="model.dominio.Professor">
+                <column name="professor_id" not-null="true"/>
+            </many-to-many>
+
+        </list>
+    </class>
+</hibernate-mapping>

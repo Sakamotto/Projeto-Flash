@@ -1,0 +1,17 @@
+model/DAO/HibernateUtil.class
+model/DAO/professor/ProfessorDAOImpl.class
+model/DAO/curso/CursoDAO.class
+model/dominio/Cpf.class
+model/DAO/areaConhecimento/AreaConhecimentoDAO.class
+model/DAO/disciplina/DisciplinaDAOImpl.class
+model/dominio/Professor.class
+model/DAO/GenericDAO.class
+model/DAO/curso/CursoDAOImpl.class
+model/dominio/AreaConhecimento.class
+model/dominio/Endereco.class
+model/DAO/areaConhecimento/AreaConhecimentoDAOImpl.class
+model/dominio/Curso.class
+model/dominio/Disciplina.class
+model/DAO/professor/ProfessorDAO.class
+model/DAO/GenericDAOImpl.class
+model/DAO/disciplina/DisciplinaDAO.class
