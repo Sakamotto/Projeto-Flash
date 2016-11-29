@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="576.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.alocacaohorarios.ControllerAlocacao">
+  <children>
+    <GridPane alignment="TOP_LEFT" layoutX="172.0" layoutY="386.0" prefWidth="457.0">
+      <children>
+        <Button contentDisplay="CENTER" defaultButton="true" disable="false" focusTraversable="true" maxWidth="-1.0" mnemonicParsing="false" onAction="#handleIniciarRelatorio" text="Iniciar" textAlignment="CENTER" visible="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Button blendMode="SRC_OVER" focusTraversable="false" mnemonicParsing="false" text="Terminar e Salvar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Button alignment="CENTER" blendMode="SRC_OVER" cancelButton="true" contentDisplay="CENTER" defaultButton="false" disable="false" focusTraversable="false" mnemonicParsing="false" text="Cancelar" wrapText="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label layoutX="218.0" layoutY="174.0" prefHeight="21.0001220703125" text="Regras Rigidas:">
+      <font>
+        <Font size="18.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label layoutX="261.0" layoutY="87.0" text="Pontuaçao das Regras" textAlignment="LEFT">
+      <font>
+        <Font size="25.0" />
+      </font>
+    </Label>
+    <Label fx:id="labelRegrasRigidas" layoutX="513.0" layoutY="177.0" text="0" />
+    <Label font="$x1" layoutX="218.0" layoutY="267.0" text="Regras Desejaveis" />
+    <Label fx:id="labelRegrasDesejaveis" layoutX="513.0" layoutY="272.0" text="0" />
+  </children>
+</AnchorPane>

@@ -37,6 +37,11 @@ public class ControllerProfessorDisciplina implements Initializable{
     private ObservableList<String> observableListDisciplinaLecionando;
     private ObservableList<String> observableListDisciplinaNaoLecionando;
 
+    private Professor professorSelecionado = new Professor();
+
+    private List<String> disciplinasLecionando = new ArrayList<>();
+    private List<String> disciplinasNaoLecionando = new ArrayList<>();
+
     private HashMap<String, Disciplina> mapDisciplinasLecionando = new HashMap<>();
     private HashMap<String, Disciplina> mapDisciplinasNaoLecionando = new HashMap<>();
 
@@ -61,41 +66,65 @@ public class ControllerProfessorDisciplina implements Initializable{
         tableViewProfessor.setItems(observableListProfessor);
     }
 
+    private void addDisciplinaLecionando(Disciplina disciplina) {
+        disciplinasLecionando.add(disciplina.getNome());
+        mapDisciplinasLecionando.put(disciplina.getNome(), disciplina);
+    }
+
+    private void addDisciplinaNaoLecionando(Disciplina disciplina) {
+        disciplinasNaoLecionando.add(disciplina.getNome());
+        mapDisciplinasNaoLecionando.put(disciplina.getNome(), disciplina);
+    }
+
+    private void removeDisciplinaLecionando(Disciplina disciplina) {
+        disciplinasLecionando.remove(disciplina.getNome());
+        mapDisciplinasLecionando.remove(disciplina.getNome());
+    }
+
+    private void removeDisciplinaNaoLecionando(Disciplina disciplina) {
+        disciplinasNaoLecionando.remove(disciplina.getNome());
+        mapDisciplinasNaoLecionando.remove(disciplina.getNome());
+    }
+
+    private void defineListViewLecionando() {
+        observableListDisciplinaLecionando = FXCollections.observableArrayList(disciplinasLecionando);
+
+        listViewLecionando.setItems(observableListDisciplinaLecionando);
+        listViewLecionando.setCellFactory(ComboBoxListCell.forListView(observableListDisciplinaLecionando));
+    }
+
+    private void defineListViewNaoLecionando() {
+        observableListDisciplinaNaoLecionando = FXCollections.observableArrayList(disciplinasNaoLecionando);
+
+        listViewNaoLecionando.setItems(observableListDisciplinaNaoLecionando);
+        listViewNaoLecionando.setCellFactory(ComboBoxListCell.forListView(observableListDisciplinaNaoLecionando));
+    }
+
     private void selecionaItemViewProfessor(Professor professor) {
 
-        List<String> disciplinas = new ArrayList<>();
-        List<String> disciplinasNaoLecionado = new ArrayList<>();
+        if (professor != null)
+            professorSelecionado = professor;
 
-        if (professor == null) {
-            professor = new Professor();
-        }
+        disciplinasLecionando = new ArrayList<>();
+        disciplinasNaoLecionando = new ArrayList<>();
 
 
-        for (Disciplina disciplina : professor.getDisciplinas()) {
+        for (Disciplina disciplina : professorSelecionado.getDisciplinas()) {
             if (disciplina != null){
-                System.out.println("O professor " + professor.getNome() + " Leciona: " + disciplina.getNome());
-
-                disciplinas.add(disciplina.getNome());
-                mapDisciplinasLecionando.put(disciplina.getNome(), disciplina);
+                System.out.println("O professor " + professorSelecionado.getNome() + " Leciona: " + disciplina.getNome());
+                addDisciplinaLecionando(disciplina);
             }
         }
 
         for (Disciplina disciplina : new DisciplinaDAOImpl().listar(Disciplina.class)) {
-            if (!disciplinas.contains(disciplina.getNome())) {
-                disciplinasNaoLecionado.add(disciplina.getNome());
-                mapDisciplinasNaoLecionando.put(disciplina.getNome(), disciplina);
+            if (!disciplinasLecionando.contains(disciplina.getNome())) {
+                addDisciplinaNaoLecionando(disciplina);
             }
         }
 
-        observableListDisciplinaLecionando = FXCollections.observableArrayList(disciplinas);
-        observableListDisciplinaNaoLecionando = FXCollections.observableArrayList(disciplinasNaoLecionado);
+        defineListViewLecionando();
 
-        listViewLecionando.setItems(observableListDisciplinaLecionando);
-        listViewLecionando.setCellFactory(ComboBoxListCell.forListView(observableListDisciplinaLecionando));
-
-        listViewNaoLecionando.setItems(observableListDisciplinaNaoLecionando);
-        listViewLecionando.setCellFactory(ComboBoxListCell.forListView(observableListDisciplinaNaoLecionando));
-
+        defineListViewNaoLecionando();
     }
 
     @FXML
@@ -110,7 +139,18 @@ public class ControllerProfessorDisciplina implements Initializable{
 
     @FXML
     public void handleAddLecionaDisciplina(){
+        String disciplinaSelecionadaNome = listViewNaoLecionando.getSelectionModel().getSelectedItems().get(0);
+        Disciplina disciplinaSelecionada;
 
+        if (disciplinaSelecionadaNome != null) {
+            disciplinaSelecionada = mapDisciplinasNaoLecionando.get(disciplinaSelecionadaNome);
+
+            addDisciplinaLecionando(disciplinaSelecionada);
+            removeDisciplinaNaoLecionando(disciplinaSelecionada);
+        }
+
+        defineListViewLecionando();
+        defineListViewNaoLecionando();
     }
 
     @FXML

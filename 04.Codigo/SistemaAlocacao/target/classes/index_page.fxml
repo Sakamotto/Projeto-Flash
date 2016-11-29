@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.Main">
+  <children>
+    <VBox prefHeight="600.0" prefWidth="800.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <children>
+        <MenuBar blendMode="SRC_OVER" cache="true" mouseTransparent="false" pickOnBounds="false" VBox.vgrow="ALWAYS">
+          <menus>
+            <Menu mnemonicParsing="false" text="Cadastros">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Área de Conhecimento" fx:id="menuCadastrosAreaConhecimento" />
+                <MenuItem mnemonicParsing="false" text="Curso" fx:id="menuCadastrosCurso" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" fx:id="menuCadastrosDisciplina" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" fx:id="menuCadastrosProfessor" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Processos">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Alocar Professores" fx:id="menuProcessosAlocarProfessores" onAction="#handleMenuItemProfessorDisciplina"/>
+                <MenuItem mnemonicParsing="false" text="Iniciar geração de horários" fx:id="menuProcessosIniciarGeracaoHorarios" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemVisuzlizarRelatorio" text="Visualizar Relatórios" fx:id="menuRelatoriosVisualizarRelatorios" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+        <AnchorPane fx:id="anchorPane" prefHeight="576.0" prefWidth="800.0" />
+      </children>
+    </VBox>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
