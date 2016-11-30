@@ -92,17 +92,17 @@ public class ControllerAlocacao implements Initializable{
         alocacoes.add(allocationQuatro);
 
 
-        scheduleUm.setDayWeek(Schedule.DayWeek.MONDAY);
-        scheduleUm.setInitSchedule(7, 30);
-        scheduleUm.setFinalSchedule(9, 20);
+        scheduleUm.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        scheduleUm.setHorarioInicio(7, 30);
+        scheduleUm.setHorarioFim(9, 20);
 
-        scheduleDois.setDayWeek(Schedule.DayWeek.TUESDAY);
-        scheduleDois.setInitSchedule(7, 30);
-        scheduleDois.setFinalSchedule(9, 20);
+        scheduleDois.setDiaSemana(Schedule.DiaSemana.TERCA);
+        scheduleDois.setHorarioInicio(7, 30);
+        scheduleDois.setHorarioFim(9, 20);
 
-        scheduleTres.setDayWeek(Schedule.DayWeek.TUESDAY);
-        scheduleTres.setInitSchedule(7, 30);
-        scheduleTres.setFinalSchedule(9, 20);
+        scheduleTres.setDiaSemana(Schedule.DiaSemana.TERCA);
+        scheduleTres.setHorarioInicio(7, 30);
+        scheduleTres.setHorarioFim(9, 20);
 
         schedules = new ArrayList<>();
 
