@@ -30,8 +30,8 @@
             <Group id="Group" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="515.0">
               <children>
                 <Button id="btnCadastrarProfessor" fx:id="btnCadastrarHorario" defaultButton="true" layoutX="0.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefWidth="175.0" text="Cadastrar Horário" />
-                <Button id="btnEditarProfessor" fx:id="btnEditarHorario" layoutX="183.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefWidth="175.0" text="Editar Professor" />
-                <Button id="btnExcluirProfessor" fx:id="btnExcluirHorario" layoutX="365.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonExcluir" prefWidth="175.0" text="Excluir Professor" />
+                <Button id="btnEditarProfessor" fx:id="btnEditarHorario" layoutX="183.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefWidth="175.0" text="Editar Horário" />
+                <Button id="btnExcluirProfessor" fx:id="btnExcluirHorario" layoutX="365.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonExcluir" prefWidth="175.0" text="Excluir Horário" />
               </children>
             </Group>
             <Label layoutX="98.0" layoutY="86.0" text="Inicio:" />

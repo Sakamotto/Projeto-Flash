@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.professor.ControllerProfessorDialogInsercao">
+<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.horario.ControllerHorarioDialogInsercao">
   <children>
     <GridPane layoutX="103.0" layoutY="138.0" prefWidth="330.0">
       <children>
@@ -44,7 +44,7 @@
       </font>
     </Label>
     <Group id="Group" layoutX="468.0" layoutY="441.0" />
-    <Button fx:id="btnSalvarProfessor" defaultButton="true" layoutX="247.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleButtonSalvar" text="Salvar" textAlignment="CENTER" />
-    <Button fx:id="btnCancelarProfessor" cancelButton="true" layoutX="327.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
+    <Button id="btnSalvarProfessor" fx:id="btnSalvarHorario" defaultButton="true" layoutX="247.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleButtonSalvar" text="Salvar" textAlignment="CENTER" />
+    <Button id="btnCancelarProfessor" fx:id="btnCancelarHorario" cancelButton="true" layoutX="327.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
   </children>
 </AnchorPane>

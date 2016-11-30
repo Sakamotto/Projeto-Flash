@@ -12,39 +12,28 @@ public class Horario {
     private int minutoInicio;
     private int horaFim;
     private int minutoFim;
-    private String horarioInicio;
-    private String horarioFim;
 
     private DiaSemana diaSemana;
 
     public Horario(){
-
+        horaInicio = 0;
+        minutoInicio = 0;
+        horaFim = 0;
+        minutoFim = 0;
     }
 
     public Horario(int idParam) {
         id = idParam;
     }
 
-    public void setHorarioInicio(String horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
-
-    public void setHorarioFim(String horarioFim) {
-        this.horarioFim = horarioFim;
-    }
-
     public void setHorarioInicio(int horaInicio, int minutoInicio) {
         this.horaInicio = horaInicio;
         this.minutoInicio = minutoInicio;
-
-        horarioInicio = getStrHorario(horaInicio, minutoInicio);
     }
 
     public void setHorarioFim(int horaFim, int minutoFim) {
         this.horaFim = horaFim;
         this.minutoFim = minutoFim;
-
-        horarioFim = getStrHorario(horaFim, minutoFim);
     }
 
     public void setDiaSemana(DiaSemana diaSemana) {
@@ -52,11 +41,11 @@ public class Horario {
     }
 
     public String getHorarioInicio() {
-        return horarioInicio;
+        return getStrHorario(horaInicio, minutoInicio);
     }
 
     public String getHorarioFim() {
-        return horarioFim;
+        return getStrHorario(horaFim, minutoFim);
     }
 
     public DiaSemana getDiaSemana() {
@@ -126,7 +115,7 @@ public class Horario {
     }
 
     private String getStrHorario(int hour, int minute) {
-        return hour + ":" + minute;
+        return hour + ":" + ( (minute < 10) ? "0" + minute : minute );
     }
 
 }
