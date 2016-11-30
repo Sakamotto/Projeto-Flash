@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.curso.ControllerCursoDialogInsercao">
+  <children>
+    <GridPane layoutX="36.0" layoutY="123.0" prefHeight="178.0" prefWidth="592.0" snapToPixel="false">
+      <children>
+        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Regime:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="Duraçao" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="Sigla:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField id="textFieldDisciplinaNome" fx:id="textFieldCursoNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField id="textFieldDisciplinaCargaHoraria" fx:id="textFieldCursoRegime" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField id="textFieldDisciplinaPeriodo" fx:id="textFieldCursoSigla" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField id="textFieldDisciplinaNome" fx:id="textFieldCursoDucarao" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="160.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="432.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+      </rowConstraints>
+    </GridPane>
+    <Label layoutX="275.0" layoutY="20.0" text="Curso" textAlignment="CENTER">
+      <font>
+        <Font size="36.0" />
+      </font>
+    </Label>
+    <Group id="Group" layoutX="468.0" layoutY="441.0">
+      <children>
+        <Button id="btnSalvarDisciplina" fx:id="btnSalvarCurso" defaultButton="true" layoutX="0.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonSalvar" text="Salvar" textAlignment="CENTER" />
+        <Button id="btnCancelarDisciplina" fx:id="btnCancelarCurso" cancelButton="true" layoutX="80.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
+      </children>
+    </Group>
+  </children>
+</AnchorPane>

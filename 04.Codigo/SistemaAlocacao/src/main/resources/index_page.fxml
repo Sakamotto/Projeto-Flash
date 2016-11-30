@@ -13,7 +13,7 @@
             <Menu mnemonicParsing="false" text="Cadastros">
               <items>
                 <MenuItem mnemonicParsing="false" text="Área de Conhecimento" fx:id="menuCadastrosAreaConhecimento" />
-                <MenuItem mnemonicParsing="false" text="Curso" fx:id="menuCadastrosCurso" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastroCurso" text="Curso" fx:id="menuCadastrosCurso" />
                 <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" fx:id="menuCadastrosDisciplina" />
                 <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" fx:id="menuCadastrosProfessor" />
                 <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosHorarios" text="Horário" fx:id="menuCadastrosHorarios" />
