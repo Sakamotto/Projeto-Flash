@@ -11,9 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class Main extends Application implements Initializable {
     @FXML
@@ -68,6 +66,12 @@ public class Main extends Application implements Initializable {
     @FXML
     public void handleMenuItemCadastrosHorarios()throws IOException{
         AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("horario/cadastro_horario.fxml"));
+        this.anchorPane.getChildren().setAll(anchorPane);
+    }
+
+    @FXML
+    public void handleMenuItemCadastroCurso() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("curso/cadastro_curso.fxml"));
         this.anchorPane.getChildren().setAll(anchorPane);
     }
 
