@@ -10,7 +10,7 @@
         </meta>
         <id name="id" column="endereco_id" type="int">
             <generator class="sequence">
-                <param name="sequence">endereco_endereco_id_seq_1</param>
+                <param name="sequence">endereco_endereco_id_seq</param>
             </generator>
         </id>
         <property name="municipio"/>

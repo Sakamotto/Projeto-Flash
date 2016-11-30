@@ -10,7 +10,7 @@
         </meta>
         <id name="id" column="curso_id" type="int">
             <generator class="sequence">
-                <param name="sequence">curso_curso_id_seq_1</param>
+                <param name="sequence">curso_curso_id_seq</param>
             </generator>
         </id>
         <property name="nome"/>

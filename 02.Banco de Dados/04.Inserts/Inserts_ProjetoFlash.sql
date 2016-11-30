@@ -1,4 +1,7 @@
-﻿INSERT INTO flash.area_conhecimento VALUES (1, 'Ciências Exatas e da Terra');
+﻿INSERT INTO flash.tipo_espaco (descricao) VALUES ('Sala');
+INSERT INTO flash.tipo_espaco (descricao) VALUES ('Laboratório');
+
+INSERT INTO flash.area_conhecimento VALUES (1, 'Ciências Exatas e da Terra');
 INSERT INTO flash.area_conhecimento VALUES (2, 'Matemática');
 INSERT INTO flash.area_conhecimento VALUES (3, 'Álgebra');
 INSERT INTO flash.area_conhecimento VALUES (4, 'Conjuntos');
