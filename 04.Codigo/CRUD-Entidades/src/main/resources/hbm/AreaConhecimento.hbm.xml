@@ -10,7 +10,7 @@
         </meta>
         <id name="id" column="area_conhecimento_id" type="int">
             <generator class="sequence">
-                <param name="sequence">area_conhecimento_area_conhecimento_id_seq_1</param>
+                <param name="sequence">area_conhecimento_area_conhecimento_id_seq</param>
             </generator>
         </id>
         <property name="descricao"/>

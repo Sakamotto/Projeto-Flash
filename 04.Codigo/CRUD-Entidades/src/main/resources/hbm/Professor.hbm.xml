@@ -26,7 +26,7 @@
                      class="model.dominio.Endereco" not-null="true" cascade="all" fetch="select"/>
 
 
-        <set name="disciplinas" table="professor_disciplina" inverse="false" lazy="true" fetch="select" cascade="none">
+        <set name="disciplinas" table="professor_disciplina" inverse="false" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="professor_id" not-null="true"/>
             </key>

@@ -1,15 +1,15 @@
 
-CREATE SEQUENCE flash.semestre_semestre_id_seq_1;
+CREATE SEQUENCE flash.semestre_semestre_id_seq;
 
 CREATE TABLE flash.semestre (
-                semestre_id INTEGER NOT NULL DEFAULT nextval('flash.semestre_semestre_id_seq_1'),
+                semestre_id INTEGER NOT NULL DEFAULT nextval('flash.semestre_semestre_id_seq'),
                 ano INTEGER NOT NULL,
                 semestre INTEGER NOT NULL,
                 CONSTRAINT semestre_id_pk PRIMARY KEY (semestre_id)
 );
 
 
-ALTER SEQUENCE flash.semestre_semestre_id_seq_1 OWNED BY flash.semestre.semestre_id;
+ALTER SEQUENCE flash.semestre_semestre_id_seq OWNED BY flash.semestre.semestre_id;
 
 CREATE SEQUENCE flash.tipo_espaco_tipo_id_seq;
 
@@ -35,43 +35,43 @@ CREATE TABLE flash.espaco (
 
 ALTER SEQUENCE flash.espaco_espaco_id_seq OWNED BY flash.espaco.espaco_id;
 
-CREATE SEQUENCE flash.dia_semana_dia_semana_id_seq_1;
+CREATE SEQUENCE flash.dia_semana_dia_semana_id_seq;
 
 CREATE TABLE flash.dia_semana (
-                dia_semana_id INTEGER NOT NULL DEFAULT nextval('flash.dia_semana_dia_semana_id_seq_1'),
+                dia_semana_id INTEGER NOT NULL DEFAULT nextval('flash.dia_semana_dia_semana_id_seq'),
                 nome_dia VARCHAR NOT NULL,
                 CONSTRAINT dia_semana_id PRIMARY KEY (dia_semana_id)
 );
 
 
-ALTER SEQUENCE flash.dia_semana_dia_semana_id_seq_1 OWNED BY flash.dia_semana.dia_semana_id;
+ALTER SEQUENCE flash.dia_semana_dia_semana_id_seq OWNED BY flash.dia_semana.dia_semana_id;
 
-CREATE SEQUENCE flash.area_conhecimento_area_conhecimento_id_seq_1;
+CREATE SEQUENCE flash.area_conhecimento_area_conhecimento_id_seq;
 
 CREATE TABLE flash.area_conhecimento (
-                area_conhecimento_id INTEGER NOT NULL DEFAULT nextval('flash.area_conhecimento_area_conhecimento_id_seq_1'),
+                area_conhecimento_id INTEGER NOT NULL DEFAULT nextval('flash.area_conhecimento_area_conhecimento_id_seq'),
                 descricao VARCHAR NOT NULL,
                 CONSTRAINT area_conhecimento_pk PRIMARY KEY (area_conhecimento_id)
 );
 
 
-ALTER SEQUENCE flash.area_conhecimento_area_conhecimento_id_seq_1 OWNED BY flash.area_conhecimento.area_conhecimento_id;
+ALTER SEQUENCE flash.area_conhecimento_area_conhecimento_id_seq OWNED BY flash.area_conhecimento.area_conhecimento_id;
 
-CREATE SEQUENCE flash.area_conhecimento_area_conhecimento_id_seq_1_1;
+CREATE SEQUENCE flash.sub_area_conhecimento_area_conhecimento_id_seq;
 
 CREATE TABLE flash.sub_area (
-                area_conhecimento_id INTEGER NOT NULL DEFAULT nextval('flash.area_conhecimento_area_conhecimento_id_seq_1_1'),
+                area_conhecimento_id INTEGER NOT NULL DEFAULT nextval('flash.sub_area_conhecimento_area_conhecimento_id_seq'),
                 sub_area_conhecimento_id INTEGER NOT NULL,
                 CONSTRAINT sub_area_pk PRIMARY KEY (area_conhecimento_id, sub_area_conhecimento_id)
 );
 
 
-ALTER SEQUENCE flash.area_conhecimento_area_conhecimento_id_seq_1_1 OWNED BY flash.sub_area.area_conhecimento_id;
+ALTER SEQUENCE flash.sub_area_conhecimento_area_conhecimento_id_seq OWNED BY flash.sub_area.area_conhecimento_id;
 
-CREATE SEQUENCE flash.curso_curso_id_seq_1;
+CREATE SEQUENCE flash.curso_curso_id_seq;
 
 CREATE TABLE flash.curso (
-                curso_id INTEGER NOT NULL DEFAULT nextval('flash.curso_curso_id_seq_1'),
+                curso_id INTEGER NOT NULL DEFAULT nextval('flash.curso_curso_id_seq'),
                 nome VARCHAR NOT NULL,
                 regime VARCHAR NOT NULL,
                 duracao INTEGER NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE flash.curso (
 );
 
 
-ALTER SEQUENCE flash.curso_curso_id_seq_1 OWNED BY flash.curso.curso_id;
+ALTER SEQUENCE flash.curso_curso_id_seq OWNED BY flash.curso.curso_id;
 
 CREATE SEQUENCE flash.horario_horario_id_seq;
 
@@ -94,10 +94,10 @@ CREATE TABLE flash.horario (
 
 ALTER SEQUENCE flash.horario_horario_id_seq OWNED BY flash.horario.horario_id;
 
-CREATE SEQUENCE flash.endereco_endereco_id_seq_1;
+CREATE SEQUENCE flash.endereco_endereco_id_seq;
 
 CREATE TABLE flash.endereco (
-                endereco_id INTEGER NOT NULL DEFAULT nextval('flash.endereco_endereco_id_seq_1'),
+                endereco_id INTEGER NOT NULL DEFAULT nextval('flash.endereco_endereco_id_seq'),
                 municipio VARCHAR NOT NULL,
                 bairro VARCHAR NOT NULL,
                 endereco VARCHAR NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE flash.endereco (
 );
 
 
-ALTER SEQUENCE flash.endereco_endereco_id_seq_1 OWNED BY flash.endereco.endereco_id;
+ALTER SEQUENCE flash.endereco_endereco_id_seq OWNED BY flash.endereco.endereco_id;
 
 CREATE SEQUENCE flash.disciplina_disciplina_id_seq;
 
@@ -155,17 +155,17 @@ CREATE TABLE flash.professor (
 
 ALTER SEQUENCE flash.professor_professor_id_seq OWNED BY flash.professor.professor_id;
 
-CREATE SEQUENCE flash.professor_disciplina_professor_disciplina_id_seq_1;
+CREATE SEQUENCE flash.professor_disciplina_professor_disciplina_id_seq;
 
 CREATE TABLE flash.professor_disciplina (
-                professor_disciplina_id INTEGER NOT NULL DEFAULT nextval('flash.professor_disciplina_professor_disciplina_id_seq_1'),
+                professor_disciplina_id INTEGER NOT NULL DEFAULT nextval('flash.professor_disciplina_professor_disciplina_id_seq'),
                 professor_id INTEGER NOT NULL,
                 disciplina_id INTEGER NOT NULL,
                 CONSTRAINT professor_disciplina_pk PRIMARY KEY (professor_disciplina_id)
 );
 
 
-ALTER SEQUENCE flash.professor_disciplina_professor_disciplina_id_seq_1 OWNED BY flash.professor_disciplina.professor_disciplina_id;
+ALTER SEQUENCE flash.professor_disciplina_professor_disciplina_id_seq OWNED BY flash.professor_disciplina.professor_disciplina_id;
 
 CREATE SEQUENCE flash.alocacao_alocacao_id_seq;
 
@@ -213,22 +213,22 @@ NOT DEFERRABLE;
 ALTER TABLE flash.disciplina ADD CONSTRAINT area_conhecimento_disciplina_fk
 FOREIGN KEY (area_conhecimento_id)
 REFERENCES flash.area_conhecimento (area_conhecimento_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+NOT DEFERRABLE;
+
+ALTER TABLE flash.sub_area ADD CONSTRAINT area_conhecimento_fk
+FOREIGN KEY (area_conhecimento_id)
+REFERENCES flash.area_conhecimento (area_conhecimento_id)
 ON DELETE NO ACTION
 ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE flash.sub_area ADD CONSTRAINT area_conhecimento_sub_area_fk
-FOREIGN KEY (area_conhecimento_id)
-REFERENCES flash.area_conhecimento (area_conhecimento_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE flash.sub_area ADD CONSTRAINT area_conhecimento_sub_area_fk1
 FOREIGN KEY (sub_area_conhecimento_id)
 REFERENCES flash.area_conhecimento (area_conhecimento_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE flash.disciplina ADD CONSTRAINT curso_disciplina_fk
@@ -252,14 +252,14 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 NOT DEFERRABLE;
 
-ALTER TABLE flash.requisito_disciplina ADD CONSTRAINT disciplina_requisito_fk
+ALTER TABLE flash.requisito_disciplina ADD CONSTRAINT disciplina_fk
 FOREIGN KEY (disciplina_id)
 REFERENCES flash.disciplina (disciplina_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE flash.requisito_disciplina ADD CONSTRAINT disciplina_requisito_fk1
+ALTER TABLE flash.requisito_disciplina ADD CONSTRAINT disciplina_requisito_fk
 FOREIGN KEY (disciplina_pre_requisito_id)
 REFERENCES flash.disciplina (disciplina_id)
 ON DELETE NO ACTION
@@ -276,20 +276,20 @@ NOT DEFERRABLE;
 ALTER TABLE flash.professor_disciplina ADD CONSTRAINT disciplina_professor_disciplina_fk
 FOREIGN KEY (disciplina_id)
 REFERENCES flash.disciplina (disciplina_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE flash.professor_disciplina ADD CONSTRAINT professor_professor_disciplina_fk
 FOREIGN KEY (professor_id)
 REFERENCES flash.professor (professor_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;
 
 ALTER TABLE flash.alocacao ADD CONSTRAINT professor_disciplina_alocacao_fk
 FOREIGN KEY (professor_disciplina_id)
 REFERENCES flash.professor_disciplina (professor_disciplina_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
+ON DELETE CASCADE
+ON UPDATE CASCADE
 NOT DEFERRABLE;

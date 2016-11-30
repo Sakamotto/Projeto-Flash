@@ -148,7 +148,7 @@ public class ControllerProfessorDisciplina implements Initializable{
             System.out.println("Disciplina: " + d.getNome());
         }
 
-        pDAO.inserir(professorSelecionado);
+        pDAO.alterar(professorSelecionado);
     }
 
     @FXML
