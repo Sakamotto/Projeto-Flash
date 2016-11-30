@@ -1,9 +1,9 @@
-package application;
+package domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import domain.Allocation;
-import domain.Schedule;
+import model.dominio.Alocacao;
+import model.dominio.Horario;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
@@ -18,22 +18,22 @@ import java.util.List;
 
 
 @PlanningSolution
-@XStreamAlias("AllocationSchedule")
-public class AllocationSchedule implements Solution<HardMediumSoftScore> {
+@XStreamAlias("AlocacaoHorario")
+public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
 
 
     @XStreamConverter(value = XStreamScoreConverter.class, types = {HardMediumSoftScoreDefinition.class})
     private HardMediumSoftScore score = HardMediumSoftScore.valueOf(0, 0, 0);
 
 
-    private List<Allocation> allocations;
-    private List<Schedule> schedules;
+    private List<Alocacao> alocacoes;
+    private List<Horario> horarios;
 
-    AllocationSchedule(){}
+    AlocacaoHorario(){}
 
-    public AllocationSchedule(List<Allocation> allocations, List<Schedule> schedules) {
-        this.allocations = allocations;
-        this.schedules = schedules;
+    public AlocacaoHorario(List<Alocacao> alocacoes, List<Horario> horarios) {
+        this.alocacoes = alocacoes;
+        this.horarios = horarios;
     }
 
     @Override
@@ -50,19 +50,19 @@ public class AllocationSchedule implements Solution<HardMediumSoftScore> {
     public Collection<? extends Object> getProblemFacts() {
         List<Object> facts = new ArrayList<>();
 
-        facts.addAll(schedules);
+        facts.addAll(horarios);
 
         return facts;
     }
 
 
     @PlanningEntityCollectionProperty
-    public List<Allocation> getAllocations() {
-        return allocations;
+    public List<Alocacao> getAlocacoes() {
+        return alocacoes;
     }
 
-    @ValueRangeProvider(id = "Schedule")
-    public List<Schedule> getSchedules() {
-        return schedules;
+    @ValueRangeProvider(id = "Horario")
+    public List<Horario> getHorarios() {
+        return horarios;
     }
 }

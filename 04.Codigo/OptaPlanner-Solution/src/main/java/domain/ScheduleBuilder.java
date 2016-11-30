@@ -1,34 +1,36 @@
 package domain;
 
+import model.dominio.Horario;
+
 /**
  * Created by danilo on 15/10/16.
  */
 public class ScheduleBuilder {
 
-    private Schedule schedule;
+    private Horario schedule;
 
     public ScheduleBuilder(int id) {
-        schedule = new Schedule(id);
+        schedule = new Horario(id);
     }
 
-    public ScheduleBuilder addDayWeek(Schedule.DiaSemana dayWeek) {
-        schedule.setDiaSemana(dayWeek);
+    public ScheduleBuilder addDiaSemana(Horario.DiaSemana diaSemana) {
+        schedule.setDiaSemana(diaSemana);
         return this;
     }
 
-    public ScheduleBuilder addInitSchedule(int init, int finish) {
+    public ScheduleBuilder addHorarioInicio(int init, int finish) {
         schedule.setHorarioInicio(init, finish);
 
         return this;
     }
 
-    public ScheduleBuilder addFinalSchedule(int init, int finish) {
+    public ScheduleBuilder addHorarioFim(int init, int finish) {
         schedule.setHorarioFim(init, finish);
 
         return this;
     }
 
-    public Schedule getSchedule() {
+    public Horario getHorario() {
         return schedule;
     }
 }

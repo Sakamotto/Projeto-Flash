@@ -1,15 +1,19 @@
 package controller.alocacaohorarios;
 
-import application.AllocationSchedule;
+import domain.AlocacaoHorario;
 import controller.Resolvedor;
-import domain.Allocation;
-import domain.Schedule;
-import domain.Subject;
-import domain.Teacher;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import model.DAO.disciplina.DisciplinaDAO;
+import model.DAO.disciplina.DisciplinaDAOImpl;
+import model.DAO.horario.HorarioDAO;
+import model.DAO.horario.HorarioDAOImpl;
+import model.DAO.professor.ProfessorDAO;
 import model.DAO.professor.ProfessorDAOImpl;
+import model.dominio.Alocacao;
+import model.dominio.Disciplina;
+import model.dominio.Horario;
 import model.dominio.Professor;
 
 import java.net.URL;
@@ -33,9 +37,9 @@ public class ControllerAlocacao implements Initializable{
 
     @FXML
     public void handleIniciarRelatorio() throws Exception{
-        AllocationSchedule problema = getProblem();
+        AlocacaoHorario problema = getProblem();
 
-        Resolvedor.setAllocationSchedule(problema);
+        Resolvedor.setAlocacaoHorario(problema);
 
         Resolvedor resolvedor = new Resolvedor();
 
@@ -45,7 +49,7 @@ public class ControllerAlocacao implements Initializable{
 
         thread1.join();
 
-        problema = resolvedor.getAllocationSchedule();
+        problema = resolvedor.getAlocacaoHorario();
 
         labelRegrasRigidas.setText(Integer.toString(problema.getScore().getHardScore()));
         labelRegrasDesejaveis.setText(Integer.toString(problema.getScore().getSoftScore()));
@@ -54,63 +58,31 @@ public class ControllerAlocacao implements Initializable{
 
     }
 
-    private AllocationSchedule getProblem() {
-        Allocation allocationUm;
-        Allocation allocationDois;
-        Allocation allocationTres;
-        Allocation allocationQuatro;
+    private AlocacaoHorario getProblem() {
+        List<Alocacao> alocacoes = new ArrayList<>();
+        List<Horario> horarios;
 
-        ProfessorDAOImpl daoProfessor = new ProfessorDAOImpl();
+        ProfessorDAO pDAO = new ProfessorDAOImpl();
+        HorarioDAO hDAO = new HorarioDAOImpl();
 
-        List<Professor> professores = daoProfessor.listar(Professor.class);
+        horarios = hDAO.listarHorariosCompletos();
 
-        Teacher teacherUm = new Teacher("Foo Bar", "99999988888");
-        Teacher teacherDois = new Teacher("Teacher Snape", "11122233344");
-        Teacher teacherTres = new Teacher("Fulano de Tal", "12312345678");
-        Teacher teacherQuatro = new Teacher("Filini di Til", "32165498787");
+        for (Horario horario : horarios) {
+            System.out.println("Dia Semana: " + horario.getDiaSemana() + " | H Inicio: " + horario.getHorarioInicio());
+        }
 
-        Subject subjectUm = new Subject("Calculo 1", 1, 60);
-        Subject subjectDois = new Subject("Logica", 1, 60);
-        Subject subjectTres = new Subject("Calculo 2", 2, 90);
-        Subject subjectQuatro = new Subject("AOC", 2, 90);
+        for (Professor professor : pDAO.listar(Professor.class)) {
+            for (Disciplina disciplina : professor.getDisciplinas()) {
+                Alocacao alocacao = new Alocacao();
 
-        Schedule scheduleUm = new Schedule(1);
-        Schedule scheduleDois = new Schedule(2);
-        Schedule scheduleTres = new Schedule(3);
+                alocacao.setProfessor(professor);
+                alocacao.setDisciplina(disciplina);
 
-        List<Allocation> alocacoes = new ArrayList<>();
-        List<Schedule> schedules;
+                alocacoes.add(alocacao);
+            }
+        }
 
-        allocationUm = new Allocation(subjectUm, teacherUm);
-        allocationDois = new Allocation(subjectDois, teacherDois);
-        allocationTres = new Allocation(subjectTres, teacherDois);
-        allocationQuatro = new Allocation(subjectQuatro, teacherTres);
-
-        alocacoes.add(allocationUm);
-        alocacoes.add(allocationDois);
-        alocacoes.add(allocationTres);
-        alocacoes.add(allocationQuatro);
-
-
-        scheduleUm.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
-        scheduleUm.setHorarioInicio(7, 30);
-        scheduleUm.setHorarioFim(9, 20);
-
-        scheduleDois.setDiaSemana(Schedule.DiaSemana.TERCA);
-        scheduleDois.setHorarioInicio(7, 30);
-        scheduleDois.setHorarioFim(9, 20);
-
-        scheduleTres.setDiaSemana(Schedule.DiaSemana.TERCA);
-        scheduleTres.setHorarioInicio(7, 30);
-        scheduleTres.setHorarioFim(9, 20);
-
-        schedules = new ArrayList<>();
-
-        schedules.add(scheduleUm);
-        schedules.add(scheduleDois);
-        schedules.add(scheduleTres);
-
-        return new AllocationSchedule(alocacoes, schedules);
+        return new AlocacaoHorario(alocacoes, horarios);
     }
 
 }

@@ -1,15 +1,14 @@
 package testes;
 
-import application.AllocationSchedule;
+import domain.AlocacaoHorario;
 import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
-import domain.Allocation;
-import domain.Schedule;
-import domain.Subject;
-import domain.Teacher;
+import model.dominio.Alocacao;
+import model.dominio.Disciplina;
 import model.dominio.Horario;
+import model.dominio.Professor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,60 +20,60 @@ import static org.junit.Assert.assertEquals;
  */
 public class HorariosProfessorConflitantes {
 
-    private Allocation allocationUm;
-    private Allocation allocationDois;
-    private Allocation allocationTres;
+    private Alocacao alocacaoUm;
+    private Alocacao alocacaoDois;
+    private Alocacao alocacaoTres;
 
-    private Teacher teacherUm = new Teacher("Foo Bar", "99999988888");
-    private Teacher teacherDois = new Teacher("Teacher Snape", "11122233344");
+    private Professor professorUm = new Professor("Foo Bar", "99999988888");
+    private Professor professorDois = new Professor("Professor Snape", "11122233344");
 
-    private Subject subjectUm = new Subject("Calculo 1", 1, 60);
-    private Subject subjectDois = new Subject("Logica", 1, 60);
-    private Subject subjectTres = new Subject("Calculo 2", 2, 90);
+    private Disciplina disciplinaUm = new Disciplina("Calculo 1", 1, 60);
+    private Disciplina disciplinaDois = new Disciplina("Logica", 1, 60);
+    private Disciplina disciplinaTres = new Disciplina("Calculo 2", 2, 90);
 
-    private Schedule scheduleUm = new Schedule(1);
-    private Schedule scheduleDois = new Schedule(2);
-    private Schedule scheduleTres = new Schedule(3);
+    private Horario horarioUm = new Horario(1);
+    private Horario horarioDois = new Horario(2);
+    private Horario horarioTres = new Horario(3);
 
-    private List<Allocation> alocacoes = new ArrayList<>();
-    private List<Schedule> schedules;
+    private List<Alocacao> alocacoes = new ArrayList<>();
+    private List<Horario> horarios;
 
     @Dado("^Existe um conjunto de professores alocados a um conjunto de disciplinas$")
     public void existe_um_conjunto_de_professores_alocados_a_um_conjunto_de_disciplinas() throws Throwable {
-        allocationUm = new Allocation(subjectUm, teacherUm);
-        allocationDois = new Allocation(subjectDois, teacherDois);
-        allocationTres = new Allocation(subjectTres, teacherDois);
+        alocacaoUm = new Alocacao(disciplinaUm, professorUm);
+        alocacaoDois = new Alocacao(disciplinaDois, professorDois);
+        alocacaoTres = new Alocacao(disciplinaTres, professorDois);
 
-        alocacoes.add(allocationUm);
-        alocacoes.add(allocationDois);
-        alocacoes.add(allocationTres);
+        alocacoes.add(alocacaoUm);
+        alocacoes.add(alocacaoDois);
+        alocacoes.add(alocacaoTres);
     }
 
     @Quando("^Eu alocar os horarios que geram conflito de horarios dos professores$")
     public void eu_alocar_os_horarios_que_geram_conflito_de_horarios_dos_professores() throws Throwable {
-        scheduleUm.setDiaSemana(Schedule.DiaSemana.TERCA);
-        scheduleUm.setHorarioInicio(7, 30);
-        scheduleUm.setHorarioFim(9, 20);
+        horarioUm.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioUm.setHorarioInicio(7, 30);
+        horarioUm.setHorarioFim(9, 20);
 
-        scheduleDois.setDiaSemana(Schedule.DiaSemana.TERCA);
-        scheduleDois.setHorarioInicio(7, 30);
-        scheduleDois.setHorarioFim(9, 20);
+        horarioDois.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioDois.setHorarioInicio(7, 30);
+        horarioDois.setHorarioFim(9, 20);
 
-        scheduleTres.setDiaSemana(Schedule.DiaSemana.TERCA);
-        scheduleTres.setHorarioInicio(7, 30);
-        scheduleTres.setHorarioFim(9, 20);
+        horarioTres.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioTres.setHorarioInicio(7, 30);
+        horarioTres.setHorarioFim(9, 20);
 
-        schedules = new ArrayList<>();
+        horarios = new ArrayList<>();
 
-        schedules.add(scheduleUm);
-        schedules.add(scheduleDois);
-        schedules.add(scheduleTres);
+        horarios.add(horarioUm);
+        horarios.add(horarioDois);
+        horarios.add(horarioTres);
 
-        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
 
-        Resolvedor.setAllocationSchedule(problema);
+        Resolvedor.setAlocacaoHorario(problema);
 
-        AllocationSchedule solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
+        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
     }
@@ -86,29 +85,29 @@ public class HorariosProfessorConflitantes {
 
     @Quando("^Alocar os horarios que nao geram conflito de horarios dos professores$")
     public void alocar_os_horarios_que_nao_geram_conflito_de_horarios_dos_professores() throws Throwable {
-        scheduleUm.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
-        scheduleUm.setHorarioInicio(7, 30);
-        scheduleUm.setHorarioFim(9, 20);
+        horarioUm.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        horarioUm.setHorarioInicio(7, 30);
+        horarioUm.setHorarioFim(9, 20);
 
-        scheduleDois.setDiaSemana(Schedule.DiaSemana.TERCA);
-        scheduleDois.setHorarioInicio(7, 30);
-        scheduleDois.setHorarioFim(9, 20);
+        horarioDois.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioDois.setHorarioInicio(7, 30);
+        horarioDois.setHorarioFim(9, 20);
 
-        scheduleTres.setDiaSemana(Schedule.DiaSemana.TERCA);
-        scheduleTres.setHorarioInicio(7, 30);
-        scheduleTres.setHorarioFim(9, 20);
+        horarioTres.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioTres.setHorarioInicio(7, 30);
+        horarioTres.setHorarioFim(9, 20);
 
-        schedules = new ArrayList<>();
+        horarios = new ArrayList<>();
 
-        schedules.add(scheduleUm);
-        schedules.add(scheduleDois);
-        schedules.add(scheduleTres);
+        horarios.add(horarioUm);
+        horarios.add(horarioDois);
+        horarios.add(horarioTres);
 
-        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
 
-        Resolvedor.setAllocationSchedule(problema);
+        Resolvedor.setAlocacaoHorario(problema);
 
-        AllocationSchedule solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
+        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
     }

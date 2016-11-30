@@ -53,8 +53,7 @@ public class Main extends Application implements Initializable {
 
     @FXML
     public void handleMenuItemVisuzlizarRelatorio() throws IOException{
-        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("alocacaoHorarios/alocacaoHorarios.fxml"));
-        this.anchorPane.getChildren().setAll(anchorPane);
+
     }
 
     @FXML
@@ -72,6 +71,12 @@ public class Main extends Application implements Initializable {
     @FXML
     public void handleMenuItemCadastroCurso() throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("curso/cadastro_curso.fxml"));
+        this.anchorPane.getChildren().setAll(anchorPane);
+    }
+
+    @FXML
+    public void handleProcessosIniciarGeracaoHorarios() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("alocacaoHorarios/alocacaoHorarios.fxml"));
         this.anchorPane.getChildren().setAll(anchorPane);
     }
 

@@ -1,8 +1,6 @@
 package application;
 
 import controller.Resolvedor;
-import domain.Allocation;
-import domain.Schedule;
 
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         Resolvedor.benchMark();
 
-//        AllocationSchedule problema;
+//        AlocacaoHorario problema;
 //
 //
 //        Schedule horario01 = new ScheduleBuilder(1)
@@ -87,33 +85,33 @@ public class Main {
 //
 //
 //
-//        problema = new AllocationSchedule(
+//        problema = new AlocacaoHorario(
 //                listAlocacao(alocacao1, alocacao2, alocacao3, alocacao4, alocacao5, alocacao6),
 //                listHorarios(horario01, horario02, horario03, horario04, horario06, horario05, horario07)
 //        );
 //
 //
 //
-//        AllocationSchedule solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
+//        AlocacaoHorario solucao = Resolvedor.resolver(problema, "solver/bruteForce_solverConfig.xml");
 //
 //        // printResultSolution(solucao);
 
     }
 
-    private static List<Schedule> listHorarios(Schedule... hs) {
-        ArrayList<Schedule> schedules = new ArrayList<>();
-
-        Collections.addAll(schedules, hs);
-
-        return schedules;
-    }
-
-    private static List<Allocation> listAlocacao(Allocation... ds) {
-        ArrayList<Allocation> allocation = new ArrayList<>();
-
-        Collections.addAll(allocation, ds);
-
-        return allocation;
-    }
+//    private static List<Schedule> listHorarios(Schedule... hs) {
+//        ArrayList<Schedule> schedules = new ArrayList<>();
+//
+//        Collections.addAll(schedules, hs);
+//
+//        return schedules;
+//    }
+//
+//    private static List<Allocation> listAlocacao(Allocation... ds) {
+//        ArrayList<Allocation> allocation = new ArrayList<>();
+//
+//        Collections.addAll(allocation, ds);
+//
+//        return allocation;
+//    }
 
 }

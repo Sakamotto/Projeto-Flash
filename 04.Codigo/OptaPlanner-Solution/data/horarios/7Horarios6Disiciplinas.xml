@@ -1,5 +1,5 @@
 <AllocationSchedule id="1">
-    <allocations id="2">
+    <alocacoes id="2">
         <Allocation id="3">
             <subject id="4">
                 <nome>Calculo 1</nome>
@@ -77,10 +77,10 @@
                 <cpf>33333222222</cpf>
             </teacher>
         </Allocation>
-    </allocations>
+    </alocacoes>
 
 
-    <schedules id="21">
+    <horarios id="21">
         <Schedule id="22">
             <initHour>7</initHour>
             <initMinute>30</initMinute>
@@ -136,5 +136,5 @@
             <finalMinute>30</finalMinute>
             <dayWeek>THURSDAY</dayWeek>
         </Schedule>
-    </schedules>
+    </horarios>
 </AllocationSchedule>

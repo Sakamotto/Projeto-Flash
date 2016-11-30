@@ -1,81 +1,81 @@
 <AllocationSchedule id="1">
     <allocations id="2">
         <Allocation id="3">
-            <subject id="4">
+            <disciplina id="4">
                 <nome>Calculo 1</nome>
                 <period>1</period>
                 <workLoad>60</workLoad>
-            </subject>
+            </disciplina>
 
-            <teacher id = "5">
+            <professor id = "5">
                 <nome>Bruno Ramos Gonzaga</nome>
                 <cpf>11111111111</cpf>
-            </teacher>
+            </professor>
         </Allocation>
 
         <Allocation id="6">
-            <subject id="7">
+            <disciplina id="7">
                 <nome>Comunicacao Empresarial</nome>
                 <period>1</period>
                 <workLoad>30</workLoad>
-            </subject>
+            </disciplina>
 
-            <teacher id="8">
+            <professor id="8">
                 <nome>Aurelia Hubner</nome>
                 <cpf>11111122222</cpf>
-            </teacher>
+            </professor>
         </Allocation>
 
 		<Allocation id="9">
-            <subject id="10">
+            <disciplina id="10">
                 <nome>Metodologia da Pesquisa</nome>
                 <period>1</period>
                 <workLoad>30</workLoad>
-            </subject>
+            </disciplina>
 
-            <teacher id="11">
+            <professor id="11">
                 <nome>Rutinelli Nao Sei O Sobrenome</nome>
                 <cpf>22222111111</cpf>
-            </teacher>
+            </professor>
         </Allocation>
 
 		<Allocation id="12">
-            <subject id="13">
+            <disciplina id="13">
                 <nome>FSI</nome>
                 <period>1</period>
                 <workLoad>30</workLoad>
-            </subject>
+            </disciplina>
 
-            <teacher id="14">
+            <professor id="14">
                 <nome>Cleio Maioli</nome>
                 <cpf>22222222222</cpf>
-            </teacher>
+            </professor>
         </Allocation>
 
 		<Allocation id="15">
-            <subject id="16">
+            <disciplina id="16">
                 <nome>Logica</nome>
                 <period>1</period>
                 <workLoad>90</workLoad>
-            </subject>
+            </disciplina>
 
-            <teacher id="17">
+            <professor id="17">
                 <nome>Jeferson Oliveira Andrade</nome>
                 <cpf>22222333333</cpf>
-            </teacher>
+            </professor>
         </Allocation>
 
 		<Allocation id="18">
-            <subject id="19">
+            <disciplina id="19">
                 <nome>Programacao 1</nome>
                 <period>1</period>
                 <workLoad>90</workLoad>
-            </subject>
+            </disciplina>
 
-            <teacher id="20">
+            <professor id="20">
                 <nome>Alessandra Aguiar</nome>
                 <cpf>33333222222</cpf>
-            </teacher>
+            </professor>
         </Allocation>
     </allocations>
 

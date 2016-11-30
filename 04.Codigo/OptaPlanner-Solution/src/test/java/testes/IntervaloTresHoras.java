@@ -1,13 +1,16 @@
 package testes;
 
 
-import application.AllocationSchedule;
+import domain.AlocacaoHorario;
 import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
-import domain.*;
+import domain.ScheduleBuilder;
+import model.dominio.Alocacao;
+import model.dominio.Disciplina;
 import model.dominio.Horario;
+import model.dominio.Professor;
 
 
 import java.util.ArrayList;
@@ -21,83 +24,83 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntervaloTresHoras {
 
-    private List<Allocation> alocacoes;
-    private List<Schedule> schedules;
+    private List<Alocacao> alocacoes;
+    private List<Horario> horarios;
 
     @Dado("^Eu tenha um conjunto de professores alocados a um conjunto de disciplinas$")
     public void eu_tenha_um_conjunto_de_professores_alocados_a_um_conjunto_de_disciplinas() throws Throwable {
-        Teacher teacher = new Teacher("Bruno R. G.", "12345678910");
+        Professor professor = new Professor("Bruno R. G.", "12345678910");
 
-        Subject subjectUm = new Subject("Calculo 1", 1, 90);
-        Subject subjectDois = new Subject("Lógica", 1, 90);
+        Disciplina disciplinaUm = new Disciplina("Calculo 1", 1, 90);
+        Disciplina disciplinaDois = new Disciplina("Lógica", 1, 90);
 
-        Allocation allocationUm = new Allocation(subjectUm);
-        Allocation allocationDois = new Allocation(subjectDois);
+        Alocacao alocacaoUm = new Alocacao(disciplinaUm);
+        Alocacao alocacaoDois = new Alocacao(disciplinaDois);
 
-        allocationUm.setTeacher(teacher);
-        allocationDois.setTeacher(teacher);
+        alocacaoUm.setProfessor(professor);
+        alocacaoDois.setProfessor(professor);
 
         alocacoes = new ArrayList<>();
 
-        alocacoes.add(allocationUm);
-        alocacoes.add(allocationDois);
+        alocacoes.add(alocacaoUm);
+        alocacoes.add(alocacaoDois);
 
     }
 
     @Quando("^Eu alocar os horarios com intervalo maior que tres horas$")
     public void eu_alocar_os_horarios_com_intervalo_maior_que_tres_horas() throws Throwable {
-        Schedule scheduleUm = new Schedule(1);
-        scheduleUm.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
-        scheduleUm.setHorarioInicio(7, 30);
-        scheduleUm.setHorarioFim(9, 20);
+        Horario horarioUm = new Horario(1);
+        horarioUm.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        horarioUm.setHorarioInicio(7, 30);
+        horarioUm.setHorarioFim(9, 20);
 
-        Schedule scheduleDois = new Schedule(2);
-        scheduleDois.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
-        scheduleDois.setHorarioInicio(13, 20);
-        scheduleDois.setHorarioFim(15, 30);
+        Horario horarioDois = new Horario(2);
+        horarioDois.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        horarioDois.setHorarioInicio(13, 20);
+        horarioDois.setHorarioFim(15, 30);
 
-        schedules = new ArrayList<>();
+        horarios = new ArrayList<>();
 
-        schedules.add(scheduleUm);
-        schedules.add(scheduleDois);
+        horarios.add(horarioUm);
+        horarios.add(horarioDois);
 
-        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
 
-        Resolvedor.setAllocationSchedule(problema);
+        Resolvedor.setAlocacaoHorario(problema);
 
-        AllocationSchedule solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
+        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), false);
     }
 
     @Entao("^Enviar mensagem de erro informando a quebra da regra$")
     public void enviar_mensagem_de_erro_informando_a_quebra_da_regra() throws Throwable {
-        System.out.println("Existe um professor com um intervalo de 3 horas vagas entre schedules de aula.");
+        System.out.println("Existe um professor com um intervalo de 3 horas vagas entre horarios de aula.");
     }
 
     @Quando("^Eu alocar os sem intervalo maior ou igual a tres horas para todos os professores$")
     public void eu_alocar_os_sem_intervalo_maior_ou_igual_a_tres_horas_para_todos_os_professores() throws Throwable {
-        Schedule scheduleUm = new ScheduleBuilder(1)
-                .addDayWeek(Schedule.DiaSemana.SEGUNDA)
-                .addInitSchedule(7, 30)
-                .addFinalSchedule(9, 20)
-                .getSchedule();
-        Schedule scheduleDois = new ScheduleBuilder(2)
-                .addDayWeek(Schedule.DiaSemana.SEGUNDA)
-                .addInitSchedule(9, 40)
-                .addFinalSchedule(11, 30)
-                .getSchedule();
+        Horario horarioUm = new ScheduleBuilder(1)
+                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
+                .addHorarioInicio(7, 30)
+                .addHorarioFim(9, 20)
+                .getHorario();
+        Horario horarioDois = new ScheduleBuilder(2)
+                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
+                .addHorarioInicio(9, 40)
+                .addHorarioFim(11, 30)
+                .getHorario();
 
-        schedules = new ArrayList<>();
+        horarios = new ArrayList<>();
 
-        schedules.add(scheduleUm);
-        schedules.add(scheduleDois);
+        horarios.add(horarioUm);
+        horarios.add(horarioDois);
 
-        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
 
-        Resolvedor.setAllocationSchedule(problema);
+        Resolvedor.setAlocacaoHorario(problema);
 
-        AllocationSchedule solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
+        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
         assertEquals(solucao.getScore().isFeasible(), true);
 

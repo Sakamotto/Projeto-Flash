@@ -1,8 +1,14 @@
 package model.dominio;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * Created by cristian on 29/11/16.
  */
+
+@XStreamAlias("Horario")
 public class Horario {
 
     public enum DiaSemana {DOMINGO, SEGUNDA, TERCA, QUARTA, QUINTA, SEXTA, SABADO}
@@ -116,6 +122,32 @@ public class Horario {
 
     private String getStrHorario(int hour, int minute) {
         return hour + ":" + ( (minute < 10) ? "0" + minute : minute );
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(getId())
+                .append(getDiaSemana())
+                .append(getHorarioInicio())
+                .append(getHorarioFim())
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Horario) {
+            Horario other = (Horario) o;
+            return new EqualsBuilder()
+                    .append(getDiaSemana(), other.getDiaSemana())
+                    .append(getHorarioInicio(), other.getHorarioInicio())
+                    .append(getHorarioFim(), other.getHorarioFim())
+                    .isEquals();
+        } else {
+            return false;
+        }
     }
 
 }

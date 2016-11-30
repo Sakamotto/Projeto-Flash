@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
     <!-- Modelo de domínio -->
-    <solutionClass>application.AllocationSchedule</solutionClass>
-    <entityClass>domain.Allocation</entityClass>
+    <solutionClass>domain.AlocacaoHorario</solutionClass>
+    <entityClass>model.dominio.Alocacao</entityClass>
 
     <!-- Score -->
     <scoreDirectorFactory>

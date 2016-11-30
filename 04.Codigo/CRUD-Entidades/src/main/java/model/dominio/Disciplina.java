@@ -1,5 +1,9 @@
 package model.dominio;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +13,8 @@ import java.util.zip.CRC32;
 /**
  * Created by danilo on 24/10/16.
  */
+
+@XStreamAlias("Disciplina")
 public class Disciplina implements Cloneable {
 
     private int id;
@@ -24,6 +30,14 @@ public class Disciplina implements Cloneable {
         nome = "";
         cargaHoraria = 0;
         periodo = 0;
+        curso = new Curso();
+        areaConhecimento = new AreaConhecimento();
+    }
+
+    public Disciplina(String nome, int periodo, int cargaHoraria) {
+        this.nome = nome;
+        this.cargaHoraria = cargaHoraria;
+        this.periodo = periodo;
         curso = new Curso();
         areaConhecimento = new AreaConhecimento();
     }
@@ -102,5 +116,30 @@ public class Disciplina implements Cloneable {
         }
 
         return obj;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(getNome())
+                .append(getPeriodo())
+                .append(getCargaHoraria())
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Disciplina) {
+            Disciplina other = (Disciplina) o;
+            return new EqualsBuilder()
+                    .append(getNome(), other.getNome())
+                    .append(getPeriodo(), other.getPeriodo())
+                    .append(getCargaHoraria(), other.getCargaHoraria())
+                    .isEquals();
+        } else {
+            return false;
+        }
     }
 }

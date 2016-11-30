@@ -1,7 +1,7 @@
 package controller;
 
-import application.AllocationSchedule;
-import domain.Allocation;
+import domain.AlocacaoHorario;
+import model.dominio.Alocacao;
 import org.optaplanner.benchmark.api.PlannerBenchmark;
 import org.optaplanner.benchmark.api.PlannerBenchmarkFactory;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
@@ -18,7 +18,7 @@ public class Resolvedor implements Runnable{
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(Resolvedor.class);
 
-    private static AllocationSchedule allocationSchedule;
+    private static AlocacaoHorario alocacaoHorario;
 
     private static boolean terminado = false;
 
@@ -30,12 +30,12 @@ public class Resolvedor implements Runnable{
         plannerBenchmark.benchmark();
     }
 
-    public static AllocationSchedule resolver(String solverConfig) {
+    public static AlocacaoHorario resolver(String solverConfig) {
         SolverFactory sF = SolverFactory.createFromXmlResource(solverConfig);
         Solver solver = sF.buildSolver();
-        solver.solve(allocationSchedule);
+        solver.solve(alocacaoHorario);
 
-        AllocationSchedule solucao = (AllocationSchedule) solver.getBestSolution();
+        AlocacaoHorario solucao = (AlocacaoHorario) solver.getBestSolution();
 
         logarSolucao(solucao);
         printResultSolution(solucao);
@@ -43,7 +43,7 @@ public class Resolvedor implements Runnable{
         return solucao;
     }
 
-    public static void logarSolucao(AllocationSchedule solucao) {
+    public static void logarSolucao(AlocacaoHorario solucao) {
         HardMediumSoftScore score = solucao.getScore();
         String viabilidade = (score.isFeasible()) ? "Sim": "Nao";
 
@@ -51,17 +51,17 @@ public class Resolvedor implements Runnable{
 
         System.out.println("Solução é viável ? R = " + viabilidade);
 
-        solucao.getAllocations().forEach(a -> logger.info("Subject = [{}] -> Schedule = [{}]", a.getSubject().getNome(), a.getSchedule().getStrDiaSemana() + ", " + a.getSchedule().getHorarioInicio() + " - " + a.getSchedule().getHorarioInicio()));
+        solucao.getAlocacoes().forEach(a -> logger.info("Disciplina = [{}] -> Horários = [{}]", a.getDisciplina().getNome(), a.getHorario().getStrDiaSemana() + ", " + a.getHorario().getHorarioInicio() + " - " + a.getHorario().getHorarioInicio()));
     }
 
-    public static void printResultSolution(AllocationSchedule solucao) {
-        List<Allocation> resultadoAlocacoes = solucao.getAllocations();
+    public static void printResultSolution(AlocacaoHorario solucao) {
+        List<Alocacao> resultadoAlocacoes = solucao.getAlocacoes();
 
-        for( Allocation resultadoAllocation : resultadoAlocacoes) {
-            System.out.println("\n\nTeacher: " + resultadoAllocation.getTeacher().getNome() +
-                    "\nDisciplina: " + resultadoAllocation.getSubject().getNome() +
-                    "\nDia da Semana: " + resultadoAllocation.getSchedule().getStrDiaSemana() +
-                    "\nHorario de Inicio " + resultadoAllocation.getSchedule().getHorarioInicio());
+        for( Alocacao resultadoAlocacao : resultadoAlocacoes) {
+            System.out.println("\n\nProfessor: " + resultadoAlocacao.getProfessor().getNome() +
+                    "\nDisciplina: " + resultadoAlocacao.getDisciplina().getNome() +
+                    "\nDia da Semana: " + resultadoAlocacao.getHorario().getStrDiaSemana() +
+                    "\nHorario de Inicio " + resultadoAlocacao.getHorario().getHorarioInicio());
         }
     }
 
@@ -69,19 +69,17 @@ public class Resolvedor implements Runnable{
         return 123456;
     }
 
-    public AllocationSchedule getAllocationSchedule() {
-        return allocationSchedule;
+    public AlocacaoHorario getAlocacaoHorario() {
+        return alocacaoHorario;
     }
 
-    public static void setAllocationSchedule(AllocationSchedule allocationSchedule) {
-        Resolvedor.allocationSchedule = allocationSchedule;
+    public static void setAlocacaoHorario(AlocacaoHorario alocacaoHorario) {
+        Resolvedor.alocacaoHorario = alocacaoHorario;
     }
-
-
 
     @Override
     public void run() {
-        allocationSchedule = resolver("solver/bruteForce_solverConfig.xml");
+        alocacaoHorario = resolver("solver/bruteForce_solverConfig.xml");
 
         terminado = true;
     }

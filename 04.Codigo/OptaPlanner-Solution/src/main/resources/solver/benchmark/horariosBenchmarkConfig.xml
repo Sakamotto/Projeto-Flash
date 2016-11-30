@@ -4,7 +4,7 @@
 
     <inheritedSolverBenchmark>
         <problemBenchmarks>
-            <xStreamAnnotatedClass>application.AllocationSchedule</xStreamAnnotatedClass>
+            <xStreamAnnotatedClass>domain.AlocacaoHorario</xStreamAnnotatedClass>
             <inputSolutionFile>data/horarios/7Horarios6Disiciplinas.xml</inputSolutionFile>
 
             <problemStatisticType>BEST_SCORE</problemStatisticType>
@@ -12,8 +12,8 @@
 
         <solver>
             <!-- Modelo de domínio -->
-            <solutionClass>application.AllocationSchedule</solutionClass>
-            <entityClass>domain.Allocation</entityClass>
+            <solutionClass>domain.AlocacaoHorario</solutionClass>
+            <entityClass>model.dominio.Alocacao</entityClass>
 
             <!-- Score -->
             <scoreDirectorFactory>

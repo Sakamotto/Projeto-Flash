@@ -1,15 +1,14 @@
 package testes;
 
-import application.AllocationSchedule;
+import domain.AlocacaoHorario;
 import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
-import domain.Allocation;
-import domain.Schedule;
-import domain.Subject;
-import domain.Teacher;
+import model.dominio.Alocacao;
+import model.dominio.Disciplina;
 import model.dominio.Horario;
+import model.dominio.Professor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,64 +21,64 @@ import static org.junit.Assert.assertEquals;
  */
 public class PeriodosHorariosDiferentes {
 
-    private Allocation allocation1;
-    private Allocation allocation2;
-    private Allocation allocation3;
-    private Allocation allocation4;
+    private Alocacao alocacao1;
+    private Alocacao alocacao2;
+    private Alocacao alocacao3;
+    private Alocacao alocacao4;
 
-    private Teacher teacher1 = new Teacher("Fulano de Tal", "12312345678");
-    private Teacher teacher2 = new Teacher("Filini di Til", "32165498787");
-    private Teacher teacher3 = new Teacher("Foo Bar", "99999988888");
-    private Teacher teacher4 = new Teacher("Teacher Snape", "11122233344");
+    private Professor professor1 = new Professor("Fulano de Tal", "12312345678");
+    private Professor professor2 = new Professor("Filini di Til", "32165498787");
+    private Professor professor3 = new Professor("Foo Bar", "99999988888");
+    private Professor professor4 = new Professor("Professor Snape", "11122233344");
 
-    private Subject subject1;
-    private Subject subject2;
-    private Subject subject3;
-    private Subject subject4;
+    private Disciplina disciplina1;
+    private Disciplina disciplina2;
+    private Disciplina disciplina3;
+    private Disciplina disciplina4;
 
-    private Schedule h1;
-    private Schedule h2;
+    private Horario h1;
+    private Horario h2;
 
-    private AllocationSchedule solucao;
+    private AlocacaoHorario solucao;
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(PeriodosHorariosDiferentes.class);
 
 
     @Dado("^Eu tenha um conjunto de discplinas em um periodo$")
     public void eu_tenha_um_conjunto_de_discplinas_em_um_periodo() {
-        subject1 = new Subject("Cálculo 1", 1, 60);
-        subject2 = new Subject("Lógica", 1, 60);
-        subject3 = new Subject("Cálculo 2", 2, 90);
-        subject4 = new Subject("AOC", 2, 90);
+        disciplina1 = new Disciplina("Cálculo 1", 1, 60);
+        disciplina2 = new Disciplina("Lógica", 1, 60);
+        disciplina3 = new Disciplina("Cálculo 2", 2, 90);
+        disciplina4 = new Disciplina("AOC", 2, 90);
 
     }
 
     @Quando("^Eu alocar o horario$")
     public void eu_alocar_o_horario() {
-        allocation1 = new Allocation();
-        allocation2 = new Allocation();
-        allocation3 = new Allocation();
-        allocation4 = new Allocation();
-        h1 = new Schedule(1);
-        h2 = new Schedule(2);
+        alocacao1 = new Alocacao();
+        alocacao2 = new Alocacao();
+        alocacao3 = new Alocacao();
+        alocacao4 = new Alocacao();
+        h1 = new Horario(1);
+        h2 = new Horario(2);
 
-        allocation1.setSubject(subject1);
-        allocation1.setTeacher(teacher1);
+        alocacao1.setDisciplina(disciplina1);
+        alocacao1.setProfessor(professor1);
 
-        allocation2.setSubject(subject2);
-        allocation2.setTeacher(teacher2);
+        alocacao2.setDisciplina(disciplina2);
+        alocacao2.setProfessor(professor2);
 
-        allocation3.setSubject(subject3);
-        allocation3.setTeacher(teacher3);
+        alocacao3.setDisciplina(disciplina3);
+        alocacao3.setProfessor(professor3);
 
-        allocation4.setSubject(subject4);
-        allocation4.setTeacher(teacher4);
+        alocacao4.setDisciplina(disciplina4);
+        alocacao4.setProfessor(professor4);
 
-        h1.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        h1.setDiaSemana(Horario.DiaSemana.SEGUNDA);
         h1.setHorarioInicio(7, 30);
         h1.setHorarioFim(9, 30);
 
-        h2.setDiaSemana(Schedule.DiaSemana.SEGUNDA);
+        h2.setDiaSemana(Horario.DiaSemana.SEGUNDA);
         h2.setHorarioInicio(9, 31);
         h2.setHorarioFim(11, 30);
 
@@ -87,19 +86,19 @@ public class PeriodosHorariosDiferentes {
 
     @Quando("^houver conflito$")
     public void houver_conflito() {
-        ArrayList<Allocation> alocacoes = new ArrayList<>();
-        ArrayList<Schedule> schedules = new ArrayList<>();
+        ArrayList<Alocacao> alocacoes = new ArrayList<>();
+        ArrayList<Horario> schedules = new ArrayList<>();
 
         schedules.add(h1);
         schedules.add(h1);
-        alocacoes.add(allocation1);
-        alocacoes.add(allocation2);
-        alocacoes.add(allocation3);
-        alocacoes.add(allocation4);
+        alocacoes.add(alocacao1);
+        alocacoes.add(alocacao2);
+        alocacoes.add(alocacao3);
+        alocacoes.add(alocacao4);
 
-        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
 
-        Resolvedor.setAllocationSchedule(problema);
+        Resolvedor.setAlocacaoHorario(problema);
 
         solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 
@@ -114,20 +113,20 @@ public class PeriodosHorariosDiferentes {
 
     @Quando("^nao houver conflito$")
     public void nao_houver_conflito() {
-        ArrayList<Allocation> alocacoes = new ArrayList<>();
-        ArrayList<Schedule> schedules = new ArrayList<>();
+        ArrayList<Alocacao> alocacoes = new ArrayList<>();
+        ArrayList<Horario> schedules = new ArrayList<>();
 
         schedules.add(h1);
         schedules.add(h2);
-        alocacoes.add(allocation1);
-        alocacoes.add(allocation2);
-        alocacoes.add(allocation3);
-        alocacoes.add(allocation4);
+        alocacoes.add(alocacao1);
+        alocacoes.add(alocacao2);
+        alocacoes.add(alocacao3);
+        alocacoes.add(alocacao4);
 
 
-        AllocationSchedule problema = new AllocationSchedule(alocacoes, schedules);
+        AlocacaoHorario problema = new AlocacaoHorario(alocacoes, schedules);
 
-        Resolvedor.setAllocationSchedule(problema);
+        Resolvedor.setAlocacaoHorario(problema);
 
         solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
 

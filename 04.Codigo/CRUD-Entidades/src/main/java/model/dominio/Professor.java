@@ -1,11 +1,16 @@
 package model.dominio;
 
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@XStreamAlias("Professor")
 public class Professor implements Cloneable {
 
     private Long id;
@@ -33,6 +38,18 @@ public class Professor implements Cloneable {
         nome = "";
         matricula = "";
         cpf = new Cpf();
+        email = "";
+        dataNascimento = "";
+        rg = "";
+
+        endereco = new Endereco();
+    }
+
+    public Professor(String nome, String cpf) {
+        this.nome = nome;
+        matricula = "";
+        this.cpf = new Cpf();
+        setCpf(cpf, false);
         email = "";
         dataNascimento = "";
         rg = "";
@@ -101,6 +118,14 @@ public class Professor implements Cloneable {
         this.endereco = endereco;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public Object clone() {
         Object obj = null;
@@ -117,11 +142,27 @@ public class Professor implements Cloneable {
         return obj;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(getNome())
+                .append(getCpf())
+                .toHashCode();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Professor) {
+            Professor other = (Professor) o;
+            return new EqualsBuilder()
+                    .append(getNome(), other.getNome())
+                    .append(getCpf(), other.getCpf())
+                    .isEquals();
+        } else {
+            return false;
+        }
     }
+
 }

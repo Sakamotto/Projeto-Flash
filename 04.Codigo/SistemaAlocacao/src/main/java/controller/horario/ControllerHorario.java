@@ -1,8 +1,6 @@
 package controller.horario;
 
-import controller.curso.ControllerCursoDialogInsercao;
 import controller.exception.AllertExceptionController;
-import domain.Schedule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.DAO.horario.HorarioDAO;
 import model.DAO.horario.HorarioDAOImpl;
-import model.dominio.Curso;
 import model.dominio.Horario;
 
 import java.io.IOException;
@@ -152,7 +149,5 @@ public class ControllerHorario implements Initializable{
         return controller.isBtnSalvarClicado();
 
     }
-
-
 
 }
