@@ -16,7 +16,7 @@ rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
 
     when
         // Opção 1 funcionando.
-        $a: Alocacao() // armazena todas as alocacoes existentes
+        $a : Alocacao() // armazena todas as alocacoes existentes
 
         Alocacao($disciplina: disciplina, $periodo: disciplina.periodo, $horario : horario) //
 
@@ -80,7 +80,6 @@ rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre d
     end
 
 rule "Um professor nao pode estar alocado em horarios conflitantes"
-
     when
 
         $a : Alocacao($professor : professor, $horario : horario != null)
@@ -101,4 +100,25 @@ rule "Um professor nao pode estar alocado em horarios conflitantes"
     then
         // System.out.println("Professor - > " + $professor.getNome() + " | Horario -> " + $horario.getStrDiaSemana() + " " + $horario.getInitHorario());
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
+    end
+
+rule "Uma disciplina nao pode ser alocada mais de uma vez no mesmo dia"
+    when
+        $a: Alocacao()
+
+        Alocacao($disciplina : disciplina, $horario : horario != null)
+
+        $total : Number(intValue > 1)
+            from accumulate(
+                Alocacao(
+                    disciplina == $disciplina,
+                    horario != null,
+                    horario.diaSemana == $horario.diaSemana
+                ),
+                init(int total = 0;),
+                action(total += 1;),
+                result(total)
+            )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
     end
