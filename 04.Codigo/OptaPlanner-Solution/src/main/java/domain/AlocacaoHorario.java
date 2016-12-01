@@ -21,10 +21,8 @@ import java.util.List;
 @XStreamAlias("AlocacaoHorario")
 public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
 
-
     @XStreamConverter(value = XStreamScoreConverter.class, types = {HardMediumSoftScoreDefinition.class})
     private HardMediumSoftScore score = HardMediumSoftScore.valueOf(0, 0, 0);
-
 
     private List<Alocacao> alocacoes;
     private List<Horario> horarios;
@@ -62,7 +60,7 @@ public class AlocacaoHorario implements Solution<HardMediumSoftScore> {
     }
 
     @ValueRangeProvider(id = "Horario")
-    public List<Horario> getHorarios() {
+    public List<Horario> getHorario() {
         return horarios;
     }
 }

@@ -1,6 +1,8 @@
 package model.dominio;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import model.dominio.solver.AlocacaoDifficultyComparator;
+import model.dominio.solver.HorarioStrengthComparator;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
@@ -10,7 +12,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
  * Created by cristian on 30/11/16.
  */
 
-@PlanningEntity
+@PlanningEntity(difficultyComparatorClass = AlocacaoDifficultyComparator.class)
 @XStreamAlias("Alocacao")
 public class Alocacao {
 
@@ -31,7 +33,8 @@ public class Alocacao {
     }
 
 
-    @PlanningVariable(valueRangeProviderRefs = {"Horario"})
+    @PlanningVariable(valueRangeProviderRefs = {"Horario"},
+            strengthComparatorClass = HorarioStrengthComparator.class)
     public Horario getHorario() {
         return horario;
     }

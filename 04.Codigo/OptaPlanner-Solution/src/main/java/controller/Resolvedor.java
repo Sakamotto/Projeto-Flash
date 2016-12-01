@@ -51,7 +51,7 @@ public class Resolvedor implements Runnable{
 
         System.out.println("Solução é viável ? R = " + viabilidade);
 
-        solucao.getAlocacoes().forEach(a -> logger.info("Disciplina = [{}] -> Horários = [{}]", a.getDisciplina().getNome(), a.getHorario().getStrDiaSemana() + ", " + a.getHorario().getHorarioInicio() + " - " + a.getHorario().getHorarioInicio()));
+        solucao.getAlocacoes().forEach(a -> logger.info("Professor = [{}] -> Disciplina = [{}] -> Horários = [{}]", a.getProfessor().getNome(), a.getDisciplina().getNome() + " - "+ a.getDisciplina().getPeriodo(), a.getHorario().getStrDiaSemana() + ", " + a.getHorario().getHorarioInicio() + " - " + a.getHorario().getHorarioFim()));
     }
 
     public static void printResultSolution(AlocacaoHorario solucao) {
@@ -79,7 +79,7 @@ public class Resolvedor implements Runnable{
 
     @Override
     public void run() {
-        alocacaoHorario = resolver("solver/bruteForce_solverConfig.xml");
+        alocacaoHorario = resolver("solver/tabuSearch_solverConfig.xml");
 
         terminado = true;
     }

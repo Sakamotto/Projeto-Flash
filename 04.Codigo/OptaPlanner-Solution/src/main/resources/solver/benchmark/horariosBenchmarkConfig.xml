@@ -7,7 +7,11 @@
             <xStreamAnnotatedClass>domain.AlocacaoHorario</xStreamAnnotatedClass>
             <inputSolutionFile>data/horarios/7Horarios6Disiciplinas.xml</inputSolutionFile>
 
+
             <problemStatisticType>BEST_SCORE</problemStatisticType>
+            <problemStatisticType>STEP_SCORE</problemStatisticType>
+            <problemStatisticType>CALCULATE_COUNT_PER_SECOND</problemStatisticType>
+            <problemStatisticType>BEST_SOLUTION_MUTATION</problemStatisticType>
         </problemBenchmarks>
 
         <solver>
@@ -19,8 +23,14 @@
             <scoreDirectorFactory>
                 <scoreDefinitionType>HARD_MEDIUM_SOFT</scoreDefinitionType>
                 <scoreDrl>solver/alocacaoHorarioScoreRules.drl</scoreDrl>
-                <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+                <!--<initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>-->
             </scoreDirectorFactory>
+
+            <termination>
+                <terminationCompositionStyle>OR</terminationCompositionStyle>
+                <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
+                <minutesSpentLimit>10</minutesSpentLimit>
+            </termination>
         </solver>
     </inheritedSolverBenchmark>
 
@@ -33,5 +43,25 @@
             </exhaustiveSearch>
         </solver>
     </solverBenchmark>
+
+    <solverBenchmark>
+        <name>Entity Tabu Search</name>
+        <solver>
+            <constructionHeuristic>
+                <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+            </constructionHeuristic>
+            <localSearch>
+                <changeMoveSelector>
+                    <selectionOrder>ORIGINAL</selectionOrder>
+                </changeMoveSelector>
+                <acceptor>
+                    <entityTabuSize>5</entityTabuSize>
+                </acceptor>
+                <forager>
+                </forager>
+            </localSearch>
+        </solver>
+    </solverBenchmark>
+
 
 </plannerBenchmark>

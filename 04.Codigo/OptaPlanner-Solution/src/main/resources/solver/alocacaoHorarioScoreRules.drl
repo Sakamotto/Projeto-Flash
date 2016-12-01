@@ -55,6 +55,7 @@ rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre d
         exists (
             Alocacao(
                 professor == $professor,
+                horario != null,
                 horario.diaSemana == $horario.diaSemana,
                 disciplina != $disciplina,
                 horario.horaInicio > $horario.horaFim
@@ -66,6 +67,7 @@ rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre d
         not (
             Alocacao(
                 professor == $professor,
+                horario != null,
                 horario.diaSemana == $horario.diaSemana,
                 disciplina != $disciplina,
                 horario.horaInicio > $horario.horaFim,
@@ -76,7 +78,6 @@ rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre d
     then
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
     end
-
 
 rule "Um professor nao pode estar alocado em horarios conflitantes"
 

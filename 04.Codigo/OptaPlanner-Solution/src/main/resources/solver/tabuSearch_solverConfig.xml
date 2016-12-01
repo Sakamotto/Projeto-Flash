@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+    <!-- Modelo de domínio -->
+    <solutionClass>domain.AlocacaoHorario</solutionClass>
+    <entityClass>model.dominio.Alocacao</entityClass>
+
+    <!-- Score -->
+    <scoreDirectorFactory>
+        <scoreDefinitionType>HARD_MEDIUM_SOFT</scoreDefinitionType>
+        <scoreDrl>solver/alocacaoHorarioScoreRules.drl</scoreDrl>
+        <!--<initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>-->
+    </scoreDirectorFactory>
+
+    <termination>
+        <terminationCompositionStyle>OR</terminationCompositionStyle>
+        <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
+        <minutesSpentLimit>1</minutesSpentLimit>
+    </termination>
+
+    <!-- Algoritmos de otimização -->
+    <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+    </constructionHeuristic>
+
+    <localSearch>
+        <changeMoveSelector>
+            <selectionOrder>ORIGINAL</selectionOrder>
+        </changeMoveSelector>
+        <acceptor>
+            <entityTabuSize>5</entityTabuSize>
+        </acceptor>
+        <forager>
+        </forager>
+    </localSearch>
+</solver>

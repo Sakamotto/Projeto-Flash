@@ -73,12 +73,15 @@ public class ControllerAlocacao implements Initializable{
 
         for (Professor professor : pDAO.listar(Professor.class)) {
             for (Disciplina disciplina : professor.getDisciplinas()) {
-                Alocacao alocacao = new Alocacao();
 
-                alocacao.setProfessor(professor);
-                alocacao.setDisciplina(disciplina);
+                for (int i = 0 ; i < (disciplina.getCargaHoraria()/30) ; i++) {
+                    Alocacao alocacao = new Alocacao();
+                    alocacao.setProfessor(professor);
+                    alocacao.setDisciplina(disciplina);
 
-                alocacoes.add(alocacao);
+                    alocacoes.add(alocacao);
+                }
+
             }
         }
 
