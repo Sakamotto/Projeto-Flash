@@ -122,3 +122,17 @@ rule "Uma disciplina nao pode ser alocada mais de uma vez no mesmo dia"
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
     end
+
+rule "Disciplinas a partir do quinto período devem estar alocadas apenas no turno matutino"
+    when
+        $a : Alocacao()
+        exists(
+            Alocacao(
+                disciplina.periodo >= 5,
+                horario != null,
+                horario.horaFim > 12
+            ) from $a
+        )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+    end
