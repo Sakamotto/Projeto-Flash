@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Main {
+public class BenchmarkMain {
 
 
     public static void main(String[] args) {
