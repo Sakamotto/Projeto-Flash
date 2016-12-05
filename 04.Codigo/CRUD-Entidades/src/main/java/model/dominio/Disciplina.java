@@ -4,11 +4,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.zip.CRC32;
 
 /**
  * Created by danilo on 24/10/16.
@@ -102,6 +99,10 @@ public class Disciplina implements Cloneable {
         this.areaConhecimento = areaConhecimento;
     }
 
+    public String getSiglaCurso() {
+        return curso.getSigla();
+    }
+
     @Override
     public Object clone() {
         Object obj = null;
@@ -116,6 +117,11 @@ public class Disciplina implements Cloneable {
         }
 
         return obj;
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 
     @Override
