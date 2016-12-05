@@ -7,6 +7,17 @@
     <groupId>br.edu.ifes.projetoflash</groupId>
     <artifactId>flashcrud</artifactId>
     <version>2.0</version>
+    <properties>
+	<maven.test.skip>true</maven.test.skip>
+	    
+        <!--- Configuracao do Sonar-->
+        <sonar.host.url>https://sonarqube.com</sonar.host.url>
+		<sonar.login>c85312f9026df6e3a31e017fa5c14b0c43258993</sonar.login>    
+
+        <!-- Codificacao -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>    
+    </properties>
 
     <dependencies>
         <dependency>
