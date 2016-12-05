@@ -70,4 +70,9 @@ public class Curso implements Cloneable {
 
         return obj;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }
