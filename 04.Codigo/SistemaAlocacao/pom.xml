@@ -35,7 +35,6 @@
             </plugin>
 
 
-
             <!-- Compilar e gerar um Jar com as dependencias-->
 
             <!--<plugin>-->
