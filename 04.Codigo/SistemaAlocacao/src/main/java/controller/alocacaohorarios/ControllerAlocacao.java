@@ -1,12 +1,11 @@
 package controller.alocacaohorarios;
 
-import domain.AlocacaoHorario;
 import controller.Resolvedor;
+import domain.AlocacaoHorario;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import model.DAO.disciplina.DisciplinaDAO;
-import model.DAO.disciplina.DisciplinaDAOImpl;
 import model.DAO.horario.HorarioDAO;
 import model.DAO.horario.HorarioDAOImpl;
 import model.DAO.professor.ProfessorDAO;
@@ -17,48 +16,38 @@ import model.dominio.Horario;
 import model.dominio.Professor;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by cristian on 28/11/16.
  */
-public class ControllerAlocacao implements Initializable{
+public class ControllerAlocacao implements Initializable,  Observer {
 
     @FXML Label labelRegrasRigidas;
     @FXML Label labelRegrasDesejaveis;
+    private static AlocacaoHorario solucao;
+    private Resolvedor resolvedor;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        labelRegrasRigidas.accessibleTextProperty();
     }
 
     @FXML
-    public void handleIniciarRelatorio() throws Exception{
-        AlocacaoHorario problema = getProblem();
+    public void handleIniciarRelatorio() throws Exception {
+        AlocacaoHorario problema = ControllerAlocacao.getProblem();
 
-        Resolvedor.setAlocacaoHorario(problema);
+        resolvedor = new Resolvedor();
+        resolvedor.setAlocacaoHorario(problema);
 
-        Resolvedor resolvedor = new Resolvedor();
+        resolvedor.setListenner(this);
 
-        Thread thread1 = new Thread(resolvedor);
-
-        thread1.start();
-
-        thread1.join();
-
-        problema = resolvedor.getAlocacaoHorario();
-
-        labelRegrasRigidas.setText(Integer.toString(problema.getScore().getHardScore()));
-        labelRegrasDesejaveis.setText(Integer.toString(problema.getScore().getSoftScore()));
-
-        System.out.println(Integer.toString(problema.getScore().getHardScore()));
-
+        Thread thread = new Thread(resolvedor);
+        thread.start();
     }
 
-    private AlocacaoHorario getProblem() {
+    private static AlocacaoHorario getProblem() {
         List<Alocacao> alocacoes = new ArrayList<>();
         List<Horario> horarios;
 
@@ -88,4 +77,12 @@ public class ControllerAlocacao implements Initializable{
         return new AlocacaoHorario(alocacoes, horarios);
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        solucao = (AlocacaoHorario) arg;
+
+        Platform.runLater(() -> labelRegrasRigidas.setText(Integer.toString(solucao.getScore().getHardScore())));
+
+        System.out.println("Numero: " + solucao.getScore().getHardScore());
+    }
 }
