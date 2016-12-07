@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+<GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" rotate="0.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.Main">
   <children>
-    <VBox prefHeight="600.0" prefWidth="800.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <VBox minWidth="-1.0" prefHeight="900.0" prefWidth="1600.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
         <MenuBar blendMode="SRC_OVER" cache="true" mouseTransparent="false" pickOnBounds="false" VBox.vgrow="ALWAYS">
           <menus>
             <Menu mnemonicParsing="false" text="Cadastros">
               <items>
-                <MenuItem fx:id="menuCadastrosAreaConhecimento" mnemonicParsing="false" text="Área de Conhecimento" />
-                <MenuItem fx:id="menuCadastrosCurso" mnemonicParsing="false" onAction="#handleMenuItemCadastroCurso" text="Curso" />
-                <MenuItem fx:id="menuCadastrosDisciplina" mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" />
-                <MenuItem fx:id="menuCadastrosProfessor" mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" />
-                <MenuItem fx:id="menuCadastrosHorarios" mnemonicParsing="false" onAction="#handleMenuItemCadastrosHorarios" text="Horário" />
+                <MenuItem mnemonicParsing="false" text="Área de Conhecimento" fx:id="menuCadastrosAreaConhecimento" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastroCurso" text="Curso" fx:id="menuCadastrosCurso" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" fx:id="menuCadastrosDisciplina" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" fx:id="menuCadastrosProfessor" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemCadastrosHorarios" text="Horário" fx:id="menuCadastrosHorarios" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Processos">
               <items>
-                <MenuItem fx:id="menuProcessosAlocarProfessores" mnemonicParsing="false" onAction="#handleMenuItemProfessorDisciplina" text="Alocar Professores" />
-                <MenuItem fx:id="menuProcessosIniciarGeracaoHorarios" mnemonicParsing="false" onAction="#handleProcessosIniciarGeracaoHorarios" text="Iniciar geração de horários" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemProfessorDisciplina" text="Alocar Professores" fx:id="menuProcessosAlocarProfessores" />
+                <MenuItem mnemonicParsing="false" onAction="#handleProcessosIniciarGeracaoHorarios" text="Iniciar geração de horários" fx:id="menuProcessosIniciarGeracaoHorarios" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">
               <items>
-                <MenuItem fx:id="menuRelatoriosVisualizarRelatorios" mnemonicParsing="false" onAction="#handleMenuItemVisuzlizarRelatorio" text="Visualizar Relatórios" />
+                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemVisuzlizarRelatorio" text="Visualizar Relatórios" fx:id="menuRelatoriosVisualizarRelatorios" />
               </items>
             </Menu>
           </menus>
         </MenuBar>
-        <AnchorPane fx:id="anchorPane" prefHeight="576.0" prefWidth="800.0"/>
+        <AnchorPane fx:id="anchorPane" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="900.0" prefWidth="1600.0" />
       </children>
     </VBox>
   </children>
