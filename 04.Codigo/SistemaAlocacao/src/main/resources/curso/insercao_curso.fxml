@@ -17,8 +17,8 @@
         <Label text="Sigla:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <TextField id="textFieldDisciplinaNome" fx:id="textFieldCursoNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <TextField id="textFieldDisciplinaCargaHoraria" fx:id="textFieldCursoRegime" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextField id="textFieldDisciplinaPeriodo" fx:id="textFieldCursoSigla" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <TextField id="textFieldDisciplinaNome" fx:id="textFieldCursoDucarao" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField id="textFieldDisciplinaPeriodo" fx:id="textFieldCursoSigla" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="160.0" />

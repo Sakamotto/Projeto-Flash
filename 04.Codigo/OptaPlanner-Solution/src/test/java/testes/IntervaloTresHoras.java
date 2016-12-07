@@ -66,9 +66,7 @@ public class IntervaloTresHoras {
 
         AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
 
-        Resolvedor.setAlocacaoHorario(problema);
-
-        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
+        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml", problema);
 
         assertEquals(solucao.getScore().isFeasible(), false);
     }
@@ -98,9 +96,7 @@ public class IntervaloTresHoras {
 
         AlocacaoHorario problema = new AlocacaoHorario(alocacoes, horarios);
 
-        Resolvedor.setAlocacaoHorario(problema);
-
-        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml");
+        AlocacaoHorario solucao = Resolvedor.resolver("solver/bruteForce_solverConfig.xml", problema);
 
         assertEquals(solucao.getScore().isFeasible(), true);
 

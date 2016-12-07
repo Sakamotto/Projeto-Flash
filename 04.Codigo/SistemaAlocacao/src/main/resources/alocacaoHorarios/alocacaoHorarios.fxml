@@ -3,15 +3,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="576.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.alocacaohorarios.ControllerAlocacao">
+<AnchorPane prefHeight="874.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.alocacaohorarios.ControllerAlocacao">
   <children>
-    <GridPane alignment="TOP_LEFT" layoutX="172.0" layoutY="386.0" prefWidth="457.0">
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dfdfdf" height="45.0" layoutX="21.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" width="1538.0" />
+    <GridPane alignment="TOP_LEFT" layoutX="1086.0" layoutY="15.0" prefWidth="457.0">
       <children>
-        <Button contentDisplay="CENTER" defaultButton="true" disable="false" focusTraversable="true" maxWidth="-1.0" mnemonicParsing="false" onAction="#handleIniciarRelatorio" text="Iniciar" textAlignment="CENTER" visible="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Button contentDisplay="CENTER" defaultButton="true" disable="false" focusTraversable="false" maxWidth="-1.0" minWidth="139.0" mnemonicParsing="false" onAction="#handleIniciarRelatorio" text="Gerar Horários" textAlignment="CENTER" visible="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
         <Button blendMode="SRC_OVER" focusTraversable="false" mnemonicParsing="false" text="Terminar e Salvar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Button alignment="CENTER" blendMode="SRC_OVER" cancelButton="true" contentDisplay="CENTER" defaultButton="false" disable="false" focusTraversable="false" mnemonicParsing="false" text="Cancelar" wrapText="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Button alignment="CENTER" blendMode="SRC_OVER" cancelButton="true" contentDisplay="CENTER" defaultButton="false" disable="false" focusTraversable="false" minWidth="139.0" mnemonicParsing="false" text="Cancelar" wrapText="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -22,18 +25,46 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Label layoutX="218.0" layoutY="174.0" prefHeight="21.0001220703125" text="Regras Rigidas:">
+    <Label layoutX="363.0" layoutY="20.0" prefHeight="21.0001220703125" text="Rígidas -&gt;" textFill="RED">
       <font>
         <Font size="18.0" fx:id="x1" />
       </font>
     </Label>
-    <Label layoutX="261.0" layoutY="87.0" text="Pontuaçao das Regras" textAlignment="LEFT">
+    <Label layoutX="27.0" layoutY="16.0" text="Pontuaçao das Regras:" textAlignment="LEFT">
       <font>
         <Font size="25.0" />
       </font>
     </Label>
-    <Label fx:id="labelRegrasRigidas" layoutX="513.0" layoutY="177.0" text="0" />
-    <Label font="$x1" layoutX="218.0" layoutY="267.0" text="Regras Desejaveis" />
-    <Label fx:id="labelRegrasDesejaveis" layoutX="513.0" layoutY="272.0" text="0" />
+    <Label fx:id="labelRegrasRigidas" layoutX="463.0" layoutY="21.0" text="0" textFill="RED">
+      <font>
+        <Font size="20.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="769.0" layoutY="20.0" text="Desejaveis -&gt;">
+      <textFill>
+        <Color blue="0.000" green="0.800" red="0.256" fx:id="x3" />
+      </textFill>
+    </Label>
+    <Label fx:id="labelRegrasDesejaveis" font="$x2" layoutX="904.0" layoutY="20.0" text="0" textFill="$x3" />
+    <Label font="$x1" layoutX="563.0" layoutY="20.0" text="Médias -&gt;">
+      <textFill>
+        <Color blue="0.000" green="0.480" red="1.000" fx:id="x4" />
+      </textFill>
+    </Label>
+    <Label id="labelRegrasDesejaveis" font="$x2" layoutX="665.0" layoutY="20.0" text="0" textFill="$x4" />
+    <Separator layoutX="518.0" layoutY="15.0" orientation="VERTICAL" prefHeight="30.0" />
+    <Separator layoutX="721.0" layoutY="15.0" orientation="VERTICAL" prefHeight="30.0" />
+    <TableView focusTraversable="false" layoutX="21.0" layoutY="87.0" prefHeight="765.0" prefWidth="1538.0">
+      <columns>
+        <TableColumn minWidth="200.0" prefWidth="75.0" text="Curso" />
+        <TableColumn minWidth="102.0" prefWidth="75.0" text="Período" />
+        <TableColumn minWidth="175.0" prefWidth="75.0" text="Horario" fx:id="tableColumnHorario" />
+        <TableColumn maxWidth="60.0" minWidth="212.0" prefWidth="60.0" text="Segunda-Feira" />
+        <TableColumn minWidth="212.0" prefWidth="75.0" text="Terça-Feira" />
+        <TableColumn minWidth="212.0" prefWidth="75.0" text="Quarta-Feira" />
+        <TableColumn minWidth="212.0" prefWidth="75.0" text="Quinta-Feira" />
+        <TableColumn minWidth="212.0" prefWidth="75.0" text="Sexta-Feira" />
+      </columns>
+    </TableView>
   </children>
 </AnchorPane>

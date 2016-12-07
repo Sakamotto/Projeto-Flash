@@ -64,15 +64,15 @@ public class Horario {
             case DOMINGO:
                 return "Domingo";
             case SEGUNDA:
-                return "Segunda";
+                return "Segunda-Feira";
             case TERCA:
-                return "Terça";
+                return "Terça-Feira";
             case QUARTA:
-                return "Quarta";
+                return "Quarta-Feira";
             case QUINTA:
-                return "Quinta";
+                return "Quinta-Feira";
             case SEXTA:
-                return "Sexta";
+                return "Sexta-Feira";
             case SABADO:
                 return "Sábado";
             default:
@@ -122,6 +122,11 @@ public class Horario {
 
     private String getStrHorario(int hour, int minute) {
         return hour + ":" + ( (minute < 10) ? "0" + minute : minute );
+    }
+
+    @Override
+    public String toString() {
+        return getStrDiaSemana() + ", " + getHorarioInicio() + "-" + getHorarioFim();
     }
 
     @Override
