@@ -59,6 +59,22 @@ public class Alocacao {
         this.professor = professor;
     }
 
+    public String getCursoNome() {
+        return disciplina.getCurso().getSigla();
+    }
+
+    public int getPeriodo() {
+        return disciplina.getPeriodo();
+    }
+
+    public String getProfessorNome() {
+        return professor.getNome();
+    }
+
+    public String getDisciplinaNome() {
+        return disciplina.getNome();
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
