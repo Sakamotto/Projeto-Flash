@@ -6,42 +6,42 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="874.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.horario.ControllerHorario">
+<AnchorPane maxHeight="700.0" minHeight="700.0" prefHeight="700.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.horario.ControllerHorario">
   <children>
-    <SplitPane dividerPositions="0.14205256570713393" focusTraversable="false" prefHeight="874.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.14205256570713393" focusTraversable="false" maxHeight="700.0" minHeight="700.0" prefHeight="700.0" prefWidth="1360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+        <AnchorPane maxHeight="700.0" minHeight="700.0" minWidth="0.0" prefHeight="700.0" prefWidth="100.0">
           <children>
-            <TableView id="tableViewProfessor" fx:id="tableViewHorario" blendMode="SRC_OVER" cache="false" cacheHint="SCALE_AND_ROTATE" depthTest="ENABLE" disable="false" editable="false" focusTraversable="false" maxWidth="-1.0" mouseTransparent="false" prefHeight="598.0" prefWidth="224.0" tableMenuButtonVisible="false" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView id="tableViewProfessor" fx:id="tableViewHorario" blendMode="SRC_OVER" cache="false" cacheHint="SCALE_AND_ROTATE" depthTest="ENABLE" disable="false" editable="false" focusTraversable="false" maxHeight="700.0" maxWidth="-1.0" minHeight="700.0" mouseTransparent="false" prefHeight="700.0" prefWidth="224.0" tableMenuButtonVisible="false" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Inicio" fx:id="tabelaColunaHorarioInicio" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" resizable="false" text="Fim" fx:id="tabelaColunaHorarioFim" />
+                <TableColumn fx:id="tabelaColunaHorarioInicio" maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Inicio" />
+                <TableColumn fx:id="tabelaColunaHorarioFim" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" resizable="false" text="Fim" />
               </columns>
             </TableView>
           </children>
         </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="550.0">
+        <AnchorPane maxHeight="700.0" minHeight="700.0" minWidth="0.0" prefHeight="700.0" prefWidth="550.0">
           <children>
-            <Label alignment="TOP_CENTER" layoutX="0.0" layoutY="68.0" prefWidth="1368.0" text="Informações de Horários" textAlignment="CENTER">
+            <Label alignment="TOP_CENTER" layoutX="-103.0" layoutY="72.0" prefWidth="1360.0" text="Informações de Horários" textAlignment="CENTER">
               <font>
                 <Font name="System Bold" size="28.0" />
               </font>
             </Label>
-            <Group id="Group" AnchorPane.bottomAnchor="48.07" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="-370.0" AnchorPane.topAnchor="506.93">
+            <Group id="Group" layoutX="287.0" layoutY="511.0" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="287.0" AnchorPane.rightAnchor="334.0" AnchorPane.topAnchor="511.0">
               <children>
                 <Button id="btnCadastrarProfessor" fx:id="btnCadastrarHorario" defaultButton="true" layoutX="0.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefWidth="175.0" text="Cadastrar Horário" />
                 <Button id="btnEditarProfessor" fx:id="btnEditarHorario" layoutX="183.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefWidth="175.0" text="Editar Horário" />
                 <Button id="btnExcluirProfessor" fx:id="btnExcluirHorario" layoutX="365.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonExcluir" prefWidth="175.0" text="Excluir Horário" />
               </children>
             </Group>
-            <Label layoutX="607.0" layoutY="239.0" text="Inicio:">
+            <Label layoutX="504.0" layoutY="243.0" text="Inicio:">
               <font>
                 <Font size="22.0" fx:id="x1" />
               </font>
             </Label>
-            <Label font="$x1" layoutX="612.0" layoutY="308.0" text="Fim:" />
-            <Label fx:id="labelHorarioInicio" font="$x1" layoutX="684.0" layoutY="239.0" prefWidth="83.0" text="0" />
-            <Label fx:id="labelHorarioFim" font="$x1" layoutX="684.0" layoutY="308.0" prefWidth="83.0" text="0" />
+            <Label font="$x1" layoutX="509.0" layoutY="312.0" text="Fim:" />
+            <Label fx:id="labelHorarioInicio" font="$x1" layoutX="581.0" layoutY="243.0" prefWidth="83.0" text="0" />
+            <Label fx:id="labelHorarioFim" font="$x1" layoutX="581.0" layoutY="312.0" prefWidth="83.0" text="0" />
           </children>
         </AnchorPane>
       </items>

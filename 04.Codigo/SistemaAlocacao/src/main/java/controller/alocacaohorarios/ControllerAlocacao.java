@@ -3,17 +3,19 @@ package controller.alocacaohorarios;
 import controller.Resolvedor;
 import domain.AlocacaoHorario;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.DAO.horario.HorarioDAO;
 import model.DAO.horario.HorarioDAOImpl;
 import model.DAO.professor.ProfessorDAO;
 import model.DAO.professor.ProfessorDAOImpl;
-import model.dominio.Alocacao;
-import model.dominio.Disciplina;
-import model.dominio.Horario;
-import model.dominio.Professor;
+import model.dominio.*;
 
 import java.net.URL;
 import java.util.*;
@@ -25,17 +27,31 @@ public class ControllerAlocacao implements Initializable,  Observer {
 
     @FXML Label labelRegrasRigidas;
     @FXML Label labelRegrasDesejaveis;
+    @FXML TableView<Alocacao> tableViewAlocacao;
+    @FXML TableColumn<Curso, String> tableColumnCurso;
+    @FXML TableColumn<Disciplina, String> tableColumnPeriodo;
+    @FXML TableColumn<Horario, String> tableColumnHorario;
+    @FXML TableColumn<Professor, String> tableColumnProfessor;
+    @FXML TableColumn<Disciplina, String> tableColumnDisciplina;
+    @FXML ProgressIndicator progressGeracaoHorarios;
+
+
     private static AlocacaoHorario solucao;
     private Resolvedor resolvedor;
+    private static final String gerarHorario = "GERAR_HORARIO";
+    private Thread threadGeracaoHorario;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        labelRegrasRigidas.accessibleTextProperty();
+        carregaTableViewAlocacao();
     }
 
     @FXML
     public void handleIniciarRelatorio() throws Exception {
+
+        progressGeracaoHorarios.setVisible(true);
+
         AlocacaoHorario problema = ControllerAlocacao.getProblem();
 
         resolvedor = new Resolvedor();
@@ -43,8 +59,42 @@ public class ControllerAlocacao implements Initializable,  Observer {
 
         resolvedor.setListenner(this);
 
-        Thread thread = new Thread(resolvedor);
-        thread.start();
+        threadGeracaoHorario = new Thread(resolvedor);
+        threadGeracaoHorario.setName(gerarHorario);
+        threadGeracaoHorario.start();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        solucao = (AlocacaoHorario) arg;
+
+        Platform.runLater(() -> labelRegrasRigidas.setText(Integer.toString(solucao.getScore().getHardScore())));
+
+        Platform.runLater(this::carregaTableViewAlocacao);
+
+        System.out.println("Numero: " + solucao.getScore().getHardScore());
+    }
+
+    private void carregaTableViewAlocacao() {
+
+        if (solucao != null) {
+
+            tableViewAlocacao.setItems(FXCollections.observableArrayList(solucao.getAlocacoes()));
+
+            tableColumnCurso.setCellValueFactory(new PropertyValueFactory<>("CursoNome"));
+            tableColumnPeriodo.setCellValueFactory(new PropertyValueFactory<>("Periodo"));
+            tableColumnHorario.setCellValueFactory(new PropertyValueFactory<>("Horario"));
+            tableColumnProfessor.setCellValueFactory(new PropertyValueFactory<>("ProfessorNome"));
+            tableColumnDisciplina.setCellValueFactory(new PropertyValueFactory<>("DisciplinaNome"));
+
+        }
+
+        tableViewAlocacao.refresh();
+
+        if (threadGeracaoHorario != null && !threadGeracaoHorario.isAlive()) {
+            progressGeracaoHorarios.setVisible(false);
+        }
+
     }
 
     private static AlocacaoHorario getProblem() {
@@ -75,14 +125,5 @@ public class ControllerAlocacao implements Initializable,  Observer {
         }
 
         return new AlocacaoHorario(alocacoes, horarios);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        solucao = (AlocacaoHorario) arg;
-
-        Platform.runLater(() -> labelRegrasRigidas.setText(Integer.toString(solucao.getScore().getHardScore())));
-
-        System.out.println("Numero: " + solucao.getScore().getHardScore());
     }
 }

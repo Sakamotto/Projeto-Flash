@@ -115,10 +115,16 @@ public class Resolvedor extends java.util.Observable implements Runnable{
     public void run() {
         SolverFactory sF = SolverFactory.createFromXmlResource("solver/tabuSearch_solverConfig.xml");
         Solver solver = sF.buildSolver();
+        AlocacaoHorario bestSolution;
 
         solver.addEventListener(event -> {
             if (event.isEveryProblemFactChangeProcessed()) {
+                AlocacaoHorario newBestSolution;
                 System.out.println("Encontrou nova solução.");
+
+                newBestSolution = (AlocacaoHorario) event.getNewBestSolution();
+
+                logarSolucao(newBestSolution);
 
                 listenner.update(Resolvedor.this, event.getNewBestSolution());
             }
@@ -126,7 +132,11 @@ public class Resolvedor extends java.util.Observable implements Runnable{
 
         solver.solve(alocacaoHorario);
 
-        listenner.update(this, solver.getBestSolution());
+        bestSolution = (AlocacaoHorario) solver.getBestSolution();
+
+        logarSolucao(bestSolution);
+
+        listenner.update(this, bestSolution);
     }
 
 }

@@ -124,6 +124,10 @@ public class Horario {
         return hour + ":" + ( (minute < 10) ? "0" + minute : minute );
     }
 
+    private String getHorario() {
+        return toString();
+    }
+
     @Override
     public String toString() {
         return getStrDiaSemana() + ", " + getHorarioInicio() + "-" + getHorarioFim();
