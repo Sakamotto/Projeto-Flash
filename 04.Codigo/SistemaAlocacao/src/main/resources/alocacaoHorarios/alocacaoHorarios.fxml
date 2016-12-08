@@ -15,7 +15,7 @@
     <GridPane alignment="TOP_LEFT" layoutX="888.0" layoutY="28.0" prefWidth="457.0">
       <children>
         <Button contentDisplay="CENTER" defaultButton="true" disable="false" focusTraversable="false" maxWidth="-1.0" minWidth="139.0" mnemonicParsing="false" onAction="#handleIniciarRelatorio" text="Gerar Horários" textAlignment="CENTER" visible="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Button blendMode="SRC_OVER" focusTraversable="false" mnemonicParsing="false" text="Terminar e Salvar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Button blendMode="SRC_OVER" focusTraversable="false" mnemonicParsing="false" onAction="#salvarSolucao" text="Terminar e Salvar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
         <Button alignment="CENTER" blendMode="SRC_OVER" cancelButton="true" contentDisplay="CENTER" defaultButton="false" disable="false" focusTraversable="false" minWidth="139.0" mnemonicParsing="false" text="Cancelar" wrapText="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
       </children>
       <columnConstraints>
