@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.embed.swing.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -7,10 +8,10 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="-1.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.alocacaohorarios.ControllerAlocacao">
+<AnchorPane minHeight="739.0" prefHeight="739.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.alocacaohorarios.ControllerAlocacao">
   <children>
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dfdfdf" height="45.0" layoutX="21.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" width="1538.0" />
-    <GridPane alignment="TOP_LEFT" layoutX="1086.0" layoutY="15.0" prefWidth="457.0">
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dfdfdf" height="45.0" layoutX="14.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" width="1333.0" />
+    <GridPane alignment="TOP_LEFT" layoutX="888.0" layoutY="28.0" prefWidth="457.0">
       <children>
         <Button contentDisplay="CENTER" defaultButton="true" disable="false" focusTraversable="false" maxWidth="-1.0" minWidth="139.0" mnemonicParsing="false" onAction="#handleIniciarRelatorio" text="Gerar Horários" textAlignment="CENTER" visible="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
         <Button blendMode="SRC_OVER" focusTraversable="false" mnemonicParsing="false" text="Terminar e Salvar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
@@ -25,43 +26,44 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Label layoutX="363.0" layoutY="20.0" prefHeight="21.0001220703125" text="Rígidas -&gt;" textFill="RED">
+    <Label layoutX="340.0" layoutY="33.0" prefHeight="21.0001220703125" text="Rígidas -&gt;" textFill="RED">
       <font>
         <Font size="18.0" fx:id="x1" />
       </font>
     </Label>
-    <Label layoutX="27.0" layoutY="16.0" text="Pontuaçao das Regras:" textAlignment="LEFT">
+    <Label layoutX="27.0" layoutY="29.0" text="Pontuaçao das Regras:" textAlignment="LEFT">
       <font>
         <Font size="25.0" />
       </font>
     </Label>
-    <Label fx:id="labelRegrasRigidas" layoutX="463.0" layoutY="21.0" text="0" textFill="RED">
+    <Label fx:id="labelRegrasRigidas" layoutX="440.0" layoutY="33.0" text="0" textFill="RED">
       <font>
         <Font size="20.0" fx:id="x2" />
       </font>
     </Label>
-    <Label font="$x1" layoutX="769.0" layoutY="20.0" text="Desejaveis -&gt;">
+    <Label font="$x1" layoutX="661.0" layoutY="33.0" text="Desejaveis -&gt;">
       <textFill>
         <Color blue="0.000" green="0.800" red="0.256" fx:id="x3" />
       </textFill>
     </Label>
-    <Label fx:id="labelRegrasDesejaveis" font="$x2" layoutX="904.0" layoutY="20.0" text="0" textFill="$x3" />
-    <Label font="$x1" layoutX="563.0" layoutY="20.0" text="Médias -&gt;">
+    <Label fx:id="labelRegrasDesejaveis" font="$x2" layoutX="796.0" layoutY="33.0" text="0" textFill="$x3" />
+    <Label font="$x1" layoutX="496.0" layoutY="33.0" text="Médias -&gt;">
       <textFill>
         <Color blue="0.000" green="0.480" red="1.000" fx:id="x4" />
       </textFill>
     </Label>
-    <Label id="labelRegrasDesejaveis" fx:id="labelRegrasMedias" font="$x2" layoutX="665.0" layoutY="20.0" text="0" textFill="$x4" />
-    <Separator layoutX="518.0" layoutY="15.0" orientation="VERTICAL" prefHeight="30.0" />
-    <Separator layoutX="721.0" layoutY="15.0" orientation="VERTICAL" prefHeight="30.0" />
-    <TableView id="tableViewAlocacaoHorario" fx:id="tableViewAlocacao" focusTraversable="false" layoutX="255.0" layoutY="87.0" prefHeight="741.0" prefWidth="1090.0">
+    <Label id="labelRegrasDesejaveis" fx:id="labelRegrasMedias" font="$x2" layoutX="598.0" layoutY="33.0" text="0" textFill="$x4" />
+    <Separator layoutX="474.0" layoutY="28.0" orientation="VERTICAL" prefHeight="30.0" />
+    <Separator layoutX="635.0" layoutY="28.0" orientation="VERTICAL" prefHeight="30.0" />
+    <TableView id="tableViewAlocacaoHorario" fx:id="tableViewAlocacao" focusTraversable="false" layoutX="135.0" layoutY="87.0" prefHeight="605.0" prefWidth="1090.0">
       <columns>
-        <TableColumn maxWidth="5000.0" minWidth="33.0" prefWidth="78.0" text="Curso" fx:id="tableColumnCurso" />
-        <TableColumn maxWidth="5000.0" minWidth="50.0" prefWidth="73.0" text="Período" fx:id="tableColumnPeriodo" />
-        <TableColumn minWidth="300.0" prefWidth="75.0" text="Horario" fx:id="tableColumnHorario" />
-        <TableColumn maxWidth="60.0" minWidth="250.0" prefWidth="60.0" text="Professor" fx:id="tableColumnProfessor" />
-        <TableColumn maxWidth="5000.0" minWidth="76.0" prefWidth="388.0" text="Disciplina" fx:id="tableColumnDisciplina" />
+        <TableColumn fx:id="tableColumnCurso" maxWidth="5000.0" minWidth="33.0" prefWidth="78.0" text="Curso" />
+        <TableColumn fx:id="tableColumnPeriodo" maxWidth="5000.0" minWidth="50.0" prefWidth="73.0" text="Período" />
+        <TableColumn fx:id="tableColumnHorario" minWidth="300.0" prefWidth="75.0" text="Horario" />
+        <TableColumn fx:id="tableColumnProfessor" maxWidth="60.0" minWidth="250.0" prefWidth="60.0" text="Professor" />
+        <TableColumn fx:id="tableColumnDisciplina" maxWidth="5000.0" minWidth="76.0" prefWidth="388.0" text="Disciplina" />
       </columns>
     </TableView>
+      <ProgressIndicator fx:id="progressGeracaoHorarios" focusTraversable="false" layoutX="852.0" layoutY="32.0" prefHeight="22.0" prefWidth="36.0" visible="false" />
   </children>
 </AnchorPane>

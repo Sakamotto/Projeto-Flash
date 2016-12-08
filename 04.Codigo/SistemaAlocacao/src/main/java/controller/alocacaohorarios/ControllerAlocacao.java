@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,10 +33,13 @@ public class ControllerAlocacao implements Initializable,  Observer {
     @FXML TableColumn<Horario, String> tableColumnHorario;
     @FXML TableColumn<Professor, String> tableColumnProfessor;
     @FXML TableColumn<Disciplina, String> tableColumnDisciplina;
+    @FXML ProgressIndicator progressGeracaoHorarios;
 
 
     private static AlocacaoHorario solucao;
     private Resolvedor resolvedor;
+    private static final String gerarHorario = "GERAR_HORARIO";
+    private Thread threadGeracaoHorario;
 
 
     @Override
@@ -45,6 +49,9 @@ public class ControllerAlocacao implements Initializable,  Observer {
 
     @FXML
     public void handleIniciarRelatorio() throws Exception {
+
+        progressGeracaoHorarios.setVisible(true);
+
         AlocacaoHorario problema = ControllerAlocacao.getProblem();
 
         resolvedor = new Resolvedor();
@@ -52,8 +59,9 @@ public class ControllerAlocacao implements Initializable,  Observer {
 
         resolvedor.setListenner(this);
 
-        Thread thread = new Thread(resolvedor);
-        thread.start();
+        threadGeracaoHorario = new Thread(resolvedor);
+        threadGeracaoHorario.setName(gerarHorario);
+        threadGeracaoHorario.start();
     }
 
     @Override
@@ -82,6 +90,11 @@ public class ControllerAlocacao implements Initializable,  Observer {
         }
 
         tableViewAlocacao.refresh();
+
+        if (threadGeracaoHorario != null && !threadGeracaoHorario.isAlive()) {
+            progressGeracaoHorarios.setVisible(false);
+        }
+
     }
 
     private static AlocacaoHorario getProblem() {

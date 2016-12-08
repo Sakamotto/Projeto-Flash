@@ -6,28 +6,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="876.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.professor.ControllerProfessor">
+<AnchorPane maxHeight="700.0" minHeight="700.0" prefHeight="700.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.professor.ControllerProfessor">
   <children>
-    <SplitPane dividerPositions="0.23599003735990037" focusTraversable="true" prefHeight="876.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.23599003735990037" focusTraversable="false" maxHeight="700.0" minHeight="700.0" prefHeight="700.0" prefWidth="1360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane minHeight="0.0" minWidth="378.0" prefHeight="874.0" prefWidth="378.0">
+        <AnchorPane maxHeight="700.0" minHeight="700.0" minWidth="378.0" prefHeight="700.0" prefWidth="378.0">
           <children>
-            <TableView fx:id="tableViewProfessor" blendMode="SRC_OVER" cache="false" cacheHint="SCALE_AND_ROTATE" depthTest="ENABLE" disable="false" editable="false" focusTraversable="false" maxWidth="-1.0" mouseTransparent="false" prefHeight="874.0" prefWidth="378.0" tableMenuButtonVisible="false" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableViewProfessor" blendMode="SRC_OVER" cache="false" cacheHint="SCALE_AND_ROTATE" depthTest="ENABLE" disable="false" editable="false" focusTraversable="false" maxHeight="700.0" maxWidth="-1.0" minHeight="700.0" mouseTransparent="false" prefHeight="700.0" prefWidth="378.0" tableMenuButtonVisible="false" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn maxWidth="181.0" minWidth="181.0" prefWidth="181.0" resizable="false" text="Nome" fx:id="tabelaColunaProfessorNome" />
-                <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" text="CPF" fx:id="tabelaColunaProfessorCpf" />
+                <TableColumn fx:id="tabelaColunaProfessorNome" maxWidth="181.0" minWidth="181.0" prefWidth="181.0" resizable="false" text="Nome" />
+                <TableColumn fx:id="tabelaColunaProfessorCpf" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" text="CPF" />
               </columns>
             </TableView>
           </children>
         </AnchorPane>
-        <AnchorPane minHeight="874.0" minWidth="1222.0" prefHeight="874.0" prefWidth="1222.0">
+        <AnchorPane minHeight="700.0" minWidth="1222.0" prefHeight="700.0" prefWidth="982.0">
           <children>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="48.0" prefWidth="1220.0" text="Informações do Professor">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutY="128.0" prefWidth="982.0" text="Informações do Professor">
               <font>
                 <Font name="System Bold" size="25.0" />
               </font>
             </Label>
-            <GridPane layoutX="414.0" layoutY="123.0" prefHeight="462.0" prefWidth="540.0">
+            <GridPane layoutX="247.0" layoutY="203.0" prefHeight="361.0" prefWidth="540.0">
               <children>
                 <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label text="Município:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
@@ -70,7 +70,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Group id="Group" AnchorPane.bottomAnchor="-81.0" AnchorPane.leftAnchor="413.5" AnchorPane.rightAnchor="-393.5" AnchorPane.topAnchor="636.0">
+            <Group id="Group" layoutX="247.0" layoutY="585.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="435.0" AnchorPane.topAnchor="585.0">
               <children>
                 <Button fx:id="btnCadastrarProfessor" defaultButton="true" layoutX="0.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefWidth="175.0" text="Cadastrar Professor" />
                 <Button fx:id="btnEditarProfessor" layoutX="183.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefWidth="175.0" text="Editar Professor" />
