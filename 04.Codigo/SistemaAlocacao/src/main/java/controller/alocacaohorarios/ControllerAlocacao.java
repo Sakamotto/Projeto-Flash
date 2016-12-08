@@ -70,7 +70,7 @@ public class ControllerAlocacao implements Initializable,  Observer {
     }
 
     @FXML
-    public void salvarSolucao() throws IOException {
+    public void salvarSolucao() {
 
         String dir = getDiretorio();
 
@@ -78,11 +78,25 @@ public class ControllerAlocacao implements Initializable,  Observer {
             String stringCsvSolucao = getCsvSolucao();
 
             File fileSolucao = new File(dir + "/" + "Grade-Horario_" + Calendar.getInstance().getTime() + ".csv");
-            FileWriter fileWriter = new FileWriter(fileSolucao);
 
-            fileWriter.write(stringCsvSolucao);
+            try {
+                FileWriter fileWriter = new FileWriter(fileSolucao);
 
-            fileWriter.close();
+                fileWriter.write(stringCsvSolucao);
+
+                fileWriter.close();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Salvo com sucesso.");
+                alert.setTitle("Ok");
+                alert.showAndWait();
+
+            }
+            catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
         }
 
     }
