@@ -6,17 +6,22 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import model.DAO.horario.HorarioDAO;
 import model.DAO.horario.HorarioDAOImpl;
 import model.DAO.professor.ProfessorDAO;
 import model.DAO.professor.ProfessorDAOImpl;
 import model.dominio.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -62,6 +67,50 @@ public class ControllerAlocacao implements Initializable,  Observer {
         threadGeracaoHorario = new Thread(resolvedor);
         threadGeracaoHorario.setName(gerarHorario);
         threadGeracaoHorario.start();
+    }
+
+    @FXML
+    public void salvarSolucao() throws IOException {
+
+        String dir = getDiretorio();
+
+        if (solucao != null && dir != null) {
+            String stringCsvSolucao = getCsvSolucao();
+
+            File fileSolucao = new File(dir + "/" + "Grade-Horario_" + Calendar.getInstance().getTime() + ".csv");
+            FileWriter fileWriter = new FileWriter(fileSolucao);
+
+            fileWriter.write(stringCsvSolucao);
+
+            fileWriter.close();
+        }
+
+    }
+
+    private String getDiretorio() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        directoryChooser.setTitle("Escolha o diretório para salvar o CSV da solução");
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        File dir = directoryChooser.showDialog(new Stage());
+
+        return (dir != null) ? dir.getAbsolutePath() : null;
+    }
+
+    private String getCsvSolucao() {
+
+        String stringCsvSolucao = "Curso,Periodo,Dia da Semana,Horario,Professor,Disciplina";
+
+        for (Alocacao alocacao : solucao.getAlocacoes()) {
+            stringCsvSolucao += "\n" + alocacao.getCursoNome() + ",";
+            stringCsvSolucao += alocacao.getPeriodo() + ",";
+            stringCsvSolucao += alocacao.getHorario() + ",";
+            stringCsvSolucao += alocacao.getProfessorNome() + ",";
+            stringCsvSolucao += alocacao.getDisciplinaNome();
+        }
+
+        return stringCsvSolucao;
     }
 
     @Override
