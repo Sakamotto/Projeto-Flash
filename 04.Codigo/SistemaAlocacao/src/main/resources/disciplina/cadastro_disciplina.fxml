@@ -27,7 +27,7 @@
                 <Font name="System Bold" size="25.0" />
               </font>
             </Label>
-            <GridPane layoutX="330.0" layoutY="169.0" prefHeight="332.0" prefWidth="274.0" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="475.0">
+            <GridPane layoutX="272.0" layoutY="169.0" prefHeight="364.0" prefWidth="540.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="267.0">
               <children>
                 <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label text="Carga Horaria:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -35,9 +35,9 @@
                 <Label text="Período:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label text="Area de Conhecimento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                 <Label text="Disicplinas Pre-Requisito:" GridPane.rowIndex="5" />
-                <ListView fx:id="listViewDisciplinaPreRequisito" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <ListView fx:id="listViewDisciplinaPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Label text="Períodos Pré-Requisito:" GridPane.rowIndex="6" />
-                <ListView fx:id="listViewPeriodoPreRequisito" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <ListView fx:id="listViewPeriodoPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <Label fx:id="labelDisciplinaNome" GridPane.columnIndex="1" />
                 <Label fx:id="labelDisciplinaCargaHoraria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label fx:id="labelDisciplinaCurso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -45,8 +45,8 @@
                 <Label fx:id="labelDisciplinaAreaConhecimento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="174.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="253.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="143.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.0" minWidth="10.0" prefWidth="324.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="40.0" minHeight="2.0" prefHeight="26.0" vgrow="SOMETIMES" />
