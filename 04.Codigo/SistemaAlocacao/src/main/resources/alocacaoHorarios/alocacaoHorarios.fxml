@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.image.*?>
-<?import javafx.embed.swing.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
@@ -32,18 +29,18 @@
         <Font size="25.0" />
       </font>
     </Label>
-    <Label fx:id="labelRegrasRigidas" layoutX="445.0" layoutY="21.0" text="0" textFill="RED">
+    <Label fx:id="labelRegrasRigidas" layoutX="445.0" layoutY="31.0" text="0" textFill="RED">
       <font>
-        <Font size="35.0" fx:id="x2" />
+        <Font size="22.0" fx:id="x2" />
       </font>
     </Label>
-    <Label id="labelRegrasDesejaveis" fx:id="labelRegrasMedias" layoutX="611.0" layoutY="21.0" text="0" textFill="#d7ad22">
+    <Label id="labelRegrasDesejaveis" fx:id="labelRegrasMedias" layoutX="611.0" layoutY="31.0" text="0" textFill="#d7ad22">
          <font>
-            <Font size="35.0" />
+            <Font size="22.0" />
          </font></Label>
-    <Label fx:id="labelRegrasDesejaveis" focusTraversable="false" layoutX="802.0" layoutY="21.0" prefHeight="38.0" prefWidth="29.0" text="0" textFill="#007c0c">
+    <Label fx:id="labelRegrasDesejaveis" focusTraversable="false" layoutX="812.0" layoutY="31.0" text="0" textFill="#007c0c">
          <font>
-            <Font size="35.0" />
+            <Font size="22.0" />
          </font></Label>
     <Separator layoutX="486.0" layoutY="28.0" orientation="VERTICAL" prefHeight="30.0" />
     <Separator layoutX="655.0" layoutY="28.0" orientation="VERTICAL" prefHeight="30.0" />
