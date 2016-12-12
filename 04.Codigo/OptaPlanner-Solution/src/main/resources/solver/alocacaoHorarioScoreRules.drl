@@ -28,24 +28,15 @@ rule "Disciplinas do mesmo período não podem estar alocadas no mesmo horário"
             ) from $a
         )
 
-        //Opção 2 funcionando.
-        /*$horario: Horario()
-        $total: Number( intValue > 1 )
-                from accumulate( Alocacao($horario == horario),
-                                 init( int total = 0; ),
-                                 action( total += 1; ),
-                                 result( total ) )*/
-
     then
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
 
-    end
+end
 
 
 rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre dois horarios de aula"
 
     when
-
         $a : Alocacao()
 
         Alocacao($professor : professor, $horario : horario != null, $disciplina : disciplina)
@@ -77,11 +68,12 @@ rule "Um professor nao pode ter um intervalo maior ou igual a tres horas entre d
 
     then
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
-    end
+
+end
 
 rule "Um professor nao pode estar alocado em horarios conflitantes"
-    when
 
+    when
         $a : Alocacao($professor : professor, $horario : horario != null)
 
         // Verificando se existe mais de uma allocation de um professor em que os horarios sao iguais.
@@ -100,9 +92,11 @@ rule "Um professor nao pode estar alocado em horarios conflitantes"
     then
         // System.out.println("Professor - > " + $professor.getNome() + " | Horario -> " + $horario.getStrDiaSemana() + " " + $horario.getInitHorario());
         scoreHolder.addHardConstraintMatch( kcontext, -1 );
-    end
+
+end
 
 rule "Uma disciplina nao pode ser alocada mais de uma vez no mesmo dia"
+
     when
         $a: Alocacao()
 
@@ -121,9 +115,11 @@ rule "Uma disciplina nao pode ser alocada mais de uma vez no mesmo dia"
             )
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
-    end
+
+end
 
 rule "Disciplinas a partir do quinto período devem estar alocadas apenas no turno matutino"
+
     when
         $a : Alocacao()
         exists(
@@ -135,4 +131,4 @@ rule "Disciplinas a partir do quinto período devem estar alocadas apenas no tur
         )
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
-    end
+end
