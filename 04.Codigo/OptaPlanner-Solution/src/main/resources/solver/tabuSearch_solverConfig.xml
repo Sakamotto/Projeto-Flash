@@ -14,7 +14,7 @@
     <termination>
         <terminationCompositionStyle>OR</terminationCompositionStyle>
         <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
-        <minutesSpentLimit>1</minutesSpentLimit>
+        <minutesSpentLimit>10</minutesSpentLimit>
     </termination>
 
     <!-- Algoritmos de otimização -->

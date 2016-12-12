@@ -146,4 +146,5 @@ rule "Disciplinas a partir do quinto período devem estar alocadas apenas no tur
 
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
+
 end
