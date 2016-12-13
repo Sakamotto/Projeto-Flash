@@ -148,3 +148,22 @@ rule "Disciplinas a partir do quinto período devem estar alocadas apenas no tur
         scoreHolder.addHardConstraintMatch(kcontext, -1);
 
 end
+
+rule "É desejável que haja ao menos um dia de intervalo entre a alocação de uma disciplina"
+// Exemplo: Não é desejável que POO1 seja na terça e na quarta, por exemplo.
+    when
+        $a : Alocacao()
+        Alocacao($disciplina: disciplina, $professor: professor, $horario: horario != null)
+
+        exists(
+            Alocacao(
+                disciplina == $disciplina,
+                professor == $professor,
+                horario != null,
+                disciplina.periodo == $disciplina.periodo,
+                Math.abs(horario.DiaSemana.valor - $horario.DiaSemana.valor) == 1
+            ) from $a
+        )
+    then
+        scoreHolder.addMediumConstraintMatch(kcontext, - 1);
+    end

@@ -11,7 +11,23 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @XStreamAlias("Horario")
 public class Horario {
 
-    public enum DiaSemana {DOMINGO, SEGUNDA, TERCA, QUARTA, QUINTA, SEXTA, SABADO}
+    public enum DiaSemana {
+
+        DOMINGO(1), SEGUNDA(2), TERCA(3), QUARTA(4), QUINTA(5), SEXTA(6), SABADO(7);
+        private int valor;
+
+        DiaSemana(int valor){
+            this.valor = valor;
+        }
+
+        public int getValor() {
+            return valor;
+        }
+
+        public void setValor(int valor) {
+            this.valor = valor;
+        }
+    }
 
     private int id;
     private int horaInicio;
