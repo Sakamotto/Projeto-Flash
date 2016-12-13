@@ -77,7 +77,7 @@ public class ControllerAlocacao implements Initializable,  Observer {
         if (solucao != null && dir != null) {
             String stringCsvSolucao = getCsvSolucao();
 
-            File fileSolucao = new File(dir + "/" + "Grade-Horario_" + Calendar.getInstance().getTime() + ".csv");
+            File fileSolucao = new File(dir + File.separator + "Grade-Horario_" + Calendar.getInstance().getTime().toString().replaceAll(":","-") + ".csv");
 
             try {
                 FileWriter fileWriter = new FileWriter(fileSolucao);
