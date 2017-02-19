@@ -14,7 +14,6 @@
           <menus>
             <Menu mnemonicParsing="false" text="Cadastros">
               <items>
-                <MenuItem fx:id="menuCadastrosAreaConhecimento" mnemonicParsing="false" text="Área de Conhecimento" />
                 <MenuItem fx:id="menuCadastrosCurso" mnemonicParsing="false" onAction="#handleMenuItemCadastroCurso" text="Curso" />
                 <MenuItem fx:id="menuCadastrosDisciplina" mnemonicParsing="false" onAction="#handleMenuItemCadastrosDisicplina" text="Disciplina" />
                 <MenuItem fx:id="menuCadastrosProfessor" mnemonicParsing="false" onAction="#handleMenuItemCadastrosProfessor" text="Professor" />

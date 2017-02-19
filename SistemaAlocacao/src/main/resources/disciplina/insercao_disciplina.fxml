@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -10,7 +11,6 @@
     <GridPane layoutX="36.0" layoutY="92.0" prefHeight="178.0" prefWidth="592.0" snapToPixel="false">
       <children>
         <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label text="Área de Conhecimento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <TextField fx:id="textFieldDisciplinaNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label text="Carga Horária:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="textFieldDisciplinaCargaHoraria" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -18,18 +18,16 @@
         <Label text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label text="Período:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="choiceBoxCurso" prefHeight="25.0" prefWidth="442.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="choiceBoxAreaConhecimento" prefHeight="25.0" prefWidth="441.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="160.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="432.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
-        <RowConstraints fillHeight="false" maxHeight="31.0" minHeight="50.0" prefHeight="31.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
       </rowConstraints>
     </GridPane>
     <Label layoutX="245.0" layoutY="14.0" text="Disciplina" textAlignment="CENTER">

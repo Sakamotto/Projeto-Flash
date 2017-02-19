@@ -33,16 +33,14 @@
                 <Label text="Carga Horaria:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label text="Período:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Label text="Area de Conhecimento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <Label text="Disicplinas Pre-Requisito:" GridPane.rowIndex="5" />
-                <ListView fx:id="listViewDisciplinaPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label text="Períodos Pré-Requisito:" GridPane.rowIndex="6" />
-                <ListView fx:id="listViewPeriodoPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label text="Disicplinas Pre-Requisito:" GridPane.rowIndex="4" />
+                <ListView fx:id="listViewDisciplinaPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Períodos Pré-Requisito:" GridPane.rowIndex="5" />
+                <ListView fx:id="listViewPeriodoPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Label fx:id="labelDisciplinaNome" GridPane.columnIndex="1" />
                 <Label fx:id="labelDisciplinaCargaHoraria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label fx:id="labelDisciplinaCurso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label fx:id="labelDisciplinaPeriodo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label fx:id="labelDisciplinaAreaConhecimento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="143.0" />
@@ -53,7 +51,6 @@
                 <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="149.0" minHeight="7.0" prefHeight="25.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
               </rowConstraints>

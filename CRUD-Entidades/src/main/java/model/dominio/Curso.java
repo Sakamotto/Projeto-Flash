@@ -1,14 +1,29 @@
 package model.dominio;
 
+import javax.persistence.*;
+
 /**
  * Created by danilo on 24/10/16.
  */
+@Entity
+@Table(name="curso", schema = "flash")
 public class Curso implements Cloneable {
 
+    @Id
+    @GeneratedValue
+    @Column(name="curso_id")
     private int id;
+
+    @Column(name="nome")
     private String nome;
+
+    @Column(name="regime")
     private String regime;
+
+    @Column(name="duracao")
     private int duracao;
+
+    @Column(name="sigla")
     private String sigla;
 
     public Curso() {

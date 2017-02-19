@@ -6,11 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.DAO.areaConhecimento.AreaConhecimentoDAO;
-import model.DAO.areaConhecimento.AreaConhecimentoDAOImpl;
 import model.DAO.curso.CursoDAO;
 import model.DAO.curso.CursoDAOImpl;
-import model.dominio.AreaConhecimento;
 import model.dominio.Curso;
 import model.dominio.Disciplina;
 
@@ -28,14 +25,11 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
     @FXML private TextField textFieldDisciplinaNome;
     @FXML private TextField textFieldDisciplinaCargaHoraria;
     @FXML private TextField textFieldDisciplinaPeriodo;
-    @FXML private ChoiceBox<AreaConhecimento> choiceBoxAreaConhecimento;
     @FXML private ChoiceBox<Curso> choiceBoxCurso;
 
     private CursoDAO cDAO = new CursoDAOImpl();
-    private AreaConhecimentoDAO acDAO = new AreaConhecimentoDAOImpl();
 
     private List<Curso> listCursos = new ArrayList<>();
-    private List<AreaConhecimento> listAreaConhecimentos = new ArrayList<>();
 
     private Stage dialogStage;
     private boolean btnSalvarClicado = false;
@@ -64,18 +58,8 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         textFieldDisciplinaCargaHoraria.setText(Integer.toString(disciplina.getCargaHoraria()));
         textFieldDisciplinaPeriodo.setText(Integer.toString(disciplina.getPeriodo()));
 
-        // Coloca a Área de conhecimento da disciplina com oescolhido.
-        if (!disciplina.getNome().equals("") && !disciplina.getAreaConhecimento().equals("")) {
-            Collections.swap(listAreaConhecimentos, 0, listAreaConhecimentos.indexOf(disciplina.getAreaConhecimento()));
-            Collections.swap(listCursos, 0, listCursos.indexOf(disciplina.getCurso()));
-        }
-
-
         choiceBoxCurso.setItems(FXCollections.observableArrayList(listCursos));
         choiceBoxCurso.getSelectionModel().selectFirst();
-
-        choiceBoxAreaConhecimento.setItems(FXCollections.observableArrayList(listAreaConhecimentos));
-        choiceBoxAreaConhecimento.getSelectionModel().selectFirst();
     }
 
 
@@ -95,8 +79,6 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         });
 
         listCursos = cDAO.listar(Curso.class);
-
-        listAreaConhecimentos = acDAO.listar(AreaConhecimento.class);
     }
 
     @FXML
@@ -106,7 +88,6 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         disciplina.setCargaHoraria(Integer.parseInt(textFieldDisciplinaCargaHoraria.getText()));
         disciplina.setCurso(choiceBoxCurso.getSelectionModel().getSelectedItem());
         disciplina.setPeriodo(Integer.parseInt(textFieldDisciplinaPeriodo.getText()));
-        disciplina.setAreaConhecimento(choiceBoxAreaConhecimento.getSelectionModel().getSelectedItem());
 
         btnSalvarClicado = true;
 
