@@ -8,6 +8,14 @@ Com isso, espera-se que o cliente tenha menos esforço, mais precisão e os hor�
 
 Utilizaremos o framework **OptaPlanner** desenvolvido em **Java** pela empresa **RedHat**.
 
+## Organização de pastas do projeto
+
+O projeto está organizado com as seguintes pastas:
+
+* **Banco_de_Dados**: Possui os arquivos de banco de dados, incluindo backup e modelos (conceitual, lógico e físico);
+* **CRUD-Entidades**: Possui os modelos da aplicação e toda a parte de persistência de dados;
+* **OptaPlanner-Solution**: Possui toda a lógica de negócio. Essa pasta contém toda a configuração e uso da ferramenta OptaPlanner em conjunto com o Drools.
+
 ## Minimundo
 
 O coordenador de curso de Bacharelado em Sistemas de Informação do Ifes Campus Serra enfrenta problemas para elaborar o horário de cada semestre para os três cursos (técnico e graduação), pois é uma tarefa muito complexa, na qual tem de ser levado em conta diferentes regras e restrições. Além disso, envolve a disponibilidade de professores, salas, laboratórios, alunos (restrições e questões), e mais cessões de docentes para (e da) Automação e Cefor. Atualmente existe um software que o apoia. Porém, o atual software não ajuda muito, pois não atende algumas restrições.
