@@ -18,7 +18,7 @@ import java.util.Set;
 public class Disciplina implements Cloneable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "disciplina_id")
     private int id;
 

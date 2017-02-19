@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Curso implements Cloneable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="curso_id")
     private int id;
 

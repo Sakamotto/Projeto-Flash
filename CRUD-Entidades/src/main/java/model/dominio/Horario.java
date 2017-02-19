@@ -4,11 +4,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import javax.persistence.*;
+
 /**
  * Created by cristian on 29/11/16.
  */
 
 @XStreamAlias("Horario")
+@Entity
+@Table(name = "horario", schema = "flash")
 public class Horario {
 
     public enum DiaSemana {
@@ -29,12 +33,24 @@ public class Horario {
         }
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "horario_id")
     private int id;
+
+    @Column(name = "hora_inicio")
     private int horaInicio;
+
+    @Column(name = "minuto_inicio")
     private int minutoInicio;
+
+    @Column(name = "hora_fim")
     private int horaFim;
+
+    @Column(name = "minuto_fim")
     private int minutoFim;
 
+    @Transient
     private DiaSemana diaSemana;
 
     public Horario(){

@@ -14,7 +14,7 @@ import java.util.Set;
 public class Professor implements Cloneable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "professor_id")
     private Long id;
 
