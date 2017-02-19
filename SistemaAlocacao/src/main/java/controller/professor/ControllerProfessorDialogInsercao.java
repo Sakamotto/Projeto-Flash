@@ -1,6 +1,7 @@
 package controller.professor;
 
-import model.dominio.Endereco;
+import javafx.scene.control.DatePicker;
+import javafx.util.StringConverter;
 import model.dominio.Professor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 /**
@@ -18,13 +21,8 @@ public class ControllerProfessorDialogInsercao implements Initializable {
     @FXML private TextField textFieldProfessorNome;
     @FXML private TextField textFieldProfessorMatricula;
     @FXML private TextField textFieldProfessorCpf;
-    @FXML private TextField textFieldProfessorMunicipio;
-    @FXML private TextField textFieldProfessorBairro;
-    @FXML private TextField textFieldProfessorEndereco;
-    @FXML private TextField textFieldProfessorNumero;
-    @FXML private TextField textFieldProfessorCep;
     @FXML private TextField textFieldProfessorEmail;
-    @FXML private TextField textFieldProfessorDataNascimento;
+    @FXML private DatePicker datePickerDataNascimento;
     @FXML private TextField textFieldProfessorRg;
 
     private Stage dialogStage;
@@ -52,37 +50,40 @@ public class ControllerProfessorDialogInsercao implements Initializable {
 
         textFieldProfessorNome.setText(professor.getNome());
         textFieldProfessorEmail.setText(professor.getEmail());
-        textFieldProfessorDataNascimento.setText(professor.getDataNascimento());
+        datePickerDataNascimento.setPromptText(professor.getDataNascimento());
         textFieldProfessorRg.setText(professor.getRg());
         textFieldProfessorCpf.setText(professor.getCpf());
         textFieldProfessorMatricula.setText(professor.getMatricula());
-        textFieldProfessorMunicipio.setText(professor.getEndereco().getMunicipio());
-        textFieldProfessorBairro.setText(professor.getEndereco().getBairro());
-        textFieldProfessorEndereco.setText(professor.getEndereco().getEndereco());
-        textFieldProfessorNumero.setText(Integer.toString(professor.getEndereco().getNumero()));
-        textFieldProfessorCep.setText(professor.getEndereco().getCep());
-
     }
 
 
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+
+        datePickerDataNascimento.setPromptText("dd-MM-yyyy");
+
+        datePickerDataNascimento.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            @Override
+            public String toString(LocalDate date) {
+                return (date != null) ? dateFormatter.format(date) : "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                return (string != null && !string.isEmpty()) ? LocalDate.parse(string, dateFormatter) : null;
+            }
+        });
+    }
 
     @FXML
     public void handleButtonSalvar() {
-        Endereco endereco = new Endereco();
-        endereco.setMunicipio(textFieldProfessorMunicipio.getText());
-        endereco.setBairro(textFieldProfessorBairro.getText());
-        endereco.setEndereco(textFieldProfessorEndereco.getText());
-        endereco.setNumero(Integer.parseInt(textFieldProfessorNumero.getText()));
-        endereco.setCep(textFieldProfessorCep.getText());
-
         professor.setNome(textFieldProfessorNome.getText());
         professor.setEmail(textFieldProfessorEmail.getText());
-        professor.setDataNascimento(textFieldProfessorDataNascimento.getText());
+        professor.setDataNascimento(datePickerDataNascimento.getPromptText());
         professor.setRg(textFieldProfessorRg.getText());
         professor.setCpf(textFieldProfessorCpf.getText(), false);
         professor.setMatricula(textFieldProfessorMatricula.getText());
-        professor.setEndereco(endereco);
 
         btnSalvarClicado = true;
 

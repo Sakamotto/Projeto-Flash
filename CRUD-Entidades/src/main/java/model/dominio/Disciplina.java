@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,14 +13,29 @@ import java.util.Set;
  */
 
 @XStreamAlias("Disciplina")
+@Entity
+@Table(name = "disciplina", schema = "flash")
 public class Disciplina implements Cloneable {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "disciplina_id")
     private int id;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "carga_horaria")
     private int cargaHoraria;
+
+    @Column(name = "periodo")
     private int periodo;
+
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
     private Curso curso;
-    private AreaConhecimento areaConhecimento;
+
+    @ManyToMany(mappedBy = "disciplinas")
     private Set<Professor> professores = new HashSet<>();
 
 
@@ -28,7 +44,6 @@ public class Disciplina implements Cloneable {
         cargaHoraria = 0;
         periodo = 0;
         curso = new Curso();
-        areaConhecimento = new AreaConhecimento();
     }
 
     public Disciplina(String nome, int periodo, int cargaHoraria) {
@@ -36,7 +51,6 @@ public class Disciplina implements Cloneable {
         this.cargaHoraria = cargaHoraria;
         this.periodo = periodo;
         curso = new Curso();
-        areaConhecimento = new AreaConhecimento();
     }
 
     public Set<Professor> getProfessores() {
@@ -89,14 +103,6 @@ public class Disciplina implements Cloneable {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
-    }
-
-    public AreaConhecimento getAreaConhecimento() {
-        return areaConhecimento;
-    }
-
-    public void setAreaConhecimento(AreaConhecimento areaConhecimento) {
-        this.areaConhecimento = areaConhecimento;
     }
 
     public String getSiglaCurso() {

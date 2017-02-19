@@ -1,29 +1,49 @@
 package model.dominio;
 
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @XStreamAlias("Professor")
+@Entity
+@Table(name = "professor", schema = "flash")
 public class Professor implements Cloneable {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "professor_id")
     private Long id;
 
+    @Column(name = "nome")
     private String nome;
-    private String email;
-    private String dataNascimento;
-    private String rg;
-    private Cpf cpf;
-    private String matricula;
-    private Endereco endereco;
-    private Set<Disciplina> disciplinas = new HashSet<>();
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "data_nascimento")
+    private String dataNascimento;
+
+    @Column(name = "rg")
+    private String rg;
+
+    @Column(name = "cpf")
+    private String cpf;
+
+    @Column(name = "matricula")
+    private String matricula;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL})
+    @JoinTable(
+            schema = "flash",
+            name = "professor_disciplina",
+            joinColumns = @JoinColumn(name = "professor_id", referencedColumnName = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_id", referencedColumnName = "disciplina_id")
+    )
+    private Set<Disciplina> disciplinas = new HashSet<>();
 
     public Set<Disciplina> getDisciplinas() {
         return disciplinas;
@@ -37,24 +57,20 @@ public class Professor implements Cloneable {
     public Professor() {
         nome = "";
         matricula = "";
-        cpf = new Cpf();
+        cpf = "";
         email = "";
         dataNascimento = "";
         rg = "";
-
-        endereco = new Endereco();
     }
 
     public Professor(String nome, String cpf) {
         this.nome = nome;
         matricula = "";
-        this.cpf = new Cpf();
+        this.cpf = "";
         setCpf(cpf, false);
         email = "";
         dataNascimento = "";
         rg = "";
-
-        endereco = new Endereco();
     }
 
 
@@ -99,23 +115,15 @@ public class Professor implements Cloneable {
     }
 
     public String getCpf() {
-        return cpf.getCpf();
+        return cpf;
     }
 
     public String getDecoratedCpf() {
-       return cpf.cpfFormated();
+       return cpf;
     }
 
     public void setCpf(String cpf, boolean validar) {
-        this.cpf.setCpf(cpf, validar);
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+        this.cpf = cpf;
     }
 
     public Long getId() {
@@ -132,8 +140,6 @@ public class Professor implements Cloneable {
 
         try {
             obj = super.clone();
-
-            ( (Professor) obj).setEndereco( (Endereco) this.getEndereco().clone() );
 
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();

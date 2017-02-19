@@ -30,11 +30,6 @@ public class ControllerProfessor implements Initializable {
     @FXML private Label labelProfessorNome;
     @FXML private Label labelProfessorMatricula;
     @FXML private Label labelProfessorCpf;
-    @FXML private Label labelProfessorMunicipio;
-    @FXML private Label labelProfessorBairro;
-    @FXML private Label labelProfessorEndereco;
-    @FXML private Label labelProfessorNumero;
-    @FXML private Label labelProfessorCep;
     @FXML private Label labelProfessorEmail;
     @FXML private Label labelProfessorDataNascimento;
     @FXML private Label labelProfessorRg;
@@ -84,12 +79,6 @@ public class ControllerProfessor implements Initializable {
         labelProfessorRg.setText(professor.getRg());
         labelProfessorCpf.setText(professor.getDecoratedCpf());
         labelProfessorMatricula.setText(professor.getMatricula());
-        labelProfessorMunicipio.setText(professor.getEndereco().getMunicipio());
-        labelProfessorBairro.setText(professor.getEndereco().getBairro());
-        labelProfessorEndereco.setText(professor.getEndereco().getEndereco());
-        labelProfessorNumero.setText(Integer.toString(professor.getEndereco().getNumero()));
-        labelProfessorCep.setText(professor.getEndereco().getCep());
-
     }
 
     @FXML

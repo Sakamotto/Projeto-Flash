@@ -35,7 +35,6 @@ public class ControllerDisciplina implements Initializable {
     @FXML Label labelDisciplinaCargaHoraria;
     @FXML Label labelDisciplinaCurso;
     @FXML Label labelDisciplinaPeriodo;
-    @FXML Label labelDisciplinaAreaConhecimento;
 
     private DisciplinaDAO dDAO = new DisciplinaDAOImpl();
 
@@ -77,7 +76,6 @@ public class ControllerDisciplina implements Initializable {
         labelDisciplinaCargaHoraria.setText(Integer.toString(disciplina.getCargaHoraria()));
         labelDisciplinaCurso.setText(disciplina.getCurso().getNome());
         labelDisciplinaPeriodo.setText(Integer.toString(disciplina.getPeriodo()));
-        labelDisciplinaAreaConhecimento.setText(disciplina.getAreaConhecimento().getDescricao());
     }
 
     @FXML
