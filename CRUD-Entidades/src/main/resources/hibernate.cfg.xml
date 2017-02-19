@@ -15,7 +15,7 @@
         <mapping class="model.dominio.Professor"/>
         <mapping class="model.dominio.Disciplina"/>
         <mapping class="model.dominio.Curso"/>
-        <mapping resource="hbm/Horario.hbm.xml"/>
+        <mapping class="model.dominio.Horario"/>
 
     </session-factory>
 </hibernate-configuration>

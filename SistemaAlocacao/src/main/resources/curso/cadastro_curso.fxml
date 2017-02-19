@@ -30,8 +30,8 @@
             <GridPane layoutX="278.0" layoutY="173.0" prefHeight="293.0" prefWidth="520.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="470.0">
               <children>
                 <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Regime" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label text="Duração" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Regime:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Duração:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label text="Sigla:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label id="labelDisciplinaNome" fx:id="labelCursoNome" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label id="labelDisciplinaCargaHoraria" fx:id="labelCursoRegime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -39,8 +39,8 @@
                 <Label id="labelDisciplinaPeriodo" fx:id="labelCursoSigla" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="95.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="342.0" minWidth="10.0" prefWidth="333.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="64.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="342.0" minWidth="10.0" prefWidth="264.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="40.0" minHeight="2.0" prefHeight="26.0" vgrow="SOMETIMES" />
