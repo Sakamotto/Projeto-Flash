@@ -12,7 +12,7 @@ import javax.persistence.*;
 
 @XStreamAlias("Horario")
 @Entity
-@Table(name = "horario", schema = "flash")
+@Table(name = "horario")
 public class Horario {
 
     public enum DiaSemana {
