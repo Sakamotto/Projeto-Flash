@@ -14,7 +14,7 @@ import java.util.Set;
 
 @XStreamAlias("Disciplina")
 @Entity
-@Table(name = "disciplina", schema = "flash")
+@Table(name = "disciplina")
 public class Disciplina implements Cloneable {
 
     @Id

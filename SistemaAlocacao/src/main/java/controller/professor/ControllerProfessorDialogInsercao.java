@@ -1,5 +1,6 @@
 package controller.professor;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
 import model.dominio.Professor;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.chrono.Chronology;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -59,10 +61,10 @@ public class ControllerProfessorDialogInsercao implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
 
-        datePickerDataNascimento.setPromptText("dd-MM-yyyy");
+        datePickerDataNascimento.setPromptText("dd/MM/yyyy");
 
         datePickerDataNascimento.setConverter(new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             @Override
             public String toString(LocalDate date) {
@@ -76,11 +78,13 @@ public class ControllerProfessorDialogInsercao implements Initializable {
         });
     }
 
+
+
     @FXML
     public void handleButtonSalvar() {
         professor.setNome(textFieldProfessorNome.getText());
         professor.setEmail(textFieldProfessorEmail.getText());
-        professor.setDataNascimento(datePickerDataNascimento.getPromptText());
+        professor.setDataNascimento(datePickerDataNascimento.editorProperty().get().getText());
         professor.setRg(textFieldProfessorRg.getText());
         professor.setCpf(textFieldProfessorCpf.getText(), false);
         professor.setMatricula(textFieldProfessorMatricula.getText());

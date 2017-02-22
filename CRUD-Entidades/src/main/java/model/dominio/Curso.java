@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by danilo on 24/10/16.
  */
 @Entity
-@Table(name="curso", schema = "flash")
+@Table(name="curso")
 public class Curso implements Cloneable {
 
     @Id

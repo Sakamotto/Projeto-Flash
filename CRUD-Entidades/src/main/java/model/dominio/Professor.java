@@ -10,7 +10,7 @@ import java.util.Set;
 
 @XStreamAlias("Professor")
 @Entity
-@Table(name = "professor", schema = "flash")
+@Table(name = "professor")
 public class Professor implements Cloneable {
 
     @Id
@@ -38,7 +38,6 @@ public class Professor implements Cloneable {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL})
     @JoinTable(
-            schema = "flash",
             name = "professor_disciplina",
             joinColumns = @JoinColumn(name = "professor_id", referencedColumnName = "professor_id"),
             inverseJoinColumns = @JoinColumn(name = "disciplina_id", referencedColumnName = "disciplina_id")
