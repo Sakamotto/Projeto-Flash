@@ -1,7 +1,12 @@
 package controller.professor;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.util.StringConverter;
 import model.dominio.Professor;
 import javafx.fxml.FXML;
@@ -26,6 +31,7 @@ public class ControllerProfessorDialogInsercao implements Initializable {
     @FXML private TextField textFieldProfessorEmail;
     @FXML private DatePicker datePickerDataNascimento;
     @FXML private TextField textFieldProfessorRg;
+    @FXML private Label validatorFieldsProfessor;
 
     private Stage dialogStage;
     private boolean btnSalvarClicado = false;
@@ -76,9 +82,50 @@ public class ControllerProfessorDialogInsercao implements Initializable {
                 return (string != null && !string.isEmpty()) ? LocalDate.parse(string, dateFormatter) : null;
             }
         });
+
+        cpfMask(textFieldProfessorCpf);
     }
 
+    /**
+     * Monta as mascara para CPF/CNPJ. A mascara eh exibida somente apos o campo perder o foco.
+     *
+     * @param textField TextField
+     */
+    private static void cpfMask(final TextField textField) {
 
+        textField.lengthProperty().addListener( (observable, oldChange, newChange) -> {
+            if (textField.isFocused()) {
+                textField.setText(textField.getText().replaceAll("\\D", ""));
+
+                if (textField.getText().length() >= 11) {
+                    textField.setText(textField.getText().substring(0, 11));
+                }
+            }
+        });
+
+        textField.focusedProperty().addListener((observableValue, aBoolean, fieldChange) -> {
+
+            String value = textField.getText();
+
+            if (textField.isFocused()) {
+                value = textField.getText().replaceAll("\\D", "");
+            }
+            else if (!fieldChange && textField.getText().length() == 11) {
+                value = value.replaceAll("[^0-9]", "");
+                value = value.replaceFirst("([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})$", "$1.$2.$3-$4");
+            }
+
+
+            textField.setText(value);
+
+            if (textField.getText().equals(value)) {
+                textField.setText("");
+                textField.insertText(0, value);
+            }
+
+        });
+
+    }
 
     @FXML
     public void handleButtonSalvar() {
@@ -91,7 +138,12 @@ public class ControllerProfessorDialogInsercao implements Initializable {
 
         btnSalvarClicado = true;
 
-        dialogStage.close();
+        if (professor.getNome().length() > 0 && professor.getCpf().length() > 0) {
+            dialogStage.close();
+        }
+        else {
+            validatorFieldsProfessor.setVisible(true);
+        }
     }
 
     @FXML

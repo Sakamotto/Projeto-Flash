@@ -11,9 +11,9 @@
   <children>
     <GridPane layoutX="36.0" layoutY="92.0" prefWidth="592.0">
       <children>
-        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Nome *:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label text="Matrícula:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <Label text="CPF:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label text="CPF *:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <TextField fx:id="textFieldProfessorNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <TextField fx:id="textFieldProfessorEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <DatePicker fx:id="datePickerDataNascimento" prefHeight="25.0" prefWidth="456.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -48,5 +48,6 @@
         <Button fx:id="btnCancelarProfessor" cancelButton="true" layoutX="80.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
       </children>
     </Group>
+      <Label fx:id="validatorFieldsProfessor" layoutX="23.0" layoutY="404.0" text="Preencha os campos obrigatórios marcados com asterisco (*). O CPF deve possuir 11 dígitos." textFill="#ff3d3d" visible="false" />
   </children>
 </AnchorPane>
