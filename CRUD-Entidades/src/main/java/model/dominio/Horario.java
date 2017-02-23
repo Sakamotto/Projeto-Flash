@@ -1,6 +1,7 @@
 package model.dominio;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import model.dominio.solver.Turno;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -14,24 +15,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "horario")
 public class Horario {
-
-    public enum DiaSemana {
-
-        DOMINGO(1), SEGUNDA(2), TERCA(3), QUARTA(4), QUINTA(5), SEXTA(6), SABADO(7);
-        private int valor;
-
-        DiaSemana(int valor){
-            this.valor = valor;
-        }
-
-        public int getValor() {
-            return valor;
-        }
-
-        public void setValor(int valor) {
-            this.valor = valor;
-        }
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,8 +33,11 @@ public class Horario {
     @Column(name = "minuto_fim")
     private int minutoFim;
 
-    @Transient
+    @Column(name = "dia_semana")
     private DiaSemana diaSemana;
+
+    @Column(name = "turno")
+    private Turno turno;
 
     public Horario(){
         horaInicio = 0;
@@ -90,26 +76,20 @@ public class Horario {
         return diaSemana;
     }
 
-
     public String getStrDiaSemana() {
-        switch (diaSemana) {
-            case DOMINGO:
-                return "Domingo";
-            case SEGUNDA:
-                return "Segunda-Feira";
-            case TERCA:
-                return "Terça-Feira";
-            case QUARTA:
-                return "Quarta-Feira";
-            case QUINTA:
-                return "Quinta-Feira";
-            case SEXTA:
-                return "Sexta-Feira";
-            case SABADO:
-                return "Sábado";
-            default:
-                return "";
-        }
+        return diaSemana.toString();
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+
+    public String getStrTurno() {
+        return turno.toString();
     }
 
     public int getId() {

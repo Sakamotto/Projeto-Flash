@@ -1,5 +1,6 @@
 package domain;
 
+import model.dominio.DiaSemana;
 import model.dominio.Horario;
 
 /**
@@ -13,7 +14,7 @@ public class ScheduleBuilder {
         schedule = new Horario(id);
     }
 
-    public ScheduleBuilder addDiaSemana(Horario.DiaSemana diaSemana) {
+    public ScheduleBuilder addDiaSemana(DiaSemana diaSemana) {
         schedule.setDiaSemana(diaSemana);
         return this;
     }

@@ -1,6 +1,7 @@
 package model.DAO.horario;
 
 import model.DAO.GenericDAOImpl;
+import model.dominio.DiaSemana;
 import model.dominio.Horario;
 
 import java.util.ArrayList;
@@ -13,19 +14,19 @@ public class HorarioDAOImpl extends GenericDAOImpl<Horario> implements HorarioDA
 
     @Override
     public List<Horario> listarHorariosCompletos() {
-        List<Horario.DiaSemana> diaSemanas = new ArrayList<>();
+        List<DiaSemana> diaSemanas = new ArrayList<>();
         List<Horario> horariosBanco = super.listar(Horario.class);
         List<Horario> horarios = new ArrayList<>();
 
-        diaSemanas.add(Horario.DiaSemana.SEGUNDA);
-        diaSemanas.add(Horario.DiaSemana.TERCA);
-        diaSemanas.add(Horario.DiaSemana.QUARTA);
-        diaSemanas.add(Horario.DiaSemana.QUINTA);
-        diaSemanas.add(Horario.DiaSemana.SEXTA);
+        diaSemanas.add(DiaSemana.SEGUNDA);
+        diaSemanas.add(DiaSemana.TERCA);
+        diaSemanas.add(DiaSemana.QUARTA);
+        diaSemanas.add(DiaSemana.QUINTA);
+        diaSemanas.add(DiaSemana.SEXTA);
 
 
 
-        for (Horario.DiaSemana diaSemana : diaSemanas) {
+        for (DiaSemana diaSemana : diaSemanas) {
             for (Horario horario : horariosBanco) {
                 Horario novoHorario = new Horario();
 

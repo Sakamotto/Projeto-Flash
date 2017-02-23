@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import model.dominio.Alocacao
 import model.dominio.Disciplina
+import model.dominio.DiaSemana
 import model.dominio.Horario
 import model.dominio.Professor
 

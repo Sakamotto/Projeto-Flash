@@ -5,10 +5,7 @@ import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
-import model.dominio.Alocacao;
-import model.dominio.Disciplina;
-import model.dominio.Horario;
-import model.dominio.Professor;
+import model.dominio.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,11 +71,11 @@ public class PeriodosHorariosDiferentes {
         alocacao4.setDisciplina(disciplina4);
         alocacao4.setProfessor(professor4);
 
-        h1.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        h1.setDiaSemana(DiaSemana.SEGUNDA);
         h1.setHorarioInicio(7, 30);
         h1.setHorarioFim(9, 30);
 
-        h2.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        h2.setDiaSemana(DiaSemana.SEGUNDA);
         h2.setHorarioInicio(9, 31);
         h2.setHorarioFim(11, 30);
 

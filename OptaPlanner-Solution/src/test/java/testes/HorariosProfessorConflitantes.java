@@ -5,10 +5,7 @@ import controller.Resolvedor;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
-import model.dominio.Alocacao;
-import model.dominio.Disciplina;
-import model.dominio.Horario;
-import model.dominio.Professor;
+import model.dominio.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,15 +48,15 @@ public class HorariosProfessorConflitantes {
 
     @Quando("^Eu alocar os horarios que geram conflito de horarios dos professores$")
     public void eu_alocar_os_horarios_que_geram_conflito_de_horarios_dos_professores() throws Throwable {
-        horarioUm.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioUm.setDiaSemana(DiaSemana.TERCA);
         horarioUm.setHorarioInicio(7, 30);
         horarioUm.setHorarioFim(9, 20);
 
-        horarioDois.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioDois.setDiaSemana(DiaSemana.TERCA);
         horarioDois.setHorarioInicio(7, 30);
         horarioDois.setHorarioFim(9, 20);
 
-        horarioTres.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioTres.setDiaSemana(DiaSemana.TERCA);
         horarioTres.setHorarioInicio(7, 30);
         horarioTres.setHorarioFim(9, 20);
 
@@ -83,15 +80,15 @@ public class HorariosProfessorConflitantes {
 
     @Quando("^Alocar os horarios que nao geram conflito de horarios dos professores$")
     public void alocar_os_horarios_que_nao_geram_conflito_de_horarios_dos_professores() throws Throwable {
-        horarioUm.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        horarioUm.setDiaSemana(DiaSemana.SEGUNDA);
         horarioUm.setHorarioInicio(7, 30);
         horarioUm.setHorarioFim(9, 20);
 
-        horarioDois.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioDois.setDiaSemana(DiaSemana.TERCA);
         horarioDois.setHorarioInicio(7, 30);
         horarioDois.setHorarioFim(9, 20);
 
-        horarioTres.setDiaSemana(Horario.DiaSemana.TERCA);
+        horarioTres.setDiaSemana(DiaSemana.TERCA);
         horarioTres.setHorarioInicio(7, 30);
         horarioTres.setHorarioFim(9, 20);
 
