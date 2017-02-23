@@ -15,7 +15,7 @@
             <TableView id="tableViewDisciplina" fx:id="tableViewCurso" blendMode="SRC_OVER" cache="false" cacheHint="SCALE_AND_ROTATE" depthTest="ENABLE" disable="false" editable="false" focusTraversable="false" maxWidth="-1.0" mouseTransparent="false" prefHeight="700.0" prefWidth="324.0" tableMenuButtonVisible="false" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="tabelaColunaCursoSigla" maxWidth="5000.0" minWidth="10.0" prefWidth="63.0" text="Sigla" />
-                <TableColumn fx:id="tabelaColunaCursoNome" maxWidth="260.0" minWidth="260.0" prefWidth="260.0" resizable="false" text="Nome" />
+                <TableColumn fx:id="tabelaColunaCursoNome" maxWidth="210.0" minWidth="210.0" prefWidth="210.0" resizable="false" text="Nome" />
               </columns>
             </TableView>
           </children>
@@ -27,20 +27,20 @@
                 <Font name="System Bold" size="25.0" />
               </font>
             </Label>
-            <GridPane layoutX="278.0" layoutY="173.0" prefHeight="293.0" prefWidth="520.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="470.0">
+            <GridPane layoutX="278.0" layoutY="173.0" maxHeight="450.0" minWidth="399.0" prefHeight="293.0" prefWidth="484.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="314.0">
               <children>
-                <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Nome do Curso:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label text="Regime:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label text="Duração:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Label text="Sigla:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label text="Duração em Horas:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Sigla do Curso:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label id="labelDisciplinaNome" fx:id="labelCursoNome" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label id="labelDisciplinaCargaHoraria" fx:id="labelCursoRegime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label id="labelDisciplinaCurso" fx:id="labelCursoDuracao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label id="labelDisciplinaPeriodo" fx:id="labelCursoSigla" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="342.0" minWidth="10.0" prefWidth="264.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="163.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="342.0" minWidth="10.0" prefWidth="321.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="40.0" minHeight="2.0" prefHeight="26.0" vgrow="SOMETIMES" />

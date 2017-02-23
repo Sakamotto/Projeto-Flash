@@ -43,9 +43,9 @@ public class ControllerCursoDialogInsercao implements Initializable {
 
         // Força o campo ser apenas inteiro.
         textFieldCursoDucarao.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                textFieldCursoDucarao.setText(newValue.replaceAll("[^\\d]", ""));
-            }
+            textFieldCursoDucarao.setText(
+                    textFieldCursoDucarao.getText().replaceFirst("\\D", "")
+            );
         });
     }
 
