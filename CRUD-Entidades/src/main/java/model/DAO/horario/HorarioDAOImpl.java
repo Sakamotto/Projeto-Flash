@@ -42,4 +42,27 @@ public class HorarioDAOImpl extends GenericDAOImpl<Horario> implements HorarioDA
 
         return horarios;
     }
+
+    @Override
+    public boolean validarHorario(Horario horarioParam) {
+
+        List<Horario> horarios = listar(Horario.class);
+        int horarioParamInicioEmMinutos = (horarioParam.getHoraInicio() * 60) + horarioParam.getMinutoInicio();
+        int horarioParamFimEmMinutos = (horarioParam.getHoraFim() * 60) + horarioParam.getMinutoFim();
+
+        for (Horario horario : horarios) {
+
+            if (horario.getDiaSemana() == horarioParam.getDiaSemana()) {
+                int horarioInicioEmMinutos = (horario.getHoraInicio() * 60) + horario.getMinutoInicio();
+                int horarioFimEmMinutos = (horario.getHoraFim() * 60) + horario.getMinutoFim();
+
+                if (horarioParamInicioEmMinutos >= horarioInicioEmMinutos && horarioParamInicioEmMinutos <= horarioFimEmMinutos
+                        || horarioParamFimEmMinutos >= horarioInicioEmMinutos && horarioParamFimEmMinutos <= horarioFimEmMinutos) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }

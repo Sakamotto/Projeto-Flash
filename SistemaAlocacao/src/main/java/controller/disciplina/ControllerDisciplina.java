@@ -115,7 +115,7 @@ public class ControllerDisciplina implements Initializable {
             }
         }
         else {
-            AllertExceptionController.noItemSelected("Por favor, selecione uma disciplina.");
+            AllertExceptionController.erro("Por favor, selecione uma disciplina.");
         }
     }
 
@@ -140,7 +140,7 @@ public class ControllerDisciplina implements Initializable {
             }
         }
         else {
-            AllertExceptionController.noItemSelected("Por favor, selecione uma disciplina.");
+            AllertExceptionController.erro("Por favor, selecione uma disciplina.");
         }
     }
 

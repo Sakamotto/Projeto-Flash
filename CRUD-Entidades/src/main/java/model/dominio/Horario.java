@@ -133,7 +133,7 @@ public class Horario {
     }
 
     private String getStrHorario(int hour, int minute) {
-        return hour + ":" + ( (minute < 10) ? "0" + minute : minute );
+        return ( (hour < 10) ? "0" + hour : hour ) + ":" + ( (minute < 10) ? "0" + minute : minute );
     }
 
     private String getHorario() {

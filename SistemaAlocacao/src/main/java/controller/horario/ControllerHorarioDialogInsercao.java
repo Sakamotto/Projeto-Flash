@@ -1,11 +1,15 @@
 package controller.horario;
 
+import controller.exception.AllertExceptionController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.DAO.horario.HorarioDAO;
+import model.DAO.horario.HorarioDAOImpl;
 import model.dominio.DiaSemana;
 import model.dominio.Horario;
 import model.dominio.solver.Turno;
@@ -25,6 +29,7 @@ public class ControllerHorarioDialogInsercao implements Initializable {
     @FXML TextField textFieldMinutoFim;
     @FXML ChoiceBox<DiaSemana> choiceBoxDiaSemana;
     @FXML ChoiceBox<Turno> choiceBoxTurno;
+    @FXML Label validatorFieldsHorario;
 
     private Stage dialogStage;
     private boolean btnSalvarClicado = false;
@@ -110,9 +115,33 @@ public class ControllerHorarioDialogInsercao implements Initializable {
         horario.setDiaSemana(choiceBoxDiaSemana.getValue());
         horario.setTurno(choiceBoxTurno.getValue());
 
-        btnSalvarClicado = true;
+        if (validarCampos()) {
+            HorarioDAO horarioDAO = new HorarioDAOImpl();
+            if (horarioDAO.validarHorario(horario)) {
+                btnSalvarClicado = true;
 
-        dialogStage.close();
+                dialogStage.close();
+            } else {
+                AllertExceptionController.erro("Já existe um horário nesse intervalo.");
+            }
+
+        } else {
+            validatorFieldsHorario.setVisible(true);
+        }
+
+    }
+
+    private boolean validarCampos() {
+        boolean valido = true;
+
+        valido = valido && choiceBoxDiaSemana.getValue() != null;
+        valido = valido && choiceBoxTurno.getValue() != null;
+        valido = valido && !textFieldHoraInicio.getText().equals("");
+        valido = valido && !textFieldMinutoInicio.getText().equals("");
+        valido = valido && !textFieldHoraFim.getText().equals("");
+        valido = valido && !textFieldMinutoFim.getText().equals("");
+
+        return valido;
     }
 
     @FXML

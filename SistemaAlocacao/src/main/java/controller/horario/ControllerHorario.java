@@ -16,10 +16,12 @@ import javafx.stage.Stage;
 import model.DAO.horario.HorarioDAO;
 import model.DAO.horario.HorarioDAOImpl;
 import model.dominio.Horario;
+import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,6 +47,7 @@ public class ControllerHorario implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         horarios = hDAO.listar(Horario.class);
+        ordenaHorarios();
 
         for (Horario h: horarios){
             System.out.println("Horário: " + h.getHorarioInicio());
@@ -55,6 +58,14 @@ public class ControllerHorario implements Initializable{
         tableViewHorario.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selecionaItemViewHorario(newValue)
         );
+    }
+
+    private void ordenaHorarios() {
+        horarios.sort((horarioUm, horarioDois) -> new CompareToBuilder()
+                .append(horarioUm.getDiaSemana(), horarioDois.getDiaSemana())
+                .append(horarioUm.getHorarioInicio(), horarioDois.getHorarioInicio())
+                .append(horarioUm.getHorarioFim(), horarioDois.getHorarioFim())
+                .toComparison());
     }
 
     private void carregaTableViewHorario(){
@@ -85,6 +96,7 @@ public class ControllerHorario implements Initializable{
 
             hDAO.inserir(horario);
             horarios.add(horario);
+            ordenaHorarios();
 
             // Recarrega a página de cadastro de horário.
             carregaTableViewHorario();
@@ -106,7 +118,7 @@ public class ControllerHorario implements Initializable{
                 carregaTableViewHorario();
             }
         }else{
-            AllertExceptionController.noItemSelected("Por favor, selecione um horario.");
+            AllertExceptionController.erro("Por favor, selecione um horario.");
         }
     }
 
@@ -128,7 +140,7 @@ public class ControllerHorario implements Initializable{
                 carregaTableViewHorario();
             }
         }else{
-            AllertExceptionController.noItemSelected("Por favor, selecione um horario.");
+            AllertExceptionController.erro("Por favor, selecione um horario.");
         }
 
     }

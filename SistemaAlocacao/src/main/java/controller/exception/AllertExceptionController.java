@@ -8,7 +8,7 @@ import javafx.scene.control.ButtonType;
  */
 public class AllertExceptionController {
 
-    public static void noItemSelected(String msg) {
+    public static void erro(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(msg);
         alert.show();

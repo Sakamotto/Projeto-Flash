@@ -13,8 +13,8 @@
       <children>
         <TextField id="textFieldProfessorEmail" fx:id="textFieldHoraInicio" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField id="textFieldProfessorEmail" fx:id="textFieldMinutoInicio" prefWidth="125.00009999999747" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-        <Label text="Inicio:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-        <Label text="Fim:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Label text="Inicio*:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Label text="Fim*:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <TextField id="textFieldProfessorDataNascimento" fx:id="textFieldHoraFim" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <TextField id="textFieldProfessorEmail" fx:id="textFieldMinutoFim" prefWidth="98.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
         <Label text="Hora" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
@@ -56,11 +56,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Dia da Semana:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label text="Turno:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label text="Dia da Semana*:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label text="Turno*:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <ChoiceBox fx:id="choiceBoxDiaSemana" prefHeight="25.0" prefWidth="302.0" GridPane.columnIndex="1" />
             <ChoiceBox fx:id="choiceBoxTurno" prefHeight="25.0" prefWidth="304.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Label fx:id="validatorFieldsHorario" layoutX="165.0" layoutY="369.0" text="Preencha os campos obrigatórios marcados com asterisco (*)." textFill="RED" visible="false" />
   </children>
 </AnchorPane>

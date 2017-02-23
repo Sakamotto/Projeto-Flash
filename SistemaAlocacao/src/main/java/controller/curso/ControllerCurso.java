@@ -115,7 +115,7 @@ public class ControllerCurso implements Initializable {
             }
         }
         else {
-            AllertExceptionController.noItemSelected("Por favor, selecione um curso.");
+            AllertExceptionController.erro("Por favor, selecione um curso.");
         }
     }
 
@@ -140,7 +140,7 @@ public class ControllerCurso implements Initializable {
             }
         }
         else {
-            AllertExceptionController.noItemSelected("Por favor, selecione um curso.");
+            AllertExceptionController.erro("Por favor, selecione um curso.");
         }
     }
 
