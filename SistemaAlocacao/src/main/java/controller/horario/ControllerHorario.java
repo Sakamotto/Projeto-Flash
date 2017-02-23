@@ -16,10 +16,12 @@ import javafx.stage.Stage;
 import model.DAO.horario.HorarioDAO;
 import model.DAO.horario.HorarioDAOImpl;
 import model.dominio.Horario;
+import org.apache.commons.lang.builder.CompareToBuilder;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,8 +33,11 @@ public class ControllerHorario implements Initializable{
     @FXML TableView<Horario> tableViewHorario;
     @FXML TableColumn<Horario, String> tabelaColunaHorarioInicio;
     @FXML TableColumn<Horario, String> tabelaColunaHorarioFim;
+    @FXML TableColumn<Horario, String> tabelaColunaDiaSemana;
     @FXML Label labelHorarioInicio;
-    @FXML Label labelHorarioFim;
+    @FXML Label labelHorarioTermino;
+    @FXML Label labelDiaSemana;
+    @FXML Label labelTurno;
 
     private HorarioDAO hDAO = new HorarioDAOImpl();
     private List<Horario> horarios = new ArrayList<>();
@@ -54,7 +59,18 @@ public class ControllerHorario implements Initializable{
         );
     }
 
+    private void ordenaHorarios() {
+        horarios.sort((horarioUm, horarioDois) -> new CompareToBuilder()
+                .append(horarioUm.getDiaSemana(), horarioDois.getDiaSemana())
+                .append(horarioUm.getHorarioInicio(), horarioDois.getHorarioInicio())
+                .append(horarioUm.getHorarioFim(), horarioDois.getHorarioFim())
+                .toComparison());
+    }
+
     private void carregaTableViewHorario(){
+        ordenaHorarios();
+
+        tabelaColunaDiaSemana.setCellValueFactory(new PropertyValueFactory<>("StrDiaSemana"));
         tabelaColunaHorarioInicio.setCellValueFactory(new PropertyValueFactory<>("HorarioInicio"));
         tabelaColunaHorarioFim.setCellValueFactory(new PropertyValueFactory<>("HorarioFim"));
 
@@ -65,7 +81,9 @@ public class ControllerHorario implements Initializable{
     public void selecionaItemViewHorario(Horario horario){
         if (horario != null) {
             labelHorarioInicio.setText(horario.getHorarioInicio());
-            labelHorarioFim.setText(horario.getHorarioFim());
+            labelHorarioTermino.setText(horario.getHorarioFim());
+            labelDiaSemana.setText(horario.getStrDiaSemana());
+            labelTurno.setText(horario.getStrTurno());
         }
     }
 
@@ -88,9 +106,10 @@ public class ControllerHorario implements Initializable{
     @FXML
     public void handleButtonEditar() throws IOException {
         Horario horario = tableViewHorario.getSelectionModel().getSelectedItem();
-        boolean btnSalvarClicado = showOpenCadastroHorarioDialog(horario, "Editar");
 
         if(horario != null){
+            boolean btnSalvarClicado = showOpenCadastroHorarioDialog(horario, "Editar");
+
             if (btnSalvarClicado) {
                 // System.out.println("Salvando horário no banco de dados.");
 
@@ -100,7 +119,7 @@ public class ControllerHorario implements Initializable{
                 carregaTableViewHorario();
             }
         }else{
-            AllertExceptionController.noItemSelected("Por favor, selecione um horario.");
+            AllertExceptionController.erro("Por favor, selecione um horario.");
         }
     }
 
@@ -122,7 +141,7 @@ public class ControllerHorario implements Initializable{
                 carregaTableViewHorario();
             }
         }else{
-            AllertExceptionController.noItemSelected("Por favor, selecione um horario.");
+            AllertExceptionController.erro("Por favor, selecione um horario.");
         }
 
     }

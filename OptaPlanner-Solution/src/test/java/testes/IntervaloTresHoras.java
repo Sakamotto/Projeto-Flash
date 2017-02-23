@@ -7,10 +7,7 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
 import domain.ScheduleBuilder;
-import model.dominio.Alocacao;
-import model.dominio.Disciplina;
-import model.dominio.Horario;
-import model.dominio.Professor;
+import model.dominio.*;
 
 
 import java.util.ArrayList;
@@ -50,12 +47,12 @@ public class IntervaloTresHoras {
     @Quando("^Eu alocar os horarios com intervalo maior que tres horas$")
     public void eu_alocar_os_horarios_com_intervalo_maior_que_tres_horas() throws Throwable {
         Horario horarioUm = new Horario(1);
-        horarioUm.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        horarioUm.setDiaSemana(DiaSemana.SEGUNDA);
         horarioUm.setHorarioInicio(7, 30);
         horarioUm.setHorarioFim(9, 20);
 
         Horario horarioDois = new Horario(2);
-        horarioDois.setDiaSemana(Horario.DiaSemana.SEGUNDA);
+        horarioDois.setDiaSemana(DiaSemana.SEGUNDA);
         horarioDois.setHorarioInicio(13, 20);
         horarioDois.setHorarioFim(15, 30);
 
@@ -79,12 +76,12 @@ public class IntervaloTresHoras {
     @Quando("^Eu alocar os sem intervalo maior ou igual a tres horas para todos os professores$")
     public void eu_alocar_os_sem_intervalo_maior_ou_igual_a_tres_horas_para_todos_os_professores() throws Throwable {
         Horario horarioUm = new ScheduleBuilder(1)
-                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
+                .addDiaSemana(DiaSemana.SEGUNDA)
                 .addHorarioInicio(7, 30)
                 .addHorarioFim(9, 20)
                 .getHorario();
         Horario horarioDois = new ScheduleBuilder(2)
-                .addDiaSemana(Horario.DiaSemana.SEGUNDA)
+                .addDiaSemana(DiaSemana.SEGUNDA)
                 .addHorarioInicio(9, 40)
                 .addHorarioFim(11, 30)
                 .getHorario();

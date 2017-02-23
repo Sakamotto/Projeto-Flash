@@ -167,7 +167,7 @@ public class ControllerAlocacao implements Initializable,  Observer {
         ProfessorDAO pDAO = new ProfessorDAOImpl();
         HorarioDAO hDAO = new HorarioDAOImpl();
 
-        horarios = hDAO.listarHorariosCompletos();
+        horarios = hDAO.listar(Horario.class);
 
         for (Horario horario : horarios) {
             System.out.println("Dia Semana: " + horario.getDiaSemana() + " | H Inicio: " + horario.getHorarioInicio());

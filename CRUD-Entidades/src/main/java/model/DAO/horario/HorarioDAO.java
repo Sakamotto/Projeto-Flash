@@ -11,4 +11,6 @@ import java.util.List;
 public interface HorarioDAO extends GenericDAO<Horario> {
 
     List<Horario> listarHorariosCompletos();
+
+    boolean validarHorario(Horario horario);
 }

@@ -2,7 +2,6 @@ package controller.professor;
 
 import controller.exception.AllertExceptionController;
 import model.DAO.professor.ProfessorDAOImpl;
-import model.dominio.Disciplina;
 import model.dominio.Professor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -117,7 +116,7 @@ public class ControllerProfessor implements Initializable {
             }
         }
         else {
-            AllertExceptionController.noItemSelected("Por favor, selecione um professor.");
+            AllertExceptionController.erro("Por favor, selecione um professor.");
         }
 
     }
@@ -142,7 +141,7 @@ public class ControllerProfessor implements Initializable {
             }
         }
         else {
-            AllertExceptionController.noItemSelected("Por favor, selecione um professor.");
+            AllertExceptionController.erro("Por favor, selecione um professor.");
         }
     }
 
