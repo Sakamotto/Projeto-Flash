@@ -47,7 +47,6 @@ public class ControllerHorario implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         horarios = hDAO.listar(Horario.class);
-        ordenaHorarios();
 
         for (Horario h: horarios){
             System.out.println("Horário: " + h.getHorarioInicio());
@@ -69,6 +68,8 @@ public class ControllerHorario implements Initializable{
     }
 
     private void carregaTableViewHorario(){
+        ordenaHorarios();
+
         tabelaColunaDiaSemana.setCellValueFactory(new PropertyValueFactory<>("StrDiaSemana"));
         tabelaColunaHorarioInicio.setCellValueFactory(new PropertyValueFactory<>("HorarioInicio"));
         tabelaColunaHorarioFim.setCellValueFactory(new PropertyValueFactory<>("HorarioFim"));
@@ -96,7 +97,6 @@ public class ControllerHorario implements Initializable{
 
             hDAO.inserir(horario);
             horarios.add(horario);
-            ordenaHorarios();
 
             // Recarrega a página de cadastro de horário.
             carregaTableViewHorario();
@@ -106,9 +106,10 @@ public class ControllerHorario implements Initializable{
     @FXML
     public void handleButtonEditar() throws IOException {
         Horario horario = tableViewHorario.getSelectionModel().getSelectedItem();
-        boolean btnSalvarClicado = showOpenCadastroHorarioDialog(horario, "Editar");
 
         if(horario != null){
+            boolean btnSalvarClicado = showOpenCadastroHorarioDialog(horario, "Editar");
+
             if (btnSalvarClicado) {
                 // System.out.println("Salvando horário no banco de dados.");
 

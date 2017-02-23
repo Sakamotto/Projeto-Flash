@@ -108,20 +108,30 @@ public class ControllerHorarioDialogInsercao implements Initializable {
     @FXML
     public void handleButtonSalvar() {
 
-        horario.setHoraInicio(Integer.parseInt(textFieldHoraInicio.getText()));
-        horario.setHoraFim(Integer.parseInt(textFieldHoraFim.getText()));
-        horario.setMinutoInicio(Integer.parseInt(textFieldMinutoInicio.getText()));
-        horario.setMinutoFim(Integer.parseInt(textFieldMinutoFim.getText()));
-        horario.setDiaSemana(choiceBoxDiaSemana.getValue());
-        horario.setTurno(choiceBoxTurno.getValue());
-
         if (validarCampos()) {
-            HorarioDAO horarioDAO = new HorarioDAOImpl();
-            if (horarioDAO.validarHorario(horario)) {
+            Horario horarioTeste = new Horario();
+
+            horarioTeste.setHoraInicio(Integer.parseInt(textFieldHoraInicio.getText()));
+            horarioTeste.setHoraFim(Integer.parseInt(textFieldHoraFim.getText()));
+            horarioTeste.setMinutoInicio(Integer.parseInt(textFieldMinutoInicio.getText()));
+            horarioTeste.setMinutoFim(Integer.parseInt(textFieldMinutoFim.getText()));
+            horarioTeste.setDiaSemana(choiceBoxDiaSemana.valueProperty().getValue());
+            horarioTeste.setTurno(choiceBoxTurno.valueProperty().getValue());
+
+            if (new HorarioDAOImpl().validarHorario(horarioTeste)) {
+
+                horario.setHoraInicio(Integer.parseInt(textFieldHoraInicio.getText()));
+                horario.setHoraFim(Integer.parseInt(textFieldHoraFim.getText()));
+                horario.setMinutoInicio(Integer.parseInt(textFieldMinutoInicio.getText()));
+                horario.setMinutoFim(Integer.parseInt(textFieldMinutoFim.getText()));
+                horario.setDiaSemana(choiceBoxDiaSemana.valueProperty().getValue());
+                horario.setTurno(choiceBoxTurno.valueProperty().getValue());
+
                 btnSalvarClicado = true;
 
                 dialogStage.close();
-            } else {
+            }
+            else {
                 AllertExceptionController.erro("Já existe um horário nesse intervalo.");
             }
 
