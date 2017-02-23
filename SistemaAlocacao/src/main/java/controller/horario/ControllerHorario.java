@@ -31,8 +31,11 @@ public class ControllerHorario implements Initializable{
     @FXML TableView<Horario> tableViewHorario;
     @FXML TableColumn<Horario, String> tabelaColunaHorarioInicio;
     @FXML TableColumn<Horario, String> tabelaColunaHorarioFim;
+    @FXML TableColumn<Horario, String> tabelaColunaDiaSemana;
     @FXML Label labelHorarioInicio;
-    @FXML Label labelHorarioFim;
+    @FXML Label labelHorarioTermino;
+    @FXML Label labelDiaSemana;
+    @FXML Label labelTurno;
 
     private HorarioDAO hDAO = new HorarioDAOImpl();
     private List<Horario> horarios = new ArrayList<>();
@@ -55,6 +58,7 @@ public class ControllerHorario implements Initializable{
     }
 
     private void carregaTableViewHorario(){
+        tabelaColunaDiaSemana.setCellValueFactory(new PropertyValueFactory<>("StrDiaSemana"));
         tabelaColunaHorarioInicio.setCellValueFactory(new PropertyValueFactory<>("HorarioInicio"));
         tabelaColunaHorarioFim.setCellValueFactory(new PropertyValueFactory<>("HorarioFim"));
 
@@ -65,7 +69,9 @@ public class ControllerHorario implements Initializable{
     public void selecionaItemViewHorario(Horario horario){
         if (horario != null) {
             labelHorarioInicio.setText(horario.getHorarioInicio());
-            labelHorarioFim.setText(horario.getHorarioFim());
+            labelHorarioTermino.setText(horario.getHorarioFim());
+            labelDiaSemana.setText(horario.getStrDiaSemana());
+            labelTurno.setText(horario.getStrTurno());
         }
     }
 
