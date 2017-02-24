@@ -7,4 +7,5 @@ import model.dominio.Curso;
  * Created by Danilo de Oliveira on 26/11/16.
  */
 public class CursoDAOImpl extends GenericDAOImpl<Curso> implements CursoDAO {
+
 }

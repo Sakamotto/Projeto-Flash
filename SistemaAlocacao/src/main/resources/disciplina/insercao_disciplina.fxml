@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.disciplina.ControllerDisciplinaDialogInsercao">
   <children>
-    <GridPane layoutX="36.0" layoutY="92.0" prefHeight="178.0" prefWidth="592.0" snapToPixel="false">
+    <GridPane layoutX="36.0" layoutY="92.0" prefHeight="154.0" prefWidth="592.0" snapToPixel="false">
       <children>
         <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <TextField fx:id="textFieldDisciplinaNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -18,16 +18,19 @@
         <Label text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label text="Período:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="choiceBoxCurso" prefHeight="25.0" prefWidth="442.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ListView fx:id="listViewDisciplinasRequisito" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Disciplinas Requisito:" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="160.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="432.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
-        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="70.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="40.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="40.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="40.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="40.0" prefHeight="30.0" valignment="CENTER" />
+            <RowConstraints fillHeight="false" maxHeight="25.0" minHeight="150.0" prefHeight="30.0" valignment="CENTER" />
       </rowConstraints>
     </GridPane>
     <Label layoutX="245.0" layoutY="14.0" text="Disciplina" textAlignment="CENTER">

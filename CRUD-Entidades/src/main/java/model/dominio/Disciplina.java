@@ -5,7 +5,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,6 +39,14 @@ public class Disciplina implements Cloneable {
 
     @ManyToMany(mappedBy = "disciplinas")
     private Set<Professor> professores = new HashSet<>();
+
+    @ManyToMany()
+    @JoinTable(
+            name = "disciplina_requisito",
+            joinColumns = @JoinColumn(name = "disciplina_id", referencedColumnName = "disciplina_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_requisito_id", referencedColumnName = "disciplina_id")
+    )
+    private Set<Disciplina> disciplinasRequisito = new HashSet<>();
 
 
     public Disciplina() {
@@ -107,6 +117,18 @@ public class Disciplina implements Cloneable {
 
     public String getSiglaCurso() {
         return curso.getSigla();
+    }
+
+    public void addDisciplinaRequisito(Disciplina disciplina) {
+        disciplinasRequisito.add(disciplina);
+    }
+
+    public void removeDisciplinaRequisito(Disciplina disciplina) {
+        disciplinasRequisito.remove(disciplina);
+    }
+
+    public List<Disciplina> getDisciplinasRequisito() {
+        return new ArrayList<>(disciplinasRequisito);
     }
 
     @Override
