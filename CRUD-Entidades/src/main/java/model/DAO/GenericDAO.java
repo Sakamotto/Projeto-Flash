@@ -9,7 +9,7 @@ public interface GenericDAO<T> {
 
     List<T> listar(Class clazz);
 
-    T recuperar(Class clazz, Long id);
+    T recuperar(Class clazz, int id);
 
     void deletar(T object);
     void alterar(T object);

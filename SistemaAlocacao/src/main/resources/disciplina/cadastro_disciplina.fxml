@@ -34,9 +34,7 @@
                 <Label text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label text="Período:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label text="Disicplinas Pre-Requisito:" GridPane.rowIndex="4" />
-                <ListView fx:id="listViewDisciplinaPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label text="Períodos Pré-Requisito:" GridPane.rowIndex="5" />
-                <ListView fx:id="listViewPeriodoPreRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <ListView fx:id="listViewDisciplinasRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <Label fx:id="labelDisciplinaNome" GridPane.columnIndex="1" />
                 <Label fx:id="labelDisciplinaCargaHoraria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label fx:id="labelDisciplinaCurso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -47,12 +45,11 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.0" minWidth="10.0" prefWidth="324.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="40.0" minHeight="2.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="149.0" minHeight="7.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="180.0" minHeight="180.0" prefHeight="49.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
             <Group id="Group" layoutX="270.0" layoutY="583.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="269.0" AnchorPane.topAnchor="583.0">

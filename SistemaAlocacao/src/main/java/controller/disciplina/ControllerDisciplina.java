@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -35,6 +36,7 @@ public class ControllerDisciplina implements Initializable {
     @FXML Label labelDisciplinaCargaHoraria;
     @FXML Label labelDisciplinaCurso;
     @FXML Label labelDisciplinaPeriodo;
+    @FXML ListView<Disciplina> listViewDisciplinasRequisito;
 
     private DisciplinaDAO dDAO = new DisciplinaDAOImpl();
 
@@ -51,7 +53,7 @@ public class ControllerDisciplina implements Initializable {
         }
 
         tableViewDisciplina.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selecionaItemViewProfessor(newValue)
+                (observable, oldValue, newValue) -> selecionaItemViewDisciplina(newValue)
         );
 
     }
@@ -66,7 +68,7 @@ public class ControllerDisciplina implements Initializable {
         tableViewDisciplina.setItems(observableListDisciplina);
     }
 
-    private void selecionaItemViewProfessor(Disciplina disciplina) {
+    private void selecionaItemViewDisciplina(Disciplina disciplina) {
 
         if (disciplina == null) {
             disciplina = new Disciplina();
@@ -76,6 +78,8 @@ public class ControllerDisciplina implements Initializable {
         labelDisciplinaCargaHoraria.setText(Integer.toString(disciplina.getCargaHoraria()));
         labelDisciplinaCurso.setText(disciplina.getCurso().getNome());
         labelDisciplinaPeriodo.setText(Integer.toString(disciplina.getPeriodo()));
+
+        listViewDisciplinasRequisito.setItems(FXCollections.observableArrayList(disciplina.getDisciplinasRequisito()));
     }
 
     @FXML

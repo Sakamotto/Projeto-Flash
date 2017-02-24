@@ -28,7 +28,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
 
     @Override
-    public T recuperar(Class clazz, Long id) {
+    public T recuperar(Class clazz, int id) {
         session.beginTransaction();
 
         T object = (T) session.load(clazz, id);

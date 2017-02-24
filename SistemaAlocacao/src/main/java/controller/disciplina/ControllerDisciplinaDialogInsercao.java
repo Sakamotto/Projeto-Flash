@@ -1,13 +1,19 @@
 package controller.disciplina;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.stage.Stage;
 import model.DAO.curso.CursoDAO;
 import model.DAO.curso.CursoDAOImpl;
+import model.DAO.disciplina.DisciplinaDAO;
+import model.DAO.disciplina.DisciplinaDAOImpl;
 import model.dominio.Curso;
 import model.dominio.Disciplina;
 
@@ -22,12 +28,19 @@ import java.util.ResourceBundle;
  */
 public class ControllerDisciplinaDialogInsercao implements Initializable {
 
-    @FXML private TextField textFieldDisciplinaNome;
-    @FXML private TextField textFieldDisciplinaCargaHoraria;
-    @FXML private TextField textFieldDisciplinaPeriodo;
-    @FXML private ChoiceBox<Curso> choiceBoxCurso;
+    @FXML
+    private TextField textFieldDisciplinaNome;
+    @FXML
+    private TextField textFieldDisciplinaCargaHoraria;
+    @FXML
+    private TextField textFieldDisciplinaPeriodo;
+    @FXML
+    private ListView<CheckBox> listViewDisciplinasRequisito;
+    @FXML
+    private ChoiceBox<Curso> choiceBoxCurso;
 
     private CursoDAO cDAO = new CursoDAOImpl();
+    private DisciplinaDAO dDAO = new DisciplinaDAOImpl();
 
     private List<Curso> listCursos = new ArrayList<>();
 
@@ -60,6 +73,8 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
 
         choiceBoxCurso.setItems(FXCollections.observableArrayList(listCursos));
         choiceBoxCurso.getSelectionModel().selectFirst();
+
+        popularListViewDisciplinas();
     }
 
 
@@ -81,6 +96,26 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         listCursos = cDAO.listar(Curso.class);
     }
 
+    private void popularListViewDisciplinas() {
+
+        List<Disciplina> disciplinas = dDAO.listar(Disciplina.class);
+        ObservableList<CheckBox> observableListCheckboxDisciplinas = FXCollections.observableArrayList();
+
+        for (Disciplina disciplina : disciplinas) {
+
+            if (disciplina.getId() != this.getDisciplina().getId()) {
+                CheckBox checkBoxDisciplina = new CheckBox(disciplina.getNome());
+
+                checkBoxDisciplina.setId(Integer.toString(disciplina.getId()));
+
+                observableListCheckboxDisciplinas.add(checkBoxDisciplina);
+            }
+
+        }
+
+        listViewDisciplinasRequisito.setItems(observableListCheckboxDisciplinas);
+    }
+
     @FXML
     public void handleButtonSalvar() {
 
@@ -88,6 +123,14 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         disciplina.setCargaHoraria(Integer.parseInt(textFieldDisciplinaCargaHoraria.getText()));
         disciplina.setCurso(choiceBoxCurso.getSelectionModel().getSelectedItem());
         disciplina.setPeriodo(Integer.parseInt(textFieldDisciplinaPeriodo.getText()));
+
+        for (CheckBox checkBoxDisciplina : listViewDisciplinasRequisito.getItems()) {
+            if (checkBoxDisciplina.isSelected()) {
+                Disciplina disciplinaRequisito = dDAO.recuperar(Disciplina.class, Integer.parseInt(checkBoxDisciplina.getId()));
+
+                disciplina.addDisciplinaRequisito(disciplinaRequisito);
+            }
+        }
 
         btnSalvarClicado = true;
 

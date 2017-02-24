@@ -138,7 +138,7 @@ public class ControllerProfessorDialogInsercao implements Initializable {
 
         btnSalvarClicado = true;
 
-        if (professor.getNome().length() > 0 && professor.getCpf().length() > 0) {
+        if (professor.getNome().length() > 0 && professor.getCpf().length() == 14) {
             dialogStage.close();
         }
         else {

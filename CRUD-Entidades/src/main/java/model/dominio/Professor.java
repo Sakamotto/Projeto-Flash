@@ -36,7 +36,7 @@ public class Professor implements Cloneable {
     @Column(name = "matricula")
     private String matricula;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL})
+    @ManyToMany()
     @JoinTable(
             name = "professor_disciplina",
             joinColumns = @JoinColumn(name = "professor_id", referencedColumnName = "professor_id"),
