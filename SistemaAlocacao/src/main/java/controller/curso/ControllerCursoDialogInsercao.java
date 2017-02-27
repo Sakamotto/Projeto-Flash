@@ -2,6 +2,7 @@ package controller.curso;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.dominio.Curso;
@@ -17,6 +18,7 @@ public class ControllerCursoDialogInsercao implements Initializable {
     @FXML TextField textFieldCursoRegime;
     @FXML TextField textFieldCursoDucarao;
     @FXML TextField textFieldCursoSigla;
+    @FXML Label validatorFieldsProfessor;
 
         private Stage dialogStage;
     private boolean btnSalvarClicado = false;
@@ -52,14 +54,27 @@ public class ControllerCursoDialogInsercao implements Initializable {
     @FXML
     public void handleButtonSalvar() {
 
-        curso.setNome(textFieldCursoNome.getText());
-        curso.setRegime(textFieldCursoRegime.getText());
-        curso.setDuracao(Integer.parseInt(textFieldCursoDucarao.getText()));
-        curso.setSigla(textFieldCursoSigla.getText());
+        if (validarCampos()) {
+            int duracaoCurso = 0;
 
-        btnSalvarClicado = true;
+            if (textFieldCursoDucarao.getText().length() > 0) {
+                duracaoCurso = Integer.parseInt(textFieldCursoDucarao.getText());
+            }
 
-        dialogStage.close();
+            curso.setNome(textFieldCursoNome.getText());
+            curso.setRegime(textFieldCursoRegime.getText());
+            curso.setDuracao(duracaoCurso);
+            curso.setSigla(textFieldCursoSigla.getText());
+
+            btnSalvarClicado = true;
+
+            dialogStage.close();
+        }
+
+        else {
+            validatorFieldsProfessor.setVisible(true);
+        }
+
     }
 
     @FXML
@@ -67,5 +82,12 @@ public class ControllerCursoDialogInsercao implements Initializable {
         btnSalvarClicado = false;
 
         dialogStage.close();
+    }
+
+    private boolean validarCampos() {
+        String nomeCurso = textFieldCursoNome.getText();
+        String siglaCurso = textFieldCursoSigla.getText();
+
+        return nomeCurso.length() > 0 && siglaCurso.length() > 0;
     }
 }

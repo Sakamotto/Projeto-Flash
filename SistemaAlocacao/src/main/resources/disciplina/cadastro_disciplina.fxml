@@ -30,26 +30,29 @@
             <GridPane layoutX="272.0" layoutY="169.0" prefHeight="364.0" prefWidth="540.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="267.0">
               <children>
                 <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Carga Horaria:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Quantidade de Aulas por Semana:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label text="Período:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Label text="Disicplinas Pre-Requisito:" GridPane.rowIndex="4" />
-                <ListView fx:id="listViewDisciplinasRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Disicplinas Pre-Requisito:" GridPane.rowIndex="5" />
+                <ListView fx:id="listViewDisciplinasRequisito" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Label fx:id="labelDisciplinaNome" GridPane.columnIndex="1" />
-                <Label fx:id="labelDisciplinaCargaHoraria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="labelAulasPorSemana" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label fx:id="labelDisciplinaCurso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label fx:id="labelDisciplinaPeriodo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Carga Horária Semanal:" GridPane.rowIndex="4" />
+                        <Label fx:id="labelCargaHorariaSemanal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="143.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.0" minWidth="10.0" prefWidth="324.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="235.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.0" minWidth="10.0" prefWidth="305.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="26.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="26.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="25.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="180.0" minHeight="180.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
             <Group id="Group" layoutX="270.0" layoutY="583.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="269.0" AnchorPane.topAnchor="583.0">

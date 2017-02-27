@@ -108,8 +108,6 @@ end
 rule "Uma disciplina nao pode ser alocada mais de uma vez no mesmo dia"
 
     when
-        $a: Alocacao()
-
         Alocacao(
             $disciplina : disciplina,
             $horario : horario != null
@@ -151,7 +149,7 @@ rule "Disciplinas a partir do quinto período devem estar alocadas apenas no tur
 end
 
 rule "É desejável que haja ao menos um dia de intervalo entre a alocação de uma disciplina"
-// Exemplo: Não é desejável que POO1 seja na terça e na quarta, por exemplo.
+    // Exemplo: Não é desejável que POO1 seja na terça e na quarta, por exemplo.
     when
         $a : Alocacao()
         Alocacao($disciplina: disciplina, $professor: professor, $horario: horario != null)
@@ -167,4 +165,26 @@ rule "É desejável que haja ao menos um dia de intervalo entre a alocação de 
         )
     then
         scoreHolder.addMediumConstraintMatch(kcontext, - 1);
-    end
+end
+
+rule "Uma disciplina deve ter um total de horários alocados para si igual à carga horária semanal"
+
+    when
+        Alocacao($disciplina: disciplina)
+
+        $totalHorarios : Number(intValue != ($disciplina.cargaHorariaSemanal))
+            from accumulate(
+                Alocacao(
+                    disciplina == $disciplina,
+                    horario != null,
+                    $minutosInicio: ((horario.horaInicio * 60) + horario.minutoInicio),
+                    $minutosFim: ((horario.horaFim * 60) + horario.minutoFim)
+                ),
+                init(int totalMinutos = 0;),
+                action(totalMinutos += ($minutosFim - $minutosInicio);),
+                result(totalMinutos)
+            )
+
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, - 1);
+end

@@ -15,7 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.DAO.curso.CursoDAO;
 import model.DAO.curso.CursoDAOImpl;
+import model.DAO.disciplina.DisciplinaDAO;
+import model.DAO.disciplina.DisciplinaDAOImpl;
 import model.dominio.Curso;
+import model.dominio.Disciplina;
 
 import java.io.IOException;
 import java.net.URL;
@@ -125,21 +128,26 @@ public class ControllerCurso implements Initializable {
         Curso curso = tableViewCurso.getSelectionModel().getSelectedItem();
 
         if (curso != null) {
-            boolean deletar;
-            deletar = AllertExceptionController.confirmation("Atencao. Deseja mesmo excluir essa curso?");
 
-            if (deletar) {
-                System.out.println("Deletando curso no banco de dados.");
+            if (!cursoPossuiDisciplina(curso)) {
+                boolean deletar;
+                deletar = AllertExceptionController.confirmation("Atencao. Deseja mesmo excluir essa curso?");
 
-                cDAO.deletar(curso);
-                cursos.remove(curso);
+                if (deletar) {
+                    System.out.println("Deletando curso no banco de dados.");
 
-                // Recarrega a página de cadastro de curso.
-                observableListCurso.clear();
-                carregaTableViewCurso();
+                    cDAO.deletar(curso);
+                    cursos.remove(curso);
+
+                    // Recarrega a página de cadastro de curso.
+                    observableListCurso.clear();
+                    carregaTableViewCurso();
+                }
+            } else {
+                AllertExceptionController.erro("Existem disciplinas com esse curso.");
             }
-        }
-        else {
+
+        } else {
             AllertExceptionController.erro("Por favor, selecione um curso.");
         }
     }
@@ -166,5 +174,17 @@ public class ControllerCurso implements Initializable {
 
         return controller.isBtnSalvarClicado();
 
+    }
+
+    private boolean cursoPossuiDisciplina(Curso curso) {
+        List<Disciplina> disciplinas = new DisciplinaDAOImpl().listar(Disciplina.class);
+
+        for (Disciplina disciplina : disciplinas) {
+            if (disciplina.getCurso() == curso) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

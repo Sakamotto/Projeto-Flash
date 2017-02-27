@@ -33,7 +33,8 @@ public class ControllerDisciplina implements Initializable {
     @FXML TableColumn<Disciplina, String> tabelaColunaCursoNome;
     @FXML TableColumn<Disciplina, String> tabelaColunaDisciplinaNome;
     @FXML Label labelDisciplinaNome;
-    @FXML Label labelDisciplinaCargaHoraria;
+    @FXML Label labelAulasPorSemana;
+    @FXML Label labelCargaHorariaSemanal;
     @FXML Label labelDisciplinaCurso;
     @FXML Label labelDisciplinaPeriodo;
     @FXML ListView<Disciplina> listViewDisciplinasRequisito;
@@ -72,12 +73,20 @@ public class ControllerDisciplina implements Initializable {
 
         if (disciplina == null) {
             disciplina = new Disciplina();
+            disciplina.setCargaHorariaSemanal(0);
         }
 
+        String cargaHorariaSemanal = Integer.toString(disciplina.getCargaHorariaSemanal() / 60);
+
+        cargaHorariaSemanal += " : ";
+        cargaHorariaSemanal += Integer.toString(disciplina.getCargaHorariaSemanal() % 60);
+
         labelDisciplinaNome.setText(disciplina.getNome());
-        labelDisciplinaCargaHoraria.setText(Integer.toString(disciplina.getCargaHoraria()));
+        labelAulasPorSemana.setText(Integer.toString(disciplina.getQuantidadeAulasSemanais()));
         labelDisciplinaCurso.setText(disciplina.getCurso().getNome());
         labelDisciplinaPeriodo.setText(Integer.toString(disciplina.getPeriodo()));
+        labelCargaHorariaSemanal.setText(cargaHorariaSemanal);
+
 
         listViewDisciplinasRequisito.setItems(FXCollections.observableArrayList(disciplina.getDisciplinasRequisito()));
     }

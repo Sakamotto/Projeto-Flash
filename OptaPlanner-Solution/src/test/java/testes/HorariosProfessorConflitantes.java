@@ -24,9 +24,9 @@ public class HorariosProfessorConflitantes {
     private Professor professorUm = new Professor("Foo Bar", "99999988888");
     private Professor professorDois = new Professor("Professor Snape", "11122233344");
 
-    private Disciplina disciplinaUm = new Disciplina("Calculo 1", 1, 60);
-    private Disciplina disciplinaDois = new Disciplina("Logica", 1, 60);
-    private Disciplina disciplinaTres = new Disciplina("Calculo 2", 2, 90);
+    private Disciplina disciplinaUm = new Disciplina("Calculo 1", 1, 60, 110, 5);
+    private Disciplina disciplinaDois = new Disciplina("Logica", 1, 60, 110, 1);
+    private Disciplina disciplinaTres = new Disciplina("Calculo 2", 2, 90, 110, 1);
 
     private Horario horarioUm = new Horario(1);
     private Horario horarioDois = new Horario(2);
