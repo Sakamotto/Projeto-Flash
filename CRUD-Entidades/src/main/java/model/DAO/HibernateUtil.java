@@ -1,13 +1,11 @@
 package model.DAO;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-
-import java.util.Properties;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
  * Created by Danilo de Oliveira on 12/11/16.
@@ -17,23 +15,26 @@ import java.util.Properties;
 public final class HibernateUtil {
 
     private static SessionFactory sessionFactory = null;
-    private static ServiceRegistry serviceRegistry = null;
-    private static Configuration configuration;
-    private static Properties properties;
+    private static StandardServiceRegistry standardRegistry = null;
 
-    private static void configurar() {
-        configuration = new Configuration();
-        configuration.configure();
-        properties = configuration.getProperties();
+    private static SessionFactory createSessionFactory() {
+        standardRegistry = new StandardServiceRegistryBuilder()
+                .configure( "hibernate.cfg.xml" )
+                .build();
+
+        Metadata metadata = new MetadataSources( standardRegistry )
+                .getMetadataBuilder()
+                .build();
+
+        sessionFactory = metadata.getSessionFactoryBuilder().build();
+
+        return sessionFactory;
     }
 
-    private static SessionFactory getSessionFactory() throws HibernateException {
+    private static SessionFactory getSessionFactory() {
 
-        if (serviceRegistry == null || sessionFactory == null) {
-            configurar();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(properties).buildServiceRegistry();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        if (sessionFactory == null || standardRegistry == null) {
+            sessionFactory = createSessionFactory();
         }
 
         return sessionFactory;

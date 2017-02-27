@@ -9,12 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @XStreamAlias("Professor")
-@Entity
-@Table(name = "professor")
+@Entity(name = "professor")
 public class Professor implements Cloneable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "professor_id")
     private Long id;
 

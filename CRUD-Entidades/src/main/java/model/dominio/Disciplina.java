@@ -15,20 +15,22 @@ import java.util.Set;
  */
 
 @XStreamAlias("Disciplina")
-@Entity
-@Table(name = "disciplina")
+@Entity(name = "disciplina")
 public class Disciplina implements Cloneable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "disciplina_id")
     private int id;
 
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "carga_horaria")
-    private int cargaHoraria;
+    @Column(name = "carga_horaria_semanal")
+    private int cargaHorariaSemanal;
+
+    @Column(name = "quantidade_aulas_semanais")
+    private int quantidadeAulasSemanais;
 
     @Column(name = "periodo")
     private int periodo;
@@ -51,14 +53,15 @@ public class Disciplina implements Cloneable {
 
     public Disciplina() {
         nome = "";
-        cargaHoraria = 0;
+        cargaHorariaSemanal = 0;
         periodo = 0;
         curso = new Curso();
     }
 
-    public Disciplina(String nome, int periodo, int cargaHoraria) {
+    public Disciplina(String nome, int periodo, int cargaHorariaSemanal, int quantidadeAulasSemanais) {
         this.nome = nome;
-        this.cargaHoraria = cargaHoraria;
+        this.cargaHorariaSemanal = cargaHorariaSemanal;
+        this.quantidadeAulasSemanais = quantidadeAulasSemanais;
         this.periodo = periodo;
         curso = new Curso();
     }
@@ -87,12 +90,20 @@ public class Disciplina implements Cloneable {
         this.nome = nome;
     }
 
-    public int getCargaHoraria() {
-        return cargaHoraria;
+    public int getCargaHorariaSemanal() {
+        return cargaHorariaSemanal;
     }
 
-    public void setCargaHoraria(int cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
+    public void setCargaHorariaSemanal(int cargaHorariaSemanal) {
+        this.cargaHorariaSemanal = cargaHorariaSemanal;
+    }
+
+    public int getQuantidadeAulasSemanais() {
+        return quantidadeAulasSemanais;
+    }
+
+    public void setQuantidadeAulasSemanais(int quantidadeAulasSemanais) {
+        this.quantidadeAulasSemanais = quantidadeAulasSemanais;
     }
 
     public int getPeriodo() {
@@ -157,7 +168,7 @@ public class Disciplina implements Cloneable {
         return new HashCodeBuilder()
                 .append(getNome())
                 .append(getPeriodo())
-                .append(getCargaHoraria())
+                .append(getCargaHorariaSemanal())
                 .toHashCode();
     }
 
@@ -170,7 +181,8 @@ public class Disciplina implements Cloneable {
             return new EqualsBuilder()
                     .append(getNome(), other.getNome())
                     .append(getPeriodo(), other.getPeriodo())
-                    .append(getCargaHoraria(), other.getCargaHoraria())
+                    .append(getCargaHorariaSemanal(), other.getCargaHorariaSemanal())
+                    .append(getQuantidadeAulasSemanais(), other.getQuantidadeAulasSemanais())
                     .isEquals();
         } else {
             return false;

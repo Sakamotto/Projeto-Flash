@@ -12,12 +12,11 @@ import javax.persistence.*;
  */
 
 @XStreamAlias("Horario")
-@Entity
-@Table(name = "horario")
+@Entity(name = "horario")
 public class Horario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "horario_id")
     private int id;
 

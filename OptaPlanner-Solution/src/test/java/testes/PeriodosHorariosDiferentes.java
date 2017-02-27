@@ -43,10 +43,10 @@ public class PeriodosHorariosDiferentes {
 
     @Dado("^Eu tenha um conjunto de discplinas em um periodo$")
     public void eu_tenha_um_conjunto_de_discplinas_em_um_periodo() {
-        disciplina1 = new Disciplina("Cálculo 1", 1, 60, 110, 1);
-        disciplina2 = new Disciplina("Lógica", 1, 60, 110, 1);
-        disciplina3 = new Disciplina("Cálculo 2", 2, 90, 110, 1);
-        disciplina4 = new Disciplina("AOC", 2, 90, 110, 1);
+        disciplina1 = new Disciplina("Cálculo 1", 1, 110, 1);
+        disciplina2 = new Disciplina("Lógica", 1, 110, 1);
+        disciplina3 = new Disciplina("Cálculo 2", 2, 110, 1);
+        disciplina4 = new Disciplina("AOC", 2, 110, 1);
 
     }
 

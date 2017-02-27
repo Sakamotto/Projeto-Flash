@@ -28,8 +28,8 @@ public class IntervaloTresHoras {
     public void eu_tenha_um_conjunto_de_professores_alocados_a_um_conjunto_de_disciplinas() throws Throwable {
         Professor professor = new Professor("Bruno R. G.", "12345678910");
 
-        Disciplina disciplinaUm = new Disciplina("Calculo 1", 1, 90, 110, 1);
-        Disciplina disciplinaDois = new Disciplina("Lógica", 1, 90, 110, 1);
+        Disciplina disciplinaUm = new Disciplina("Calculo 1", 1, 110, 1);
+        Disciplina disciplinaDois = new Disciplina("Lógica", 1, 110, 1);
 
         Alocacao alocacaoUm = new Alocacao(disciplinaUm);
         Alocacao alocacaoDois = new Alocacao(disciplinaDois);
