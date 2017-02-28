@@ -135,8 +135,6 @@ public class ControllerHorarioDialogInsercao implements Initializable {
                 AllertExceptionController.erro("Já existe um horário nesse intervalo.");
             }
 
-        } else {
-            validatorFieldsHorario.setVisible(true);
         }
 
     }
@@ -150,6 +148,22 @@ public class ControllerHorarioDialogInsercao implements Initializable {
         valido = valido && !textFieldMinutoInicio.getText().equals("");
         valido = valido && !textFieldHoraFim.getText().equals("");
         valido = valido && !textFieldMinutoFim.getText().equals("");
+
+        if (!valido) {
+            validatorFieldsHorario.setVisible(true);
+        } else {
+            int horaInicio = Integer.parseInt(textFieldHoraInicio.getText());
+            int minutoInicio = Integer.parseInt(textFieldMinutoInicio.getText());
+            int horaFim = Integer.parseInt(textFieldHoraFim.getText());
+            int minutoFim = Integer.parseInt(textFieldMinutoFim.getText());
+
+            if (horaFim < horaInicio || (horaFim == horaInicio && minutoFim < minutoInicio)) {
+                AllertExceptionController.erro("O horário de término deve ser menor que o início.");
+
+                valido = false;
+            }
+
+        }
 
         return valido;
     }

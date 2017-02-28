@@ -11,10 +11,10 @@
   <children>
     <GridPane layoutX="36.0" layoutY="123.0" prefHeight="178.0" prefWidth="592.0" snapToPixel="false">
       <children>
-        <Label text="Nome do Curso:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Nome do Curso*:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label text="Regime:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Label text="Duraçao em Horas:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label text="Sigla do Curso:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="Sigla do Curso*:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <TextField id="textFieldDisciplinaNome" fx:id="textFieldCursoNome" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <TextField id="textFieldDisciplinaCargaHoraria" fx:id="textFieldCursoRegime" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField id="textFieldDisciplinaNome" fx:id="textFieldCursoDucarao" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -42,5 +42,6 @@
         <Button id="btnCancelarDisciplina" fx:id="btnCancelarCurso" cancelButton="true" layoutX="80.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
       </children>
     </Group>
+      <Label fx:id="validatorFieldsProfessor" layoutX="36.0" layoutY="447.0" text="Preencha os campos obrigatórios marcados com asterisco (*)." textFill="#ff3d3d" visible="false" />
   </children>
 </AnchorPane>

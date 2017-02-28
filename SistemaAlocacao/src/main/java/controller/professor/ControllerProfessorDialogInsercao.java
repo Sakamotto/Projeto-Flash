@@ -129,16 +129,17 @@ public class ControllerProfessorDialogInsercao implements Initializable {
 
     @FXML
     public void handleButtonSalvar() {
-        professor.setNome(textFieldProfessorNome.getText());
-        professor.setEmail(textFieldProfessorEmail.getText());
-        professor.setDataNascimento(datePickerDataNascimento.editorProperty().get().getText());
-        professor.setRg(textFieldProfessorRg.getText());
-        professor.setCpf(textFieldProfessorCpf.getText(), false);
-        professor.setMatricula(textFieldProfessorMatricula.getText());
 
-        btnSalvarClicado = true;
+        if (validarCampos()) {
 
-        if (professor.getNome().length() > 0 && professor.getCpf().length() == 14) {
+            professor.setNome(textFieldProfessorNome.getText());
+            professor.setEmail(textFieldProfessorEmail.getText());
+            professor.setDataNascimento(datePickerDataNascimento.editorProperty().get().getText());
+            professor.setRg(textFieldProfessorRg.getText());
+            professor.setCpf(textFieldProfessorCpf.getText(), false);
+            professor.setMatricula(textFieldProfessorMatricula.getText());
+
+            btnSalvarClicado = true;
             dialogStage.close();
         }
         else {
@@ -151,5 +152,12 @@ public class ControllerProfessorDialogInsercao implements Initializable {
         btnSalvarClicado = false;
 
         dialogStage.close();
+    }
+
+    private boolean validarCampos() {
+        String nomeProfessor = textFieldProfessorNome.getText();
+        String cpfProfessor = textFieldProfessorCpf.getText();
+
+        return !nomeProfessor.equals("") && cpfProfessor.length() == 14;
     }
 }

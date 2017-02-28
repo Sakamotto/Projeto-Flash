@@ -176,7 +176,7 @@ public class ControllerAlocacao implements Initializable,  Observer {
         for (Professor professor : pDAO.listar(Professor.class)) {
             for (Disciplina disciplina : professor.getDisciplinas()) {
 
-                for (int i = 0 ; i < (disciplina.getCargaHoraria()/30) ; i++) {
+                for (int i = 0 ; i < (disciplina.getQuantidadeAulasSemanais()) ; i++) {
                     Alocacao alocacao = new Alocacao();
                     alocacao.setProfessor(professor);
                     alocacao.setDisciplina(disciplina);

@@ -5,12 +5,11 @@ import javax.persistence.*;
 /**
  * Created by danilo on 24/10/16.
  */
-@Entity
-@Table(name="curso")
+@Entity(name="curso")
 public class Curso implements Cloneable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="curso_id")
     private int id;
 

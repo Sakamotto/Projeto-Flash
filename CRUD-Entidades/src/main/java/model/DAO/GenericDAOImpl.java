@@ -1,10 +1,11 @@
 package model.DAO;
 
-import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -12,18 +13,17 @@ import java.util.List;
  */
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
-    protected static Session session = HibernateUtil.getSession();;
+    private static Session session = HibernateUtil.getSession();
 
     @Override
     public List<T> listar(Class clazz) {
-        session.beginTransaction();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery( clazz );
+        Root<T> root = criteria.from( clazz );
 
-        Criteria getAll = session.createCriteria(clazz);
-        Hibernate.initialize(clazz);
-        List<T> listProfessores = getAll.list();
+        criteria.select( root );
 
-        session.getTransaction().commit();
-        return listProfessores;
+        return session.createQuery( criteria ).getResultList();
     }
 
 

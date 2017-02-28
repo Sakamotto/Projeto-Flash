@@ -4,11 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.DAO.curso.CursoDAO;
 import model.DAO.curso.CursoDAOImpl;
@@ -19,7 +15,6 @@ import model.dominio.Disciplina;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -28,16 +23,14 @@ import java.util.ResourceBundle;
  */
 public class ControllerDisciplinaDialogInsercao implements Initializable {
 
-    @FXML
-    private TextField textFieldDisciplinaNome;
-    @FXML
-    private TextField textFieldDisciplinaCargaHoraria;
-    @FXML
-    private TextField textFieldDisciplinaPeriodo;
-    @FXML
-    private ListView<CheckBox> listViewDisciplinasRequisito;
-    @FXML
-    private ChoiceBox<Curso> choiceBoxCurso;
+    @FXML private TextField textFieldDisciplinaNome;
+    @FXML private TextField textFieldAulasPorSemana;
+    @FXML private TextField textFieldDisciplinaPeriodo;
+    @FXML private TextField textFieldHoraSemanal;
+    @FXML private TextField textFieldMinutoSemanal;
+    @FXML private ListView<CheckBox> listViewDisciplinasRequisito;
+    @FXML private ChoiceBox<Curso> choiceBoxCurso;
+    @FXML private Label labelValidarCampos;
 
     private CursoDAO cDAO = new CursoDAOImpl();
     private DisciplinaDAO dDAO = new DisciplinaDAOImpl();
@@ -68,8 +61,10 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         this.disciplina = disciplina;
 
         textFieldDisciplinaNome.setText(disciplina.getNome());
-        textFieldDisciplinaCargaHoraria.setText(Integer.toString(disciplina.getCargaHoraria()));
+        textFieldAulasPorSemana.setText(Integer.toString(disciplina.getQuantidadeAulasSemanais()));
         textFieldDisciplinaPeriodo.setText(Integer.toString(disciplina.getPeriodo()));
+        textFieldHoraSemanal.setText(String.valueOf(disciplina.getCargaHorariaSemanal() / 60));
+        textFieldMinutoSemanal.setText(String.valueOf(disciplina.getCargaHorariaSemanal() % 60));
 
         choiceBoxCurso.setItems(FXCollections.observableArrayList(listCursos));
         choiceBoxCurso.getSelectionModel().selectFirst();
@@ -82,15 +77,19 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
 
         // Força o campo ser apenas inteiro.
         textFieldDisciplinaPeriodo.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                textFieldDisciplinaPeriodo.setText(newValue.replaceAll("[^\\d]", ""));
-            }
+            textFieldDisciplinaPeriodo.setText(newValue.replaceAll("\\D", ""));
         });
 
-        textFieldDisciplinaCargaHoraria.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                textFieldDisciplinaCargaHoraria.setText(newValue.replaceAll("[^\\d]", ""));
-            }
+        textFieldAulasPorSemana.textProperty().addListener((observable, oldValue, newValue) -> {
+            textFieldAulasPorSemana.setText(newValue.replaceAll("\\D", ""));
+        });
+
+        textFieldHoraSemanal.textProperty().addListener((observable, oldValue, newValue) -> {
+            textFieldHoraSemanal.setText(newValue.replaceAll("\\D", ""));
+        });
+
+        textFieldMinutoSemanal.textProperty().addListener((observable, oldValue, newValue) -> {
+            textFieldMinutoSemanal.setText(newValue.replaceAll("\\D", ""));
         });
 
         listCursos = cDAO.listar(Curso.class);
@@ -119,22 +118,32 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
     @FXML
     public void handleButtonSalvar() {
 
-        disciplina.setNome(textFieldDisciplinaNome.getText());
-        disciplina.setCargaHoraria(Integer.parseInt(textFieldDisciplinaCargaHoraria.getText()));
-        disciplina.setCurso(choiceBoxCurso.getSelectionModel().getSelectedItem());
-        disciplina.setPeriodo(Integer.parseInt(textFieldDisciplinaPeriodo.getText()));
+        if (validarCampos()) {
+            int horaSemanal = Integer.parseInt(textFieldHoraSemanal.getText());
+            int minutoSemanal = Integer.parseInt(textFieldMinutoSemanal.getText());
 
-        for (CheckBox checkBoxDisciplina : listViewDisciplinasRequisito.getItems()) {
-            if (checkBoxDisciplina.isSelected()) {
-                Disciplina disciplinaRequisito = dDAO.recuperar(Disciplina.class, Integer.parseInt(checkBoxDisciplina.getId()));
+            disciplina.setNome(textFieldDisciplinaNome.getText());
+            disciplina.setQuantidadeAulasSemanais(Integer.parseInt(textFieldAulasPorSemana.getText()));
+            disciplina.setCurso(choiceBoxCurso.getSelectionModel().getSelectedItem());
+            disciplina.setPeriodo(Integer.parseInt(textFieldDisciplinaPeriodo.getText()));
+            disciplina.setCargaHorariaSemanal((horaSemanal * 60) + minutoSemanal);
 
-                disciplina.addDisciplinaRequisito(disciplinaRequisito);
+            for (CheckBox checkBoxDisciplina : listViewDisciplinasRequisito.getItems()) {
+                if (checkBoxDisciplina.isSelected()) {
+                    Disciplina disciplinaRequisito = dDAO.recuperar(Disciplina.class, Integer.parseInt(checkBoxDisciplina.getId()));
+
+                    disciplina.addDisciplinaRequisito(disciplinaRequisito);
+                }
             }
+
+            btnSalvarClicado = true;
+
+            dialogStage.close();
+        }
+        else {
+            labelValidarCampos.setVisible(true);
         }
 
-        btnSalvarClicado = true;
-
-        dialogStage.close();
     }
 
     @FXML
@@ -142,5 +151,20 @@ public class ControllerDisciplinaDialogInsercao implements Initializable {
         btnSalvarClicado = false;
 
         dialogStage.close();
+    }
+
+    private boolean validarCampos() {
+        String nome = textFieldDisciplinaNome.getText();
+        Curso curso = choiceBoxCurso.getSelectionModel().getSelectedItem();
+        String periodo = textFieldDisciplinaPeriodo.getText();
+        String horaraSemanal = textFieldHoraSemanal.getText();
+        String minutoSemanal = textFieldHoraSemanal.getText();
+
+        return !nome.equals("") &&
+                curso != null &&
+                !periodo.equals("") &&
+                !horaraSemanal.equals("") &&
+                !minutoSemanal.equals("");
+
     }
 }

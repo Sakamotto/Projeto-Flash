@@ -1,11 +1,11 @@
+import model.DAO.curso.CursoDAO;
+import model.DAO.curso.CursoDAOImpl;
+import model.DAO.disciplina.DisciplinaDAO;
+import model.DAO.disciplina.DisciplinaDAOImpl;
 import model.dominio.Curso;
 import model.dominio.Disciplina;
-import model.dominio.Horario;
-import model.dominio.Professor;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-import javax.xml.validation.Schema;
+import java.util.List;
 
 /**
  * Created by danilo on 23/02/17.
@@ -13,16 +13,18 @@ import javax.xml.validation.Schema;
 public class GenerateDataBase {
 
     public static void main(String[] args) {
-        AnnotationConfiguration config = new AnnotationConfiguration();
+        DisciplinaDAO dDAO = new DisciplinaDAOImpl();
+        CursoDAO cDAO = new CursoDAOImpl();
+        List<Disciplina> disciplinas = dDAO.listar(Disciplina.class);
 
-        config.addAnnotatedClass(Curso.class);
-        config.addAnnotatedClass(Disciplina.class);
-        config.addAnnotatedClass(Horario.class);
-        config.addAnnotatedClass(Professor.class);
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome("AFF");
 
-        config.configure("hibernate.cfg.xml");
+        Curso curso = new Curso();
+        curso.setNome("ASDFSDAFSDAF");
+        cDAO.inserir(curso);
 
-        new SchemaExport(config).create(true, true);
-
+        disciplina.setCurso(cDAO.listar(Curso.class).get(0));
+        dDAO.inserir(disciplina);
     }
 }
