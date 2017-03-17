@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Sakamotto/Projeto-Flash.png?label=ready&title=Ready)](https://waffle.io/Sakamotto/Projeto-Flash)
 # Projeto-Flash
 
 ## Resumo do Projeto
