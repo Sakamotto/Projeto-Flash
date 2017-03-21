@@ -16,10 +16,10 @@ before_script:
 
 
 script:
-  - cd OptaPlanner-Solution
-  - mvn clean install
-  - cd ..  
   - cd CRUD-Entidades
+  - mvn clean install
+  - cd ..
+  - cd OptaPlanner-Solution
   - mvn clean install
   - cd ..
   - cd SistemaAlocacao
