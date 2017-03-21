@@ -10,17 +10,17 @@
   <children>
     <SplitPane dividerPositions="0.20275344180225283" focusTraversable="false" maxHeight="700.0" minHeight="700.0" prefHeight="700.0" prefWidth="1360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane maxHeight="700.0" minHeight="700.0" minWidth="0.0" prefHeight="700.0" prefWidth="321.0">
+        <AnchorPane maxHeight="700.0" minHeight="700.0" minWidth="376.0" prefHeight="700.0" prefWidth="339.0">
           <children>
-            <TableView fx:id="tableViewDisciplina" blendMode="SRC_OVER" cache="false" cacheHint="SCALE_AND_ROTATE" depthTest="ENABLE" disable="false" editable="false" focusTraversable="false" maxWidth="-1.0" mouseTransparent="false" prefHeight="700.0" prefWidth="224.0" tableMenuButtonVisible="false" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableViewDisciplina" blendMode="SRC_OVER" cache="false" cacheHint="SCALE_AND_ROTATE" depthTest="ENABLE" disable="false" editable="false" focusTraversable="false" maxHeight="700.0" minHeight="700.0" minWidth="390.0" mouseTransparent="false" prefHeight="700.0" prefWidth="376.0" tableMenuButtonVisible="false" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="tabelaColunaCursoNome" maxWidth="5000.0" minWidth="10.0" prefWidth="63.0" text="Curso" />
-                <TableColumn fx:id="tabelaColunaDisciplinaNome" maxWidth="5000.0" minWidth="257.0" prefWidth="160.0" resizable="false" text="Disciplina" />
+                <TableColumn fx:id="tabelaColunaCursoNome" maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Curso" />
+                <TableColumn fx:id="tabelaColunaDisciplinaNome" maxWidth="5000.0" minWidth="220.0" prefWidth="276.0" resizable="false" text="Disciplina" />
               </columns>
             </TableView>
           </children>
         </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1271.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="698.0" prefWidth="1033.0">
           <children>
             <Label alignment="TOP_CENTER" layoutY="74.0" prefWidth="1079.0" text="Informações da Disciplina">
               <font>
