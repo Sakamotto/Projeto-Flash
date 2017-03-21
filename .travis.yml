@@ -19,6 +19,9 @@ script:
   - cd CRUD-Entidades
   - mvn clean install
   - cd ..
+  - cd SistemaAlocacao
+  - mvn clean install
+  - cd ..
   - cd OptaPlanner-Solution
   - mvn clean install sonar:sonar -Dsonar.login=c85312f9026df6e3a31e017fa5c14b0c43258993
 
