@@ -16,7 +16,7 @@ before_script:
 
 
 script:
-  - cd 04.Codigo/CRUD-Entidades
+  - cd CRUD-Entidades
   - mvn clean install
   - cd ..
   - cd OptaPlanner-Solution
