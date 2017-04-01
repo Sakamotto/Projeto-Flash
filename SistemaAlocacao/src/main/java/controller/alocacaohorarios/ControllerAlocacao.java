@@ -6,17 +6,15 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.DAO.horario.HorarioDAO;
 import model.DAO.horario.HorarioDAOImpl;
 import model.DAO.professor.ProfessorDAO;
 import model.DAO.professor.ProfessorDAOImpl;
+import model.DAO.regra.RegraDAOImpl;
 import model.dominio.*;
 
 import java.io.File;
