@@ -40,7 +40,7 @@
                 <Font name="System Bold" size="13.0" />
               </font>
             </Label>
-            <Label fx:id="labelProfessor" layoutX="108.0" layoutY="76.0" text="" />
+            <Label fx:id="labelProfessor" layoutX="172.0" layoutY="76.0" />
             <TableView fx:id="tableViewLecionando" disable="false" editable="false" focusTraversable="true" layoutX="134.0" layoutY="159.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="370.0" tableMenuButtonVisible="false" visible="true">
               <columns>
                 <TableColumn fx:id="tableColumnLecionandoSiglaCurso" editable="true" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" resizable="true" text="Curso" />

@@ -81,6 +81,11 @@ public class Main extends Application implements Initializable {
         this.anchorPane.getChildren().setAll(anchorPane);
     }
 
+    @FXML
+    public void handleMenuItemGerenciamentoRegras() throws  IOException {
+        System.out.println("Ok");
+    }
+
 
     public static void main(String[] args) {
         launch(args);

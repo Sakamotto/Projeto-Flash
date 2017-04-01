@@ -27,7 +27,7 @@
                 <Font name="System Bold" size="25.0" />
               </font>
             </Label>
-            <GridPane layoutX="272.0" layoutY="169.0" prefHeight="364.0" prefWidth="540.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="267.0">
+            <GridPane layoutX="167.0" layoutY="169.0" prefHeight="380.0" prefWidth="698.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="109.0">
               <children>
                 <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label text="Quantidade de Aulas por Semana:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -43,8 +43,8 @@
                         <Label fx:id="labelCargaHorariaSemanal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="235.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.0" minWidth="10.0" prefWidth="305.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="246.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="452.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="26.0" vgrow="SOMETIMES" />
