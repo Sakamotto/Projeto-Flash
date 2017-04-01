@@ -27,7 +27,7 @@
                 <Font name="System Bold" size="25.0" />
               </font>
             </Label>
-            <GridPane layoutX="247.0" layoutY="203.0" prefHeight="361.0" prefWidth="540.0">
+            <GridPane layoutX="162.0" layoutY="203.0" prefHeight="361.0" prefWidth="727.0">
               <children>
                 <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label id="labelClienteNome" fx:id="labelProfessorNome" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -43,8 +43,8 @@
                 <Label fx:id="labelProfessorRg" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="179.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="374.0" minWidth="10.0" prefWidth="359.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="643.0" minWidth="10.0" prefWidth="112.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="557.0" minWidth="10.0" prefWidth="557.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -55,7 +55,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Group id="Group" layoutX="247.0" layoutY="585.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="435.0" AnchorPane.topAnchor="585.0">
+            <Group id="Group" layoutX="248.0" layoutY="613.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="248.0" AnchorPane.rightAnchor="434.0" AnchorPane.topAnchor="613.0">
               <children>
                 <Button fx:id="btnCadastrarProfessor" defaultButton="true" layoutX="0.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefWidth="175.0" text="Cadastrar Professor" />
                 <Button fx:id="btnEditarProfessor" layoutX="183.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefWidth="175.0" text="Editar Professor" />
