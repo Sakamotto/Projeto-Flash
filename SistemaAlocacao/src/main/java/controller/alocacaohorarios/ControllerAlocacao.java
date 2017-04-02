@@ -31,8 +31,13 @@ public class ControllerAlocacao implements Initializable,  Observer {
     @FXML Label labelRegrasRigidas;
     @FXML Label labelRegrasDesejaveis;
     @FXML TableView<Alocacao> tableViewAlocacao;
+    @FXML TableView<Regra> tableViewGerenciamentoRegras;
     @FXML TableColumn<Curso, String> tableColumnCurso;
     @FXML TableColumn<Disciplina, String> tableColumnPeriodo;
+    @FXML TableColumn<Regra, String> tableColumnRegraNome;
+    @FXML TableColumn<Regra, String> tableColumnRegraTipo;
+    @FXML TableColumn<Regra, String> tableColumnRegraPenalidade;
+    @FXML TableColumn<Regra, String> tableColumnRegraEstado;
     @FXML TableColumn<Horario, String> tableColumnHorario;
     @FXML TableColumn<Professor, String> tableColumnProfessor;
     @FXML TableColumn<Disciplina, String> tableColumnDisciplina;
@@ -40,6 +45,7 @@ public class ControllerAlocacao implements Initializable,  Observer {
 
 
     private static AlocacaoHorario solucao;
+    private List<Regra> regras;
     private Resolvedor resolvedor;
     private static final String gerarHorario = "GERAR_HORARIO";
     private Thread threadGeracaoHorario;
@@ -48,6 +54,8 @@ public class ControllerAlocacao implements Initializable,  Observer {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         carregaTableViewAlocacao();
+        carregaTableViewRegras();
+
     }
 
     @FXML
@@ -157,6 +165,25 @@ public class ControllerAlocacao implements Initializable,  Observer {
         }
 
     }
+
+    private void carregaTableViewRegras() {
+
+        if (regras == null) {
+            regras = new RegraDAOImpl().listar(Regra.class);
+
+        }
+
+        tableViewGerenciamentoRegras.setItems(FXCollections.observableArrayList(regras));
+
+        tableColumnRegraNome.setCellValueFactory(new PropertyValueFactory<>("Descricao"));
+        tableColumnRegraTipo.setCellValueFactory(new PropertyValueFactory<>("TipoRegra"));
+        tableColumnRegraPenalidade.setCellValueFactory(new PropertyValueFactory<>("Penalidade"));
+        tableColumnRegraEstado.setCellValueFactory(new PropertyValueFactory<>("Estado"));
+
+        tableViewGerenciamentoRegras.refresh();
+    }
+
+    // TODO: Criar tela para Ativação e Alteração de pontos para Regras.
 
     private static AlocacaoHorario getProblem() {
         List<Alocacao> alocacoes = new ArrayList<>();

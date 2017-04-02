@@ -37,7 +37,7 @@ public class GenerateDataBase {
 
         regra.setDescricao("Teste Regra");
         regra.setPenalidade(50);
-        regra.setTipoRegra(Regra.TipoRegra.SOFT);
+        regra.setTipoRegra(Regra.TipoRegra.Soft);
         regra.setAtivada(true);
 
         RegraDAO regraDAO = new RegraDAOImpl();

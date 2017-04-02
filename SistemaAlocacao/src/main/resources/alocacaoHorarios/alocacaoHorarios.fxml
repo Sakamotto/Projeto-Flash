@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.*?>
+<?import javafx.embed.swing.*?>
+<?import javafx.scene.web.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -97,7 +101,18 @@
       </Tab>
       <Tab closable="false" text="Gerenciamento de Regras">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewGerenciamentoRegras" layoutX="212.0" layoutY="68.0" prefHeight="410.0" prefWidth="959.0">
+                    <columns>
+                      <TableColumn fx:id="tableColumnRegraNome" prefWidth="705.0" text="Regra" />
+                      <TableColumn fx:id="tableColumnRegraTipo" minWidth="0.0" prefWidth="83.0" text="Tipo" />
+                        <TableColumn fx:id="tableColumnRegraPenalidade" prefWidth="93.0" text="Penalidade" />
+                        <TableColumn fx:id="tableColumnRegraEstado" prefWidth="77.0" text="Estado" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="642.0" layoutY="506.0" mnemonicParsing="false" text="Editar Regra" />
+               </children></AnchorPane>
         </content>
       </Tab>
    </tabs>

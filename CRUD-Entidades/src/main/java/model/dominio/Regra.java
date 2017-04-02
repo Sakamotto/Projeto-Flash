@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity(name = "regra")
 public class Regra {
 
-    public enum TipoRegra {SOFT, MEDIUM, HARD}
+    public enum TipoRegra {Soft, Medium, Hard}
 
     @Id
     @GeneratedValue
@@ -65,5 +65,9 @@ public class Regra {
 
     public void setTipoRegra(TipoRegra tipoRegra) {
         this.tipoRegra = tipoRegra;
+    }
+
+    public String getEstado() {
+        return (ativada) ? "Ativada" : "Desativada";
     }
 }
