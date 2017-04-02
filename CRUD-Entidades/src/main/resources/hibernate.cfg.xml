@@ -16,6 +16,7 @@
         <mapping class="model.dominio.Disciplina"/>
         <mapping class="model.dominio.Curso"/>
         <mapping class="model.dominio.Horario"/>
+        <mapping class="model.dominio.Regra"/>
 
     </session-factory>
 </hibernate-configuration>

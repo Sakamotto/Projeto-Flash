@@ -2,8 +2,11 @@ import model.DAO.curso.CursoDAO;
 import model.DAO.curso.CursoDAOImpl;
 import model.DAO.disciplina.DisciplinaDAO;
 import model.DAO.disciplina.DisciplinaDAOImpl;
+import model.DAO.regra.RegraDAO;
+import model.DAO.regra.RegraDAOImpl;
 import model.dominio.Curso;
 import model.dominio.Disciplina;
+import model.dominio.Regra;
 
 import java.util.List;
 
@@ -26,5 +29,19 @@ public class GenerateDataBase {
 
         disciplina.setCurso(cDAO.listar(Curso.class).get(0));
         dDAO.inserir(disciplina);
+
+
+        // Regras
+
+        Regra regra = new Regra();
+
+        regra.setDescricao("Teste Regra");
+        regra.setPenalidade(50);
+        regra.setTipoRegra(Regra.TipoRegra.Soft);
+        regra.setAtivada(true);
+
+        RegraDAO regraDAO = new RegraDAOImpl();
+        regraDAO.inserir(regra);
+
     }
 }

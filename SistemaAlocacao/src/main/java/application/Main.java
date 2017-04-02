@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -77,7 +78,7 @@ public class Main extends Application implements Initializable {
 
     @FXML
     public void handleProcessosIniciarGeracaoHorarios() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("alocacaoHorarios/alocacaoHorarios.fxml"));
+        TabPane anchorPane = FXMLLoader.load(getClass().getClassLoader().getResource("alocacaoHorarios/alocacaoHorarios.fxml"));
         this.anchorPane.getChildren().setAll(anchorPane);
     }
 
