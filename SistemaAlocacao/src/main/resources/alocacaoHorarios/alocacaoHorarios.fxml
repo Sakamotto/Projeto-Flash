@@ -103,15 +103,18 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="tableViewGerenciamentoRegras" layoutX="212.0" layoutY="68.0" prefHeight="410.0" prefWidth="959.0">
+                  <TableView fx:id="tableViewGerenciamentoRegras" focusTraversable="false" layoutX="212.0" layoutY="68.0" prefHeight="410.0" prefWidth="959.0">
                     <columns>
-                      <TableColumn fx:id="tableColumnRegraNome" prefWidth="705.0" text="Regra" />
-                      <TableColumn fx:id="tableColumnRegraTipo" minWidth="0.0" prefWidth="83.0" text="Tipo" />
-                        <TableColumn fx:id="tableColumnRegraPenalidade" prefWidth="93.0" text="Penalidade" />
-                        <TableColumn fx:id="tableColumnRegraEstado" prefWidth="77.0" text="Estado" />
+                      <TableColumn fx:id="tableColumnRegraNome" editable="false" prefWidth="637.0" text="Regra" />
+                      <TableColumn fx:id="tableColumnRegraTipo" minWidth="0.0" prefWidth="112.0" text="Tipo" />
+                        <TableColumn fx:id="tableColumnRegraPenalidade" prefWidth="89.0" text="Penalidade" />
+                        <TableColumn fx:id="tableColumnRegraEstado" prefWidth="120.0" text="Estado" />
                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
-                  <Button layoutX="642.0" layoutY="506.0" mnemonicParsing="false" text="Editar Regra" />
+                  <Button layoutX="642.0" layoutY="506.0" mnemonicParsing="false" onAction="#editarRegra" text="Editar Regra" />
                </children></AnchorPane>
         </content>
       </Tab>

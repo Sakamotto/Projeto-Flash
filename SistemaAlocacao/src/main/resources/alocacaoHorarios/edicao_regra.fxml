@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="491.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.alocacaohorarios.ControllerRegraDialogEdicao">
+  <children>
+    <GridPane layoutX="36.0" layoutY="123.0" prefHeight="178.0" prefWidth="592.0" snapToPixel="false">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="492.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+        <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="50.0" prefHeight="30.0" valignment="CENTER" />
+      </rowConstraints>
+         <children>
+            <Label text="Descrição:" />
+            <Label fx:id="labelRegraDescricao" wrapText="true" GridPane.columnIndex="1" />
+            <Label text="Tipo:" GridPane.rowIndex="1" />
+            <Label fx:id="labelRegraTipo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Penalidade:" GridPane.rowIndex="2" />
+            <TextField fx:id="textFieldRegraPenalidade" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Estado:" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="choiceBoxRegraEstado" maxWidth="150.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+    </GridPane>
+    <Label layoutX="275.0" layoutY="20.0" text="Regra" textAlignment="CENTER">
+      <font>
+        <Font size="36.0" />
+      </font>
+    </Label>
+    <Group id="Group" layoutX="468.0" layoutY="441.0">
+      <children>
+        <Button id="btnSalvarDisciplina" fx:id="btnSalvarRegra" defaultButton="true" layoutX="0.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonSalvar" text="Salvar" textAlignment="CENTER" />
+        <Button id="btnCancelarDisciplina" fx:id="btnCancelarRegra" cancelButton="true" layoutX="80.0" layoutY="0.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
+      </children>
+    </Group>
+      <Label fx:id="validatorFieldsRegra" layoutX="36.0" layoutY="447.0" text="Preencha os campos obrigatórios marcados com asterisco (*)." textFill="#ff3d3d" visible="false" />
+  </children>
+</AnchorPane>

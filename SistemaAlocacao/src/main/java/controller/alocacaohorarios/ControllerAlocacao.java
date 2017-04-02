@@ -1,13 +1,17 @@
 package controller.alocacaohorarios;
 
 import controller.Resolvedor;
+import controller.exception.AllertExceptionController;
 import domain.AlocacaoHorario;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.DAO.horario.HorarioDAO;
@@ -184,6 +188,52 @@ public class ControllerAlocacao implements Initializable,  Observer {
     }
 
     // TODO: Criar tela para Ativação e Alteração de pontos para Regras.
+
+    @FXML
+    public void editarRegra() throws IOException {
+        Regra regra = tableViewGerenciamentoRegras.getSelectionModel().getSelectedItem();
+
+        if (regra != null) {
+
+            boolean btnSalvarClicado = showOpenCadastroCursoDialog(regra, "Edicao");
+
+            if (btnSalvarClicado) {
+                System.out.println("Alterando Curso no banco de dados.");
+
+                // Recarrega a página de cadastro de curso.
+
+                new RegraDAOImpl().alterar(regra);
+
+                carregaTableViewRegras();
+            }
+        }
+        else {
+            AllertExceptionController.erro("Por favor, selecione um curso.");
+        }
+    }
+
+    private boolean showOpenCadastroCursoDialog(Regra regra, String action) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerRegraDialogEdicao.class.getClassLoader().getResource("alocacaoHorarios/edicao_regra.fxml"));
+
+        AnchorPane paginaDialogoCadastro = fxmlLoader.load();
+
+        // Cria um Estágio de Diálogo.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(action +" de Curso");
+        Scene scene = new Scene(paginaDialogoCadastro);
+        dialogStage.setScene(scene);
+
+        // Seta a caixa de dialogo no controller e o curso.
+        ControllerRegraDialogEdicao controller = fxmlLoader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setRegra(regra);
+
+        // Mostra a tela de dialogo que foi toda carregada e espera ser fechada.
+        dialogStage.showAndWait();
+
+        return controller.isBtnSalvarClicado();
+
+    }
 
     private static AlocacaoHorario getProblem() {
         List<Alocacao> alocacoes = new ArrayList<>();
