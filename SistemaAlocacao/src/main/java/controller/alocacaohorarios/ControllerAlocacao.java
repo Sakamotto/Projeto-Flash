@@ -198,9 +198,7 @@ public class ControllerAlocacao implements Initializable,  Observer {
             boolean btnSalvarClicado = showOpenCadastroCursoDialog(regra, "Edicao");
 
             if (btnSalvarClicado) {
-                System.out.println("Alterando Curso no banco de dados.");
-
-                // Recarrega a página de cadastro de curso.
+                System.out.println("Alterando Regra no banco de dados.");
 
                 new RegraDAOImpl().alterar(regra);
 
@@ -208,7 +206,7 @@ public class ControllerAlocacao implements Initializable,  Observer {
             }
         }
         else {
-            AllertExceptionController.erro("Por favor, selecione um curso.");
+            AllertExceptionController.erro("Por favor, selecione uma regra.");
         }
     }
 
@@ -219,11 +217,11 @@ public class ControllerAlocacao implements Initializable,  Observer {
 
         // Cria um Estágio de Diálogo.
         Stage dialogStage = new Stage();
-        dialogStage.setTitle(action +" de Curso");
+        dialogStage.setTitle(action +" de Regra");
         Scene scene = new Scene(paginaDialogoCadastro);
         dialogStage.setScene(scene);
 
-        // Seta a caixa de dialogo no controller e o curso.
+        // Seta a caixa de dialogo no controller e a regra.
         ControllerRegraDialogEdicao controller = fxmlLoader.getController();
         controller.setDialogStage(dialogStage);
         controller.setRegra(regra);

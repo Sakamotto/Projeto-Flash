@@ -23,7 +23,6 @@
             <Menu mnemonicParsing="false" text="Processos">
               <items>
                 <MenuItem fx:id="menuProcessosAlocarProfessores" mnemonicParsing="false" onAction="#handleMenuItemProfessorDisciplina" text="Alocação de Professores" />
-                        <MenuItem fx:id="menuProcessosGerenciamentoRegras" mnemonicParsing="false" onAction="#handleMenuItemGerenciamentoRegras" text="Gerenciamento de Regras" />
                 <MenuItem fx:id="menuProcessosIniciarGeracaoHorarios" mnemonicParsing="false" onAction="#handleProcessosIniciarGeracaoHorarios" text="Geração de horários" />
               </items>
             </Menu>
