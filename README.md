@@ -1,5 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/Sakamotto/Projeto-Flash.png?label=ready&title=Ready)](https://waffle.io/Sakamotto/Projeto-Flash)
 [![Stories in Ready](https://badge.waffle.io/Sakamotto/Projeto-Flash.png?label=ready&title=Ready)](https://waffle.io/Sakamotto/Projeto-Flash)
+
 # Projeto-Flash
 
 ## Resumo do Projeto
@@ -30,8 +31,8 @@ Os setores administrativos precisam de horários para cuidar dos espaços, inclu
 
 ## Integrantes do Grupo do Trabalho
 
-* Cristian da Silva Anterio
-* Danilo de Oliveira
+* Cristian da Silva Anterio (BSI)
+* Danilo de Oliveira (BSI)
 
 ## Relatório
 
